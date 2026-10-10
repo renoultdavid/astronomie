@@ -99,7 +99,6 @@
       margin-top: 0.3rem;
     }
 
-    /* HOTSPOTS */
     .hotspot {
       position: absolute;
       z-index: 20;
@@ -187,7 +186,6 @@
       color: #ffffff;
     }
 
-    /* Thèmes */
     .theme-solar .core-dot { background: #ffd166; box-shadow: 0 0 10px #ffd166; }
     .theme-solar .pulse-ring { border-color: rgba(255, 209, 102, 0.85); }
     .theme-solar .label-pill { border-color: rgba(255, 209, 102, 0.4); }
@@ -222,7 +220,6 @@
       50% { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 22px rgba(255, 255, 255, 0.25); }
     }
 
-    /* DRAWER */
     .drawer-backdrop {
       position: fixed;
       inset: 0;
@@ -313,4 +310,265 @@
     .drawer-img-container {
       width: 100%;
       height: 215px;
-      margin:
+      margin: 1.8rem 0;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: #0f172a;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .drawer-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+
+    .drawer:hover .drawer-img {
+      transform: scale(1.04);
+    }
+
+    .drawer-desc {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: #cbd5e1;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      margin-bottom: 2rem;
+    }
+
+    .launch-btn {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      padding: 1rem 1.8rem;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(226, 232, 240, 0.85));
+      color: #050814;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      border-radius: 40px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 25px rgba(255, 255, 255, 0.25), 0 0 35px rgba(56, 189, 248, 0.25);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .launch-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 35px rgba(255, 255, 255, 0.45), 0 0 50px rgba(56, 189, 248, 0.5);
+      background: #ffffff;
+      color: #020617;
+    }
+
+    .launch-icon {
+      font-size: 1.1rem;
+      transition: transform 0.3s ease;
+    }
+
+    .launch-btn:hover .launch-icon {
+      transform: translateX(4px) translateY(-2px);
+    }
+
+    @media (max-width: 900px) {
+      .drawer {
+        width: 100vw;
+        max-width: 100vw;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="portal-container" id="portalContainer">
+    <img 
+      id="spaceBg"
+      class="space-canvas" 
+      src="https://lh3.googleusercontent.com/d/1jKt4QY5rQ5yBLQEoE2jbIT_jbcM0IZ9S=s2560" 
+      alt="Cosmos profond avec Saturne et nébuleuses"
+      onerror="this.src='https://drive.google.com/thumbnail?id=1jKt4QY5rQ5yBLQEoE2jbIT_jbcM0IZ9S&sz=w2560';"
+    />
+    
+    <div class="cosmic-overlay"></div>
+
+    <header class="header-bar">
+      <h1 class="header-title">Atlas Céleste</h1>
+      <span class="header-sub">Portail d'exploration astronomique</span>
+    </header>
+
+    <!-- 1. Système Solaire -->
+    <div class="hotspot theme-solar" style="top: 78%; left: 24%;" onclick="openPanel('solar')">
+      <div class="pulse-anchor">
+        <div class="pulse-ring pulse-ring-1"></div>
+        <div class="pulse-ring pulse-ring-2"></div>
+        <div class="core-dot"></div>
+      </div>
+      <div class="label-pill">Le monde de notre système solaire</div>
+    </div>
+
+    <!-- 2. Nébuleuses -->
+    <div class="hotspot theme-nebula" style="top: 28%; left: 19%;" onclick="openPanel('nebula')">
+      <div class="pulse-anchor">
+        <div class="pulse-ring pulse-ring-1"></div>
+        <div class="pulse-ring pulse-ring-2"></div>
+        <div class="core-dot"></div>
+      </div>
+      <div class="label-pill">Le monde des nébuleuses</div>
+    </div>
+
+    <!-- 3. Amas Ouverts -->
+    <div class="hotspot theme-open reverse" style="top: 21%; left: 47%;" onclick="openPanel('open_cluster')">
+      <div class="pulse-anchor">
+        <div class="pulse-ring pulse-ring-1"></div>
+        <div class="pulse-ring pulse-ring-2"></div>
+        <div class="core-dot"></div>
+      </div>
+      <div class="label-pill">Le monde des amas ouverts</div>
+    </div>
+
+    <!-- 4. Amas Globulaires -->
+    <div class="hotspot theme-globular reverse" style="top: 45%; left: 66%;" onclick="openPanel('globular_cluster')">
+      <div class="pulse-anchor">
+        <div class="pulse-ring pulse-ring-1"></div>
+        <div class="pulse-ring pulse-ring-2"></div>
+        <div class="core-dot"></div>
+      </div>
+      <div class="label-pill">Le monde des amas globulaires</div>
+    </div>
+
+    <!-- 5. Galaxies -->
+    <div class="hotspot theme-galaxy reverse" style="top: 15%; left: 77.5%;" onclick="openPanel('galaxy')">
+      <div class="pulse-anchor">
+        <div class="pulse-ring pulse-ring-1"></div>
+        <div class="pulse-ring pulse-ring-2"></div>
+        <div class="core-dot"></div>
+      </div>
+      <div class="label-pill">Le monde des galaxies</div>
+    </div>
+
+    <!-- 6. Étoiles -->
+    <div class="hotspot theme-stars" style="top: 75%; left: 72%;" onclick="openPanel('stars')">
+      <div class="pulse-anchor">
+        <div class="pulse-ring pulse-ring-1"></div>
+        <div class="pulse-ring pulse-ring-2"></div>
+        <div class="core-dot"></div>
+      </div>
+      <div class="label-pill">Le monde des étoiles</div>
+    </div>
+  </div>
+
+  <div class="drawer-backdrop" id="backdrop" onclick="closePanel()"></div>
+
+  <aside class="drawer" id="drawer">
+    <button class="close-btn" onclick="closePanel()" title="Fermer">✕</button>
+    <span class="drawer-badge" id="drawerBadge">Exploration</span>
+    <h2 class="drawer-title" id="drawerTitle">Titre de l'exploration</h2>
+
+    <div class="drawer-img-container">
+      <img id="drawerImage" class="drawer-img" src="" alt="Aperçu Céleste" />
+    </div>
+
+    <p class="drawer-desc" id="drawerText">Description introductive...</p>
+
+    <a id="drawerBtn" class="launch-btn" href="#">
+      <span>Décollage</span>
+      <span class="launch-icon">↗</span>
+    </a>
+  </aside>
+
+  <script>
+    const WORLDS = {
+      solar: {
+        badge: "Système Planétaire",
+        title: "Le Monde de notre Système Solaire",
+        image: "https://lh3.googleusercontent.com/d/1e0j2BVS8oQ-6mHr4NAjvxzR3IU0KWurX=s1200",
+        fallback: "https://drive.google.com/thumbnail?id=1e0j2BVS8oQ-6mHr4NAjvxzR3IU0KWurX&sz=w1200",
+        text: "Des anneaux majestueux de Saturne aux confins de la ceinture de Kuiper, parcourez la diversité géologique et atmosphérique des mondes qui gravitent autour de notre étoile mère.",
+        link: "./systeme-solaire/"
+      },
+      nebula: {
+        badge: "Milieu Interstellaire",
+        title: "Le Monde des Nébuleuses",
+        image: "https://lh3.googleusercontent.com/d/1Zf6RpCGdJEwvDQ1d9sl_L4laCRIexwyL=s1200",
+        fallback: "https://drive.google.com/thumbnail?id=1Zf6RpCGdJEwvDQ1d9sl_L4laCRIexwyL&sz=w1200",
+        text: "Berceaux d'étoiles et rémanents cataclysmiques de supernovae, les nébuleuses sculptent le vide cosmique de voiles incandescents de gaz ionisé et de poussières sombres.",
+        link: "./nebuleuses/"
+      },
+      open_cluster: {
+        badge: "Stellogenèse Récente",
+        title: "Le Monde des Amas Ouverts",
+        image: "https://lh3.googleusercontent.com/d/1FrBH0aeEt5jIMnkdPifAkOeoEO_HznQB=s1200",
+        fallback: "https://drive.google.com/thumbnail?id=1FrBH0aeEt5jIMnkdPifAkOeoEO_HznQB&sz=w1200",
+        text: "Congrégations de centaines de jeunes étoiles nées ensemble dans le disque galactique, liées par la gravitation avant de se disperser au gré des révolutions de la Voie Lactée.",
+        link: "./amas-ouverts/"
+      },
+      globular_cluster: {
+        badge: "Reliques Cosmiques",
+        title: "Le Monde des Amas Globulaires",
+        image: "https://lh3.googleusercontent.com/d/1gQv-U4jXmdG7q4MjF56zHYv6hoTisE-c=s1200",
+        fallback: "https://drive.google.com/thumbnail?id=1gQv-U4jXmdG7q4MjF56zHYv6hoTisE-c&sz=w1200",
+        text: "Sphères denses regroupant jusqu'à un million d'étoiles primitives dans le halo galactique, véritables témoins fossilisés des premiers âges de l'Univers.",
+        link: "./amas-globulaires/"
+      },
+      galaxy: {
+        badge: "Échelle Extragalactique",
+        title: "Le Monde des Galaxies",
+        image: "https://lh3.googleusercontent.com/d/1zvAq7KNyQxvSAB7aH37WYKzYvbZ2hyTN=s1200",
+        fallback: "https://drive.google.com/thumbnail?id=1zvAq7KNyQxvSAB7aH37WYKzYvbZ2hyTN&sz=w1200",
+        text: "Îlots d'univers rassemblant des centaines de milliards de soleils. Explorez la dynamique des bras spiraux majestueux et l'activité des trous noirs supermassifs centraux.",
+        link: "./galaxies/"
+      },
+      stars: {
+        badge: "Spectroscopie Pure",
+        title: "Le Monde des Étoiles",
+        image: "https://lh3.googleusercontent.com/d/1nFWVD2p3fb8PVfNI79uX1YRFQbcETwfX=s1200",
+        fallback: "https://drive.google.com/thumbnail?id=1nFWVD2p3fb8PVfNI79uX1YRFQbcETwfX&sz=w1200",
+        text: "Hors de l'atmosphère terrestre, les étoiles brillent d'un éclat pur et immuable, sans la moindre scintillation, révélant la physique intime des réacteurs thermonucléaires.",
+        link: "./etoiles/"
+      }
+    };
+
+    const drawer = document.getElementById('drawer');
+    const backdrop = document.getElementById('backdrop');
+    const drawerImg = document.getElementById('drawerImage');
+
+    function openPanel(key) {
+      const data = WORLDS[key];
+      if (!data) return;
+
+      document.getElementById('drawerBadge').innerText = data.badge;
+      document.getElementById('drawerTitle').innerText = data.title;
+      
+      drawerImg.onerror = function() {
+        this.onerror = null;
+        this.src = data.fallback;
+      };
+      drawerImg.src = data.image;
+
+      document.getElementById('drawerText').innerText = data.text;
+      document.getElementById('drawerBtn').href = data.link;
+
+      drawer.classList.add('active');
+      backdrop.classList.add('active');
+      document.body.classList.add('drawer-open');
+    }
+
+    function closePanel() {
+      drawer.classList.remove('active');
+      backdrop.classList.remove('active');
+      document.body.classList.remove('drawer-open');
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closePanel();
+    });
+  </script>
+</body>
+</html>
