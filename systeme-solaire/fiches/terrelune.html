@@ -6,71 +6,328 @@
   <title>La Terre et la Lune — Système Solaire</title>
   <link rel="stylesheet" href="../../fiche.css">
   <style>
-    /* Styles additionnels spécifiques au module Atlas & Lightbox */
-    .atlas-section {
-      background: #0b1120;
-      border: 1px solid #1e293b;
+    /* CADRE CONTRAINT GLOBAL DU SITE (Identique à Soleil / Mercure) */
+    body {
+      background-color: #020617;
+      color: #e2e8f0;
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', system-ui, sans-serif;
+    }
+
+    .fiche-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 6rem;
+      box-sizing: border-box;
+    }
+
+    /* HERO D'ACCUEIL */
+    .hero-img-box {
+      width: 100%;
       border-radius: 12px;
-      padding: 24px;
-      margin: 36px 0;
+      overflow: hidden;
+      border: 1px solid #1e293b;
+      background: #000;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
-    .atlas-controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 20px;
-      align-items: center;
-      justify-content: space-between;
+    .hero-img-box img {
+      width: 100%;
+      height: auto;
+      max-height: 520px;
+      object-fit: contain;
+      display: block;
+      background: #000;
     }
-    .atlas-search {
-      flex: 1 1 260px;
-      background: #070d19;
-      border: 1px solid #334155;
-      color: #f8fafc;
-      padding: 10px 14px;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .atlas-search:focus {
-      border-color: #38bdf8;
-    }
-    .atlas-filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .filter-btn {
-      background: #1e293b;
-      border: 1px solid #334155;
+    .hero-caption {
+      padding: 10px 16px;
+      font-size: 0.82rem;
       color: #94a3b8;
-      padding: 7px 14px;
+      background: rgba(11, 17, 32, 0.95);
+      border-top: 1px solid #1e293b;
+      text-align: center;
+      font-style: italic;
+    }
+
+    /* TEXTES ET PARAGRAPHES */
+    p {
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: #cbd5e1;
+      text-align: justify;
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+    }
+
+    /* PHOTOS DANS LA FICHE (Ratios respectés, jamais étirées) */
+    .photo-card {
+      width: 100%;
+      background: #070d19;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 28px 0;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    }
+    .photo-card img {
+      width: 100%;
+      height: auto;
+      max-height: 500px;
+      object-fit: contain;
+      display: block;
+      background: #000;
+    }
+    .photo-card-caption {
+      padding: 8px 14px;
+      font-size: 0.8rem;
+      color: #38bdf8;
+      background: #0b1120;
+      border-top: 1px solid #1e293b;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .photo-duo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .photo-duo-grid .photo-card {
+      margin: 0;
+    }
+
+    /* SLIDER 1 : ENSEMBLES GÉOLOGIQUES (Natif, robuste) */
+    .slider-card {
+      width: 100%;
+      background: #141720;
+      border: 1px solid #232838;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      padding: 18px 22px;
+      margin: 32px 0;
+      box-sizing: border-box;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #1f2533;
+    }
+    .slider-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #38bdf8;
+    }
+    .slider-counter {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #64748b;
+    }
+    .geo-slide {
+      display: none;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 20px;
+      align-items: center;
+      padding: 16px 0;
+    }
+    .geo-slide.active {
+      display: grid;
+    }
+    .geo-slide-title {
+      font-size: 1.3rem;
+      color: #ffffff;
+      margin: 6px 0 10px;
+      font-weight: 700;
+    }
+    .geo-item-box {
+      background: #1a1f2c;
+      border-left: 3px solid #38bdf8;
+      border-radius: 0 6px 6px 0;
+      padding: 8px 12px;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #cbd5e1;
+      margin-bottom: 8px;
+    }
+    .geo-item-box strong { color: #ffffff; }
+    .geo-img-wrap {
+      width: 100%;
+      height: 280px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #2a3142;
+      background: #000;
+    }
+    .geo-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .slider-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 12px;
+      border-top: 1px solid #1f2533;
+    }
+    .nav-btn {
+      background: #1c2230;
+      color: #e2e8f0;
+      border: 1px solid #2f384d;
       border-radius: 6px;
+      padding: 6px 16px;
       font-size: 0.8rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s;
     }
-    .filter-btn:hover, .filter-btn.active {
-      background: #2563eb;
+    .nav-btn:hover:not(:disabled) {
+      background: #283145;
       border-color: #38bdf8;
       color: #ffffff;
     }
+    .nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .dots-container { display: flex; gap: 6px; }
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #334155; cursor: pointer; transition: all 0.2s;
+    }
+    .dot.active { background: #38bdf8; width: 20px; border-radius: 4px; }
+
+    /* DECK CONQUÊTE SPATIALE */
+    .deck-card {
+      width: 100%;
+      background: radial-gradient(circle at 80% 20%, rgba(30, 41, 59, 0.45) 0%, rgba(5, 7, 11, 0.95) 75%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 32px 0;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+    }
+    .deck-header {
+      height: 52px;
+      padding: 0 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(10, 14, 23, 0.7);
+    }
+    .deck-toc-select {
+      background: #0f172a;
+      color: #f1f5f9;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 0.82rem;
+      outline: none;
+      max-width: 260px;
+    }
+    .deck-slide {
+      display: none;
+      padding: 24px 28px;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      min-height: 380px;
+    }
+    .deck-slide.active { display: grid; }
+    .deck-slide-badge {
+      font-size: 0.7rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 3px 10px;
+      border-radius: 999px;
+      display: inline-block;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    .deck-slide-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+    .deck-media-wrap {
+      width: 100%;
+      height: 260px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      background: #000;
+    }
+    .deck-media-wrap img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .deck-footer {
+      height: 52px;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(10, 14, 23, 0.85);
+    }
+
+    /* ATLAS DES RELIEFS */
+    .atlas-box {
+      background: #0b1120;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 36px 0;
+    }
+    .atlas-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+      justify-content: space-between;
+    }
+    .atlas-input {
+      flex: 1 1 240px;
+      background: #070d19;
+      border: 1px solid #334155;
+      color: #f8fafc;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      outline: none;
+    }
+    .atlas-input:focus { border-color: #38bdf8; }
+    .atlas-filter-btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .atlas-filter-btn.active, .atlas-filter-btn:hover {
+      background: #2563eb;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
     .atlas-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 16px;
-      max-height: 680px;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 14px;
+      max-height: 550px;
       overflow-y: auto;
       padding-right: 6px;
-    }
-    .atlas-grid::-webkit-scrollbar {
-      width: 6px;
-    }
-    .atlas-grid::-webkit-scrollbar-thumb {
-      background: #1e293b;
-      border-radius: 3px;
     }
     .atlas-card {
       background: #141b2d;
@@ -78,1268 +335,848 @@
       border-radius: 8px;
       overflow: hidden;
       cursor: pointer;
-      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
-      display: flex;
-      flex-direction: column;
+      transition: all 0.2s;
     }
     .atlas-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-3px);
       border-color: #38bdf8;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
     }
-    .atlas-card-img {
+    .atlas-card img {
       width: 100%;
-      height: 140px;
+      height: 120px;
       object-fit: cover;
-      background: #070d19;
       display: block;
+      background: #000;
     }
-    .atlas-card-body {
-      padding: 10px 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
+    .atlas-card-info {
+      padding: 8px 10px;
     }
-    .atlas-card-tag {
-      font-size: 0.68rem;
+    .atlas-card-type {
+      font-size: 0.65rem;
+      color: #38bdf8;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: #38bdf8;
     }
     .atlas-card-title {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 600;
       color: #f8fafc;
-      margin: 0;
+      margin: 2px 0;
     }
-    .atlas-card-coords {
-      font-size: 0.75rem;
-      color: #94a3b8;
-    }
-    /* Modal Lightbox */
+    .atlas-card-sub { font-size: 0.72rem; color: #94a3b8; }
+
+    /* MODAL */
     .atlas-modal {
       display: none;
       position: fixed;
       inset: 0;
       background: rgba(3, 7, 18, 0.88);
       backdrop-filter: blur(8px);
-      z-index: 1000;
+      z-index: 2000;
       align-items: center;
       justify-content: center;
       padding: 20px;
     }
-    .atlas-modal.active {
-      display: flex;
-    }
-    .atlas-modal-box {
+    .atlas-modal.active { display: flex; }
+    .atlas-modal-inner {
       background: #0f172a;
       border: 1px solid #334155;
       border-radius: 12px;
-      max-width: 720px;
+      max-width: 680px;
       width: 100%;
       overflow: hidden;
       position: relative;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.7);
     }
     .atlas-modal-close {
       position: absolute;
-      top: 12px;
-      right: 14px;
+      top: 10px; right: 12px;
       background: rgba(0,0,0,0.6);
       border: 1px solid #475569;
       color: #fff;
-      font-size: 1.2rem;
-      width: 32px;
-      height: 32px;
+      width: 30px; height: 30px;
       border-radius: 50%;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       z-index: 10;
     }
-    .atlas-modal-img {
-      width: 100%;
-      max-height: 440px;
-      object-fit: cover;
-      background: #000;
-      display: block;
+    .atlas-modal-inner img {
+      width: 100%; max-height: 400px; object-fit: contain; background: #000; display: block;
     }
-    .atlas-modal-desc {
-      padding: 16px 20px;
-    }
-    .atlas-modal-desc h3 {
-      margin: 0 0 6px 0;
-      color: #f8fafc;
-      font-size: 1.25rem;
-    }
-    .atlas-modal-desc p {
-      margin: 4px 0 0 0;
-      color: #94a3b8;
-      font-size: 0.85rem;
-      line-height: 1.5;
-    }
-    .photo-duo {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
-      margin: 20px 0;
-    }
-    .photo-duo img {
-      width: 100%;
-      height: 280px;
-      object-fit: cover;
-      border-radius: 8px;
-      border: 1px solid #1e293b;
-    }
-    .photo-single {
-      margin: 20px 0;
-    }
-    .photo-single img {
-      width: 100%;
-      max-height: 480px;
-      object-fit: cover;
-      border-radius: 8px;
-      border: 1px solid #1e293b;
-      display: block;
-    }
-    .photo-caption {
-      font-size: 0.82rem;
-      color: #94a3b8;
-      margin-top: 6px;
-      text-align: center;
-      font-style: italic;
+    .atlas-modal-desc { padding: 14px 18px; }
+
+    @media (max-width: 768px) {
+      .geo-slide, .deck-slide { grid-template-columns: 1fr; }
+      .geo-img-wrap, .deck-media-wrap { height: 200px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- HERO SECTION -->
-  <section class="hero-section">
+  <div class="fiche-container">
+
+    <!-- HERO D'ACCUEIL -->
     <div class="hero-img-box">
-      <img src="https://lh3.googleusercontent.com/d/17ogfLD6TrMq_Xp6o1QbT7JcBmp8Lw2Se" alt="Terre au-dessus cratère Compton - LRO 2015">
+      <img src="https://lh3.googleusercontent.com/d/17ogfLD6TrMq_Xp6o1QbT7JcBmp8Lw2Se" alt="Terre au-dessus cratère Compton">
       <div class="hero-caption">Terre au-dessus cratère Compton - LRO (Lunar Reconnaissance Orbiter) 2015</div>
     </div>
-    <div class="hero-text-box">
-      <h1>La Terre et la Lune</h1>
-      <p class="hero-lead">
-        Troisième planète du Système solaire par ordre d’éloignement au Soleil, la Terre est le plus dense et le plus grand des quatre corps telluriques. Née il y a environ 4,54 milliards d’années de l’accrétion de poussières et de planétésimaux au sein de la nébuleuse protosolaire, elle s’est progressivement différenciée en plusieurs enveloppes concentriques : un noyau métallique dense, un manteau silicaté ductile et une mince croûte rocheuse externe. Située en plein cœur de la zone habitable circumstellaire, elle bénéficie d'une insolation équilibrée qui permet à l'eau de subsister durablement sous ses trois états physiques, faisant d'elle la seule « planète océan » connue, avec une hydrosphère liquide recouvrant plus de 70 % de sa superficie.
-      </p>
-      <p class="hero-lead">
-        Sa dynamique interne est gouvernée par une tectonique des plaques active et continue, un mécanisme unique parmi les planètes rocheuses qui recycle perpétuellement la lithosphère, régule le cycle géochimique du carbone à long terme et édifie les grandes chaînes de montagnes ainsi que les fosses océaniques. Cette géodynamique interne génère également, via les mouvements de convection dans son noyau externe de fer liquide, une puissante magnétosphère qui dévie les particules mortelles du vent solaire et préserve l'enveloppe gazeuse. Composée principalement d’azote moléculaire et d’oxygène libre, son atmosphère dense exerce un effet de serre naturel modéré qui maintient une température moyenne globale de surface d’environ 15 °C.
-      </p>
-      <p class="hero-lead">
-        Cette conjonction exceptionnelle d'eau liquide, de protection magnétique, de stabilité thermique et de renouvellement géologique a permis l'émergence de la vie il y a au moins 3,8 milliards d'années. En retour, l'essor de la biosphère a profondément métamorphosé la géochimie du globe terrestre, enrichissant l'atmosphère en oxygène par photosynthèse et forgeant une couche d'ozone protectrice contre les rayons ultraviolets. Accompagnée d'un satellite naturel exceptionnellement massif, la Lune, qui stabilise l'obliquité de son axe de rotation et amortit les variations climatiques majeures sur les temps géologiques, la Terre demeure à ce jour le seul refuge biologique identifié dans l'Univers.
-      </p>
-    </div>
-  </section>
 
-  <!-- INFOGRAPHIE INTERACTIVE 1 : LA TERRE -->
-  <div id="infographie-terre" style="font-family: system-ui, -apple-system, sans-serif; background: #0b1120; color: #e2e8f0; padding: 14px 16px; border-radius: 8px; width: 100%; box-sizing: border-box; margin: 30px 0; border: 1px solid #1e293b;">
-    <header style="text-align: center; margin: 0 0 10px 0;">
-      <h2 style="color: #f8fafc; margin: 0; font-size: 1.25rem; line-height: 1.2;">La Terre : l'oasis dynamique du Système solaire</h2>
-      <p style="color: #94a3b8; margin: 4px 0 0 0; font-size: 0.8rem;">Anatomie interne, géodynamique des plaques et bouclier magnétosphérique</p>
-    </header>
+    <!-- TEXTE INTRO TERRE -->
+    <p>
+      Troisième planète du Système solaire par ordre d’éloignement au Soleil, la Terre est le plus dense et le plus grand des quatre corps telluriques. Née il y a environ 4,54 milliards d’années de l’accrétion de poussières et de planétésimaux au sein de la nébuleuse protosolaire, elle s’est progressivement différenciée en plusieurs enveloppes concentriques : un noyau métallique dense, un manteau silicaté ductile et une mince croûte rocheuse externe. Située en plein cœur de la zone habitable circumstellaire, elle bénéficie d'une insolation équilibrée qui permet à l'eau de subsister durablement sous ses trois états physiques, faisant d'elle la seule « planète océan » connue, avec une hydrosphère liquide recouvrant plus de 70 % de sa superficie.
+    </p>
+    <p>
+      Sa dynamique interne est gouvernée par une tectonique des plaques active et continue, un mécanisme unique parmi les planètes rocheuses qui recycle perpétuellement la lithosphère, régule le cycle géochimique du carbone à long terme et édifie les grandes chaînes de montagnes ainsi que les fosses océaniques. Cette géodynamique interne génère également, via les mouvements de convection dans son noyau externe de fer liquide, une puissante magnétosphère qui dévie les particules mortelles du vent solaire et préserve l'enveloppe gazeuse. Composée principalement d’azote moléculaire et d’oxygène libre, son atmosphère dense exerce un effet de serre naturel modéré qui maintient une température moyenne globale de surface d’environ 15 °C.
+    </p>
+    <p>
+      Cette conjonction exceptionnelle d'eau liquide, de protection magnétique, de stabilité thermique et de renouvellement géologique a permis l'émergence de la vie il y a au moins 3,8 milliards d'années. En retour, l'essor de la biosphère a profondément métamorphosé la géochimie du globe terrestre, enrichissant l'atmosphère en oxygène par photosynthèse et forgeant une couche d'ozone protectrice contre les rayons ultraviolets. Accompagnée d'un satellite naturel exceptionnellement massif, la Lune, qui stabilise l'obliquité de son axe de rotation et amortit les variations climatiques majeures sur les temps géologiques, la Terre demeure à ce jour le seul refuge biologique identifié dans l'Univers.
+    </p>
 
-    <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 0 0 12px 0;">
-      <button onclick="changerOngletTerre('structure')" id="btn-ter-structure" style="padding: 6px 14px; border-radius: 6px; border: none; background: #2563eb; color: #fff; font-weight: 600; cursor: pointer; font-size: 0.82rem;">1. Structure interne & Géodynamique</button>
-      <button onclick="changerOngletTerre('tectonique')" id="btn-ter-tectonique" style="padding: 6px 14px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.82rem;">2. Tectonique des plaques & Cycle de l'eau</button>
-      <button onclick="changerOngletTerre('champ')" id="btn-ter-champ" style="padding: 6px 14px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.82rem;">3. Champ magnétique & Bouclier radiatif</button>
-    </div>
+    <!-- BOX INFOGRAPHIE 1 : LA TERRE -->
+    <div id="infographie-terre" style="background: #0b1120; color: #e2e8f0; padding: 12px 14px; border-radius: 8px; width: 100%; border: 1px solid #1e293b; margin: 30px 0;">
+      <header style="text-align: center; margin: 0 0 8px 0;">
+        <h2 style="color: #f8fafc; margin: 0; font-size: 1.2rem; line-height: 1.2;">La Terre : l'oasis dynamique du Système solaire</h2>
+        <p style="color: #94a3b8; margin: 2px 0 0 0; font-size: 0.78rem;">Anatomie interne, géodynamique des plaques et bouclier magnétosphérique</p>
+      </header>
 
-    <!-- ONGLET 1 TERRE -->
-    <div id="onglet-ter-structure" style="margin: 0; padding: 0;">
-      <div style="background: #070d19; border: 1px solid #1e293b; border-radius: 6px; padding: 6px 8px; margin-bottom: 8px; overflow-x: auto;">
-        <svg viewBox="0 0 920 230" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; aspect-ratio: 920 / 230; min-width: 700px; display: block; margin: 0;">
-          <defs>
-            <radialGradient id="gradNoyauInterne" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#ffffff"/>
-              <stop offset="60%" stop-color="#fed7aa"/>
-              <stop offset="100%" stop-color="#f97316"/>
-            </radialGradient>
-            <radialGradient id="gradNoyauExterne" cx="50%" cy="50%" r="50%">
-              <stop offset="50%" stop-color="#fb923c"/>
-              <stop offset="100%" stop-color="#c2410c"/>
-            </radialGradient>
-            <radialGradient id="gradManteauTer" cx="50%" cy="50%" r="50%">
-              <stop offset="60%" stop-color="#b45309"/>
-              <stop offset="100%" stop-color="#78350f"/>
-            </radialGradient>
-          </defs>
-          <text x="460" y="16" text-anchor="middle" fill="#94a3b8" font-size="11" letter-spacing="1">COUPE GÉOLOGIQUE DE LA TERRE : DU NOYAU SOLIDE À LA CROÛTE</text>
-          <g transform="translate(60, 215)">
-            <path d="M 0 -195 A 195 195 0 0 1 195 0 L 175 0 A 175 175 0 0 0 0 -175 Z" fill="#334155" stroke="#94a3b8" stroke-width="1"/>
-            <path d="M 0 -175 A 175 175 0 0 1 175 0 L 0 0 Z" fill="url(#gradManteauTer)"/>
-            <path d="M 0 -110 A 110 110 0 0 1 110 0 L 0 0 Z" fill="url(#gradNoyauExterne)"/>
-            <path d="M 0 -60 A 60 60 0 0 1 60 0 L 0 0 Z" fill="url(#gradNoyauInterne)"/>
-          </g>
-          <g transform="translate(300, 35)">
-            <line x1="0" y1="10" x2="60" y2="10" stroke="#94a3b8" stroke-width="1.2"/>
-            <text x="70" y="13" fill="#cbd5e1" font-size="9.5" font-weight="bold">Croûte terrestre (5 à 70 km d'épaisseur)</text>
-            <text x="70" y="25" fill="#94a3b8" font-size="8">Plaques lithosphériques rigides (océanique et continentale).</text>
-            <line x1="0" y1="50" x2="60" y2="50" stroke="#b45309" stroke-width="1.2"/>
-            <text x="70" y="53" fill="#fb923c" font-size="9.5" font-weight="bold">Manteau (jusqu'à 2 900 km de profondeur)</text>
-            <text x="70" y="65" fill="#94a3b8" font-size="8">Roches silicatées visqueuses en convection lente (moteur de la tectonique).</text>
-            <line x1="0" y1="95" x2="60" y2="95" stroke="#ea580c" stroke-width="1.2"/>
-            <text x="70" y="98" fill="#fb923c" font-size="9.5" font-weight="bold">Noyau externe liquide (2 900 à 5 150 km)</text>
-            <text x="70" y="110" fill="#94a3b8" font-size="8">Fer et nickel en fusion, mouvements de convection générant le champ magnétique.</text>
-            <line x1="0" y1="140" x2="60" y2="140" stroke="#f97316" stroke-width="1.2"/>
-            <text x="70" y="143" fill="#facc15" font-size="9.5" font-weight="bold">Graine (Noyau interne solide, 5 150 à 6 371 km)</text>
-            <text x="70" y="155" fill="#94a3b8" font-size="8">Sphère de fer pur à ~5 400 °C maintenue solide par une pression colossale.</text>
-          </g>
-        </svg>
+      <div style="display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin: 0 0 10px 0;">
+        <button onclick="changerOngletTerre('structure')" id="btn-ter-structure" style="padding: 5px 12px; border-radius: 6px; border: none; background: #2563eb; color: #fff; font-weight: 600; cursor: pointer; font-size: 0.8rem;">1. Structure interne &amp; Géodynamique</button>
+        <button onclick="changerOngletTerre('tectonique')" id="btn-ter-tectonique" style="padding: 5px 12px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.8rem;">2. Tectonique des plaques &amp; Cycle de l'eau</button>
+        <button onclick="changerOngletTerre('champ')" id="btn-ter-champ" style="padding: 5px 12px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.8rem;">3. Champ magnétique &amp; Bouclier radiatif</button>
       </div>
 
-      <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 8px 10px; overflow-x: auto;">
-        <table style="width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: left; color: #ffffff;">
-          <thead>
-            <tr style="border-bottom: 1.5px solid #64748b; color: #ffffff; font-weight: bold;">
-              <th style="padding: 5px 6px;">Paramètre géophysique</th>
-              <th style="padding: 5px 6px;">Valeur terrestre</th>
-              <th style="padding: 5px 6px;">Signification planétologique</th>
-            </tr>
-          </thead>
-          <tbody style="line-height: 1.4; color: #ffffff;">
-            <tr style="border-bottom: 1px solid #334155;">
-              <td style="padding: 5px 6px; color: #38bdf8; font-weight: bold;">Rayon moyen</td>
-              <td style="padding: 5px 6px; color: #ffffff;">6 371 km</td>
-              <td style="padding: 5px 6px; color: #ffffff;">Plus grande des planètes telluriques du Système solaire.</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #334155;">
-              <td style="padding: 5px 6px; color: #4ade80; font-weight: bold;">Densité moyenne</td>
-              <td style="padding: 5px 6px; color: #ffffff;">5,515 g/cm³</td>
-              <td style="padding: 5px 6px; color: #ffffff;">La plus élevée de tous les corps célestes du Système solaire (noyau métallique très dense).</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #334155;">
-              <td style="padding: 5px 6px; color: #facc15; font-weight: bold;">Flux thermique interne</td>
-              <td style="padding: 5px 6px; color: #ffffff;">~44,2 térawatts</td>
-              <td style="padding: 5px 6px; color: #ffffff;">Alimenté par la désintégration radioactive naturelle (U, Th, K) et la cristallisation de la graine.</td>
-            </tr>
-            <tr>
-              <td style="padding: 5px 6px; color: #f472b6; font-weight: bold;">Eau de surface</td>
-              <td style="padding: 5px 6px; color: #ffffff;">Recouvre 71 % du globe</td>
-              <td style="padding: 5px 6px; color: #ffffff;">Planète bleue unique possédant des océans d'eau liquide stables en surface.</td>
-            </tr>
-          </tbody>
-        </table>
+      <div id="onglet-ter-structure" style="margin: 0; padding: 0;">
+        <div style="background: #070d19; border: 1px solid #1e293b; border-radius: 6px; padding: 6px 8px; margin-bottom: 8px; overflow-x: auto;">
+          <svg viewBox="0 0 920 230" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; aspect-ratio: 920 / 230; min-width: 700px; display: block; margin: 0;">
+            <defs>
+              <radialGradient id="gradNoyauInterne" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="60%" stop-color="#fed7aa"/>
+                <stop offset="100%" stop-color="#f97316"/>
+              </radialGradient>
+              <radialGradient id="gradNoyauExterne" cx="50%" cy="50%" r="50%">
+                <stop offset="50%" stop-color="#fb923c"/>
+                <stop offset="100%" stop-color="#c2410c"/>
+              </radialGradient>
+              <radialGradient id="gradManteauTer" cx="50%" cy="50%" r="50%">
+                <stop offset="60%" stop-color="#b45309"/>
+                <stop offset="100%" stop-color="#78350f"/>
+              </radialGradient>
+            </defs>
+            <text x="460" y="16" text-anchor="middle" fill="#94a3b8" font-size="11" letter-spacing="1">COUPE GÉOLOGIQUE DE LA TERRE : DU NOYAU SOLIDE À LA CROÛTE</text>
+            <g transform="translate(60, 215)">
+              <path d="M 0 -195 A 195 195 0 0 1 195 0 L 175 0 A 175 175 0 0 0 0 -175 Z" fill="#334155" stroke="#94a3b8" stroke-width="1"/>
+              <path d="M 0 -175 A 175 175 0 0 1 175 0 L 0 0 Z" fill="url(#gradManteauTer)"/>
+              <path d="M 0 -110 A 110 110 0 0 1 110 0 L 0 0 Z" fill="url(#gradNoyauExterne)"/>
+              <path d="M 0 -60 A 60 60 0 0 1 60 0 L 0 0 Z" fill="url(#gradNoyauInterne)"/>
+            </g>
+            <g transform="translate(300, 35)">
+              <line x1="0" y1="10" x2="60" y2="10" stroke="#94a3b8" stroke-width="1.2"/>
+              <text x="70" y="13" fill="#cbd5e1" font-size="9.5" font-weight="bold">Croûte terrestre (5 à 70 km d'épaisseur)</text>
+              <text x="70" y="25" fill="#94a3b8" font-size="8">Plaques lithosphériques rigides (océanique et continentale).</text>
+              <line x1="0" y1="50" x2="60" y2="50" stroke="#b45309" stroke-width="1.2"/>
+              <text x="70" y="53" fill="#fb923c" font-size="9.5" font-weight="bold">Manteau (jusqu'à 2 900 km de profondeur)</text>
+              <text x="70" y="65" fill="#94a3b8" font-size="8">Roches silicatées visqueuses en convection lente (moteur de la tectonique).</text>
+              <line x1="0" y1="95" x2="60" y2="95" stroke="#ea580c" stroke-width="1.2"/>
+              <text x="70" y="98" fill="#fb923c" font-size="9.5" font-weight="bold">Noyau externe liquide (2 900 à 5 150 km)</text>
+              <text x="70" y="110" fill="#94a3b8" font-size="8">Fer et nickel en fusion, mouvements de convection générant le champ magnétique.</text>
+              <line x1="0" y1="140" x2="60" y2="140" stroke="#f97316" stroke-width="1.2"/>
+              <text x="70" y="143" fill="#facc15" font-size="9.5" font-weight="bold">Graine (Noyau interne solide, 5 150 à 6 371 km)</text>
+              <text x="70" y="155" fill="#94a3b8" font-size="8">Sphère de fer pur à ~5 400 °C maintenue solide par une pression colossale.</text>
+            </g>
+          </svg>
+        </div>
+
+        <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 8px 10px; overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: left; color: #ffffff;">
+            <thead>
+              <tr style="border-bottom: 1.5px solid #64748b; color: #ffffff; font-weight: bold;">
+                <th style="padding: 5px 6px;">Paramètre géophysique</th>
+                <th style="padding: 5px 6px;">Valeur terrestre</th>
+                <th style="padding: 5px 6px;">Signification planétologique</th>
+              </tr>
+            </thead>
+            <tbody style="line-height: 1.4; color: #ffffff;">
+              <tr style="border-bottom: 1px solid #334155;">
+                <td style="padding: 5px 6px; color: #38bdf8; font-weight: bold;">Rayon moyen</td>
+                <td style="padding: 5px 6px; color: #ffffff;">6 371 km</td>
+                <td style="padding: 5px 6px; color: #ffffff;">Plus grande des planètes telluriques du Système solaire.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #334155;">
+                <td style="padding: 5px 6px; color: #4ade80; font-weight: bold;">Densité moyenne</td>
+                <td style="padding: 5px 6px; color: #ffffff;">5,515 g/cm³</td>
+                <td style="padding: 5px 6px; color: #ffffff;">La plus élevée de tous les corps célestes (noyau métallique dense).</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #334155;">
+                <td style="padding: 5px 6px; color: #facc15; font-weight: bold;">Flux thermique interne</td>
+                <td style="padding: 5px 6px; color: #ffffff;">~44,2 térawatts</td>
+                <td style="padding: 5px 6px; color: #ffffff;">Alimenté par la désintégration radioactive et la cristallisation de la graine.</td>
+              </tr>
+              <tr>
+                <td style="padding: 5px 6px; color: #f472b6; font-weight: bold;">Eau de surface</td>
+                <td style="padding: 5px 6px; color: #ffffff;">Recouvre 71 % du globe</td>
+                <td style="padding: 5px 6px; color: #ffffff;">Planète bleue unique possédant des océans d'eau liquide stables en surface.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="onglet-ter-tectonique" style="display: none; margin: 0; padding: 0;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 8px;">
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
+            <div style="color: #38bdf8; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">La tectonique des plaques : moteur thermique</div>
+            <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.35;">
+              Exclusivité terrestre majeure rendue possible par la lubrification de l'eau, la lithosphère est découpée en plaques rigides en mouvement perpétuel. Ce cycle évacue la chaleur interne et régule le climat à l'échelle des temps géologiques.
+            </p>
+          </div>
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
+            <div style="color: #4ade80; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Le cycle hydrologique global</div>
+            <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.35;">
+              L'eau circule en permanence entre océans, atmosphère, glaces et biosphère. Ce cycle alimenté par le Soleil façonne les reliefs et stabilise l'effet de serre naturel indispensable à la vie.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div id="onglet-ter-champ" style="display: none; margin: 0; padding: 0;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 8px;">
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
+            <div style="color: #38bdf8; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">La magnétosphère : bouclier contre le vent solaire</div>
+            <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.35;">
+              Généré par les mouvements du fer liquide dans le noyau externe (effet dynamo), le champ magnétique terrestre dévie les flux de particules chargées du Soleil, empêchant l'érosion de l'atmosphère.
+            </p>
+          </div>
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
+            <div style="color: #4ade80; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">L'effet de serre naturel : +33 °C vitaux</div>
+            <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.35;">
+              La vapeur d'eau et le CO2 piègent les rayonnements infrarouges réémis par la surface, élevant la température globale de -18 °C à +15 °C.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- ONGLET 2 TERRE -->
-    <div id="onglet-ter-tectonique" style="display: none; margin: 0; padding: 0;">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 8px;">
-        <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
-          <div style="color: #38bdf8; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">La tectonique des plaques : moteur thermique</div>
-          <div style="background: #0f172a; border-radius: 4px; padding: 4px; margin-bottom: 6px;">
-            <svg viewBox="0 0 280 85" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
-              <g transform="translate(140, 42)">
-                <path d="M -90 -20 L -20 -20 L 0 15 L -90 15 Z" fill="#0284c7" opacity="0.4"/>
-                <path d="M 0 -25 L 90 -25 L 90 15 L 0 15 Z" fill="#b45309" opacity="0.6"/>
-                <circle cx="0" cy="5" r="4" fill="#ef4444"/>
-                <line x1="-55" y1="-8" x2="-25" y2="-8" stroke="#38bdf8" stroke-width="1.8"/>
-                <polygon points="-23,-8 -31,-11 -31,-5" fill="#38bdf8"/>
-                <line x1="30" y1="-8" x2="60" y2="-8" stroke="#facc15" stroke-width="1.8"/>
-                <polygon points="62,-8 54,-5 54,-11" fill="#facc15"/>
-                <text x="0" y="34" text-anchor="middle" fill="#94a3b8" font-size="7.5">Subduction, accrétion et dérive continentale (~cm/an)</text>
-              </g>
-            </svg>
-          </div>
-          <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.3;">
-            Exclusivité terrestre majeure dans le Système solaire (rendue possible par la lubrification de l'eau), la surface de la Terre est découpée en plaques rigides en mouvement perpétuel. Ce cycle évacue la chaleur interne, renouvelle les fonds océaniques et régule le climat à l'échelle des temps géologiques.
-          </p>
-        </div>
+    <!-- SECTION TRANSITION ARTEMIS II -->
+    <div class="photo-duo-grid">
+      <div class="photo-card">
+        <img src="https://lh3.googleusercontent.com/d/1sHYZqeeGypDXseDMzKoU0sS89WTApMYw" alt="Mission Artemis II">
+        <div class="photo-card-caption">Mission Artemis II 2026 (1)</div>
+      </div>
+      <div class="photo-card">
+        <img src="https://lh3.googleusercontent.com/d/1p8QkpiDzneEJjeAg1yPI7BKU3GAx26ov" alt="Mission Artemis II">
+        <div class="photo-card-caption">Mission Artemis II 2026 (2)</div>
+      </div>
+    </div>
 
-        <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
-          <div style="color: #4ade80; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Le cycle hydrologique global</div>
-          <div style="background: #0f172a; border-radius: 4px; padding: 4px; margin-bottom: 6px;">
-            <svg viewBox="0 0 280 85" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
-              <g transform="translate(140, 42)">
-                <rect x="-110" y="10" width="80" height="20" fill="#0284c7" opacity="0.6"/>
-                <path d="M -80 10 Q -60 -20 -30 -10" fill="none" stroke="#38bdf8" stroke-width="1.8" stroke-dasharray="3,2"/>
-                <ellipse cx="-10" cy="-18" rx="16" ry="8" fill="#ffffff" opacity="0.8"/>
-                <path d="M 15 -10 L 40 15" stroke="#67e8f9" stroke-width="1.8"/>
-                <path d="M 40 15 Q 60 22 90 20" fill="none" stroke="#0284c7" stroke-width="2"/>
-                <text x="0" y="34" text-anchor="middle" fill="#94a3b8" font-size="7.5">Évaporation • Précipitations • Rivières • Océans</text>
-              </g>
-            </svg>
-          </div>
-          <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.3;">
-            L'eau circule en permanence entre les réservoirs majeurs de la planète (océans, atmosphère, calottes glaciaires et biosphère). Ce cycle alimenté par l'énergie solaire façonne les reliefs par l'érosion et stabilise l'effet de serre naturel indispensable à la vie.
-          </p>
-        </div>
+    <!-- INTRO LUNE -->
+    <h2>La Lune</h2>
+    <p>
+      Seul satellite naturel de la Terre et compagne inséparable de nos nuits, la Lune veille silencieusement sur notre monde depuis plus de 4,5 milliards d'années. Née des débris d'un impact cataclysmique entre la proto-Terre et un corps de la taille de Mars prénommé Théia, elle arbore un visage profondément marqué par son histoire géologique : de sombres mers de basalte refroidi, sculptées par d'anciens panaches magmatiques, contrastent avec la blancheur éclatante de ses hauts plateaux anorthositiques.
+    </p>
+    <p>
+      Verrouillée par les forces de marée de notre planète, elle nous présente éternellement la même face, agissant comme un stabilisateur orbital indispensable qui protège le climat terrestre des fluctuations chaotiques. Témoin privilégié de l'histoire du Système solaire et gardienne de glaces polaires éternelles, la Lune demeure aujourd'hui la première étape incontournable de l'expansion humaine dans le cosmos.
+    </p>
 
-        <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px; grid-column: 1 / -1;">
-          <div style="color: #facc15; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Le stabilisateur orbital : La Lune</div>
+    <!-- BOX INFOGRAPHIE 2 : LA LUNE -->
+    <div id="infographie-lune" style="background: #0b1120; color: #e2e8f0; padding: 12px 14px; border-radius: 8px; width: 100%; border: 1px solid #1e293b; margin: 30px 0;">
+      <header style="text-align: center; margin: 0 0 8px 0;">
+        <h2 style="color: #f8fafc; margin: 0; font-size: 1.2rem; line-height: 1.2;">La Lune : notre compagne de sélénologie</h2>
+        <p style="color: #94a3b8; margin: 2px 0 0 0; font-size: 0.78rem;">Origine par impact géant, structure asymétrique, maria basaltiques et verrouillage marémantique</p>
+      </header>
+
+      <div style="display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin: 0 0 10px 0;">
+        <button onclick="changerOngletLune('origine')" id="btn-lun-origine" style="padding: 5px 12px; border-radius: 6px; border: none; background: #2563eb; color: #fff; font-weight: 600; cursor: pointer; font-size: 0.8rem;">1. Origine &amp; Structure interne</button>
+        <button onclick="changerOngletLune('geologie')" id="btn-lun-geologie" style="padding: 5px 12px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.8rem;">2. María basaltiques &amp; Asymétrie crustale</button>
+        <button onclick="changerOngletLune('orbite')" id="btn-lun-orbite" style="padding: 5px 12px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.8rem;">3. Rotation synchrone &amp; Marées</button>
+      </div>
+
+      <div id="onglet-lun-origine" style="margin: 0; padding: 0;">
+        <div style="background: #070d19; border: 1px solid #1e293b; border-radius: 6px; padding: 6px 8px; margin-bottom: 8px; overflow-x: auto;">
+          <svg viewBox="0 0 920 230" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; aspect-ratio: 920 / 230; min-width: 700px; display: block; margin: 0;">
+            <defs>
+              <radialGradient id="gradNoyauLune" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="50%" stop-color="#cbd5e1"/>
+                <stop offset="100%" stop-color="#64748b"/>
+              </radialGradient>
+              <radialGradient id="gradManteauLune" cx="50%" cy="50%" r="50%">
+                <stop offset="60%" stop-color="#475569"/>
+                <stop offset="100%" stop-color="#1e293b"/>
+              </radialGradient>
+            </defs>
+            <text x="460" y="16" text-anchor="middle" fill="#94a3b8" font-size="11" letter-spacing="1">COUPE INTERNE DE LA LUNE ET HYPOTHÈSE DE L'IMPACT GÉANT (THÉIA)</text>
+            <g transform="translate(230, 118)">
+              <text x="0" y="-82" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="bold">Structure interne (données Apollo)</text>
+              <circle cx="0" cy="0" r="75" fill="#64748b" stroke="#94a3b8" stroke-width="1.2"/>
+              <circle cx="0" cy="0" r="71" fill="url(#gradManteauLune)"/>
+              <circle cx="0" cy="0" r="28" fill="url(#gradNoyauLune)"/>
+              <line x1="0" y1="0" x2="20" y2="-15" stroke="#facc15" stroke-width="1.5"/>
+              <circle cx="20" cy="-15" r="2.2" fill="#facc15"/>
+              <text x="24" y="-18" fill="#facc15" font-size="8.5" font-weight="bold">Noyau métallique partiel (~330 km)</text>
+              <line x1="0" y1="0" x2="-55" y2="30" stroke="#94a3b8" stroke-width="1.2"/>
+              <text x="-59" y="40" text-anchor="end" fill="#94a3b8" font-size="8">Manteau riche en olivine et pyroxène</text>
+              <text x="0" y="92" text-anchor="middle" fill="#cbd5e1" font-size="8.5">Croûte : 30 km (face visible) à 60 km (face cachée)</text>
+            </g>
+            <line x1="460" y1="30" x2="460" y2="205" stroke="#1e293b" stroke-width="1.5"/>
+            <g transform="translate(680, 118)">
+              <text x="0" y="-82" text-anchor="middle" fill="#f43f5e" font-size="11" font-weight="bold">Scénario de l'impact géant (Theia)</text>
+              <circle cx="-35" cy="10" r="32" fill="#2563eb" opacity="0.85"/>
+              <text x="-35" y="14" text-anchor="middle" fill="#ffffff" font-size="8" font-weight="bold">Proto-Terre</text>
+              <circle cx="30" cy="-25" r="20" fill="#ea580c" opacity="0.85"/>
+              <text x="30" y="-22" text-anchor="middle" fill="#ffffff" font-size="7.5" font-weight="bold">Théia</text>
+              <line x1="18" y1="-12" x2="-10" y2="0" stroke="#facc15" stroke-width="2"/>
+              <ellipse cx="0" cy="15" rx="75" ry="18" fill="none" stroke="#fb923c" stroke-width="1.8" stroke-dasharray="4,2"/>
+              <text x="0" y="68" text-anchor="middle" fill="#cbd5e1" font-size="8">Il y a ~4,51 Ga : impact oblique d'un corps de taille martienne</text>
+              <text x="0" y="82" text-anchor="middle" fill="#94a3b8" font-size="7.5">Accrétion des débris en orbite pour former la Lune</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div id="onglet-lun-geologie" style="display: none; margin: 0; padding: 0;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 8px;">
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
+            <div style="color: #60a5fa; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Les Maria : anciennes mers de lave</div>
+            <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.35;">
+              Vastes bassins creusés lors du bombardement tardif, comblés par des laves basaltiques fluides entre 3,8 et 3,1 milliards d'années.
+            </p>
+          </div>
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
+            <div style="color: #f472b6; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Asymétrie crustale</div>
+            <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.35;">
+              La croûte de la face cachée est deux fois plus épaisse (~60-80 km) que celle de la face visible (~30-40 km), empêchant le magma d'affleurer.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div id="onglet-lun-orbite" style="display: none; margin: 0; padding: 0;">
+        <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
+          <div style="color: #a78bfa; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Rotation synchrone &amp; Verrouillage</div>
           <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.35;">
-            Notre unique satellite naturel, exceptionnellement massif par rapport à la taille de la Terre, agit comme un balancier gravitationnel. En maintenant l'inclinaison de l'axe de rotation terrestre stable autour de 23,44° (évitant des oscillations chaotiques comme sur Mars), la Lune garantit la régularité des saisons et la pérennité du climat sur des centaines de millions d'années.
+            Sous l'effet des forces de marée terrestres, la rotation de la Lune s'est calée exactement sur sa période de révolution (27,3 jours).
           </p>
         </div>
       </div>
     </div>
 
-    <!-- ONGLET 3 TERRE -->
-    <div id="onglet-ter-champ" style="display: none; margin: 0; padding: 0;">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 8px;">
-        <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
-          <div style="color: #38bdf8; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">La magnétosphère : bouclier contre le vent solaire</div>
-          <div style="background: #0f172a; border-radius: 4px; padding: 4px; margin-bottom: 6px;">
-            <svg viewBox="0 0 280 85" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
-              <g transform="translate(140, 42)">
-                <circle cx="0" cy="0" r="10" fill="#2563eb"/>
-                <path d="M 0 10 C -40 40 -80 20 -90 0 C -80 -20 -40 -40 0 -10" fill="none" stroke="#38bdf8" stroke-width="1.5"/>
-                <path d="M 0 10 C -70 70 -120 30 -130 0 C -120 -30 -70 -70 0 -10" fill="none" stroke="#38bdf8" stroke-width="1.5"/>
-                <line x1="-120" y1="-25" x2="-95" y2="-25" stroke="#facc15" stroke-width="1.5"/>
-                <line x1="-120" y1="0" x2="-95" y2="0" stroke="#facc15" stroke-width="1.5"/>
-                <line x1="10" y1="0" x2="90" y2="0" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3,3"/>
-                <text x="0" y="38" text-anchor="middle" fill="#94a3b8" font-size="7.5">Déviation des particules ionisées (aurores polaires)</text>
-              </g>
-            </svg>
-          </div>
-          <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.3;">
-            Généré par les mouvements du fer liquide dans le noyau externe (effet dynamo), le champ magnétique terrestre dévie les flux de particules chargées mortes émises par le Soleil. Sans ce bouclier invisible, l'atmosphère aurait été érodée dans l'espace, à l'instar de ce qui s'est produit sur Mars.
-          </p>
-        </div>
+    <!-- SECTIONS FACE VISIBLE / CACHÉE -->
+    <h2>Face visible / face cachée</h2>
+    <div class="photo-card">
+      <img src="https://lh3.googleusercontent.com/d/1YFBFm9eRZaHbi9-sMsvfOYp3qEmwvwBx" alt="Face visible de la Lune">
+      <div class="photo-card-caption">Face visible de la Lune</div>
+    </div>
+    <p>
+      Verrouillée en rotation synchrone avec la Terre, la face visible présente toujours le même hémisphère aux observateurs terrestres. Elle se caractérise par une forte dissymétrie visuelle, dominée à près de 31 % par de vastes étendues sombres appelées « mers » lunaires (maria). Ces plaines d'épanchement basaltique résultent d'un volcanisme ancien très fluide qui a comblé de gigantesques bassins d'impact formés au début de l'histoire du satellite. Autour de ces mers s'élèvent d'anciens remparts montagneux ainsi qu'un réseau dense de cratères météoritiques d'âges variés, dont certains très récents présentent des rayonnements clairs spectaculaires, à l'image de Tycho ou Copernic. La croûte y est relativement mince (environ 30 à 40 km), ce qui a facilité la remontée des magmas mantelliques sous l'effet des impacts majeurs. Cette région abrite également le complexe géochimique « Procellarum KREEP », riche en éléments radioactifs producteurs de chaleur (potassium, terres rares, phosphore, thorium), expliquant la longévité de son volcanisme. Le contraste frappant entre les hauts plateaux clairs d'anorthosite et les mers basaltiques sombres compose la silhouette familière que l'on discerne à l'œil nu depuis le sol terrestre.
+    </p>
 
-        <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
-          <div style="color: #4ade80; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">L'effet de serre naturel : +33 °C vitaux</div>
-          <div style="background: #0f172a; border-radius: 4px; padding: 4px; margin-bottom: 6px;">
-            <svg viewBox="0 0 280 85" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
-              <g transform="translate(140, 42)">
-                <rect x="-110" y="-25" width="220" height="50" rx="4" fill="#1e3a8a" opacity="0.3"/>
-                <text x="0" y="-5" text-anchor="middle" fill="#fde047" font-size="9" font-weight="bold">Température sans effet de serre : -18 °C</text>
-                <text x="0" y="14" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="bold">Température réelle avec atmosphère : +15 °C</text>
-              </g>
-            </svg>
-          </div>
-          <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.3;">
-            La vapeur d'eau (H2O), le dioxyde de carbone (CO2) et le méthane (CH4) présents dans l'atmosphère piègent une partie du rayonnement infrarouge renvoyé par la surface. Cet effet de serre naturel réchauffe la planète de 33 °C, transformant un monde de glace stérile en une biosphère tempérée.
-          </p>
-        </div>
+    <div class="photo-card">
+      <img src="https://lh3.googleusercontent.com/d/1nk9ckuBb_Rs3daEmFxSD8-KJEKafS7Pb" alt="Face cachée de la Lune">
+      <div class="photo-card-caption">Face cachée de la Lune</div>
+    </div>
+    <p>
+      Inaccessible depuis la Terre et révélée pour la première fois en 1959 par la sonde soviétique Luna 3, la face cachée dévoile une physionomie radicalement différente. Dépourvue de grandes étendues sombres, elle ne compte que très peu de mers basaltiques, qui ne recouvrent qu'environ 1 % de sa superficie totale (comme la mer de Moscou). Le paysage y est presque exclusivement constitué de hauts plateaux clairs (terrae), saturés de cratères d'impact superposés les uns aux autres dans un désordre géologique primordial. Cette absence de remplissage magmatique s'explique par une croûte lunaire nettement plus épaisse de ce côté (souvent supérieure à 60 à 80 km), formant une barrière difficilement franchissable pour les laves profondes. La topographie y est beaucoup plus accidentée et présente des dénivelés colossaux, dominés au sud par l'immense bassin Pôle Sud-Aitken, l'une des plus vastes dépressions d'impact répertoriées dans le Système solaire (environ 2 500 km de diamètre). Épargnée par les émissions radio artificielles de notre civilisation grâce à l'écran naturel de la masse lunaire, cette face offre un environnement de silence électromagnétique exceptionnel, hautement convoité pour la radioastronomie moderne. Elle demeure un témoin quasi intact du bombardement météoritique intense qui a frappé les corps telluriques il y a près de quatre milliards d'années.
+    </p>
 
-        <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px; grid-column: 1 / -1;">
-          <div style="color: #f87171; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">L'albédo terrestre et l'équilibre énergétique</div>
-          <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.35;">
-            La Terre possède un albédo moyen (pouvoir réfléchissant) de <strong>30 %</strong> (0,30), dû principalement aux nuages, à la glace et aux déserts clairs. Sur les 340 W/m² reçus en moyenne du Soleil, environ 100 W/m² sont renvoyés directement dans l'espace et 240 W/m² sont absorbés par l'atmosphère et les océans, maintenant l'équilibre thermique global de la planète.
-          </p>
+    <!-- LES ENSEMBLES GÉOLOGIQUES (SLIDER NATIF RÉPARÉ) -->
+    <h2>Les ensembles géologiques</h2>
+    <div class="slider-card">
+      <div class="slider-header">
+        <span class="slider-tag">Planétologie • Lune</span>
+        <span class="slider-counter" id="geoCounter">01 / 04</span>
+      </div>
+
+      <!-- Diapo 1 -->
+      <div class="geo-slide active" id="gslide-0">
+        <div>
+          <span style="font-size:0.7rem; color:#38bdf8; font-weight:700; text-transform:uppercase;">Section 01</span>
+          <h3 class="geo-slide-title">Cratères d'impact</h3>
+          <p style="font-size:0.85rem; color:#94a3b8; margin-bottom:8px;">Empreintes omniprésentes du bombardement météoritique :</p>
+          <div class="geo-item-box"><strong>Origine d'impact :</strong> dépressions nées de chocs hypervéloces, sans érosion atmosphérique.</div>
+          <div class="geo-item-box"><strong>Morphologies variées :</strong> simples bols ou remparts étagés avec gradins et pitons centraux (Copernic, Tycho).</div>
+          <div class="geo-item-box"><strong>Systèmes rayonnants :</strong> panaches d'éjectas clairs éjectés sur des centaines de kilomètres.</div>
         </div>
+        <div class="geo-img-wrap">
+          <img src="https://lh3.googleusercontent.com/d/1b6I3hvgQfkuxqGldTmQE6tT8o9kb_4y0" alt="Cratères lunaires">
+        </div>
+      </div>
+
+      <!-- Diapo 2 -->
+      <div class="geo-slide" id="gslide-1">
+        <div>
+          <span style="font-size:0.7rem; color:#38bdf8; font-weight:700; text-transform:uppercase;">Section 02</span>
+          <h3 class="geo-slide-title">Mers lunaires (Maria)</h3>
+          <p style="font-size:0.85rem; color:#94a3b8; margin-bottom:8px;">Vastes bassins sombres façonnés par le volcanisme effusif :</p>
+          <div class="geo-item-box"><strong>Plaines basaltiques :</strong> nappes de basalte ayant comblé les dépressions d'impact géantes.</div>
+          <div class="geo-item-box"><strong>Asymétrie globale :</strong> recouvrent 31 % de la face visible contre à peine 1 % de la face cachée.</div>
+          <div class="geo-item-box"><strong>Reliefs associés :</strong> rides de compression sinueuses et dômes volcaniques de refroidissement.</div>
+        </div>
+        <div class="geo-img-wrap">
+          <img src="https://lh3.googleusercontent.com/d/1bQHyWPmBZxtyXiqOK-QZOpm_dOumEE8D" alt="Mers lunaires">
+        </div>
+      </div>
+
+      <!-- Diapo 3 -->
+      <div class="geo-slide" id="gslide-2">
+        <div>
+          <span style="font-size:0.7rem; color:#38bdf8; font-weight:700; text-transform:uppercase;">Section 03</span>
+          <h3 class="geo-slide-title">Massifs montagneux (Montes)</h3>
+          <p style="font-size:0.85rem; color:#94a3b8; margin-bottom:8px;">Remparts titanesques dressés par les impacts colossaux :</p>
+          <div class="geo-item-box"><strong>Origine d'impact :</strong> massifs non tectoniques formés par le soulèvement de la croûte.</div>
+          <div class="geo-item-box"><strong>Couronnes de bassins :</strong> chaînes arquées bordant les mers (Apenninus, Caucasus, Alpes).</div>
+          <div class="geo-item-box"><strong>Altitudes :</strong> sommets culminant à plus de 4 000 à 5 000 mètres au-dessus des plaines.</div>
+        </div>
+        <div class="geo-img-wrap">
+          <img src="https://lh3.googleusercontent.com/d/1baFPUJ2LnukYBXgpIAz3OTHXvP0NDOPw" alt="Montes lunaires">
+        </div>
+      </div>
+
+      <!-- Diapo 4 -->
+      <div class="geo-slide" id="gslide-3">
+        <div>
+          <span style="font-size:0.7rem; color:#38bdf8; font-weight:700; text-transform:uppercase;">Section 04</span>
+          <h3 class="geo-slide-title">Vallées et gorges (Vallis)</h3>
+          <p style="font-size:0.85rem; color:#94a3b8; margin-bottom:8px;">Sillons profonds nés de fractures ou de coulées magmatiques :</p>
+          <div class="geo-item-box"><strong>Vallées structurales :</strong> grabens et failles rectilignes (Vallis Alpes découpant les Alpes).</div>
+          <div class="geo-item-box"><strong>Rilles sinueux :</strong> tunnels de lave effondrés et chenaux d'écoulement (Vallis Schröteri).</div>
+          <div class="geo-item-box"><strong>Témoins magmatiques :</strong> corridors de lave alimentant les plaines basaltiques.</div>
+        </div>
+        <div class="geo-img-wrap">
+          <img src="https://lh3.googleusercontent.com/d/1AO0J7enSOVELazGbn9astomSaKMr9KSB" alt="Vallis lunaires">
+        </div>
+      </div>
+
+      <div class="slider-footer">
+        <button class="nav-btn" id="geoPrevBtn" onclick="moveGeoSlide(-1)">← Précédent</button>
+        <div class="dots-container" id="geoDots"></div>
+        <button class="nav-btn" id="geoNextBtn" onclick="moveGeoSlide(1)">Suivant →</button>
       </div>
     </div>
 
-    <script>
-      function changerOngletTerre(nom) {
-        const onglets = ['structure', 'tectonique', 'champ'];
-        onglets.forEach(o => {
-          const contenu = document.getElementById('onglet-ter-' + o);
-          const bouton = document.getElementById('btn-ter-' + o);
-          if (o === nom) {
-            contenu.style.display = 'block';
-            bouton.style.background = '#2563eb';
-            bouton.style.color = '#ffffff';
-          } else {
-            contenu.style.display = 'none';
-            bouton.style.background = '#1e293b';
-            bouton.style.color = '#94a3b8';
-          }
-        });
-      }
-    </script>
-  </div>
-
-  <!-- SECTION TRANSITION : ARTEMIS II -->
-  <div class="photo-duo">
-    <img src="https://lh3.googleusercontent.com/d/1sHYZqeeGypDXseDMzKoU0sS89WTApMYw" alt="Mission Artemis II (1)">
-    <img src="https://lh3.googleusercontent.com/d/1p8QkpiDzneEJjeAg1yPI7BKU3GAx26ov" alt="Mission Artemis II (2)">
-  </div>
-  <div class="photo-caption">Mission Artemis II 2026</div>
-
-  <!-- INTRO LUNE -->
-  <h2>La Lune</h2>
-  <p>
-    Seul satellite naturel de la Terre et compagne inséparable de nos nuits, la Lune veille silencieusement sur notre monde depuis plus de 4,5 milliards d'années. Née des débris d'un impact cataclysmique entre la proto-Terre et un corps de la taille de Mars prénommé Théia, elle arbore un visage profondément marqué par son histoire géologique : de sombres mers de basalte refroidi, sculptées par d'anciens panaches magmatiques, contrastent avec la blancheur éclatante de ses hauts plateaux anorthositiques.
-  </p>
-  <p>
-    Verrouillée par les forces de marée de notre planète, elle nous présente éternellement la même face, agissant comme un stabilisateur orbital indispensable qui protège le climat terrestre des fluctuations chaotiques. Témoin privilégié de l'histoire du Système solaire et gardienne de glaces polaires éternelles, la Lune demeure aujourd'hui la première étape incontournable de l'expansion humaine dans le cosmos.
-  </p>
-
-  <!-- INFOGRAPHIE INTERACTIVE 2 : LA LUNE -->
-  <div id="infographie-lune" style="font-family: system-ui, -apple-system, sans-serif; background: #0b1120; color: #e2e8f0; padding: 14px 16px; border-radius: 8px; width: 100%; box-sizing: border-box; margin: 30px 0; border: 1px solid #1e293b;">
-    <header style="text-align: center; margin: 0 0 10px 0;">
-      <h2 style="color: #f8fafc; margin: 0; font-size: 1.25rem; line-height: 1.2;">La Lune : notre compagne de sélénologie</h2>
-      <p style="color: #94a3b8; margin: 4px 0 0 0; font-size: 0.8rem;">Origine par impact géant, structure asymétrique, maria basaltiques et verrouillage marémantique</p>
-    </header>
-
-    <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 0 0 12px 0;">
-      <button onclick="changerOngletLune('origine')" id="btn-lun-origine" style="padding: 6px 14px; border-radius: 6px; border: none; background: #2563eb; color: #fff; font-weight: 600; cursor: pointer; font-size: 0.82rem;">1. Origine & Structure interne</button>
-      <button onclick="changerOngletLune('geologie')" id="btn-lun-geologie" style="padding: 6px 14px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.82rem;">2. María basaltiques & Asymétrie crustale</button>
-      <button onclick="changerOngletLune('orbite')" id="btn-lun-orbite" style="padding: 6px 14px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.82rem;">3. Rotation synchrone & Marées</button>
-    </div>
-
-    <!-- ONGLET 1 LUNE -->
-    <div id="onglet-lun-origine" style="margin: 0; padding: 0;">
-      <div style="background: #070d19; border: 1px solid #1e293b; border-radius: 6px; padding: 6px 8px; margin-bottom: 8px; overflow-x: auto;">
-        <svg viewBox="0 0 920 230" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; aspect-ratio: 920 / 230; min-width: 700px; display: block; margin: 0;">
-          <defs>
-            <radialGradient id="gradNoyauLune" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#ffffff"/>
-              <stop offset="50%" stop-color="#cbd5e1"/>
-              <stop offset="100%" stop-color="#64748b"/>
-            </radialGradient>
-            <radialGradient id="gradManteauLune" cx="50%" cy="50%" r="50%">
-              <stop offset="60%" stop-color="#475569"/>
-              <stop offset="100%" stop-color="#1e293b"/>
-            </radialGradient>
-          </defs>
-          <text x="460" y="16" text-anchor="middle" fill="#94a3b8" font-size="11" letter-spacing="1">COUPE INTERNE DE LA LUNE ET HYPOTHÈSE DE L'IMPACT GÉANT (THÉIA)</text>
-          <g transform="translate(230, 118)">
-            <text x="0" y="-82" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="bold">Structure interne (données Apollo)</text>
-            <circle cx="0" cy="0" r="75" fill="#64748b" stroke="#94a3b8" stroke-width="1.2"/>
-            <circle cx="0" cy="0" r="71" fill="url(#gradManteauLune)"/>
-            <circle cx="0" cy="0" r="28" fill="url(#gradNoyauLune)"/>
-            <line x1="0" y1="0" x2="20" y2="-15" stroke="#facc15" stroke-width="1.5"/>
-            <circle cx="20" cy="-15" r="2.2" fill="#facc15"/>
-            <text x="24" y="-18" fill="#facc15" font-size="8.5" font-weight="bold">Noyau métallique partiel (~330 km)</text>
-            <line x1="0" y1="0" x2="-55" y2="30" stroke="#94a3b8" stroke-width="1.2"/>
-            <text x="-59" y="40" text-anchor="end" fill="#94a3b8" font-size="8">Manteau riche en olivine et pyroxène</text>
-            <text x="0" y="92" text-anchor="middle" fill="#cbd5e1" font-size="8.5">Croûte : 30 km (face visible) à 60 km (face cachée)</text>
-          </g>
-          <line x1="460" y1="30" x2="460" y2="205" stroke="#1e293b" stroke-width="1.5"/>
-          <g transform="translate(680, 118)">
-            <text x="0" y="-82" text-anchor="middle" fill="#f43f5e" font-size="11" font-weight="bold">Scénario de l'impact géant (Theia)</text>
-            <circle cx="-35" cy="10" r="32" fill="#2563eb" opacity="0.85"/>
-            <text x="-35" y="14" text-anchor="middle" fill="#ffffff" font-size="8" font-weight="bold">Proto-Terre</text>
-            <circle cx="30" cy="-25" r="20" fill="#ea580c" opacity="0.85"/>
-            <text x="30" y="-22" text-anchor="middle" fill="#ffffff" font-size="7.5" font-weight="bold">Théia</text>
-            <line x1="18" y1="-12" x2="-10" y2="0" stroke="#facc15" stroke-width="2"/>
-            <ellipse cx="0" cy="15" rx="75" ry="18" fill="none" stroke="#fb923c" stroke-width="1.8" stroke-dasharray="4,2"/>
-            <text x="0" y="68" text-anchor="middle" fill="#cbd5e1" font-size="8">Il y a ~4,51 Ga : impact oblique d'un corps de taille martienne</text>
-            <text x="0" y="82" text-anchor="middle" fill="#94a3b8" font-size="7.5">Accrétion des débris en orbite pour former la Lune</text>
-          </g>
-        </svg>
+    <div class="photo-duo-grid">
+      <div class="photo-card">
+        <img src="https://lh3.googleusercontent.com/d/18qYaAqLOrISD7upBklZ5zo03MR2efsa6" alt="Mons Hadley">
+        <div class="photo-card-caption">Mons Hadley</div>
       </div>
-
-      <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 8px 10px; overflow-x: auto;">
-        <table style="width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: left; color: #ffffff;">
-          <thead>
-            <tr style="border-bottom: 1.5px solid #64748b; color: #ffffff; font-weight: bold;">
-              <th style="padding: 5px 6px;">Paramètre</th>
-              <th style="padding: 5px 6px;">Lune</th>
-              <th style="padding: 5px 6px;">Terre (comparatif)</th>
-              <th style="padding: 5px 6px;">Conséquence géophysique</th>
-            </tr>
-          </thead>
-          <tbody style="line-height: 1.4; color: #ffffff;">
-            <tr style="border-bottom: 1px solid #334155;">
-              <td style="padding: 5px 6px; color: #38bdf8; font-weight: bold;">Rayon moyen</td>
-              <td style="padding: 5px 6px; color: #ffffff;">1 737,4 km</td>
-              <td style="padding: 5px 6px; color: #ffffff;">6 371 km (Lune ≈ 0,27 Terre)</td>
-              <td style="padding: 5px 6px; color: #ffffff;">Cinquième plus grande lune du Système solaire, ratio de taille planète/satellite le plus élevé.</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #334155;">
-              <td style="padding: 5px 6px; color: #4ade80; font-weight: bold;">Gravité de surface</td>
-              <td style="padding: 5px 6px; color: #ffffff;">1,62 m/s² (0,165 g)</td>
-              <td style="padding: 5px 6px; color: #ffffff;">9,81 m/s² (1,00 g)</td>
-              <td style="padding: 5px 6px; color: #ffffff;">Incapable de retenir une atmosphère par gravité ; évaporation immédiate des gaz volatils.</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #334155;">
-              <td style="padding: 5px 6px; color: #facc15; font-weight: bold;">Champ magnétique</td>
-              <td style="padding: 5px 6px; color: #ffffff;">Quasi nul (traces rémanentes)</td>
-              <td style="padding: 5px 6px; color: #ffffff;">30 à 60 µT</td>
-              <td style="padding: 5px 6px; color: #ffffff;">Le noyau s'est solidifié très tôt, arrêtant la géodynamo interne.</td>
-            </tr>
-            <tr>
-              <td style="padding: 5px 6px; color: #f472b6; font-weight: bold;">Distance moyenne</td>
-              <td style="padding: 5px 6px; color: #ffffff;">384 400 km</td>
-              <td style="padding: 5px 6px; color: #ffffff;">-</td>
-              <td style="padding: 5px 6px; color: #ffffff;">S'éloigne de la Terre de 3,8 cm par an en raison des transferts de moment cinétique par marée.</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="photo-card">
+        <img src="https://lh3.googleusercontent.com/d/1MT8LMtfsmKUpu8UiAf30yoIbuOqVx3fd" alt="Surface lunaire">
+        <div class="photo-card-caption">Régolithe et hauts plateaux</div>
       </div>
     </div>
 
-    <!-- ONGLET 2 LUNE -->
-    <div id="onglet-lun-geologie" style="display: none; margin: 0; padding: 0;">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 8px;">
-        <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
-          <div style="color: #60a5fa; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Les Maria : anciennes mers de lave refroidie</div>
-          <div style="background: #0f172a; border-radius: 4px; padding: 4px; margin-bottom: 6px;">
-            <svg viewBox="0 0 280 85" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
-              <g transform="translate(140, 42)">
-                <circle cx="0" cy="0" r="32" fill="#1e293b" stroke="#334155" stroke-width="1"/>
-                <ellipse cx="0" cy="2" rx="22" ry="12" fill="#0f172a"/>
-                <text x="0" y="3" text-anchor="middle" fill="#60a5fa" font-size="8" font-weight="bold">Bassin d'impact inondé de basalte</text>
-                <text x="0" y="35" text-anchor="middle" fill="#94a3b8" font-size="7.5">Riches en fer et titane • Albédo sombre (~7 %)</text>
-              </g>
-            </svg>
-          </div>
-          <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.3;">
-            Baptisées à tort « mers » (<em>maria</em>) par Galilée, ces vastes taches sombres visibles à l'œil nu sont de gigantesques bassins d'impact creusés par des astéroïdes géants puis comblés par des épanchements de laves basaltiques fluides entre 3,8 et 3,1 milliards d'années.
-          </p>
-        </div>
-
-        <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
-          <div style="color: #f472b6; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">L'asymétrie de la croûte : Face visible vs Face cachée</div>
-          <div style="background: #0f172a; border-radius: 4px; padding: 4px; margin-bottom: 6px;">
-            <svg viewBox="0 0 280 85" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
-              <g transform="translate(140, 42)">
-                <path d="M -70 0 A 30 30 0 0 1 -10 0 Z" fill="#0284c7" opacity="0.6"/>
-                <text x="-40" y="-8" text-anchor="middle" fill="#38bdf8" font-size="7.5" font-weight="bold">Face visible (Croûte fine ~30 km)</text>
-                <path d="M 10 0 A 30 30 0 0 1 70 0 Z" fill="#b45309" opacity="0.6"/>
-                <text x="40" y="-8" text-anchor="middle" fill="#fb923c" font-size="7.5" font-weight="bold">Face cachée (Épaisse ~60 km)</text>
-                <text x="0" y="32" text-anchor="middle" fill="#94a3b8" font-size="7.5">Absence quasi-totale de maria sur la face cachée</text>
-              </g>
-            </svg>
-          </div>
-          <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.3;">
-            La croûte de la face cachée est deux fois plus épaisse que celle de la face visible. Lorsque les impacts ont fracturé la croûte primitive, seule la face visible, plus mince, a permis au magma du manteau de remonter facilement pour former les <em>maria</em>.
-          </p>
-        </div>
-
-        <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px; grid-column: 1 / -1;">
-          <div style="color: #67e8f9; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Réserves de glace d'eau dans les cratères ombragés</div>
-          <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.35;">
-            En raison de l'inclinaison quasi nulle de l'axe de rotation de la Lune (1,54°), le fond des cratères profonds situés aux pôles (comme Shackleton ou Hermite) ne reçoit jamais les rayons du Soleil. Des milliards de tonnes de glace d'eau pure, apportées par des comètes au fil des éons, y sont piégées en permanence sous forme de permafrost cryogénique, constituant une ressource stratégique clé pour les futures bases habitées (Artémis).
-          </p>
-        </div>
-      </div>
+    <!-- CRATÈRES D'IMPACT -->
+    <h2>Cratères d'impact</h2>
+    <p>
+      Les cratères d'impact constituent la signature morphologique dominante du paysage lunaire. En l'absence d'atmosphère protectrice, d'eau liquide et d'une tectonique des plaques active pour recycler la croûte, la Lune conserve pratiquement intactes les cicatrices de collisions météoritiques survenues depuis plus de quatre milliards d'années. Ces dépressions circulaires ne sont pas le résultat d'éruptions volcaniques, mais de chocs à des vitesses cosmiques extrêmes — généralement comprises entre 15 et 30 kilomètres par seconde — qui libèrent instantanément une énergie cinétique colossale, vaporisant le projectile et excavant violemment le substrat rocheux.
+    </p>
+    <div class="photo-card">
+      <img src="https://lh3.googleusercontent.com/d/1mSXwF3QXvK-wFZUsACg3DIoK7T2f-lYR" alt="Cratère Tycho">
+      <div class="photo-card-caption">Cratère Tycho</div>
     </div>
-
-    <!-- ONGLET 3 LUNE -->
-    <div id="onglet-lun-orbite" style="display: none; margin: 0; padding: 0;">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 8px;">
-        <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
-          <div style="color: #a78bfa; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">La rotation synchrone : Pourquoi voyons-nous toujours la même face ?</div>
-          <div style="background: #0f172a; border-radius: 4px; padding: 4px; margin-bottom: 6px;">
-            <svg viewBox="0 0 280 85" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
-              <g transform="translate(140, 42)">
-                <circle cx="-50" cy="0" r="12" fill="#2563eb"/>
-                <text x="-50" y="3" text-anchor="middle" fill="#ffffff" font-size="7">Terre</text>
-                <circle cx="50" cy="0" r="8" fill="#94a3b8"/>
-                <path d="M 45 -4 L 50 -8 L 55 -4" fill="none" stroke="#facc15" stroke-width="1.5"/>
-                <text x="50" y="-14" text-anchor="middle" fill="#facc15" font-size="7.5">Même face visible</text>
-                <text x="0" y="34" text-anchor="middle" fill="#94a3b8" font-size="7.5">Période de révolution = Période de rotation (27,3 jours)</text>
-              </g>
-            </svg>
-          </div>
-          <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.3;">
-            Sous l'effet des forces de marée gravitationnelles exercées par la Terre, la rotation initiale de la Lune a été freinée au fil des millénaires jusqu'à se verrouiller exactement sur sa période orbitale. Elle met le même temps (27,3 jours) pour tourner sur elle-même que pour faire le tour de la Terre.
-          </p>
-        </div>
-
-        <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
-          <div style="color: #38bdf8; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Les marées océaniques et terrestres</div>
-          <div style="background: #0f172a; border-radius: 4px; padding: 4px; margin-bottom: 6px;">
-            <svg viewBox="0 0 280 85" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
-              <g transform="translate(140, 42)">
-                <ellipse cx="0" cy="0" rx="20" ry="14" fill="#2563eb"/>
-                <circle cx="85" cy="0" r="5" fill="#cbd5e1"/>
-                <text x="85" y="-10" text-anchor="middle" fill="#cbd5e1" font-size="7">Lune</text>
-                <path d="M 20 0 Q 50 -10 80 -2" fill="none" stroke="#38bdf8" stroke-width="1.2" stroke-dasharray="2,2"/>
-                <text x="0" y="34" text-anchor="middle" fill="#94a3b8" font-size="7.5">Bourrelets d'attraction différentielle (marées hautes)</text>
-              </g>
-            </svg>
-          </div>
-          <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.3;">
-            L'attraction gravitationnelle de la Lune étire légèrement la Terre et ses océans, créant deux bourrelets opposés (marées semi-diurnes). Ce frottement dissipe de l'énergie mécanique, ralentit imperceptiblement la rotation de la Terre et éloigne progressivement la Lune de notre planète.
-          </p>
-        </div>
-
-        <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px; grid-column: 1 / -1;">
-          <div style="color: #facc15; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">La coïncidence géométrique parfaite des éclipses</div>
-          <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.35;">
-            Bien que le Soleil soit 400 fois plus grand que la Lune, il est aussi exactement 400 fois plus éloigné de la Terre. Cette pure coïncidence géométrique fait que la Lune et le Soleil affichent le même diamètre apparent (~0,5 degré) dans notre ciel, permettant d'admirer de spectaculaires <strong>éclipses solaires totales</strong> lorsque les orbites s'alignent parfaitement.
-          </p>
-        </div>
-      </div>
+    <div class="photo-card">
+      <img src="https://lh3.googleusercontent.com/d/17BTQPdD_vSsnMnuMrdpHDg1j7QW6nN3L" alt="Cratère Goclenius">
+      <div class="photo-card-caption">Cratère Goclenius</div>
     </div>
-
-    <script>
-      function changerOngletLune(nom) {
-        const onglets = ['origine', 'geologie', 'orbite'];
-        onglets.forEach(o => {
-          const contenu = document.getElementById('onglet-lun-' + o);
-          const bouton = document.getElementById('btn-lun-' + o);
-          if (o === nom) {
-            contenu.style.display = 'block';
-            bouton.style.background = '#2563eb';
-            bouton.style.color = '#ffffff';
-          } else {
-            contenu.style.display = 'none';
-            bouton.style.background = '#1e293b';
-            bouton.style.color = '#94a3b8';
-          }
-        });
-      }
-    </script>
-  </div>
-
-  <!-- SECTION FACE VISIBLE / FACE CACHÉE -->
-  <h2>Face visible / face cachée</h2>
-  <div class="photo-single">
-    <img src="https://lh3.googleusercontent.com/d/1YFBFm9eRZaHbi9-sMsvfOYp3qEmwvwBx" alt="Face visible de la Lune">
-  </div>
-  <p>
-    Verrouillée en rotation synchrone avec la Terre, la face visible présente toujours le même hémisphère aux observateurs terrestres. Elle se caractérise par une forte dissymétrie visuelle, dominée à près de 31 % par de vastes étendues sombres appelées « mers » lunaires (maria). Ces plaines d'épanchement basaltique résultent d'un volcanisme ancien très fluide qui a comblé de gigantesques bassins d'impact formés au début de l'histoire du satellite. Autour de ces mers s'élèvent d'anciens remparts montagneux ainsi qu'un réseau dense de cratères météoritiques d'âges variés, dont certains très récents présentent des rayonnements clairs spectaculaires, à l'image de Tycho ou Copernic. La croûte y est relativement mince (environ 30 à 40 km), ce qui a facilité la remontée des magmas mantelliques sous l'effet des impacts majeurs. Cette région abrite également le complexe géochimique « Procellarum KREEP », riche en éléments radioactifs producteurs de chaleur (potassium, terres rares, phosphore, thorium), expliquant la longévité de son volcanisme. Le contraste frappant entre les hauts plateaux clairs d'anorthosite et les mers basaltiques sombres compose la silhouette familière que l'on discerne à l'œil nu depuis le sol terrestre.
-  </p>
-
-  <div class="photo-single">
-    <img src="https://lh3.googleusercontent.com/d/1nk9ckuBb_Rs3daEmFxSD8-KJEKafS7Pb" alt="Face cachée de la Lune">
-  </div>
-  <p>
-    Inaccessible depuis la Terre et révélée pour la première fois en 1959 par la sonde soviétique Luna 3, la face cachée dévoile une physionomie radicalement différente. Dépourvue de grandes étendues sombres, elle ne compte que très peu de mers basaltiques, qui ne recouvrent qu'environ 1 % de sa superficie totale (comme la mer de Moscou). Le paysage y est presque exclusivement constitué de hauts plateaux clairs (terrae), saturés de cratères d'impact superposés les uns aux autres dans un désordre géologique primordial. Cette absence de remplissage magmatique s'explique par une croûte lunaire nettement plus épaisse de ce côté (souvent supérieure à 60 à 80 km), formant une barrière difficilement franchissable pour les laves profondes. La topographie y est beaucoup plus accidentée et présente des dénivelés colossaux, dominés au sud par l'immense bassin Pôle Sud-Aitken, l'une des plus vastes dépressions d'impact répertoriées dans le Système solaire (environ 2 500 km de diamètre). Épargnée par les émissions radio artificielles de notre civilisation grâce à l'écran naturel de la masse lunaire, cette face offre un environnement de silence électromagnétique exceptionnel, hautement convoité pour la radioastronomie moderne. Elle demeure un témoin quasi intact du bombardement météoritique intense qui a frappé les corps telluriques il y a près de quatre milliards d'années.
-  </p>
-
-  <!-- SLIDER ENSEMBLES GÉOLOGIQUES -->
-  <h2>Les ensembles géologiques</h2>
-  <div style="height: 480px; width: 100%; margin: 24px 0; border: 1px solid #1e293b; border-radius: 12px; overflow: hidden;">
-    <iframe srcdoc='<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formations Géologiques de la Lune</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { width: 100%; height: 100%; background-color: #0d0e12; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #e2e8f0; overflow: hidden; }
-    .slider-card { width: 100%; height: 100%; background: #141720; border: 1px solid #232838; border-radius: 12px; display: flex; flex-direction: column; justify-content: space-between; padding: 16px 22px; }
-    .slider-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 8px; border-bottom: 1px solid #1f2533; }
-    .tag { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #38bdf8; }
-    .counter { font-size: 0.78rem; font-weight: 600; color: #64748b; letter-spacing: 0.05em; }
-    .slides-container { position: relative; flex: 1; width: 100%; min-height: 0; margin: 10px 0; }
-    .slide { position: absolute; inset: 0; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 18px; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
-    .slide.active { opacity: 1; pointer-events: auto; }
-    .text-content { display: flex; flex-direction: column; gap: 8px; overflow-y: auto; padding-right: 6px; }
-    .text-content::-webkit-scrollbar { width: 4px; }
-    .text-content::-webkit-scrollbar-thumb { background: #2a3142; border-radius: 2px; }
-    .section-badge { font-size: 0.68rem; font-weight: 700; color: #38bdf8; letter-spacing: 0.08em; text-transform: uppercase; }
-    .slide-title { font-size: 1.25rem; font-weight: 700; color: #ffffff; line-height: 1.25; }
-    .slide-intro { font-size: 0.82rem; color: #94a3b8; line-height: 1.4; }
-    .items-list { display: flex; flex-direction: column; gap: 6px; margin-top: 2px; }
-    .item-card { background: #1a1f2c; border-left: 3px solid #38bdf8; border-radius: 0 6px 6px 0; padding: 7px 10px; font-size: 0.8rem; line-height: 1.35; color: #cbd5e1; }
-    .item-card strong { color: #ffffff; font-weight: 600; }
-    .image-container { width: 100%; height: 100%; max-height: 310px; border-radius: 8px; overflow: hidden; background: #000; border: 1px solid #2a3142; display: flex; align-items: center; justify-content: center; }
-    .image-container img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .slider-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 8px; border-top: 1px solid #1f2533; }
-    .nav-btn { background: #1c2230; color: #e2e8f0; border: 1px solid #2f384d; border-radius: 6px; padding: 6px 14px; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
-    .nav-btn:hover:not(:disabled) { background: #283145; border-color: #38bdf8; color: #ffffff; }
-    .nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
-    .dots-container { display: flex; gap: 6px; }
-    .dot { width: 7px; height: 7px; border-radius: 50%; background: #334155; cursor: pointer; transition: all 0.2s ease; }
-    .dot.active { background: #38bdf8; width: 18px; border-radius: 4px; }
-    @media (max-width: 720px) {
-      .slide { grid-template-columns: 1fr; grid-template-rows: auto 1fr; gap: 10px; }
-      .image-container { max-height: 170px; }
-      .slide-title { font-size: 1.05rem; }
-      .slider-card { padding: 12px; }
-    }
-  </style>
-</head>
-<body>
-  <div class="slider-card">
-    <div class="slider-header">
-      <span class="tag">Planétologie • Lune</span>
-      <span class="counter" id="counter">01 / 04</span>
+    <p>
+      Lors de la perforation de la croûte, une masse considérable de matière broyée et fondue est projetée hors de la cavité transitoire. Les fragments les plus lourds retombent à proximité immédiate pour ériger le rempart surélevé du cratère et creuser de petits cratères secondaires. Les poussières les plus fines et le régolithe anorthositique pulvérisé sont propulsés à haute vélocité sur des centaines, voire des milliers de kilomètres, dessinant des rayons clairs spectaculaires disposés en étoile autour des édifices les plus jeunes. Ces traînées lumineuses très réfléchissantes, emblématiques de l'ère copernicienne, finissent par s'estomper et s'assombrir très lentement au fil des centaines de millions d'années sous l'effet du bombardement des micrométéorites et de l'irradiation continue du vent solaire.
+    </p>
+    <div class="photo-card">
+      <img src="https://lh3.googleusercontent.com/d/1Uy-MHQ9WvzTyd8B9zfiAWN0hGHGzFf69" alt="Cratère Ryder">
+      <div class="photo-card-caption">Cratère Ryder</div>
     </div>
-    <div class="slides-container">
-      <div class="slide active">
-        <div class="text-content">
-          <span class="section-badge">Section 01</span>
-          <h2 class="slide-title">Cratères d'impact</h2>
-          <p class="slide-intro">Empreintes omniprésentes du bombardement météoritique ayant façonné le relief lunaire :</p>
-          <div class="items-list">
-            <div class="item-card"><strong>Origine d'impact :</strong> dépressions nées de chocs météoritiques hypervéloces, en l'absence totale d'érosion atmosphérique.</div>
-            <div class="item-card"><strong>Morphologies variées :</strong> simples bols pour les petits cratères, remparts étagés avec gradins et pitons centraux pour les grands édifices (ex. Copernic, Tycho).</div>
-            <div class="item-card"><strong>Systèmes rayonnants :</strong> panaches d'éjectas clairs rejetés sur des centaines de kilomètres lors des impacts récents.</div>
+    <p>
+      La diversité des cratères lunaires illustre les différentes étapes de l'histoire du satellite. Un édifice jeune comme Tycho, formé il y a seulement une centaine de millions d'années, conserve une fraîcheur remarquable et déploie le réseau rayonnant le plus éclatant de la face visible. À l'opposé, d'immenses et très anciennes structures comme Clavius, d'un diamètre supérieur à 220 kilomètres, témoignent de l'usure du temps géologique en arborant un plancher criblé d'impacts ultérieurs superposés. D'autres enfin, à l'image de Platon ou d'Archimède, ont vu leur cavité d'origine envahie et noyée par des nappes de lave basaltique particulièrement fluides lors des grandes phases d'épanchement magmatique des mers, transformant leur intérieur en de vastes plaines sombres et parfaitement lisses encerclées de remparts déchiquetés.
+    </p>
+
+    <!-- MERS LUNAIRES -->
+    <h2>Mers lunaires</h2>
+    <p>
+      Observées depuis la Terre à l'œil nu ou à travers les premières lunettes astronomiques du XVIIᵉ siècle, ces vastes étendues planes et sombres ont d'abord été prises pour de véritables étendues d'eau liquide, ce qui leur valut l'appellation latine de maria (mers au pluriel, mare au singulier) attribuée par Galilée et ses contemporains. La réalité géologique s'avère radicalement différente : il s'agit d'immenses plaines rocheuses nées d'épanchements de laves basaltiques refroidies depuis des milliards d'années. Leur teinte gris foncé, presque noire par contraste avec les hauts plateaux environnants, provient de leur forte teneur en fer, en magnésium et en titane (notamment via l'ilménite), minéraux qui absorbent une grande partie du rayonnement solaire et confèrent à ces plaines un faible pouvoir réflecteur.
+    </p>
+    <div class="photo-card">
+      <img src="https://lh3.googleusercontent.com/d/106up7FHfAKsEEL5ltBAk9KsMQGuM_xkO" alt="Mare Crisium">
+      <div class="photo-card-caption">Mare Crisium</div>
+    </div>
+    <p>
+      La formation des mers lunaires ne s'est pas faite en un seul événement, mais en deux phases séparées par plusieurs centaines de millions d'années. Au début de l'histoire du satellite, lors du Grand Bombardement Tardif il y a environ 3,9 milliards d'années, la chute de corps astéroïdaux géants a fracturé profondément la croûte primordiale, excavant d'immenses dépressions circulaires appelées bassins d'impact. Bien plus tard, entre 3,8 et 3,1 milliards d'années avant notre ère — avec des épisodes résiduels s'étirant jusqu'à 1,5 milliard d'années —, la désintégration radioactive au cœur du manteau a provoqué des fontes partielles de matière. Ces magmas ultramafiques, extrêmement chauds et fluides comme de l'huile de moteur, sont remontés le long des fractures ouvertes par les impacts pour inonder lentement les fonds de cuvettes sous forme de nappes superposées pouvant atteindre plusieurs kilomètres d'épaisseur cumulée.
+    </p>
+    <div class="photo-card">
+      <img src="https://lh3.googleusercontent.com/d/1Il3yBl5MqXWKEJ3KuD2jNOsGZp30HKOU" alt="Mare Imbrium">
+      <div class="photo-card-caption">Mare Imbrium</div>
+    </div>
+    <p>
+      L'une des énigmes majeures de la Lune réside dans la répartition spectaculairement inégale de ses mers. Elles recouvrent près de 31 % de la superficie de la face visible, dessinant le profil familier de la « Mer des Pluies » (Mare Imbrium), de la « Mer de la Tranquillité » (Mare Tranquillitatis) ou de l'immense « Océan des Tempêtes » (Oceanus Procellarum). En revanche, elles occupent à peine 1 % de la face cachée. Cette dichotomie s'explique d'abord par l'épaisseur de la croûte lunaire : mince sur l'hémisphère tourné vers la Terre (environ 30 à 40 kilomètres), elle dépasse souvent 60 à 80 kilomètres sur la face cachée, formant une barrière que les laves mantelliques n'avaient pas la pression hydrostatique nécessaire pour franchir. De plus, la face visible concentre le domaine géochimique « Procellarum KREEP », une province rocheuse enrichie en éléments radioactifs (potassium, terres rares, phosphore, thorium) dont la chaleur résiduelle prolongée a entretenu la fusion du manteau.
+    </p>
+    <div class="photo-card">
+      <img src="https://lh3.googleusercontent.com/d/1bQHyWPmBZxtyXiqOK-QZOpm_dOumEE8D" alt="Mare Serenitatis">
+      <div class="photo-card-caption">Mare Serenitatis</div>
+    </div>
+    <p>
+      Bien qu'elles apparaissent planes à l'échelle globale, les mers sont sculptées par des figures géologiques typiques du refroidissement magmatique et des contraintes structurales. Au fur et à mesure que les immenses coulées de basalte s'accumulaient, leur masse a fait fléchir le fond des bassins, créant des anomalies de gravité positives majeures appelées « mascons » (concentrations de masse). Ce tassement gravitaire a engendré des rides de compression (wrinkle ridges), bourrelets sinueux ondulant à la surface des laves figées. On y observe également des dômes volcaniques peu pentus ainsi que des « rilles », tranchées sinueuses creusées par l'érosion thermique de laves ultra-rapides ou laissées par l'effondrement d'anciens tunnels de lave souterrains.
+    </p>
+
+    <!-- MONTAGNES -->
+    <h2>Montagnes</h2>
+    <p>
+      Sur Terre, les grandes chaînes montagneuses comme les Alpes ou l'Himalaya sont le produit de la tectonique des plaques, forgées par la dérive des continents et la lente compression de la croûte. Sur la Lune, dépourvue de dynamique des plaques, les massifs appelés Montes possèdent une origine radicalement différente : ce sont des structures d'impact pures. Ces montagnes titanesques constituent en réalité les remparts surélevés des immenses bassins circulaires creusés il y a près de quatre milliards d'années par la collision d'astéroïdes géants. Lors de ces chocs cosmiques, des pans entiers de la croûte primordiale ont été fracturés, soulevés et basculés vers l'extérieur, formant des couronnes rocheuses déchiquetées qui encerclent aujourd'hui les plaines de lave.
+    </p>
+    <div class="photo-card">
+      <img src="https://lh3.googleusercontent.com/d/1nK5ux3BjWwuCQDsJMawB84YBCp1Wwv5N" alt="Montes Alpes">
+      <div class="photo-card-caption">Montes Alpes</div>
+    </div>
+    <p>
+      L'exemple le plus spectaculaire de cette orogenèse d'impact s'observe autour de la Mer des Pluies (Mare Imbrium), un bassin né de la chute d'un astéroïde de plus de 100 kilomètres de diamètre. L'onde de choc colossale a sculpté plusieurs massifs arqués continus qui délimitent le contour est et nord de la plaine basaltique : les Montes Apenninus (monts Apennins), les Montes Caucasus (monts Caucase) et les Montes Alpes (monts Alpes). Les monts Apennins, qui s'étirent sur près de 600 kilomètres de longueur, présentent une asymétrie caractéristique des remparts d'impact : une pente douce tournée vers l'extérieur du bassin et une falaise interne abrupte qui plonge directement vers la plaine de basalte sombre.
+    </p>
+    <div class="photo-card">
+      <img src="https://lh3.googleusercontent.com/d/14o1AJ6I1YD4VIyl1eTNWS63vNXW3WhNE" alt="Montes Apenninus">
+      <div class="photo-card-caption">Montes Apenninus</div>
+    </div>
+    <p>
+      Bien que la Lune soit un astre quatre fois plus petit que la Terre, ses reliefs n'ont rien à envier aux chaînes terrestres. Certaines crêtes des monts Apennins, à l'image du mont Huygens ou du mont Hadley, s'élèvent entre 4 000 et plus de 5 500 mètres au-dessus du plancher de la plaine adjacente. Dans la région polaire australe, les monts Leibnitz atteignent des dénivellations avoisinant 8 000 mètres au-dessus du fond des dépressions environnantes. En l'absence totale d'eau courante, de pluie, de vent et de glaciers pour éroder les versants, ces falaises ne sont pas sculptées en aiguilles acérées : elles ont été lentement adoucies sur des milliards d'années par le bombardement continu des micrométéorites, formant des dômes massifs aux pentes abruptes recouvertes d'une épaisse couche de régolithe.
+    </p>
+    <div class="photo-card">
+      <img src="https://lh3.googleusercontent.com/d/1baFPUJ2LnukYBXgpIAz3OTHXvP0NDOPw" alt="Montes Zeeman">
+      <div class="photo-card-caption">Montes Zeeman</div>
+    </div>
+    <p>
+      Au-delà de leur aspect majestueux, les Montes constituent un trésor pour la planétologie car ils mettent à nu les strates les plus profondes du satellite. L'énergie des impacts majeurs a excavé et expulsé les roches de la croûte moyenne et profonde, les empilant sur les crêtes sous forme de gigantesques blocs de brèches d'impact. C'est précisément au pied du massif des Apennins que s'est posée la mission Apollo 15 en 1971, permettant aux astronautes de collecter l'« échantillon de la Genèse » (Genesis Rock), une anorthosite vieille de plus de quatre milliards d'années issue de la cristallisation initiale de l'océan de magma primitif de la Lune.
+    </p>
+
+    <!-- VALLÉES -->
+    <h2>Vallées</h2>
+    <p>
+      Contrairement aux vallées terrestres façonnées par l'érosion continue des cours d'eau ou le rabotage des glaciers, les vallées lunaires (valles au pluriel, vallis au singulier) et les failles associées sont le résultat exclusif de fractures crustales et d'anciens écoulements magmatiques. Sur un monde totalement privé d'hydrosphère et d'atmosphère, ces sillons incisés dans la roche témoignent des tensions colossales subies par la croûte lunaire lors du refroidissement de l'astre, ainsi que des passages empruntés par les laves basaltiques ultra-fluides issues des profondeurs.
+    </p>
+    <div class="photo-card">
+      <img src="https://lh3.googleusercontent.com/d/1AO0J7enSOVELazGbn9astomSaKMr9KSB" alt="Vallis Alpes">
+      <div class="photo-card-caption">Vallis Alpes</div>
+    </div>
+    <p>
+      Certaines vallées remarquables correspondent à des grabens, des fossés d'effondrement encadrés par deux failles normales parallèles où un pan entier de la croûte s'est affaissé sous l'effet de forces d'extension. L'exemple le plus célèbre de la face visible est la Vallis Alpes (vallée des Alpes), un spectaculaire couloir rectiligne de 166 kilomètres de long et d'une dizaine de kilomètres de large qui tranche littéralement la chaîne des monts Alpes pour relier le bassin de la Mer des Pluies à la Mer du Froid. D'autres structures linéaires analogues, comme la Vallis Rheita au sud-est, combinent des fractures tectoniques et le creusement par des chaînes d'éjectas rasants projetés lors de cataclysmes voisins.
+    </p>
+    <div class="photo-card">
+      <img src="https://lh3.googleusercontent.com/d/1ac1PJmJiEvdTcEMbsj3PVgceAeXdQ0wL" alt="Vallis Schröteri">
+      <div class="photo-card-caption">Vallis Schröteri</div>
+    </div>
+    <p>
+      Parallèlement aux vallées rectilignes, la surface lunaire est sillonnée par des « rilles » (ou rainures sinueuses), canaux étroits aux méandres prononcés qui rappellent étrangement le tracé de rivières asséchées. Ces dépressions ont été creusées à l'origine par des laves basaltiques d'une fluidité extrême, riches en fer et pauvres en silice, qui se déplaçaient à grande vitesse en érodant thermiquement et mécaniquement le sol sous-jacent. Le cas emblématique de Vallis Schröteri (la vallée de Schröter), située sur le plateau d'Aristarque au cœur de l'océan des Tempêtes, mesure près de 160 kilomètres et naît d'une bouche éruptive circulaire appelée la « Tête de Cobra », formant le plus imposant chenal de coulée volcanique visible sur la Lune.
+    </p>
+    <p>
+      Un grand nombre de rainures sinueuses ne sont pas de simples tranchées ouvertes dès leur origine, mais les toits effondrés d'anciens tubes de lave tubulaires. Lorsque la surface d'un fleuve de magma se solidifie au contact du vide spatial, elle forme une croûte isolante sous laquelle la lave continue de circuler à haute température ; une fois l'éruption terminée et le conduit vidangé, la voûte basaltique fragilisée finit par s'écrouler sous l'impact répété des micrométéorites. C'est ce mécanisme qui a façonné la crevasse de Hadley (Rima Hadley), explorée au plus près par la mission Apollo 15, dont la tranchée de plus d'un kilomètre de large et de 300 mètres de profondeur a permis d'étudier directement les strates empilées des coulées basaltiques primordiales.
+    </p>
+
+    <!-- CONQUÊTE SPATIALE (DECK NATIF SANS IFRAME) -->
+    <h2>Conquête spatiale</h2>
+    <div class="deck-card">
+      <header class="deck-header">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span style="font-size:0.75rem; text-transform:uppercase; color:#94a3b8; font-weight:700;">Chroniques Lunaires</span>
+          <select id="deckTocSelect" class="deck-toc-select"></select>
+        </div>
+        <div style="font-size:0.8rem; color:#64748b;"><span id="deckCurNum">1</span> / <span id="deckTotNum">13</span></div>
+      </header>
+
+      <div id="deckSlidesContainer">
+        <!-- Slide 1 -->
+        <div class="deck-slide active" data-title="1. Introduction : L'astre convoité">
+          <div>
+            <span class="deck-slide-badge">Genèse &amp; Vue d'ensemble</span>
+            <h3 class="deck-slide-title">Sept décennies d'exploration spatiale</h3>
+            <p>L'exploration de la Lune est le miroir des grandes mutations technologiques et géopolitiques de l'Humanité.</p>
+            <p>Du duel idéologique de la Guerre froide jusqu'à la renaissance contemporaine, notre satellite naturel est devenu un laboratoire fondamental et le tremplin vers l'espace lointain.</p>
+          </div>
+          <div class="deck-media-wrap">
+            <img src="https://lh3.googleusercontent.com/d/1FFmfpqSioN4LCxnx7uv5CrWPQ5Cw8z1t" alt="Pleine Lune">
           </div>
         </div>
-        <div class="image-container">
-          <img src="https://lh3.googleusercontent.com/d/1b6I3hvgQfkuxqGldTmQE6tT8o9kb_4y0" alt="Cratères lunaires" loading="lazy">
-        </div>
-      </div>
-      <div class="slide">
-        <div class="text-content">
-          <span class="section-badge">Section 02</span>
-          <h2 class="slide-title">Mers lunaires (Maria)</h2>
-          <p class="slide-intro">Vastes bassins sombres façonnés par le volcanisme effusif ancien :</p>
-          <div class="items-list">
-            <div class="item-card"><strong>Plaines basaltiques :</strong> immenses nappes de basalte fluide ayant comblé les dépressions d'impact géantes entre 3,8 et 3,1 milliards d'années.</div>
-            <div class="item-card"><strong>Asymétrie globale :</strong> recouvrent environ 31 % de la face visible (ex. Mare Imbrium, Mare Tranquillitatis) contre à peine 1 % de la face cachée.</div>
-            <div class="item-card"><strong>Reliefs associés :</strong> rides de compression sinueuses (wrinkle ridges) et dômes volcaniques témoignant du refroidissement magmatique.</div>
+
+        <!-- Slide 2 -->
+        <div class="deck-slide" data-title="2. Les pionniers soviétiques (Luna)">
+          <div>
+            <span class="deck-slide-badge">Guerre Froide (1959–1966)</span>
+            <h3 class="deck-slide-title">L'audace soviétique : Luna &amp; la face cachée</h3>
+            <p>Sous la direction de Sergueï Korolev, l'URSS prend l'ascendant initial :</p>
+            <p><strong>Luna 1 (1959) :</strong> Première sonde à atteindre la vitesse de libération.<br>
+            <strong>Luna 3 (1959) :</strong> Premières photographies historiques de la face cachée.<br>
+            <strong>Luna 9 (1966) :</strong> Tout premier atterrissage doux et transmission de panoramas.</p>
+          </div>
+          <div class="deck-media-wrap">
+            <img src="https://lh3.googleusercontent.com/d/1SIedhMeMTTglWpiOfmufAZNVcOwhDuYT" alt="Luna 3">
           </div>
         </div>
-        <div class="image-container">
-          <img src="https://lh3.googleusercontent.com/d/1bQHyWPmBZxtyXiqOK-QZOpm_dOumEE8D" alt="Mers lunaires" loading="lazy">
-        </div>
-      </div>
-      <div class="slide">
-        <div class="text-content">
-          <span class="section-badge">Section 03</span>
-          <h2 class="slide-title">Massifs et chaînes montagneuses (Montes)</h2>
-          <p class="slide-intro">Remparts titanesques dressés par les impacts colossaux formateurs de bassins :</p>
-          <div class="items-list">
-            <div class="item-card"><strong>Origine d'impact :</strong> massifs non tectoniques formés par le soulèvement et l'éjection de croûte lors du creusement des grands bassins.</div>
-            <div class="item-card"><strong>Couronnes de bassins :</strong> chaînes arquées bordant les mers (ex. Montes Apenninus, Montes Caucasus ou Montes Alpes bordant Mare Imbrium).</div>
-            <div class="item-card"><strong>Altitudes remarquables :</strong> sommets escarpés culminant couramment à plus de 4 000 à 5 000 mètres au-dessus du plancher des mers adjacentes.</div>
+
+        <!-- Slide 3 -->
+        <div class="deck-slide" data-title="3. Préparation américaine (Surveyor)">
+          <div>
+            <span class="deck-slide-badge">Robotique NASA (1961–1968)</span>
+            <h3 class="deck-slide-title">Ranger, Surveyor et Lunar Orbiter</h3>
+            <p>Face à l'avance soviétique, la NASA déploie un programme méthodique :</p>
+            <p><strong>Surveyor :</strong> Teste la portance du régolithe avec pelles mécaniques et radar.<br>
+            <strong>Lunar Orbiter :</strong> Cartographie 99 % de la surface pour préparer les sites Apollo.</p>
+          </div>
+          <div class="deck-media-wrap">
+            <img src="https://lh3.googleusercontent.com/d/1YxZFpjvOXhi6XmHKXQIhyMPcsQmwvonh" alt="Surveyor">
           </div>
         </div>
-        <div class="image-container">
-          <img src="https://lh3.googleusercontent.com/d/1baFPUJ2LnukYBXgpIAz3OTHXvP0NDOPw" alt="Montes lunaires" loading="lazy">
-        </div>
-      </div>
-      <div class="slide">
-        <div class="text-content">
-          <span class="section-badge">Section 04</span>
-          <h2 class="slide-title">Vallées et gorges (Vallis)</h2>
-          <p class="slide-intro">Sillons profonds résultant de fractures structurales ou de coulées magmatiques :</p>
-          <div class="items-list">
-            <div class="item-card"><strong>Vallées structurales :</strong> grabens et failles rectilignes creusés par l'effondrement de la croûte ou par des éjectas rasants (ex. Vallis Alpes découpant les monts Alpes).</div>
-            <div class="item-card"><strong>Rilles sinueux :</strong> chenaux d'écoulement de lave ultra-fluide et tunnels de lave effondrés (ex. Vallis Schröteri dans l'océan des Tempêtes).</div>
-            <div class="item-card"><strong>Témoins magmatiques :</strong> corridors d'évacuation de la lave vers les plaines basaltiques lors des phases éruptives primordiales.</div>
+
+        <!-- Slide 4 -->
+        <div class="deck-slide" data-title="4. L'architecture Apollo">
+          <div>
+            <span class="deck-slide-badge">Ingénierie Apollo</span>
+            <h3 class="deck-slide-title">Saturn V et le rendez-vous orbital (LOR)</h3>
+            <p>Le choix du Rendez-vous en Orbite Lunaire divise la mission en véhicules spécialisés :</p>
+            <p><strong>Saturn V :</strong> Monstre de 111 m développant 34,5 MN de poussée.<br>
+            <strong>Module de Commande (CSM) :</strong> Transit et retour atmosphérique direct.<br>
+            <strong>Module Lunaire (LM) :</strong> Descente et décollage de la surface lunaire.</p>
+          </div>
+          <div class="deck-media-wrap">
+            <img src="https://lh3.googleusercontent.com/d/1N-zI_7a4bJYx-6Or95ESEh5RvswqWVH2" alt="Saturn V">
           </div>
         </div>
-        <div class="image-container">
-          <img src="https://lh3.googleusercontent.com/d/1AO0J7enSOVELazGbn9astomSaKMr9KSB" alt="Vallis lunaires" loading="lazy">
-        </div>
-      </div>
-    </div>
-    <div class="slider-footer">
-      <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Précédent</button>
-      <div class="dots-container" id="dots"></div>
-      <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
-    </div>
-  </div>
-  <script>
-    let currentSlide = 0;
-    const slides = document.querySelectorAll(".slide");
-    const totalSlides = slides.length;
-    const counter = document.getElementById("counter");
-    const dotsContainer = document.getElementById("dots");
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
-    for (let i = 0; i < totalSlides; i++) {
-      const dot = document.createElement("div");
-      dot.className = "dot" + (i === 0 ? " active" : "");
-      dot.onclick = () => goToSlide(i);
-      dotsContainer.appendChild(dot);
-    }
-    const dots = document.querySelectorAll(".dot");
-    function updateView() {
-      slides.forEach((s, idx) => s.classList.toggle("active", idx === currentSlide));
-      dots.forEach((d, idx) => d.classList.toggle("active", idx === currentSlide));
-      counter.textContent = String(currentSlide + 1).padStart(2, "0") + " / " + String(totalSlides).padStart(2, "0");
-      prevBtn.disabled = currentSlide === 0;
-      nextBtn.disabled = currentSlide === totalSlides - 1;
-    }
-    function changeSlide(direction) {
-      if (currentSlide + direction >= 0 && currentSlide + direction < totalSlides) {
-        currentSlide += direction;
-        updateView();
-      }
-    }
-    function goToSlide(index) {
-      currentSlide = index;
-      updateView();
-    }
-    updateView();
-  </script>
-</body>
-</html>' style="width: 100%; height: 100%; border: none;"></iframe>
-  </div>
 
-  <div class="photo-duo">
-    <img src="https://lh3.googleusercontent.com/d/18qYaAqLOrISD7upBklZ5zo03MR2efsa6" alt="Relief lunaire">
-    <img src="https://lh3.googleusercontent.com/d/1MT8LMtfsmKUpu8UiAf30yoIbuOqVx3fd" alt="Surface lunaire">
-  </div>
+        <!-- Slide 5 -->
+        <div class="deck-slide" data-title="5. Les missions Apollo 11, 12, 13">
+          <div>
+            <span class="deck-slide-badge">Exploration Humaine (1969–1970)</span>
+            <h3 class="deck-slide-title">Premiers pas et crises surmontées</h3>
+            <p><strong>Apollo 11 (20 juillet 1969) :</strong> Alunissage d'Eagle par Neil Armstrong et Buzz Aldrin dans Mare Tranquillitatis.<br>
+            <strong>Apollo 12 :</strong> Sauvetage par la commande « SCE to AUX » après foudroiement.<br>
+            <strong>Apollo 13 :</strong> Explosion d'un réservoir d'oxygène et retour héroïque.</p>
+          </div>
+          <div class="deck-media-wrap">
+            <img src="https://lh3.googleusercontent.com/d/1F1Cqh4Ez8J_bMS52ORXfKql4y2maLA09" alt="Buzz Aldrin">
+          </div>
+        </div>
 
-  <!-- SOUS-TITRE CRATERES D'IMPACT -->
-  <h2>Cratères d'impact</h2>
-  <p>
-    Les cratères d'impact constituent la signature morphologique dominante du paysage lunaire. En l'absence d'atmosphère protectrice, d'eau liquide et d'une tectonique des plaques active pour recycler la croûte, la Lune conserve pratiquement intactes les cicatrices de collisions météoritiques survenues depuis plus de quatre milliards d'années. Ces dépressions circulaires ne sont pas le résultat d'éruptions volcaniques, mais de chocs à des vitesses cosmiques extrêmes — généralement comprises entre 15 et 30 kilomètres par seconde — qui libèrent instantanément une énergie cinétique colossale, vaporisant le projectile et excavant violemment le substrat rocheux.
-  </p>
-  <div class="photo-single">
-    <img src="https://lh3.googleusercontent.com/d/1mSXwF3QXvK-wFZUsACg3DIoK7T2f-lYR" alt="Cratère Tycho">
-    <div class="photo-caption">Cratère Tycho</div>
-  </div>
-  <div class="photo-single">
-    <img src="https://lh3.googleusercontent.com/d/17BTQPdD_vSsnMnuMrdpHDg1j7QW6nN3L" alt="Cratère Goclenius">
-    <div class="photo-caption">Cratère Goclenius</div>
-  </div>
-  <p>
-    Lors de la perforation de la croûte, une masse considérable de matière broyée et fondue est projetée hors de la cavité transitoire. Les fragments les plus lourds retombent à proximité immédiate pour ériger le rempart surélevé du cratère et creuser de petits cratères secondaires. Les poussières les plus fines et le régolithe anorthositique pulvérisé sont propulsés à haute vélocité sur des centaines, voire des milliers de kilomètres, dessinant des rayons clairs spectaculaires disposés en étoile autour des édifices les plus jeunes. Ces traînées lumineuses très réfléchissantes, emblématiques de l'ère copernicienne, finissent par s'estomper et s'assombrir très lentement au fil des centaines de millions d'années sous l'effet du bombardement des micrométéorites et de l'irradiation continue du vent solaire.
-  </p>
-  <div class="photo-single">
-    <img src="https://lh3.googleusercontent.com/d/1Uy-MHQ9WvzTyd8B9zfiAWN0hGHGzFf69" alt="Cratère Ryder">
-    <div class="photo-caption">Cratère Ryder</div>
-  </div>
-  <p>
-    La diversité des cratères lunaires illustre les différentes étapes de l'histoire du satellite. Un édifice jeune comme Tycho, formé il y a seulement une centaine de millions d'années, conserve une fraîcheur remarquable et déploie le réseau rayonnant le plus éclatant de la face visible. À l'opposé, d'immenses et très anciennes structures comme Clavius, d'un diamètre supérieur à 220 kilomètres, témoignent de l'usure du temps géologique en arborant un plancher criblé d'impacts ultérieurs superposés. D'autres enfin, à l'image de Platon ou d'Archimède, ont vu leur cavité d'origine envahie et noyée par des nappes de lave basaltique particulièrement fluides lors des grandes phases d'épanchement magmatique des mers, transformant leur intérieur en de vastes plaines sombres et parfaitement lisses encerclées de remparts déchiquetés.
-  </p>
+        <!-- Slide 6 -->
+        <div class="deck-slide" data-title="6. L'apogée scientifique Apollo (15, 16, 17)">
+          <div>
+            <span class="deck-slide-badge">Missions J (1971–1972)</span>
+            <h3 class="deck-slide-title">Le rover lunaire et la roche Genesis</h3>
+            <p>Les missions Apollo J étendent la mobilité avec la jeep lunaire électrique (LRV). Apollo 15 rapporte la « Roche Genesis », anorthosite vieille de 4,5 milliards d'années issue de l'océan de magma primordial.</p>
+          </div>
+          <div class="deck-media-wrap">
+            <img src="https://lh3.googleusercontent.com/d/1GTCLfYrNXW5GE5cn1JHId8RoUH9oalrl" alt="Rover Lunaire">
+          </div>
+        </div>
 
-  <!-- SOUS-TITRE MERS LUNAIRES -->
-  <h2>Mers lunaires</h2>
-  <p>
-    Observées depuis la Terre à l'œil nu ou à travers les premières lunettes astronomiques du XVIIᵉ siècle, ces vastes étendues planes et sombres ont d'abord été prises pour de véritables étendues d'eau liquide, ce qui leur valut l'appellation latine de maria (mers au pluriel, mare au singulier) attribuée par Galilée et ses contemporains. La réalité géologique s'avère radicalement différente : il s'agit d'immenses plaines rocheuses nées d'épanchements de laves basaltiques refroidies depuis des milliards d'années. Leur teinte gris foncé, presque noire par contraste avec les hauts plateaux environnants, provient de leur forte teneur en fer, en magnésium et en titane (notamment via l'ilménite), minéraux qui absorbent une grande partie du rayonnement solaire et confèrent à ces plaines un faible pouvoir réflecteur.
-  </p>
-  <div class="photo-single">
-    <img src="https://lh3.googleusercontent.com/d/106up7FHfAKsEEL5ltBAk9KsMQGuM_xkO" alt="Mare Crisium">
-    <div class="photo-caption">Mare Crisium</div>
-  </div>
-  <p>
-    La formation des mers lunaires ne s'est pas faite en un seul événement, mais en deux phases séparées par plusieurs centaines de millions d'années. Au début de l'histoire du satellite, lors du Grand Bombardement Tardif il y a environ 3,9 milliards d'années, la chute de corps astéroïdaux géants a fracturé profondément la croûte primordiale, excavant d'immenses dépressions circulaires appelées bassins d'impact. Bien plus tard, entre 3,8 et 3,1 milliards d'années avant notre ère — avec des épisodes résiduels s'étirant jusqu'à 1,5 milliard d'années —, la désintégration radioactive au cœur du manteau a provoqué des fontes partielles de matière. Ces magmas ultramafiques, extrêmement chauds et fluides comme de l'huile de moteur, sont remontés le long des fractures ouvertes par les impacts pour inonder lentement les fonds de cuvettes sous forme de nappes superposées pouvant atteindre plusieurs kilomètres d'épaisseur cumulée.
-  </p>
-  <div class="photo-single">
-    <img src="https://lh3.googleusercontent.com/d/1Il3yBl5MqXWKEJ3KuD2jNOsGZp30HKOU" alt="Mare Imbrium">
-    <div class="photo-caption">Mare Imbrium</div>
-  </div>
-  <p>
-    L'une des énigmes majeures de la Lune réside dans la répartition spectaculairement inégale de ses mers. Elles recouvrent près de 31 % de la superficie de la face visible, dessinant le profil familier de la « Mer des Pluies » (Mare Imbrium), de la « Mer de la Tranquillité » (Mare Tranquillitatis) ou de l'immense « Océan des Tempêtes » (Oceanus Procellarum). En revanche, elles occupent à peine 1 % de la face cachée. Cette dichotomie s'explique d'abord par l'épaisseur de la croûte lunaire : mince sur l'hémisphère tourné vers la Terre (environ 30 à 40 kilomètres), elle dépasse souvent 60 à 80 kilomètres sur la face cachée, formant une barrière que les laves mantelliques n'avaient pas la pression hydrostatique nécessaire pour franchir. De plus, la face visible concentre le domaine géochimique « Procellarum KREEP », une province rocheuse enrichie en éléments radioactifs (potassium, terres rares, phosphore, thorium) dont la chaleur résiduelle prolongée a entretenu la fusion du manteau.
-  </p>
-  <div class="photo-single">
-    <img src="https://lh3.googleusercontent.com/d/1bQHyWPmBZxtyXiqOK-QZOpm_dOumEE8D" alt="Mare Serenitatis">
-    <div class="photo-caption">Mare Serenitatis</div>
-  </div>
-  <p>
-    Bien qu'elles apparaissent planes à l'échelle globale, les mers sont sculptées par des figures géologiques typiques du refroidissement magmatique et des contraintes structurales. Au fur et à mesure que les immenses coulées de basalte s'accumulaient, leur masse a fait fléchir le fond des bassins, créant des anomalies de gravité positives majeures appelées « mascons » (concentrations de masse). Ce tassement gravitaire a engendré des rides de compression (wrinkle ridges), bourrelets sinueux ondulant à la surface des laves figées. On y observe également des dômes volcaniques peu pentus ainsi que des « rilles », tranchées sinueuses creusées par l'érosion thermique de laves ultra-rapides ou laissées par l'effondrement d'anciens tunnels de lave souterrains.
-  </p>
+        <!-- Slide 7 -->
+        <div class="deck-slide" data-title="7. Robots lourds soviétiques (Lunokhod)">
+          <div>
+            <span class="deck-slide-badge">Robotique Lourde URSS</span>
+            <h3 class="deck-slide-title">Lunokhod et retours d'échantillons</h3>
+            <p><strong>Lunokhod 1 &amp; 2 :</strong> Premiers astromobiles téléguidés depuis la Terre (39 km parcourus).<br>
+            <strong>Luna 16, 20 et 24 :</strong> Premiers carottages et retours automatisés d'échantillons de l'histoire.</p>
+          </div>
+          <div class="deck-media-wrap">
+            <img src="https://lh3.googleusercontent.com/d/1GhMEjjVXe7zWO4ZOaEbnGcDjrXxCzeCF" alt="Lunokhod">
+          </div>
+        </div>
 
-  <!-- SOUS-TITRE MONTAGNE -->
-  <h2>Montagnes</h2>
-  <p>
-    Sur Terre, les grandes chaînes montagneuses comme les Alpes ou l'Himalaya sont le produit de la tectonique des plaques, forgées par la dérive des continents et la lente compression de la croûte. Sur la Lune, dépourvue de dynamique des plaques, les massifs appelés Montes possèdent une origine radicalement différente : ce sont des structures d'impact pures. Ces montagnes titanesques constituent en réalité les remparts surélevés des immenses bassins circulaires creusés il y a près de quatre milliards d'années par la collision d'astéroïdes géants. Lors de ces chocs cosmiques, des pans entiers de la croûte primordiale ont été fracturés, soulevés et basculés vers l'extérieur, formant des couronnes rocheuses déchiquetées qui encerclent aujourd'hui les plaines de lave.
-  </p>
-  <div class="photo-single">
-    <img src="https://lh3.googleusercontent.com/d/1nK5ux3BjWwuCQDsJMawB84YBCp1Wwv5N" alt="Montes Alpes">
-    <div class="photo-caption">Montes Alpes</div>
-  </div>
-  <p>
-    L'exemple le plus spectaculaire de cette orogenèse d'impact s'observe autour de la Mer des Pluies (Mare Imbrium), un bassin né de la chute d'un astéroïde de plus de 100 kilomètres de diamètre. L'onde de choc colossale a sculpté plusieurs massifs arqués continus qui délimitent le contour est et nord de la plaine basaltique : les Montes Apenninus (monts Apennins), les Montes Caucasus (monts Caucase) et les Montes Alpes (monts Alpes). Les monts Apennins, qui s'étirent sur près de 600 kilomètres de longueur, présentent une asymétrie caractéristique des remparts d'impact : une pente douce tournée vers l'extérieur du bassin et une falaise interne abrupte qui plonge directement vers la plaine de basalte sombre.
-  </p>
-  <div class="photo-single">
-    <img src="https://lh3.googleusercontent.com/d/14o1AJ6I1YD4VIyl1eTNWS63vNXW3WhNE" alt="Montes Apenninus">
-    <div class="photo-caption">Montes Apenninus</div>
-  </div>
-  <p>
-    Bien que la Lune soit un astre quatre fois plus petit que la Terre, ses reliefs n'ont rien à envier aux chaînes terrestres. Certaines crêtes des monts Apennins, à l'image du mont Huygens ou du mont Hadley, s'élèvent entre 4 000 et plus de 5 500 mètres au-dessus du plancher de la plaine adjacente. Dans la région polaire australe, les monts Leibnitz atteignent des dénivellations avoisinant 8 000 mètres au-dessus du fond des dépressions environnantes. En l'absence totale d'eau courante, de pluie, de vent et de glaciers pour éroder les versants, ces falaises ne sont pas sculptées en aiguilles acérées : elles ont été lentement adoucies sur des milliards d'années par le bombardement continu des micrométéorites, formant des dômes massifs aux pentes abruptes recouvertes d'une épaisse couche de régolithe.
-  </p>
-  <div class="photo-single">
-    <img src="https://lh3.googleusercontent.com/d/1baFPUJ2LnukYBXgpIAz3OTHXvP0NDOPw" alt="Montes Zeeman">
-    <div class="photo-caption">Montes Zeeman</div>
-  </div>
-  <p>
-    Au-delà de leur aspect majestueux, les Montes constituent un trésor pour la planétologie car ils mettent à nu les strates les plus profondes du satellite. L'énergie des impacts majeurs a excavé et expulsé les roches de la croûte moyenne et profonde, les empilant sur les crêtes sous forme de gigantesques blocs de brèches d'impact. C'est précisément au pied du massif des Apennins que s'est posée la mission Apollo 15 en 1971, permettant aux astronautes de collecter l'« échantillon de la Genèse » (Genesis Rock), une anorthosite vieille de plus de quatre milliards d'années issue de la cristallisation initiale de l'océan de magma primitif de la Lune.
-  </p>
+        <!-- Slide 8 -->
+        <div class="deck-slide" data-title="8. Paradigmes de la planétologie comparée">
+          <div>
+            <span class="deck-slide-badge">Avancées Fondamentales</span>
+            <h3 class="deck-slide-title">L'impact de Théia et les lasers LLR</h3>
+            <p>Les échantillons Apollo et Luna confirment le scénario de collision avec le protoplanétoïde Théia. Les réflecteurs laser LLR au sol mesurent toujours l'éloignement de la Lune à 3,8 cm/an.</p>
+          </div>
+          <div class="deck-media-wrap">
+            <img src="https://lh3.googleusercontent.com/d/1qe1aKHkq23HqJWRoH-Yx8Ev7UnmzuYIE" alt="Rétroréflecteur laser">
+          </div>
+        </div>
 
-  <!-- SOUS-TITRE VALLÉES -->
-  <h2>Vallées</h2>
-  <p>
-    Contrairement aux vallées terrestres façonnées par l'érosion continue des cours d'eau ou le rabotage des glaciers, les vallées lunaires (valles au pluriel, vallis au singulier) et les failles associées sont le résultat exclusif de fractures crustales et d'anciens écoulements magmatiques. Sur un monde totalement privé d'hydrosphère et d'atmosphère, ces sillons incisés dans la roche témoignent des tensions colossales subies par la croûte lunaire lors du refroidissement de l'astre, ainsi que des passages empruntés par les laves basaltiques ultra-fluides issues des profondeurs.
-  </p>
-  <div class="photo-single">
-    <img src="https://lh3.googleusercontent.com/d/1AO0J7enSOVELazGbn9astomSaKMr9KSB" alt="Vallis Alpes">
-    <div class="photo-caption">Vallis Alpes</div>
-  </div>
-  <p>
-    Certaines vallées remarquables correspondent à des grabens, des fossés d'effondrement encadrés par deux failles normales parallèles où un pan entier de la croûte s'est affaissé sous l'effet de forces d'extension. L'exemple le plus célèbre de la face visible est la Vallis Alpes (vallée des Alpes), un spectaculaire couloir rectiligne de 166 kilomètres de long et d'une dizaine de kilomètres de large qui tranche littéralement la chaîne des monts Alpes pour relier le bassin de la Mer des Pluies à la Mer du Froid. D'autres structures linéaires analogues, comme la Vallis Rheita au sud-est, combinent des fractures tectoniques et le creusement par des chaînes d'éjectas rasants projetés lors de cataclysmes voisins.
-  </p>
-  <div class="photo-single">
-    <img src="https://lh3.googleusercontent.com/d/1ac1PJmJiEvdTcEMbsj3PVgceAeXdQ0wL" alt="Vallis Schröteri">
-    <div class="photo-caption">Vallis Schröteri</div>
-  </div>
-  <p>
-    Parallèlement aux vallées rectilignes, la surface lunaire est sillonnée par des « rilles » (ou rainures sinueuses), canaux étroits aux méandres prononcés qui rappellent étrangement le tracé de rivières asséchées. Ces dépressions ont été creusées à l'origine par des laves basaltiques d'une fluidité extrême, riches en fer et pauvres en silice, qui se déplaçaient à grande vitesse en érodant thermiquement et mécaniquement le sol sous-jacent. Le cas emblématique de Vallis Schröteri (la vallée de Schröter), située sur le plateau d'Aristarque au cœur de l'océan des Tempêtes, mesure près de 160 kilomètres et naît d'une bouche éruptive circulaire appelée la « Tête de Cobra », formant le plus imposant chenal de coulée volcanique visible sur la Lune.
-  </p>
-  <p>
-    Un grand nombre de rainures sinueuses ne sont pas de simples tranchées ouvertes dès leur origine, mais les toits effondrés d'anciens tubes de lave tubulaires. Lorsque la surface d'un fleuve de magma se solidifie au contact du vide spatial, elle forme une croûte isolante sous laquelle la lave continue de circuler à haute température ; une fois l'éruption terminée et le conduit vidangé, la voûte basaltique fragilisée finit par s'écrouler sous l'impact répété des micrométéorites. C'est ce mécanisme qui a façonné la crevasse de Hadley (Rima Hadley), explorée au plus près par la mission Apollo 15, dont la tranchée de plus d'un kilomètre de large et de 300 mètres de profondeur a permis d'étudier directement les strates empilées des coulées basaltiques primordiales.
-  </p>
+        <!-- Slide 9 -->
+        <div class="deck-slide" data-title="9. Renaissance orbitale (1994–2015)">
+          <div>
+            <span class="deck-slide-badge">La Quête de l'Eau</span>
+            <h3 class="deck-slide-title">Clementine, LRO et la glace polaire</h3>
+            <p>Après deux décennies de pause, Clementine et Lunar Prospector détectent de l'hydrogène aux pôles. LRO et LCROSS prouvent formellement la présence de glace d'eau pure piégée au fond des cratères ombragés.</p>
+          </div>
+          <div class="deck-media-wrap">
+            <img src="https://lh3.googleusercontent.com/d/1l0Fb62AkigdO6qbV0AfTor6G7zXl6j38" alt="Détection d'eau">
+          </div>
+        </div>
 
-  <!-- TITRE CONQUÊTE SPATIALE -->
-  <h2>Conquête spatiale</h2>
-  <div style="height: 640px; width: 100%; margin: 24px 0; border: 1px solid #1e293b; border-radius: 12px; overflow: hidden;">
-    <iframe srcdoc='<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Histoire de l&apos;Exploration Spatiale Lunaire</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { width: 100%; height: 100%; overflow: hidden; background-color: #05070b; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #d1d5db; }
-    .deck-container { width: 100%; height: 100%; display: flex; flex-direction: column; position: relative; background: radial-gradient(circle at 80% 20%, rgba(30, 41, 59, 0.45) 0%, rgba(5, 7, 11, 0.95) 75%); }
-    .deck-header { height: 56px; min-height: 56px; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255, 255, 255, 0.08); background: rgba(10, 14, 23, 0.7); backdrop-filter: blur(8px); z-index: 20; }
-    .header-left { display: flex; align-items: center; gap: 16px; }
-    .header-title { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: #94a3b8; font-weight: 600; display: flex; align-items: center; gap: 8px; }
-    .header-title::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #38bdf8; box-shadow: 0 0 10px #38bdf8; }
-    .toc-select { background: #0f172a; color: #f1f5f9; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 6px; padding: 6px 12px; font-size: 0.85rem; cursor: pointer; outline: none; transition: all 0.2s ease; max-width: 280px; }
-    .toc-select:hover, .toc-select:focus { border-color: #38bdf8; box-shadow: 0 0 8px rgba(56, 189, 248, 0.3); }
-    .slide-counter { font-size: 0.85rem; color: #64748b; font-variant-numeric: tabular-nums; letter-spacing: 1px; }
-    .slide-counter span { color: #f1f5f9; font-weight: 600; }
-    .slides-viewport { flex: 1; position: relative; overflow: hidden; width: 100%; }
-    .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 24px 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; opacity: 0; pointer-events: none; transform: translateX(30px); transition: opacity 0.35s ease, transform 0.35s ease; }
-    .slide.active { opacity: 1; pointer-events: auto; transform: translateX(0); }
-    .slide-content { display: flex; flex-direction: column; justify-content: center; height: 100%; overflow-y: auto; padding-right: 12px; }
-    .slide-content::-webkit-scrollbar { width: 4px; }
-    .slide-content::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 4px; }
-    .slide-badge { align-self: flex-start; font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; color: #38bdf8; background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); padding: 3px 10px; border-radius: 999px; margin-bottom: 12px; font-weight: 600; }
-    .slide-title { font-size: 1.55rem; font-weight: 700; color: #f8fafc; line-height: 1.25; margin-bottom: 14px; letter-spacing: -0.5px; }
-    .slide-body { font-size: 0.90rem; line-height: 1.6; color: #cbd5e1; }
-    .slide-body p { margin-bottom: 10px; }
-    .slide-body strong { color: #f8fafc; font-weight: 600; }
-    .key-points { list-style: none; margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }
-    .key-points li { position: relative; padding-left: 18px; font-size: 0.85rem; color: #94a3b8; }
-    .key-points li::before { content: "▹"; position: absolute; left: 0; color: #38bdf8; font-size: 0.95rem; line-height: 1; }
-    .slide-media-wrapper { display: flex; flex-direction: column; justify-content: center; height: 100%; }
-    .media-card { width: 100%; height: 82%; border-radius: 12px; border: 1px solid rgba(56, 189, 248, 0.25); background: rgba(15, 23, 42, 0.5); position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); }
-    .media-card img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 12px; transition: transform 0.4s ease; }
-    .media-card:hover img { transform: scale(1.02); }
-    .media-caption { margin-top: 8px; font-size: 0.78rem; color: #94a3b8; line-height: 1.4; text-align: center; border-left: 2px solid #38bdf8; padding-left: 8px; }
-    .deck-footer { height: 56px; min-height: 56px; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255, 255, 255, 0.08); background: rgba(10, 14, 23, 0.85); z-index: 20; }
-    .nav-buttons { display: flex; align-items: center; gap: 12px; }
-    .nav-btn { background: #1e293b; border: 1px solid rgba(255, 255, 255, 0.12); color: #f8fafc; width: 38px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1rem; transition: all 0.2s ease; outline: none; }
-    .nav-btn:hover:not(:disabled) { background: #38bdf8; color: #05070b; box-shadow: 0 0 12px rgba(56, 189, 248, 0.4); border-color: #38bdf8; }
-    .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-    .keyboard-hint { font-size: 0.75rem; color: #64748b; }
-    @media (max-width: 800px) {
-      .slide { grid-template-columns: 1fr; gap: 16px; padding: 16px; }
-      .slide-media-wrapper { height: 180px; }
-      .media-card { height: 100%; }
-      .slide-title { font-size: 1.25rem; }
-      .toc-select { max-width: 170px; font-size: 0.75rem; }
-    }
-  </style>
-</head>
-<body>
-<div class="deck-container">
-  <header class="deck-header">
-    <div class="header-left">
-      <div class="header-title">Chroniques Lunaires</div>
-      <select id="tocSelect" class="toc-select" aria-label="Sommaire"></select>
-    </div>
-    <div class="slide-counter"><span id="currentNum">1</span> / <span id="totalNum">13</span></div>
-  </header>
-  <main class="slides-viewport" id="viewport">
-    <section class="slide active" data-title="1. Introduction : L&apos;astre convoité">
-      <div class="slide-content">
-        <span class="slide-badge">Genèse & Vue d&apos;ensemble</span>
-        <h2 class="slide-title">Sept décennies d&apos;exploration spatiale</h2>
-        <div class="slide-body">
-          <p>L&apos;exploration de la Lune est le miroir des grandes mutations technologiques et géopolitiques de l&apos;Humanité.</p>
-          <p>Du duel idéologique de la Guerre froide jusqu&apos;à la renaissance multilatérale contemporaine, notre satellite naturel est passé du statut d&apos;instrument de prestige à celui de laboratoire fondamental et de futur tremplin vers le système solaire.</p>
-          <ul class="key-points">
-            <li>1959–1976 : La compétition pionnière et les débarquements d&apos;Apollo.</li>
-            <li>1994–2015 : La cartographie orbitale globale et la preuve des glaces polaires.</li>
-            <li>Depuis 2019 : L&apos;exploration de la face cachée, l&apos;essor privé et les infrastructures durables.</li>
-          </ul>
+        <!-- Slide 10 -->
+        <div class="deck-slide" data-title="10. Face cachée et hautes latitudes">
+          <div>
+            <span class="deck-slide-badge">Exploration Moderne (2019–2024)</span>
+            <h3 class="deck-slide-title">Chang'e 4, 6, Chandrayaan-3 et SLIM</h3>
+            <p><strong>Chang'e 4 &amp; 6 :</strong> Premiers atterrissages et premier retour d'échantillons de la face cachée.<br>
+            <strong>Chandrayaan-3 :</strong> Premier atterrissage réussi par l'Inde aux hautes latitudes australes.</p>
+          </div>
+          <div class="deck-media-wrap">
+            <img src="https://lh3.googleusercontent.com/d/16inL3nEdOLr-1EzWn4gjb9zJnB8wah9X" alt="Chang'e / Chandrayaan">
+          </div>
         </div>
-      </div>
-      <div class="slide-media-wrapper">
-        <div class="media-card"><img src="https://lh3.googleusercontent.com/d/1FFmfpqSioN4LCxnx7uv5CrWPQ5Cw8z1t" alt="Pleine Lune vue depuis l&apos;espace"></div>
-        <div class="media-caption">La Lune, premier laboratoire planétaire accessible à l&apos;exploration humaine.</div>
-      </div>
-    </section>
-    <section class="slide" data-title="2. Les pionniers soviétiques (Luna)">
-      <div class="slide-content">
-        <span class="slide-badge">Guerre Froide (1959–1966)</span>
-        <h2 class="slide-title">L&apos;audace soviétique : Luna & la face cachée</h2>
-        <div class="slide-body">
-          <p>Sous la direction du constructeur Sergueï Korolev, l&apos;URSS prend une avance décisive :</p>
-          <ul class="key-points">
-            <li><strong>Luna 1 (janvier 1959) :</strong> Première sonde à atteindre la vitesse de libération terrestre (11,2 km/s).</li>
-            <li><strong>Luna 2 (septembre 1959) :</strong> Premier impact direct sur la surface lunaire.</li>
-            <li><strong>Luna 3 (octobre 1959) :</strong> Premier survol circumlunaire photographiant la face cachée. Les clichés révèlent une absence quasi-totale de grandes mers basaltiques.</li>
-            <li><strong>Luna 9 (février 1966) :</strong> Tout premier atterrissage doux et transmission panoramique du sol.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="slide-media-wrapper">
-        <div class="media-card"><img src="https://lh3.googleusercontent.com/d/1SIedhMeMTTglWpiOfmufAZNVcOwhDuYT" alt="Luna 3 et premier cliché de la face cachée"></div>
-        <div class="media-caption">Le premier regard de l&apos;Humanité sur la face cachée de la Lune grâce à Luna 3.</div>
-      </div>
-    </section>
-    <section class="slide" data-title="3. Préparation américaine (Ranger, Surveyor)">
-      <div class="slide-content">
-        <span class="slide-badge">Robotique NASA (1961–1968)</span>
-        <h2 class="slide-title">Ranger, Surveyor et Lunar Orbiter</h2>
-        <div class="slide-body">
-          <p>Face à l&apos;avance soviétique, la NASA structure méthodiquement trois programmes d&apos;éclaireurs :</p>
-          <ul class="key-points">
-            <li><strong>Programme Ranger :</strong> Des sondes kamikazes transmettant des milliers de clichés submétriques avant impact.</li>
-            <li><strong>Programme Surveyor :</strong> Atterrissage doux contrôlé par radar altimétrique. Les pelles mécaniques testent la portance du régolithe et confirment qu&apos;un vaisseau ne s&apos;enfoncera pas.</li>
-            <li><strong>Lunar Orbiter :</strong> Cinq sondes cartographient 99% de la surface pour identifier les sites d&apos;atterrissage sécurisés d&apos;Apollo.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="slide-media-wrapper">
-        <div class="media-card"><img src="https://lh3.googleusercontent.com/d/1YxZFpjvOXhi6XmHKXQIhyMPcsQmwvonh" alt="Atterrisseur Surveyor sur la Lune"></div>
-        <div class="media-caption">Surveyor confirme la solidité mécanique du sol lunaire pour les futurs modules habités.</div>
-      </div>
-    </section>
-    <section class="slide" data-title="4. L&apos;architecture Apollo">
-      <div class="slide-content">
-        <span class="slide-badge">Ingénierie Apollo</span>
-        <h2 class="slide-title">Saturn V et le rendez-vous orbital (LOR)</h2>
-        <div class="slide-body">
-          <p>Le choix audacieux du <strong>Rendez-vous en Orbite Lunaire (LOR)</strong>, soutenu par John Houbolt, divise la charge en éléments spécialisés :</p>
-          <ul class="key-points">
-            <li><strong>Lanceur Saturn V :</strong> Un géant de 111 mètres développant une poussée de 34,5 MN au décollage.</li>
-            <li><strong>Module de Commande et de Service (CSM) :</strong> Assure le transit de l&apos;équipage, le support de vie et la rentrée atmosphérique directe.</li>
-            <li><strong>Module Lunaire (LM) :</strong> Dédié exclusivement à la descente et à la remontée depuis la surface lunaire.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="slide-media-wrapper">
-        <div class="media-card"><img src="https://lh3.googleusercontent.com/d/1N-zI_7a4bJYx-6Or95ESEh5RvswqWVH2" alt="Décollage Saturn V"></div>
-        <div class="media-caption">La Saturn V, symbole technique de la course à l&apos;espace américaine.</div>
-      </div>
-    </section>
-    <section class="slide" data-title="5. Les missions Apollo 11, 12, 13">
-      <div class="slide-content">
-        <span class="slide-badge">Exploration Humaine (1969–1970)</span>
-        <h2 class="slide-title">Premiers pas et crises surmontées</h2>
-        <div class="slide-body">
-          <ul class="key-points">
-            <li><strong>Apollo 11 (20 juillet 1969) :</strong> Alunissage manuel d&apos;Eagle par Neil Armstrong et Buzz Aldrin dans la Mer de la Tranquillité avec seulement 40 secondes d&apos;ergols résiduels.</li>
-            <li><strong>Apollo 12 (novembre 1969) :</strong> Frappée deux fois par la foudre au décollage. La commande providentielle <em>« SCE to AUX »</em> formulée par John Aaron sauve la mission. Alunissage de précision près de Surveyor 3.</li>
-            <li><strong>Apollo 13 (avril 1970) :</strong> Explosion d&apos;un réservoir d&apos;oxygène. L&apos;équipage utilise le LM Aquarius comme canot de sauvetage et boucle une trajectoire de retour libre.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="slide-media-wrapper">
-        <div class="media-card"><img src="https://lh3.googleusercontent.com/d/1F1Cqh4Ez8J_bMS52ORXfKql4y2maLA09" alt="Buzz Aldrin sur la Lune"></div>
-        <div class="media-caption">« Un petit pas pour l&apos;homme, un bond de géant pour l&apos;humanité » (20 juillet 1969).</div>
-      </div>
-    </section>
-    <section class="slide" data-title="6. L&apos;apogée scientifique Apollo (15, 16, 17)">
-      <div class="slide-content">
-        <span class="slide-badge">Missions J (1971–1972)</span>
-        <h2 class="slide-title">Le rover lunaire et la roche Genesis</h2>
-        <div class="slide-body">
-          <p>Les missions Apollo de classe « J » portent l&apos;investigation géologique à son zénith :</p>
-          <ul class="key-points">
-            <li><strong>Le Lunar Roving Vehicle (LRV) :</strong> Véhicule électrique tout-terrain permettant d&apos;explorer des dizaines de kilomètres.</li>
-            <li><strong>La Roche Genesis (Apollo 15) :</strong> Échantillon d&apos;anorthosite vieux de 4,5 milliards d&apos;années, preuve de l&apos;existence d&apos;un océan magmatique primordial.</li>
-            <li><strong>Apollo 17 :</strong> Découverte par le géologue-astronaute Harrison Schmitt des fameux dépôts pyroclastiques orange du cratère Shorty.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="slide-media-wrapper">
-        <div class="media-card"><img src="https://lh3.googleusercontent.com/d/1GTCLfYrNXW5GE5cn1JHId8RoUH9oalrl" alt="Astronaute et le Rover Lunaire"></div>
-        <div class="media-caption">Le Lunar Roving Vehicle a offert une mobilité inédite aux expéditions scientifiques de surface.</div>
-      </div>
-    </section>
-    <section class="slide" data-title="7. Robots lourds soviétiques (Lunokhod)">
-      <div class="slide-content">
-        <span class="slide-badge">Robotique Lourde Soviétique</span>
-        <h2 class="slide-title">Lunokhod et retours d&apos;échantillons</h2>
-        <div class="slide-body">
-          <p>Après l&apos;abandon de son lanceur N1, l&apos;URSS excelle dans l&apos;automatisation lourde par fusée Proton :</p>
-          <ul class="key-points">
-            <li><strong>Lunokhod 1 (1970) & Lunokhod 2 (1973) :</strong> Premiers rovers téléguidés depuis la Terre. Chauffés par une source au polonium-210, ils parcourent respectivement 10,5 km et 39 km.</li>
-            <li><strong>Luna 16, 20 et 24 :</strong> Premiers retours automatisés d&apos;échantillons de l&apos;histoire. En 1976, Luna 24 fore jusqu&apos;à 2 mètres de profondeur dans Mare Crisium.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="slide-media-wrapper">
-        <div class="media-card"><img src="https://lh3.googleusercontent.com/d/1GhMEjjVXe7zWO4ZOaEbnGcDjrXxCzeCF" alt="Rover soviétique Lunokhod"></div>
-        <div class="media-caption">Lunokhod 1 : pionnier de l&apos;exploration robotique motorisée extraterrestre.</div>
-      </div>
-    </section>
-    <section class="slide" data-title="8. Paradigmes de la planétologie comparée">
-      <div class="slide-content">
-        <span class="slide-badge">Avancées Fondamentales</span>
-        <h2 class="slide-title">L&apos;impact de Théia et les lasers LLR</h2>
-        <div class="slide-body">
-          <p>Les 382 kg de roches Apollo et les forages Luna ont révolutionné l&apos;astrophysique :</p>
-          <ul class="key-points">
-            <li><strong>L&apos;impact géant Théia :</strong> Collision d&apos;un protoplanétoïde avec la Terre primitive expliquant le petit noyau ferreux et l&apos;appauvrissement en éléments volatils.</li>
-            <li><strong>Télémétrie Laser Lunaire (LLR) :</strong> Réseaux de rétro-réflecteurs en quartz toujours tirés depuis la Terre. Précision millimétrique prouvant la récession de l&apos;orbite de 3,82 cm/an.</li>
-            <li><strong>Terrane KREEP :</strong> Concentration asymétrique d&apos;éléments producteurs de chaleur expliquant le volcanisme de la face visible.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="slide-media-wrapper">
-        <div class="media-card"><img src="https://lh3.googleusercontent.com/d/1qe1aKHkq23HqJWRoH-Yx8Ev7UnmzuYIE" alt="Rétro-réflecteur laser lunaire"></div>
-        <div class="media-caption">Le réseau LLR permet de mesurer la distance Terre-Lune au millimètre près depuis plus de 50 ans.</div>
-      </div>
-    </section>
-    <section class="slide" data-title="9. Renaissance orbitale (1994–2015)">
-      <div class="slide-content">
-        <span class="slide-badge">La Quête de l&apos;Eau</span>
-        <h2 class="slide-title">Clementine, LRO et la glace polaire</h2>
-        <div class="slide-body">
-          <p>Après 20 ans d&apos;interruption, la Lune redevient une priorité scientifique majeure :</p>
-          <ul class="key-points">
-            <li><strong>Clementine (1994) & Lunar Prospector (1998) :</strong> Premières signatures d&apos;hydrogène dans les zones d&apos;ombre permanente polaires.</li>
-            <li><strong>Chandrayaan-1 (2008) :</strong> Détection formelle de groupements hydroxyles (OH) et de molécules d&apos;eau par l&apos;imageur M³ de la NASA/ISRO.</li>
-            <li><strong>LCROSS & LRO (2009) :</strong> Impact cinétique dans le cratère Cabeus prouvant la présence de 5,5% d&apos;eau en masse au sein des éjectas.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="slide-media-wrapper">
-        <div class="media-card"><img src="https://lh3.googleusercontent.com/d/1l0Fb62AkigdO6qbV0AfTor6G7zXl6j38" alt="Sonde orbitale et détection d&apos;eau"></div>
-        <div class="media-caption">La détection de glace d&apos;eau aux pôles a totalement relancé la course aux bases permanentes.</div>
-      </div>
-    </section>
-    <section class="slide" data-title="10. Face cachée et hautes latitudes">
-      <div class="slide-content">
-        <span class="slide-badge">Exploration Moderne (2019–2024)</span>
-        <h2 class="slide-title">Chang&apos;e 4, 6, Chandrayaan-3 et SLIM</h2>
-        <div class="slide-body">
-          <p>Une diversification technologique internationale sans précédent :</p>
-          <ul class="key-points">
-            <li><strong>Chang&apos;e 4 (2019) & Chang&apos;e 6 (2024) :</strong> Premiers atterrissages et premier retour d&apos;échantillons (1 935 g) de la face cachée (bassin SPA).</li>
-            <li><strong>Chandrayaan-3 (2023) :</strong> L&apos;Inde réalise le premier poser réussi aux hautes latitudes polaires (69,37° S) et mesure le gradient thermique extrême du sol.</li>
-            <li><strong>SLIM (2024) :</strong> Le Japon valide un atterrissage de précision à 55 mètres de sa cible.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="slide-media-wrapper">
-        <div class="media-card"><img src="https://lh3.googleusercontent.com/d/16inL3nEdOLr-1EzWn4gjb9zJnB8wah9X" alt="Atterrisseur au pôle Sud ou face cachée"></div>
-        <div class="media-caption">L&apos;alunissage de Chandrayaan-3 au pôle Sud consacre l&apos;Inde comme 4e puissance lunaire.</div>
-      </div>
-    </section>
-    <section class="slide" data-title="11. L&apos;essor commercial (CLPS)">
-      <div class="slide-content">
-        <span class="slide-badge">New Space (2024–2025)</span>
-        <h2 class="slide-title">Le programme CLPS et les atterrisseurs privés</h2>
-        <div class="slide-body">
-          <p>La NASA achète désormais le service de livraison d&apos;instruments à des compagnies privées :</p>
-          <ul class="key-points">
-            <li><strong>Odysseus (IM-1, fév. 2024) :</strong> Premier alunissage d&apos;un consortium privé et premier moteur cryogénique méthane/LOX vers la Lune.</li>
-            <li><strong>Blue Ghost 1 (mars 2025) :</strong> Succès total de Firefly Aerospace avec un atterrissage parfaitement vertical dans Mare Crisium et 14 jours d&apos;opérations complètes.</li>
-            <li><strong>IM-2 Athena (mars 2025) :</strong> Atterrissage le plus austral de l&apos;histoire à Mons Mouton (84,79° S).</li>
-          </ul>
-        </div>
-      </div>
-      <div class="slide-media-wrapper">
-        <div class="media-card"><img src="https://lh3.googleusercontent.com/d/1E9odAzaWddWi6XBQbcbS_IKnlea8DZ1G" alt="Atterrisseur commercial Blue Ghost ou Odysseus"></div>
-        <div class="media-caption">Blue Ghost 1 valide la fiabilité des atterrisseurs commerciaux au service de la recherche.</div>
-      </div>
-    </section>
-    <section class="slide" data-title="12. Le duel du futur : Artemis vs ILRS">
-      <div class="slide-content">
-        <span class="slide-badge">La Prochaine Décennie</span>
-        <h2 class="slide-title">Artemis face à la station ILRS</h2>
-        <div class="slide-body">
-          <p>Deux architectures géopolitiques concurrentes s&apos;affrontent pour le pôle Sud :</p>
-          <ul class="key-points">
-            <li><strong>Programme Artemis (NASA / ESA / JAXA / CSA) :</strong> Vaisseau Orion, station orbitale Gateway en orbite NRHO et atterrisseurs lourds HLS (Starship / Blue Moon).</li>
-            <li><strong>Projet ILRS (Chine / Russie / Partenaires) :</strong> Double tir du lanceur lourd CZ-10, capsule Mengzhou, atterrisseur Lanyue et base robotique alimentée par énergie nucléaire dès 2028-2035.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="slide-media-wrapper">
-        <div class="media-card"><img src="https://lh3.googleusercontent.com/d/1Vjf9S54KGlhEZ-ArSH0qmZM-xevv5TnZ" alt="Base lunaire ou Lunar Gateway"></div>
-        <div class="media-caption">La Lune redevient le théâtre d&apos;une rivalité technologique et stratégique planétaire.</div>
-      </div>
-    </section>
-    <section class="slide" data-title="13. S&apos;installer : ISRU, énergie & survie">
-      <div class="slide-content">
-        <span class="slide-badge">Défis Techniques</span>
-        <h2 class="slide-title">Vivre et produire sur place (ISRU)</h2>
-        <div class="slide-body">
-          <p>L&apos;implantation pérenne exige de s&apos;affranchir du cordon ombilical terrestre :</p>
-          <ul class="key-points">
-            <li><strong>Extraction de l&apos;eau polaire :</strong> Électrolyse de la glace pour fabriquer le dioxygène respirable et le carburant cryogénique (H₂ / O₂).</li>
-            <li><strong>Oxygène minéral :</strong> Réduction carbothermique ou électrolyse en sels fondus de la régolithe (40 à 45% d&apos;oxygène lié).</li>
-            <li><strong>Défis extrêmes :</strong> Nuits de 14 jours (-180°C nécessitant des micro-réacteurs nucléaires), radiations cosmiques et poussière abrasive toxique.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="slide-media-wrapper">
-        <div class="media-card"><img src="https://lh3.googleusercontent.com/d/18Pr3QPHpRLwfQVlogKxC-1oH7uM6HspA" alt="Extraction des ressources in situ sur la Lune"></div>
-        <div class="media-caption">L&apos;utilisation des ressources in situ (ISRU) est la clé d&apos;une présence humaine permanente.</div>
-      </div>
-    </section>
-  </main>
-  <footer class="deck-footer">
-    <div class="nav-buttons">
-      <button class="nav-btn" id="prevBtn" title="Précédent (←)">◀</button>
-      <button class="nav-btn" id="nextBtn" title="Suivant (→)">▶</button>
-    </div>
-    <div class="keyboard-hint">Navigation : Flèches Clavier ◄ / ► ou Sommaire Déroulant</div>
-  </footer>
-</div>
-<script>
-  (function () {
-    const slides = document.querySelectorAll(".slide");
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
-    const currentNum = document.getElementById("currentNum");
-    const totalNum = document.getElementById("totalNum");
-    const tocSelect = document.getElementById("tocSelect");
-    let currentIndex = 0;
-    const total = slides.length;
-    totalNum.textContent = total;
-    slides.forEach((slide, index) => {
-      const option = document.createElement("option");
-      option.value = index;
-      option.textContent = slide.dataset.title || `Diapositive ${index + 1}`;
-      tocSelect.appendChild(option);
-    });
-    function showSlide(index) {
-      if (index < 0 || index >= total) return;
-      slides[currentIndex].classList.remove("active");
-      currentIndex = index;
-      slides[currentIndex].classList.add("active");
-      currentNum.textContent = currentIndex + 1;
-      tocSelect.value = currentIndex;
-      prevBtn.disabled = (currentIndex === 0);
-      nextBtn.disabled = (currentIndex === total - 1);
-    }
-    prevBtn.addEventListener("click", () => showSlide(currentIndex - 1));
-    nextBtn.addEventListener("click", () => showSlide(currentIndex + 1));
-    tocSelect.addEventListener("change", (e) => {
-      showSlide(parseInt(e.target.value, 10));
-    });
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowRight" || e.key === "Space") {
-        if (currentIndex < total - 1) showSlide(currentIndex + 1);
-      } else if (e.key === "ArrowLeft") {
-        if (currentIndex > 0) showSlide(currentIndex - 1);
-      }
-    });
-    showSlide(0);
-  })();
-</script>
-</body>
-</html>' style="width: 100%; height: 100%; border: none;"></iframe>
-  </div>
 
-  <!-- MODULE ATLAS INTERACTIF DE LA LUNE (RECHERCHE & FORMATIONS PLANETARIUM) -->
-  <h2>Atlas et cartographie sélénologique</h2>
-  <div class="atlas-section">
-    <div class="atlas-controls">
-      <input type="text" id="atlasSearchInput" class="atlas-search" placeholder="Rechercher un cratère, une mer, un mont, une vallée...">
-      <div class="atlas-filters">
-        <button class="filter-btn active" onclick="filtrerAtlas('all')">Tous</button>
-        <button class="filter-btn" onclick="filtrerAtlas('crater')">Cratères</button>
-        <button class="filter-btn" onclick="filtrerAtlas('mare')">Mers (Maria)</button>
-        <button class="filter-btn" onclick="filtrerAtlas('volcano')">Monts & Massifs</button>
-        <button class="filter-btn" onclick="filtrerAtlas('valley')">Vallées (Vallis)</button>
+        <!-- Slide 11 -->
+        <div class="deck-slide" data-title="11. L'essor commercial (CLPS)">
+          <div>
+            <span class="deck-slide-badge">New Space (2024–2025)</span>
+            <h3 class="deck-slide-title">Programme CLPS et atterrisseurs privés</h3>
+            <p>La NASA externalise la logistique de surface : Odysseus (IM-1) réalise le premier alunissage privé, suivi de Blue Ghost 1 opérant dans Mare Crisium et IM-2 au pôle Sud.</p>
+          </div>
+          <div class="deck-media-wrap">
+            <img src="https://lh3.googleusercontent.com/d/1E9odAzaWddWi6XBQbcbS_IKnlea8DZ1G" alt="Atterrisseur privé">
+          </div>
+        </div>
+
+        <!-- Slide 12 -->
+        <div class="deck-slide" data-title="12. Le duel du futur : Artemis vs ILRS">
+          <div>
+            <span class="deck-slide-badge">La Prochaine Décennie</span>
+            <h3 class="deck-slide-title">Artemis face à la station ILRS</h3>
+            <p>Deux projets rivaux se préparent pour le pôle Sud : le programme occidental Artemis (capsule Orion, station Gateway, atterrisseurs HLS) face à la station sino-russe ILRS.</p>
+          </div>
+          <div class="deck-media-wrap">
+            <img src="https://lh3.googleusercontent.com/d/1Vjf9S54KGlhEZ-ArSH0qmZM-xevv5TnZ" alt="Base lunaire">
+          </div>
+        </div>
+
+        <!-- Slide 13 -->
+        <div class="deck-slide" data-title="13. S'installer : ISRU, énergie &amp; survie">
+          <div>
+            <span class="deck-slide-badge">Défis Techniques</span>
+            <h3 class="deck-slide-title">Vivre et produire sur place (ISRU)</h3>
+            <p>L'implantation humaine durable nécessite l'extraction d'oxygène et d'hydrogène à partir de la glace polaire et du régolithe, ainsi que des micro-réacteurs pour franchir les nuits lunaires de 14 jours terrestres.</p>
+          </div>
+          <div class="deck-media-wrap">
+            <img src="https://lh3.googleusercontent.com/d/18Pr3QPHpRLwfQVlogKxC-1oH7uM6HspA" alt="ISRU lunaire">
+          </div>
+        </div>
       </div>
+
+      <footer class="deck-footer">
+        <button class="nav-btn" id="deckPrevBtn" onclick="moveDeckSlide(-1)">◀ Précédent</button>
+        <span style="font-size:0.75rem; color:#64748b;">Navigation : flèches ou menu déroulant</span>
+        <button class="nav-btn" id="deckNextBtn" onclick="moveDeckSlide(1)">Suivant ▶</button>
+      </footer>
     </div>
 
-    <div class="atlas-grid" id="atlasGrid">
-      <!-- Rempli dynamiquement en JS avec les 63 POIs officiels de la Lune -->
-    </div>
-  </div>
+    <!-- ATLAS CARTOGRAPHIQUE (Contraint et propre) -->
+    <h2>Atlas et cartographie sélénologique</h2>
+    <div class="atlas-box">
+      <div class="atlas-controls">
+        <input type="text" id="atlasSearchInput" class="atlas-input" placeholder="Rechercher un cratère, une mer, un mont, une vallée...">
+        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+          <button class="atlas-filter-btn active" onclick="filtrerAtlas('all')">Tous</button>
+          <button class="atlas-filter-btn" onclick="filtrerAtlas('crater')">Cratères</button>
+          <button class="atlas-filter-btn" onclick="filtrerAtlas('mare')">Mers</button>
+          <button class="atlas-filter-btn" onclick="filtrerAtlas('volcano')">Monts</button>
+          <button class="atlas-filter-btn" onclick="filtrerAtlas('valley')">Vallées</button>
+        </div>
+      </div>
 
-  <!-- MODAL LIGHTBOX / ZOOM POI -->
+      <div class="atlas-grid" id="atlasGrid"></div>
+    </div>
+
+  </div> <!-- FIN .fiche-container -->
+
+  <!-- MODAL ZOOM ATLAS -->
   <div class="atlas-modal" id="atlasModal" onclick="fermerModal(event)">
-    <div class="atlas-modal-box">
+    <div class="atlas-modal-inner">
       <button class="atlas-modal-close" onclick="fermerModalDirect()">✕</button>
-      <img id="modalImg" class="atlas-modal-img" src="" alt="Détail relief lunaire">
+      <img id="modalImg" src="" alt="Relief">
       <div class="atlas-modal-desc">
-        <h3 id="modalTitle">-</h3>
-        <p id="modalCoords" style="color: #38bdf8; font-weight: 600; font-size: 0.8rem;"></p>
-        <p id="modalDesc"></p>
+        <h3 id="modalTitle" style="color:#ffffff; margin:0 0 6px 0;">-</h3>
+        <p id="modalCoords" style="color:#38bdf8; font-weight:600; font-size:0.8rem; margin-bottom:6px;"></p>
+        <p id="modalDesc" style="color:#94a3b8; font-size:0.85rem; margin:0; line-height:1.4;"></p>
       </div>
     </div>
   </div>
 
   <script>
-    // Base de données des 63 formations géologiques de la Lune extraite du moteur planetarium
+    /* 1. ONGLETS TERRE */
+    function changerOngletTerre(nom) {
+      ['structure', 'tectonique', 'champ'].forEach(o => {
+        const c = document.getElementById('onglet-ter-' + o);
+        const b = document.getElementById('btn-ter-' + o);
+        if (c && b) {
+          c.style.display = (o === nom) ? 'block' : 'none';
+          b.style.background = (o === nom) ? '#2563eb' : '#1e293b';
+          b.style.color = (o === nom) ? '#ffffff' : '#94a3b8';
+        }
+      });
+    }
+
+    /* 2. ONGLETS LUNE */
+    function changerOngletLune(nom) {
+      ['origine', 'geologie', 'orbite'].forEach(o => {
+        const c = document.getElementById('onglet-lun-' + o);
+        const b = document.getElementById('btn-lun-' + o);
+        if (c && b) {
+          c.style.display = (o === nom) ? 'block' : 'none';
+          b.style.background = (o === nom) ? '#2563eb' : '#1e293b';
+          b.style.color = (o === nom) ? '#ffffff' : '#94a3b8';
+        }
+      });
+    }
+
+    /* 3. SLIDER ENSEMBLES GÉOLOGIQUES (REMIS EN FONCTIONNEMENT) */
+    let curGeo = 0;
+    const totalGeo = 4;
+    const geoDotsContainer = document.getElementById('geoDots');
+    for (let i = 0; i < totalGeo; i++) {
+      const d = document.createElement('div');
+      d.className = 'dot' + (i === 0 ? ' active' : '');
+      d.onclick = () => setGeoSlide(i);
+      geoDotsContainer.appendChild(d);
+    }
+
+    function updateGeoView() {
+      for (let i = 0; i < totalGeo; i++) {
+        const s = document.getElementById('gslide-' + i);
+        if (s) s.classList.toggle('active', i === curGeo);
+      }
+      const dots = document.querySelectorAll('#geoDots .dot');
+      dots.forEach((d, i) => d.classList.toggle('active', i === curGeo));
+      document.getElementById('geoCounter').textContent = `0${curGeo + 1} / 04`;
+      document.getElementById('geoPrevBtn').disabled = (curGeo === 0);
+      document.getElementById('geoNextBtn').disabled = (curGeo === totalGeo - 1);
+    }
+    function moveGeoSlide(dir) {
+      if (curGeo + dir >= 0 && curGeo + dir < totalGeo) {
+        curGeo += dir;
+        updateGeoView();
+      }
+    }
+    function setGeoSlide(i) {
+      curGeo = i;
+      updateGeoView();
+    }
+    updateGeoView();
+
+    /* 4. DECK CONQUÊTE SPATIALE */
+    const deckSlides = document.querySelectorAll('.deck-slide');
+    const deckSelect = document.getElementById('deckTocSelect');
+    let deckIdx = 0;
+    document.getElementById('deckTotNum').textContent = deckSlides.length;
+
+    deckSlides.forEach((s, i) => {
+      const opt = document.createElement('option');
+      opt.value = i;
+      opt.textContent = s.dataset.title || `Diapo ${i+1}`;
+      deckSelect.appendChild(opt);
+    });
+
+    function showDeckSlide(i) {
+      if (i < 0 || i >= deckSlides.length) return;
+      deckSlides[deckIdx].classList.remove('active');
+      deckIdx = i;
+      deckSlides[deckIdx].classList.add('active');
+      document.getElementById('deckCurNum').textContent = deckIdx + 1;
+      deckSelect.value = deckIdx;
+      document.getElementById('deckPrevBtn').disabled = (deckIdx === 0);
+      document.getElementById('deckNextBtn').disabled = (deckIdx === deckSlides.length - 1);
+    }
+    function moveDeckSlide(dir) {
+      showDeckSlide(deckIdx + dir);
+    }
+    deckSelect.addEventListener('change', (e) => showDeckSlide(parseInt(e.target.value, 10)));
+    showDeckSlide(0);
+
+    /* 5. ATLAS LUNAIRE */
     const MOON_POIS = [
       { name: "Cratère Abbe", lat: -57.3, lon: 174.8, cat: "crater", type: "Cratère d'impact", id: "1Fp_eIcqeiGq02Hw8WV45eX6_HGZasNsx" },
       { name: "Cratère Abulfeda", lat: -13.8, lon: 13.9, cat: "crater", type: "Cratère d'impact", id: "1K4-2qMZNFitS4VypZiT2rtLtlU6YgoWT" },
@@ -1369,109 +1206,104 @@
       { name: "Mare Fecunditatis", lat: -7.8, lon: 51.3, cat: "mare", type: "Mer basaltique", id: "1V4wuYseBQF1DscbXrlemh2Q00dGAlXSP" },
       { name: "Mare Humorum", lat: -24.4, lon: -38.6, cat: "mare", type: "Mer basaltique", id: "1E4Tc_ufSLc_1pgEG0sgQ0-PTv3J46lbo" },
       { name: "Mare Imbrium", lat: 32.8, lon: -15.6, cat: "mare", type: "Bassin d'impact inondé", id: "1Il3yBl5MqXWKEJ3KuD2jNOsGZp30HKOU" },
-      { name: "Mare Ingenii", lat: -33.7, lon: 163.5, cat: "mare", type: "Mer basaltique (face cachée)", id: "1RO1kwKwWrOIvr7Tw9VPVJIUhgKd0IC2-" },
-      { name: "Mare Moscoviense", lat: 27.3, lon: 147.9, cat: "mare", type: "Mer de Moscou (face cachée)", id: "1bUMwyb6a8zbE-uKMZXPoHdMDVL2EGVUC" },
+      { name: "Mare Ingenii", lat: -33.7, lon: 163.5, cat: "mare", type: "Mer basaltique", id: "1RO1kwKwWrOIvr7Tw9VPVJIUhgKd0IC2-" },
+      { name: "Mare Moscoviense", lat: 27.3, lon: 147.9, cat: "mare", type: "Mer de Moscou", id: "1bUMwyb6a8zbE-uKMZXPoHdMDVL2EGVUC" },
       { name: "Mare Nectaris", lat: -15.2, lon: 35.5, cat: "mare", type: "Mer basaltique", id: "1mE3rrdA_iTchZSblIqj7DaqhwVackB8l" },
       { name: "Mare Nubium", lat: -21.3, lon: -16.6, cat: "mare", type: "Mer des Nuées", id: "1W-F-Sy5QG-nenRw9Z9RAo3TyrBEbqw49" },
-      { name: "Mare Orientale", lat: -19.4, lon: -92.8, cat: "mare", type: "Bassin d'impact multianneaux", id: "1rd5UO3Tkc06CVolucZseKPAIY_eqzCTd" },
+      { name: "Mare Orientale", lat: -19.4, lon: -92.8, cat: "mare", type: "Bassin d'impact", id: "1rd5UO3Tkc06CVolucZseKPAIY_eqzCTd" },
       { name: "Mare Serenitatis", lat: 28.0, lon: 17.5, cat: "mare", type: "Mer de la Sérénité", id: "1bQHyWPmBZxtyXiqOK-QZOpm_dOumEE8D" },
       { name: "Mare Spumans", lat: 1.1, lon: 65.3, cat: "mare", type: "Mer Écumante", id: "1nSfX6KLhOHAMzsR-3Bcf9vfMSt828_Af" },
-      { name: "Mare Tranquillitatis", lat: 8.5, lon: 31.4, cat: "mare", type: "Mer de la Tranquillité (Apollo 11)", id: "1oWdrMxfx-hnFkeisOP0lXDsJunRwsnP9" },
+      { name: "Mare Tranquillitatis", lat: 8.5, lon: 31.4, cat: "mare", type: "Mer de la Tranquillité", id: "1oWdrMxfx-hnFkeisOP0lXDsJunRwsnP9" },
       { name: "Mare Undarum", lat: 6.8, lon: 68.4, cat: "mare", type: "Mer des Ondes", id: "197_qezH_0XASdOsuxdYeDxlBR0kq2jt-" },
-      { name: "Massif de Malapert", lat: -84.9, lon: 12.9, cat: "volcano", type: "Montagne polaire australe", id: "1cVyhsJLMmoKXjnK-1xQLOc-4Qo17a16Y" },
-      { name: "Mons Argaeus", lat: 19.3, lon: 29.0, cat: "volcano", type: "Pic montagneux isolé", id: "1SxItBJyOo0v17kYsgtwVhFHII20VxOEq" },
+      { name: "Massif de Malapert", lat: -84.9, lon: 12.9, cat: "volcano", type: "Montagne australe", id: "1cVyhsJLMmoKXjnK-1xQLOc-4Qo17a16Y" },
+      { name: "Mons Argaeus", lat: 19.3, lon: 29.0, cat: "volcano", type: "Pic isolé", id: "1SxItBJyOo0v17kYsgtwVhFHII20VxOEq" },
       { name: "Mons Delisle", lat: 29.5, lon: -35.8, cat: "volcano", type: "Massif montagneux", id: "1SosCxUjJh6MSDF7xcTL3QiRSDEATp-5f" },
-      { name: "Mons Hadley", lat: 26.5, lon: 4.7, cat: "volcano", type: "Sommet des Apennins (Apollo 15)", id: "18qYaAqLOrISD7upBklZ5zo03MR2efsa6" },
+      { name: "Mons Hadley", lat: 26.5, lon: 4.7, cat: "volcano", type: "Sommet des Apennins", id: "18qYaAqLOrISD7upBklZ5zo03MR2efsa6" },
       { name: "Mons La Hire", lat: 27.8, lon: -25.5, cat: "volcano", type: "Pic isolé", id: "1pYW_rCNVm48zXpGdplBabcpYLwhTF8or" },
-      { name: "Mons Latreille", lat: 18.4, lon: 61.9, cat: "volcano", type: "Dôme / relief de mer", id: "1UYYrZq9fKy5btvQAhktMP7B9RhnaZ_jI" },
+      { name: "Mons Latreille", lat: 18.4, lon: 61.9, cat: "volcano", type: "Dôme de mer", id: "1UYYrZq9fKy5btvQAhktMP7B9RhnaZ_jI" },
       { name: "Mons Penck", lat: -10.0, lon: 21.6, cat: "volcano", type: "Pic montagneux", id: "1LyI85MkdEVs2Ei185MdIKvCXQv04aP2i" },
       { name: "Mons Pico", lat: 45.7, lon: -8.9, cat: "volcano", type: "Pic isolé de Mare Imbrium", id: "1e9jlJcCGypV0BBaniXy6xKPu8NDVZBcD" },
-      { name: "Mons Rümker", lat: 40.8, lon: -58.1, cat: "volcano", type: "Complexe volcanique à dômes", id: "1P0VuW2vACGhQWtz2vr0H7b400mic71mT" },
+      { name: "Mons Rümker", lat: 40.8, lon: -58.1, cat: "volcano", type: "Complexe volcanique", id: "1P0VuW2vACGhQWtz2vr0H7b400mic71mT" },
       { name: "Montes Agricola", lat: 29.1, lon: -54.1, cat: "volcano", type: "Chaîne montagneuse", id: "1U1k1mTnd0Xkg7xwq-4XoLbwsKXoMuQXM" },
-      { name: "Montes Alpes", lat: 46.4, lon: -0.8, cat: "volcano", type: "Chaîne arquée de Mare Imbrium", id: "1nK5ux3BjWwuCQDsJMawB84YBCp1Wwv5N" },
-      { name: "Montes Apenninus", lat: 18.9, lon: -3.7, cat: "volcano", type: "Rempart géant d'impact", id: "14o1AJ6I1YD4VIyl1eTNWS63vNXW3WhNE" },
+      { name: "Montes Alpes", lat: 46.4, lon: -0.8, cat: "volcano", type: "Chaîne arquée", id: "1nK5ux3BjWwuCQDsJMawB84YBCp1Wwv5N" },
+      { name: "Montes Apenninus", lat: 18.9, lon: -3.7, cat: "volcano", type: "Rempart d'impact", id: "14o1AJ6I1YD4VIyl1eTNWS63vNXW3WhNE" },
       { name: "Montes Carpatus", lat: 14.5, lon: -24.4, cat: "volcano", type: "Monts Carpates", id: "1ZwhMHP6i-pUHWtb5iNgkZzI7O6efyhNp" },
       { name: "Montes Caucasus", lat: 38.4, lon: 10.0, cat: "volcano", type: "Monts Caucase", id: "19DjvEq3jmqu_Wvs9Tk068GtxyUaWrfaZ" },
       { name: "Montes Haemus", lat: 19.9, lon: 12.0, cat: "volcano", type: "Chaîne montagneuse", id: "1lpX3J2WGRz54TrtayuZ19TxnoKyk60xG" },
       { name: "Montes Harbinger", lat: 27.0, lon: -41.0, cat: "volcano", type: "Massif montagneux", id: "1BzWptHdDsVcAzMY76rmSQq9VYmmEpTmI" },
       { name: "Montes Recti", lat: 48.0, lon: -20.0, cat: "volcano", type: "Chaîne rectiligne", id: "1Xk4ThGv33i2jouz5DTd4XETZbS_gJdcG" },
       { name: "Montes Riphaeus", lat: -7.7, lon: -28.1, cat: "volcano", type: "Monts Riphées", id: "1BoUERYsjLojKhEAI37gpIGWjhfNxG6If" },
-      { name: "Montes Secchi", lat: 2.7, lon: 43.2, cat: "volcano", type: "Chaîne de cratères et monts", id: "1fE2oxWaKY6RmxBZGVLH9yAJ-vFzE_lt6" },
+      { name: "Montes Secchi", lat: 2.7, lon: 43.2, cat: "volcano", type: "Chaîne de cratères", id: "1fE2oxWaKY6RmxBZGVLH9yAJ-vFzE_lt6" },
       { name: "Montes Spitzbergen", lat: 35.0, lon: -5.0, cat: "volcano", type: "Crête isolée", id: "1XtkLFlkzrvYp-_zwkVLJ4hUu7tdNVp6I" },
       { name: "Montes Taurus", lat: 28.4, lon: 41.1, cat: "volcano", type: "Monts Taurus", id: "1qCf90Vot7M_hjByICU21Chq4_Fggni7O" },
       { name: "Montes Teneriffe", lat: 47.1, lon: -11.8, cat: "volcano", type: "Crêtes de Mare Imbrium", id: "1ALKypLRoK2_5I3h2dEv_6EXo5GRukt6n" },
-      { name: "Montes Zeeman", lat: -75.0, lon: -135.0, cat: "volcano", type: "Rempart géant polaire austral", id: "1baFPUJ2LnukYBXgpIAz3OTHXvP0NDOPw" },
-      { name: "Oceanus Procellarum", lat: 18.4, lon: -57.4, cat: "mare", type: "Océan des Tempêtes (vaste plaine)", id: "18CigpaS7seCeExlfRYa4bEhP06fNHx2t" },
-      { name: "Vallis Alpes", lat: 48.5, lon: 3.2, cat: "valley", type: "Graben rectiligne d'effondrement", id: "1AO0J7enSOVELazGbn9astomSaKMr9KSB" },
-      { name: "Vallis Palitzsch", lat: -26.4, lon: 64.3, cat: "valley", type: "Gorge linéaire de cratère", id: "1n8xALI921CBdf9AOBRT3p_YvzMVefjue" },
-      { name: "Vallis Schröteri", lat: 26.2, lon: -50.8, cat: "valley", type: "Chenal de lave volcanique sinueux", id: "1ac1PJmJiEvdTcEMbsj3PVgceAeXdQ0wL" }
+      { name: "Montes Zeeman", lat: -75.0, lon: -135.0, cat: "volcano", type: "Rempart polaire austral", id: "1baFPUJ2LnukYBXgpIAz3OTHXvP0NDOPw" },
+      { name: "Oceanus Procellarum", lat: 18.4, lon: -57.4, cat: "mare", type: "Océan des Tempêtes", id: "18CigpaS7seCeExlfRYa4bEhP06fNHx2t" },
+      { name: "Vallis Alpes", lat: 48.5, lon: 3.2, cat: "valley", type: "Graben rectiligne", id: "1AO0J7enSOVELazGbn9astomSaKMr9KSB" },
+      { name: "Vallis Palitzsch", lat: -26.4, lon: 64.3, cat: "valley", type: "Gorge linéaire", id: "1n8xALI921CBdf9AOBRT3p_YvzMVefjue" },
+      { name: "Vallis Schröteri", lat: 26.2, lon: -50.8, cat: "valley", type: "Chenal de lave sinueux", id: "1ac1PJmJiEvdTcEMbsj3PVgceAeXdQ0wL" }
     ];
 
-    let currentFilter = 'all';
+    let currentAtlasFilter = 'all';
 
     function renderAtlas(items) {
       const grid = document.getElementById('atlasGrid');
       grid.innerHTML = '';
       if (items.length === 0) {
-        grid.innerHTML = '<div style="color: #64748b; font-size: 0.9rem; grid-column: 1 / -1; padding: 20px; text-align: center;">Aucune formation géologique ne correspond à votre recherche.</div>';
+        grid.innerHTML = '<div style="color:#64748b; font-size:0.85rem; grid-column:1/-1; padding:20px; text-align:center;">Aucune formation trouvée.</div>';
         return;
       }
       items.forEach(poi => {
-        const card = document.createElement('div');
-        card.className = 'atlas-card';
-        card.onclick = () => ouvrirModal(poi);
-        card.innerHTML = `
-          <img class="atlas-card-img" src="https://lh3.googleusercontent.com/d/${poi.id}" alt="${poi.name}" loading="lazy">
-          <div class="atlas-card-body">
-            <span class="atlas-card-tag">${poi.type}</span>
-            <h4 class="atlas-card-title">${poi.name}</h4>
-            <span class="atlas-card-coords">${poi.lat}° N / ${poi.lon}° E</span>
+        const c = document.createElement('div');
+        c.className = 'atlas-card';
+        c.onclick = () => openAtlasModal(poi);
+        c.innerHTML = `
+          <img src="https://lh3.googleusercontent.com/d/${poi.id}" alt="${poi.name}" loading="lazy">
+          <div class="atlas-card-info">
+            <span class="atlas-card-type">${poi.type}</span>
+            <div class="atlas-card-title">${poi.name}</div>
+            <div class="atlas-card-sub">${poi.lat}° N / ${poi.lon}° E</div>
           </div>
         `;
-        grid.appendChild(card);
+        grid.appendChild(c);
       });
     }
 
     function filtrerAtlas(cat) {
-      currentFilter = cat;
-      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      currentAtlasFilter = cat;
+      document.querySelectorAll('.atlas-filter-btn').forEach(b => b.classList.remove('active'));
       event.target.classList.add('active');
-      appliquerFiltres();
+      applyAtlasFilters();
     }
 
-    function appliquerFiltres() {
-      const query = document.getElementById('atlasSearchInput').value.toLowerCase().trim();
+    function applyAtlasFilters() {
+      const q = document.getElementById('atlasSearchInput').value.toLowerCase().trim();
       const filtered = MOON_POIS.filter(poi => {
-        const matchCat = (currentFilter === 'all' || poi.cat === currentFilter);
-        const matchText = poi.name.toLowerCase().includes(query) || poi.type.toLowerCase().includes(query);
+        const matchCat = (currentAtlasFilter === 'all' || poi.cat === currentAtlasFilter);
+        const matchText = poi.name.toLowerCase().includes(q) || poi.type.toLowerCase().includes(q);
         return matchCat && matchText;
       });
       renderAtlas(filtered);
     }
 
-    document.getElementById('atlasSearchInput').addEventListener('input', appliquerFiltres);
+    document.getElementById('atlasSearchInput').addEventListener('input', applyAtlasFilters);
 
-    function ouvrirModal(poi) {
+    function openAtlasModal(poi) {
       document.getElementById('modalTitle').textContent = poi.name;
-      document.getElementById('modalCoords').textContent = `Coordonnées lunaires : Latitude ${poi.lat}° | Longitude ${poi.lon}°`;
-      document.getElementById('modalDesc').textContent = `Formation de type : ${poi.type}. Prise de vue orbitale à haute résolution répertoriée dans la cartographie globale de la Lune.`;
+      document.getElementById('modalCoords').textContent = `Latitude : ${poi.lat}° • Longitude : ${poi.lon}°`;
+      document.getElementById('modalDesc').textContent = `Type : ${poi.type}. Imagerie orbitale à haute résolution répertoriée dans la cartographie globale.`;
       document.getElementById('modalImg').src = `https://lh3.googleusercontent.com/d/${poi.id}`;
       document.getElementById('atlasModal').classList.add('active');
     }
 
     function fermerModal(e) {
-      if (e.target.id === 'atlasModal') {
-        document.getElementById('atlasModal').classList.remove('active');
-      }
+      if (e.target.id === 'atlasModal') fermerModalDirect();
     }
-
     function fermerModalDirect() {
       document.getElementById('atlasModal').classList.remove('active');
     }
 
-    // Initialisation au chargement
     renderAtlas(MOON_POIS);
   </script>
-
 </body>
 </html>
