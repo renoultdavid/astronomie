@@ -69,6 +69,54 @@ body {
   color: var(--text-main);
 }
 
+/* BOUTON MAISON (ACCUEIL GÉNÉRAL) */
+.btn-home {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50% !important;
+  padding: 0 !important;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-home:hover {
+  color: var(--gold-accent);
+  border-color: var(--gold-accent);
+  background: rgba(245, 158, 11, 0.12) !important;
+  transform: scale(1.05);
+}
+
+/* BOUTON PLEIN ÉCRAN */
+.btn-fullscreen {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-muted);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+}
+
+.btn-fullscreen:hover {
+  color: var(--cyan-accent);
+  border-color: var(--cyan-accent);
+  background: rgba(56, 189, 248, 0.1);
+}
+
 .fiche-container {
   max-width: 1080px;
   margin: 0 auto;
@@ -150,13 +198,13 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 16px;
   margin-bottom: 1.5rem;
-  align-items: center; /* Centre le conteneur */
+  align-items: center;
 }
 
 .media-grid-2 img, .grid-duo img {
   width: 100%;
   height: auto;
-  align-self: center; /* Forçage Safari pour centrer verticalement */
+  align-self: center;
   border-radius: 8px;
   border: 1px solid var(--border-subtle);
   display: block;
@@ -232,7 +280,7 @@ body {
   margin-bottom: 1rem;
 }
 
-/* BOÎTE DÉROULANTE AVEC ASCENSEUR INTERNE (.box-container) */
+/* BOÎTE DÉROULANTE AVEC ASCENSEUR INTERNE */
 .box-container {
   width: 100%;
   margin: 1.8rem 0;
@@ -376,27 +424,4 @@ body {
   .media-grid-2, .grid-duo { 
     grid-template-columns: 1fr; 
   }
-}
-/* Bouton plein écran discret */
-.btn-fullscreen {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: var(--text-muted);
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-family: 'Cinzel', serif;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.3s ease;
-}
-
-.btn-fullscreen:hover {
-  color: var(--cyan-accent);
-  border-color: var(--cyan-accent);
-  background: rgba(56, 189, 248, 0.1);
 }
