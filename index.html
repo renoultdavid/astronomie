@@ -1455,8 +1455,14 @@
 
     function navigateBack() {
       if (navigationStack.length > 1) {
-        navigationStack.pop();
+        const currentView = navigationStack.pop();
         const previousView = navigationStack[navigationStack.length - 1];
+
+        // Coupe le moteur 3D et libère la mémoire graphique
+        if (currentView === 'planetarium') {
+          const frame = document.getElementById('planetarium-frame');
+          if (frame) frame.src = '';
+        }
 
         document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
         document.getElementById('view-' + previousView).classList.add('active');
