@@ -152,6 +152,309 @@
     .app-view.active {
       display: block;
     }
+
+    /* VUE 1 : FRESQUE PORTAIL 16/9 */
+    #view-portal {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: #000000;
+      overflow: hidden;
+    }
+    #view-portal.active {
+      display: flex;
+    }
+
+    .portal-container {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      width: min(100vw, calc((100vh - 52px) * (16 / 9)));
+      height: min(calc(100vh - 52px), calc(100vw * (9 / 16)));
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000000;
+    }
+
+    .space-canvas {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      transition: filter 0.6s ease;
+    }
+
+    body.drawer-open .space-canvas {
+      filter: brightness(0.45) blur(4px);
+    }
+
+    .cosmic-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(2, 6, 23, 0) 0%, rgba(2, 6, 23, 0.45) 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* BALISES ET POINTS CLIQUABLES */
+    .hotspot {
+      position: absolute;
+      z-index: 20;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hotspot.reverse {
+      flex-direction: row-reverse;
+    }
+
+    .hotspot:hover {
+      transform: translate(-50%, -50%) scale(1.08);
+      z-index: 30;
+    }
+
+    .pulse-anchor {
+      position: relative;
+      width: clamp(18px, 1.8vw, 24px);
+      height: clamp(18px, 1.8vw, 24px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .core-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 0 10px #ffffff;
+      position: relative;
+      z-index: 2;
+    }
+
+    .pulse-ring {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: breathe 3.6s infinite cubic-bezier(0.4, 0, 0.6, 1);
+    }
+
+    .pulse-ring-1 {
+      width: 100%;
+      height: 100%;
+      border: 1.5px solid rgba(255, 255, 255, 0.75);
+    }
+
+    .pulse-ring-2 {
+      width: 165%;
+      height: 165%;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      animation-delay: 0.7s;
+    }
+
+    .label-pill {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.58rem, 0.85vw, 0.78rem);
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: clamp(5px, 0.6vw, 8px) clamp(12px, 1.2vw, 18px);
+      border-radius: 30px;
+      background: rgba(10, 15, 29, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: rgba(255, 255, 255, 0.95);
+      white-space: nowrap;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.65), 0 0 15px rgba(255, 255, 255, 0.08);
+      transition: all 0.3s ease;
+      animation: pill-glow 3.6s infinite ease-in-out;
+    }
+
+    .hotspot:hover .label-pill {
+      background: rgba(15, 23, 42, 0.95);
+      border-color: rgba(255, 255, 255, 0.7);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.45);
+      color: #ffffff;
+    }
+
+    .theme-solar .core-dot { background: #ffd166; box-shadow: 0 0 10px #ffd166; }
+    .theme-solar .pulse-ring { border-color: rgba(255, 209, 102, 0.85); }
+    .theme-solar .label-pill { border-color: rgba(255, 209, 102, 0.4); }
+
+    .theme-nebula .core-dot { background: #f43f5e; box-shadow: 0 0 10px #f43f5e; }
+    .theme-nebula .pulse-ring { border-color: rgba(244, 63, 94, 0.85); }
+    .theme-nebula .label-pill { border-color: rgba(244, 63, 94, 0.4); }
+
+    .theme-open .core-dot { background: #38bdf8; box-shadow: 0 0 10px #38bdf8; }
+    .theme-open .pulse-ring { border-color: rgba(56, 189, 248, 0.85); }
+    .theme-open .label-pill { border-color: rgba(56, 189, 248, 0.4); }
+
+    .theme-globular .core-dot { background: #a78bfa; box-shadow: 0 0 10px #a78bfa; }
+    .theme-globular .pulse-ring { border-color: rgba(167, 139, 250, 0.85); }
+    .theme-globular .label-pill { border-color: rgba(167, 139, 250, 0.4); }
+
+    .theme-galaxy .core-dot { background: #67e8f9; box-shadow: 0 0 10px #67e8f9; }
+    .theme-galaxy .pulse-ring { border-color: rgba(103, 232, 249, 0.85); }
+    .theme-galaxy .label-pill { border-color: rgba(103, 232, 249, 0.4); }
+
+    .theme-stars .core-dot { background: #f8fafc; box-shadow: 0 0 10px #f8fafc; }
+    .theme-stars .pulse-ring { border-color: rgba(248, 250, 252, 0.85); }
+    .theme-stars .label-pill { border-color: rgba(248, 250, 252, 0.4); }
+
+    @keyframes breathe {
+      0%, 100% { transform: scale(0.85); opacity: 0.35; }
+      50% { transform: scale(1.35); opacity: 0.95; }
+    }
+
+    @keyframes pill-glow {
+      0%, 100% { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 10px rgba(255, 255, 255, 0.05); }
+      50% { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 22px rgba(255, 255, 255, 0.25); }
+    }
+
+    /* VOLET LATÉRAL (DRAWER) */
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 7, 18, 0.65);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      z-index: 1040;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .drawer-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .drawer {
+      position: fixed;
+      top: 52px;
+      right: 0;
+      width: 440px;
+      max-width: 90vw;
+      height: calc(100% - 52px);
+      background: rgba(11, 17, 33, 0.96);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-left: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: -15px 0 45px rgba(0, 0, 0, 0.85);
+      z-index: 1050;
+      transform: translateX(100%);
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow-y: auto;
+      padding: 1.5rem 2rem 3rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .drawer.active {
+      transform: translateX(0);
+    }
+
+    .close-btn {
+      align-self: flex-end;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #94a3b8;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: all 0.25s ease;
+    }
+    .close-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.25);
+      transform: rotate(90deg);
+    }
+
+    .drawer-badge {
+      display: inline-block;
+      align-self: flex-start;
+      margin-top: 0.8rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #93c5fd;
+      border: 1px solid rgba(147, 197, 253, 0.25);
+    }
+
+    .drawer-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      color: #ffffff;
+      margin-top: 0.6rem;
+      line-height: 1.3;
+    }
+
+    .drawer-img-container {
+      width: 100%;
+      height: 190px;
+      margin: 1.2rem 0;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: #0f172a;
+    }
+
+    .drawer-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .drawer-desc {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: #cbd5e1;
+      font-weight: 300;
+      margin-bottom: 2rem;
+      flex-grow: 1;
+    }
+
+    .launch-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      padding: 0.9rem 1.5rem;
+      background: linear-gradient(135deg, #ffffff, #cbd5e1);
+      color: #050814;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border-radius: 40px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.25);
+      transition: all 0.3s ease;
+    }
+    .launch-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(255, 255, 255, 0.45);
+      background: #ffffff;
+      color: #000000;
+    }
   </style>
 </head>
 <body>
@@ -173,14 +476,78 @@
   <!-- LES ÉCRANS DU SITE -->
   <main id="views-container">
 
-    <!-- VUE 1 : PORTAIL GÉNÉRAL -->
+    <!-- VUE 1 : PORTAIL GÉNÉRAL (ATLAS CÉLESTE) -->
     <section id="view-portal" class="app-view active">
-      <div style="padding: 3rem; text-align: center;">
-        <h1 style="font-family:'Cinzel', serif; font-size:2rem; margin-bottom:1rem;">ATLAS CÉLESTE</h1>
-        <p style="color:#94a3b8; margin-bottom:2rem;">Portail d'exploration astronomique</p>
-        <button onclick="goToView('systeme-solaire')" style="padding:12px 24px; border-radius:30px; background:#38bdf8; color:#020617; font-weight:700; border:none; cursor:pointer;">
-          Explorer le Système Solaire →
-        </button>
+      <div class="portal-container" id="portalContainer">
+        <img 
+          id="spaceBg" 
+          class="space-canvas" 
+          src="https://lh3.googleusercontent.com/d/1jKt4QY5rQ5yBLQEoE2jbIT_jbcM0IZ9S=s2560" 
+          alt="Cosmos profond avec Saturne et nébuleuses"
+          onerror="this.src='https://drive.google.com/thumbnail?id=1jKt4QY5rQ5yBLQEoE2jbIT_jbcM0IZ9S&sz=w2560';"
+        />
+        
+        <div class="cosmic-overlay"></div>
+
+        <!-- 1. Système Solaire -->
+        <div class="hotspot theme-solar" style="top: 78%; left: 24%;" onclick="openPanel('solar')">
+          <div class="pulse-anchor">
+            <div class="pulse-ring pulse-ring-1"></div>
+            <div class="pulse-ring pulse-ring-2"></div>
+            <div class="core-dot"></div>
+          </div>
+          <div class="label-pill">Le monde de notre système solaire</div>
+        </div>
+
+        <!-- 2. Nébuleuses -->
+        <div class="hotspot theme-nebula" style="top: 28%; left: 19%;" onclick="openPanel('nebula')">
+          <div class="pulse-anchor">
+            <div class="pulse-ring pulse-ring-1"></div>
+            <div class="pulse-ring pulse-ring-2"></div>
+            <div class="core-dot"></div>
+          </div>
+          <div class="label-pill">Le monde des nébuleuses</div>
+        </div>
+
+        <!-- 3. Amas Ouverts -->
+        <div class="hotspot theme-open reverse" style="top: 21%; left: 47%;" onclick="openPanel('open_cluster')">
+          <div class="pulse-anchor">
+            <div class="pulse-ring pulse-ring-1"></div>
+            <div class="pulse-ring pulse-ring-2"></div>
+            <div class="core-dot"></div>
+          </div>
+          <div class="label-pill">Le monde des amas ouverts</div>
+        </div>
+
+        <!-- 4. Amas Globulaires -->
+        <div class="hotspot theme-globular reverse" style="top: 45%; left: 66%;" onclick="openPanel('globular_cluster')">
+          <div class="pulse-anchor">
+            <div class="pulse-ring pulse-ring-1"></div>
+            <div class="pulse-ring pulse-ring-2"></div>
+            <div class="core-dot"></div>
+          </div>
+          <div class="label-pill">Le monde des amas globulaires</div>
+        </div>
+
+        <!-- 5. Galaxies -->
+        <div class="hotspot theme-galaxy reverse" style="top: 15%; left: 77.5%;" onclick="openPanel('galaxy')">
+          <div class="pulse-anchor">
+            <div class="pulse-ring pulse-ring-1"></div>
+            <div class="pulse-ring pulse-ring-2"></div>
+            <div class="core-dot"></div>
+          </div>
+          <div class="label-pill">Le monde des galaxies</div>
+        </div>
+
+        <!-- 6. Étoiles -->
+        <div class="hotspot theme-stars" style="top: 75%; left: 72%;" onclick="openPanel('stars')">
+          <div class="pulse-anchor">
+            <div class="pulse-ring pulse-ring-1"></div>
+            <div class="pulse-ring pulse-ring-2"></div>
+            <div class="core-dot"></div>
+          </div>
+          <div class="label-pill">Le monde des étoiles</div>
+        </div>
       </div>
     </section>
 
@@ -205,8 +572,110 @@
 
   </main>
 
+  <!-- VOLET LATÉRAL DE L'ATLAS CÉLESTE -->
+  <div class="drawer-backdrop" id="backdrop" onclick="closePanel()"></div>
+  <aside class="drawer" id="drawer">
+    <button class="close-btn" onclick="closePanel()" title="Fermer">✕</button>
+    <span class="drawer-badge" id="drawerBadge">Exploration</span>
+    <h2 class="drawer-title" id="drawerTitle">Titre</h2>
+    <div class="drawer-img-container">
+      <img id="drawerImage" class="drawer-img" src="" alt="Aperçu Céleste" />
+    </div>
+    <p class="drawer-desc" id="drawerText">Description...</p>
+    <button id="drawerBtn" class="launch-btn" onclick="launchSelectedWorld()">
+      <span>Décollage</span>
+      <span style="font-size:1.1rem;">↗</span>
+    </button>
+  </aside>
+
   <script>
-    /* HISTORIQUE DE NAVIGATION INTERNE */
+    /* DONNÉES DES MONDES */
+    const WORLDS = {
+      solar: {
+        badge: "Système Planétaire",
+        title: "Le Monde de notre Système Solaire",
+        image: "https://lh3.googleusercontent.com/d/1e0j2BVS8oQ-6mHr4NAjvxzR3IU0KWurX=s1200",
+        fallback: "https://drive.google.com/thumbnail?id=1e0j2BVS8oQ-6mHr4NAjvxzR3IU0KWurX&sz=w1200",
+        text: "Des anneaux majestueux de Saturne aux confins de la ceinture de Kuiper, parcourez la diversité géologique et atmosphérique des mondes qui gravitent autour de notre étoile mère.",
+        viewId: "systeme-solaire"
+      },
+      nebula: {
+        badge: "Milieu Interstellaire",
+        title: "Le Monde des Nébuleuses",
+        image: "https://lh3.googleusercontent.com/d/1Zf6RpCGdJEwvDQ1d9sl_L4laCRIexwyL=s1200",
+        fallback: "https://drive.google.com/thumbnail?id=1Zf6RpCGdJEwvDQ1d9sl_L4laCRIexwyL&sz=w1200",
+        text: "Berceaux d'étoiles et rémanents cataclysmiques de supernovae, les nébuleuses sculptent le vide cosmique de voiles incandescents de gaz ionisé et de poussières sombres.",
+        viewId: "nebuleuses"
+      },
+      open_cluster: {
+        badge: "Stellogenèse Récente",
+        title: "Le Monde des Amas Ouverts",
+        image: "https://lh3.googleusercontent.com/d/1FrBH0aeEt5jIMnkdPifAkOeoEO_HznQB=s1200",
+        fallback: "https://drive.google.com/thumbnail?id=1FrBH0aeEt5jIMnkdPifAkOeoEO_HznQB&sz=w1200",
+        text: "Congrégations de centaines de jeunes étoiles nées ensemble dans le disque galactique, liées par la gravitation avant de se disperser au gré des révolutions de la Voie Lactée.",
+        viewId: "amas-ouverts"
+      },
+      globular_cluster: {
+        badge: "Reliques Cosmiques",
+        title: "Le Monde des Amas Globulaires",
+        image: "https://lh3.googleusercontent.com/d/1gQv-U4jXmdG7q4MjF56zHYv6hoTisE-c=s1200",
+        fallback: "https://drive.google.com/thumbnail?id=1gQv-U4jXmdG7q4MjF56zHYv6hoTisE-c&sz=w1200",
+        text: "Sphères denses regroupant jusqu'à un million d'étoiles primitives dans le halo galactique, véritables témoins fossilisés des premiers âges de l'Univers.",
+        viewId: "amas-globulaires"
+      },
+      galaxy: {
+        badge: "Échelle Extragalactique",
+        title: "Le Monde des Galaxies",
+        image: "https://lh3.googleusercontent.com/d/1zvAq7KNyQxvSAB7aH37WYKzYvbZ2hyTN=s1200",
+        fallback: "https://drive.google.com/thumbnail?id=1zvAq7KNyQxvSAB7aH37WYKzYvbZ2hyTN&sz=w1200",
+        text: "Îlots d'univers rassemblant des centaines de milliards de soleils. Explorez la dynamique des bras spiraux majestueux et l'activité des trous noirs supermassifs centraux.",
+        viewId: "galaxies"
+      },
+      stars: {
+        badge: "Spectroscopie Pure",
+        title: "Le Monde des Étoiles",
+        image: "https://lh3.googleusercontent.com/d/1nFWVD2p3fb8PVfNI79uX1YRFQbcETwfX=s1200",
+        fallback: "https://drive.google.com/thumbnail?id=1nFWVD2p3fb8PVfNI79uX1YRFQbcETwfX&sz=w1200",
+        text: "Hors de l'atmosphère terrestre, les étoiles brillent d'un éclat pur et immuable, sans la moindre scintillation, révélant la physique intime des réacteurs thermonucléaires.",
+        viewId: "etoiles"
+      }
+    };
+
+    let activeWorldKey = null;
+    const drawer = document.getElementById('drawer');
+    const backdrop = document.getElementById('backdrop');
+    const drawerImg = document.getElementById('drawerImage');
+
+    function openPanel(key) {
+      const data = WORLDS[key];
+      if (!data) return;
+      activeWorldKey = key;
+
+      document.getElementById('drawerBadge').innerText = data.badge;
+      document.getElementById('drawerTitle').innerText = data.title;
+      drawerImg.onerror = function() { this.onerror = null; this.src = data.fallback; };
+      drawerImg.src = data.image;
+      document.getElementById('drawerText').innerText = data.text;
+
+      drawer.classList.add('active');
+      backdrop.classList.add('active');
+      document.body.classList.add('drawer-open');
+    }
+
+    function closePanel() {
+      drawer.classList.remove('active');
+      backdrop.classList.remove('active');
+      document.body.classList.remove('drawer-open');
+    }
+
+    function launchSelectedWorld() {
+      if (!activeWorldKey) return;
+      const data = WORLDS[activeWorldKey];
+      closePanel();
+      goToView(data.viewId);
+    }
+
+    /* GESTION DE LA NAVIGATION INTERNE */
     let navigationStack = ['portal'];
 
     function goToView(viewId) {
@@ -222,7 +691,7 @@
 
     function navigateBack() {
       if (navigationStack.length > 1) {
-        navigationStack.pop(); // Retire la vue actuelle
+        navigationStack.pop();
         const previousView = navigationStack[navigationStack.length - 1];
 
         document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
@@ -246,6 +715,10 @@
         backBtn.style.display = 'inline-flex';
         backBtn.innerText = '← Système Solaire';
         title.innerText = 'Exploration Planétaire';
+      } else {
+        backBtn.style.display = 'inline-flex';
+        backBtn.innerText = '← Atlas Céleste';
+        title.innerText = viewId.toUpperCase();
       }
     }
 
@@ -253,7 +726,7 @@
     function toggleFullScreen() {
       if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen().catch(err => {
-          console.warn("Plein écran non supporté ou bloqué :", err);
+          console.warn("Plein écran non supporté :", err);
         });
       } else {
         if (document.exitFullscreen) {
@@ -262,12 +735,16 @@
       }
     }
 
-    /* TOUCHE ÉCHAP POUR RECULER D'UN NIVEAU */
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && navigationStack.length > 1) {
-        navigateBack();
+      if (e.key === 'Escape') {
+        if (drawer.classList.contains('active')) {
+          closePanel();
+        } else if (navigationStack.length > 1) {
+          navigateBack();
+        }
       }
     });
   </script>
 </body>
+</html>
 </html>
