@@ -123,11 +123,13 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 16px;
   margin-bottom: 1.5rem;
-  align-items: center; /* Centre automatiquement l'image la plus courte sur toute la hauteur */
+  align-items: center; /* Centrage pour le conteneur */
 }
 
-.media-grid-2 img, .grid-duo img, .media-single img {
+.media-grid-2 img, .grid-duo img {
   width: 100%;
+  height: auto;
+  align-self: center; /* FORÇAGE SAFARI : oblige l'image à se caler au milieu vertical */
   border-radius: 8px;
   border: 1px solid var(--border-subtle);
   display: block;
