@@ -425,14 +425,11 @@ body {
     grid-template-columns: 1fr; 
   }
 }
-/* =========================================================
-   STYLE UNIVERSEL DES SOUS-TITRES (TRAIT DORÉ ESTOMPÉ)
-   Valable pour toutes les fiches (Planètes, Galaxies, etc.)
-========================================================= */
+/* S'APPLIQUE À ABSOLUMENT TOUS LES H2 DU SITE */
+h2,
 .section-heading,
 .section-title-fiche,
-.section-h2,
-h2.section-title {
+.section-h2 {
   font-family: 'Cinzel', serif;
   font-size: clamp(1.3rem, 2.2vw, 1.7rem);
   letter-spacing: 0.15em;
@@ -444,10 +441,10 @@ h2.section-title {
   gap: 14px;
 }
 
+h2::after,
 .section-heading::after,
 .section-title-fiche::after,
-.section-h2::after,
-h2.section-title::after {
+.section-h2::after {
   content: "";
   flex: 1;
   height: 1px;
