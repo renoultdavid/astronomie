@@ -425,3 +425,31 @@ body {
     grid-template-columns: 1fr; 
   }
 }
+/* =========================================================
+   STYLE UNIVERSEL DES SOUS-TITRES (TRAIT DORÉ ESTOMPÉ)
+   Valable pour toutes les fiches (Planètes, Galaxies, etc.)
+========================================================= */
+.section-heading,
+.section-title-fiche,
+.section-h2,
+h2.section-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #f8fafc;
+  margin: 4rem 0 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.section-heading::after,
+.section-title-fiche::after,
+.section-h2::after,
+h2.section-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.5), transparent);
+}
