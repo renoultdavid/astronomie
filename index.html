@@ -1429,9 +1429,14 @@
     /* CHARGEMENT DYNAMIQUE DES FICHES EN PLEIN ÉCRAN */
     function ouvrirFicheAstre(nomAstre) {
       const frame = document.getElementById('fiche-frame');
-      // Pointe vers le dossier fiches (ex: ./systeme-solaire/fiches/soleil.html)
       frame.src = `./systeme-solaire/fiches/${nomAstre}.html`;
-      goToView('fiche-' + nomAstre);
+      
+      // On affiche bien la section fiche-astre
+      goToView('fiche-astre');
+      
+      // On affiche le nom de l'astre dans la barre du haut
+      const title = document.getElementById('nav-title');
+      if (title) title.innerText = nomAstre.toUpperCase();
     }
 
     window.addEventListener('keydown', (e) => {
@@ -1467,7 +1472,7 @@
         if (currentView === 'planetarium') {
           const frame = document.getElementById('planetarium-frame');
           if (frame) frame.src = '';
-        } else if (currentView.startsWith('fiche-')) {
+        } else if (currentView === 'fiche-astre') {
           const ficheFrame = document.getElementById('fiche-frame');
           if (ficheFrame) ficheFrame.src = '';
         }
@@ -1502,11 +1507,9 @@
         backBtn.style.display = 'inline-flex';
         backBtn.innerText = '← Système Solaire';
         title.innerText = 'Planétarium 3D';
-      } else if (viewId.startsWith('fiche-')) {
-        const nom = viewId.replace('fiche-', '');
+      } else if (viewId === 'fiche-astre') {
         backBtn.style.display = 'inline-flex';
         backBtn.innerText = '← Système Solaire';
-        title.innerText = nom.toUpperCase();
       } else {
         backBtn.style.display = 'inline-flex';
         backBtn.innerText = '← Atlas Céleste';
