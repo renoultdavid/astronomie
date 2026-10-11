@@ -595,9 +595,16 @@
 
   <!-- BARRE SUPÉRIEURE DE NAVIGATION -->
   <header class="top-nav">
-    <a href="../" class="nav-back">← Atlas Céleste</a>
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <a href="https://renoultdavid.github.io/accueil/" class="btn-home" title="Accueil général">🏠</a>
+      <a href="../" class="nav-back">← Atlas Céleste</a>
+    </div>
+
     <div class="nav-brand">Système Solaire</div>
-    <div style="width: 110px;"></div>
+
+    <div style="display: flex; gap: 8px; align-items: center;">
+      <button class="btn-fullscreen" onclick="toggleFullScreen()" title="Plein écran">⛶ Plein écran</button>
+    </div>
   </header>
   <main class="container">
 
