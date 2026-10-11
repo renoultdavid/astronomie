@@ -1240,12 +1240,9 @@
       </div>
     </section>
 
-    <!-- VUE 3 : EXEMPLE FICHE ASTRE -->
-    <section id="view-astre-mercure" class="app-view">
-      <div style="padding: 3rem; text-align: center;">
-        <h1 style="font-family:'Cinzel', serif; font-size:2rem; margin-bottom:1rem; color:#38bdf8;">MERCURE</h1>
-        <p style="color:#94a3b8;">La planète de fer et de cratères</p>
-      </div>
+    <!-- VUE 3 : LECTEUR IMMERSIF DES FICHES D'ASTRES -->
+    <section id="view-fiche-astre" class="app-view" style="overflow: hidden;">
+      <iframe id="fiche-frame" src="" style="width: 100%; height: 100%; border: none; display: block; background: #020617;"></iframe>
     </section>
 
     <!-- VUE 4 : PLANÉTARIUM 3D INTÉGRÉ -->
@@ -1421,13 +1418,21 @@
         const pos = card.getAttribute('data-pos');
         if (pos === '0') {
           const astre = card.getAttribute('data-astre');
-          goToView('astre-' + astre);
+          ouvrirFicheAstre(astre);
         } else {
           currentCardIndex = index;
           updateCarousel();
         }
       });
     });
+
+    /* CHARGEMENT DYNAMIQUE DES FICHES EN PLEIN ÉCRAN */
+    function ouvrirFicheAstre(nomAstre) {
+      const frame = document.getElementById('fiche-frame');
+      // Pointe vers le dossier fiches (ex: ./systeme-solaire/fiches/soleil.html)
+      frame.src = `./systeme-solaire/fiches/${nomAstre}.html`;
+      goToView('fiche-' + nomAstre);
+    }
 
     window.addEventListener('keydown', (e) => {
       const ssView = document.getElementById('view-systeme-solaire');
@@ -1462,6 +1467,9 @@
         if (currentView === 'planetarium') {
           const frame = document.getElementById('planetarium-frame');
           if (frame) frame.src = '';
+        } else if (currentView.startsWith('fiche-')) {
+          const ficheFrame = document.getElementById('fiche-frame');
+          if (ficheFrame) ficheFrame.src = '';
         }
 
         document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
@@ -1494,10 +1502,11 @@
         backBtn.style.display = 'inline-flex';
         backBtn.innerText = '← Système Solaire';
         title.innerText = 'Planétarium 3D';
-      } else if (viewId.startsWith('astre-')) {
+      } else if (viewId.startsWith('fiche-')) {
+        const nom = viewId.replace('fiche-', '');
         backBtn.style.display = 'inline-flex';
         backBtn.innerText = '← Système Solaire';
-        title.innerText = 'Exploration Planétaire';
+        title.innerText = nom.toUpperCase();
       } else {
         backBtn.style.display = 'inline-flex';
         backBtn.innerText = '← Atlas Céleste';
