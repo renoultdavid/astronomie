@@ -1434,9 +1434,21 @@
       // On affiche bien la section fiche-astre
       goToView('fiche-astre');
       
+      // Table des noms d'affichage
+      const noms = {
+        terrelune: "TERRE & LUNE",
+        terre: "TERRE & LUNE",
+        venus: "VÉNUS",
+        geocroiseurs: "GÉOCROISEURS",
+        asteroides: "ASTÉROÏDES",
+        kuiper: "KUIPER & PLUTON"
+      };
+
       // On affiche le nom de l'astre dans la barre du haut
       const title = document.getElementById('nav-title');
-      if (title) title.innerText = nomAstre.toUpperCase();
+      if (title) {
+        title.innerText = noms[nomAstre] || nomAstre.toUpperCase();
+      }
     }
 
     window.addEventListener('keydown', (e) => {
