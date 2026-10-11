@@ -1,1 +1,1161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mercure — Le monde métallique des extrêmes</title>
 
+  <link rel="icon" type="image/jpeg" sizes="512x512" href="../../icon-512.jpeg">
+  <link rel="apple-touch-icon" href="../../icon-512.jpeg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../fiche.css">
+
+  <style>
+    /* STYLES SPÉCIFIQUES POUR L'EXPLORATEUR GÉOLOGIQUE */
+    .atlas-explorer {
+      background: #070d19;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 2rem 0 3.5rem;
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.7);
+    }
+
+    .atlas-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 1rem;
+    }
+
+    .atlas-filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .atlas-filter-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #94a3b8;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .atlas-filter-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    .atlas-filter-btn.active {
+      background: #2563eb;
+      border-color: #38bdf8;
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(37, 99, 235, 0.5);
+    }
+
+    .atlas-search {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 20px;
+      padding: 7px 16px;
+      color: #fff;
+      font-size: 0.8rem;
+      outline: none;
+      min-width: 220px;
+      font-family: inherit;
+    }
+
+    .atlas-search:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+    }
+
+    .atlas-counter {
+      font-size: 0.75rem;
+      color: #64748b;
+      margin-bottom: 1rem;
+      font-family: 'Share Tech Mono', monospace;
+    }
+
+    .atlas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+      gap: 12px;
+      max-height: 580px;
+      overflow-y: auto;
+      padding-right: 6px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(56, 189, 248, 0.4) transparent;
+    }
+
+    .atlas-card {
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.25s ease;
+      text-align: center;
+      padding: 6px;
+    }
+
+    .atlas-card:hover {
+      transform: translateY(-4px);
+      border-color: #38bdf8;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6), 0 0 12px rgba(56, 189, 248, 0.2);
+    }
+
+    .atlas-img-box {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #000;
+      margin-bottom: 6px;
+    }
+
+    .atlas-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .atlas-card:hover .atlas-img-box img {
+      transform: scale(1.08);
+    }
+
+    .atlas-card-title {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      line-height: 1.25;
+      margin-bottom: 3px;
+    }
+
+    .atlas-card-tag {
+      font-size: 0.62rem;
+      font-family: 'Share Tech Mono', monospace;
+      padding: 1px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .tag-crater { background: rgba(249, 115, 22, 0.15); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.3); }
+    .tag-mare { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+    .tag-valley { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+
+    /* MODALE / VISIONNEUSE GRAND FORMAT (LIGHTBOX) */
+    .atlas-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.88);
+      backdrop-filter: blur(10px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .atlas-modal {
+      background: #0b1120;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      border-radius: 14px;
+      max-width: 650px;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+      position: relative;
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      z-index: 10;
+    }
+
+    .modal-img-box {
+      width: 100%;
+      max-height: 440px;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-img-box img {
+      max-width: 100%;
+      max-height: 440px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .modal-details {
+      padding: 1.2rem 1.6rem;
+    }
+
+    .modal-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .modal-meta {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.75rem;
+      color: #38bdf8;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRE SUPÉRIEURE DE NAVIGATION -->
+  <nav class="fiche-nav">
+    <a href="../index.html">← Système Solaire</a>
+    <span style="font-family:'Cinzel',serif; font-size:0.9rem; letter-spacing:0.12em; text-transform:uppercase;">Mercure</span>
+    <a href="../planetarium.html" target="_blank" rel="noopener">🪐 Planétarium 3D</a>
+  </nav>
+
+  <main class="fiche-container">
+
+    <!-- HERO & INTRODUCTION GÉNÉRALE -->
+    <header class="hero-astro">
+      <h1 class="hero-title">Mercure</h1>
+      <p class="hero-sub">Le monde métallique des extrêmes</p>
+
+      <div class="caption-text" style="background: rgba(15, 23, 42, 0.65); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 12px; padding: clamp(1.2rem, 3vw, 2rem); margin-bottom: 2.5rem; text-align: justify; color: #cbd5e1; font-size: 0.95rem; line-height: 1.85;">
+        Sentinelle de fer calcinée par le Soleil, Mercure est la plus petite et la plus extrême des planètes du Système solaire. Dépourvue d'atmosphère pour adoucir son climat, elle endure un écart thermique vertigineux de plus de six cents degrés entre ses midis de plomb fondu et ses nuits cryogéniques. Sous sa surface balafrée d'escarpements géants nés du rétrécissement de son cœur métallique démesuré, ce monde calciné abrite pourtant de la glace d'eau éternelle au fond de cratères polaires plongés dans l'ombre perpétuelle. Verrouillée dans une singulière résonance gravitationnelle, sa course effrénée a également offert à la physique moderne la toute première confirmation expérimentale de la relativité générale d'Einstein. Un astre de paradoxes absolus qui brave en solitaire la proximité ardente de notre étoile.
+      </div>
+
+      <!-- PHOTO PRINCIPALE MERCURE -->
+      <div class="hero-img-box" style="aspect-ratio: auto; border-color: rgba(56, 189, 248, 0.4); box-shadow: 0 0 50px rgba(0,0,0,0.9), 0 0 35px rgba(56, 189, 248, 0.2);">
+        <img src="https://lh3.googleusercontent.com/d/1J4GrZuFlDDxzSUGGDR1DAn2ceg1G0pvK=s1600" alt="Mercure en vraies couleurs">
+      </div>
+    </header>
+
+    <!-- MODULE INTERACTIF : ARCHITECTURE ET ÉVOLUTION DE MERCURE -->
+    <section>
+      <div id="infographie-mercure" style="font-family: system-ui, -apple-system, sans-serif; background: #0b1120; color: #e2e8f0; padding: 10px 14px; border-radius: 10px; width: 100%; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.6);">
+        <header style="text-align: center; margin: 0 0 8px 0;">
+          <h2 style="color: #f8fafc; margin: 0; font-size: 1.25rem; line-height: 1.2;">Mercure : le monde métallique des extrêmes</h2>
+          <p style="color: #94a3b8; margin: 4px 0 0 0; font-size: 0.8rem;">Cœur ferreux démesuré, contraction globale et résonance spin-orbite 3:2</p>
+        </header>
+
+        <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 0 0 10px 0;">
+          <button onclick="changerOngletMercure('structure')" id="btn-mer-structure" style="padding: 6px 14px; border-radius: 6px; border: none; background: #2563eb; color: #fff; font-weight: 600; cursor: pointer; font-size: 0.8rem;">1. Structure interne & Cœur colossal</button>
+          <button onclick="changerOngletMercure('geologie')" id="btn-mer-geologie" style="padding: 6px 14px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.8rem;">2. Géologie, Caloris & Glace polaire</button>
+          <button onclick="changerOngletMercure('orbite')" id="btn-mer-orbite" style="padding: 6px 14px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.8rem;">3. Résonance 3:2 & Températures</button>
+        </div>
+
+        <!-- ONGLET 1 -->
+        <div id="onglet-mer-structure" style="margin: 0; padding: 0;">
+          <div style="background: #070d19; border: 1px solid #1e293b; border-radius: 6px; padding: 6px 8px; margin-bottom: 8px; overflow-x: auto;">
+            <svg viewBox="0 0 920 230" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; aspect-ratio: 920 / 230; min-width: 700px; display: block; margin: 0;">
+              <defs>
+                <radialGradient id="gradNoyauFer" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#ffffff"/>
+                  <stop offset="40%" stop-color="#cbd5e1"/>
+                  <stop offset="85%" stop-color="#64748b"/>
+                  <stop offset="100%" stop-color="#334155"/>
+                </radialGradient>
+                <radialGradient id="gradManteauSil" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#b45309"/>
+                  <stop offset="100%" stop-color="#78350f"/>
+                </radialGradient>
+              </defs>
+
+              <text x="460" y="16" text-anchor="middle" fill="#94a3b8" font-size="11" letter-spacing="1">ANOMALIE DE STRUCTURE : MERCURE FACE À LA TERRE</text>
+
+              <g transform="translate(230, 118)">
+                <text x="0" y="-82" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="bold">Mercure (Rayon : 2 440 km)</text>
+                <circle cx="0" cy="0" r="72" fill="#475569" stroke="#94a3b8" stroke-width="1.2"/>
+                <circle cx="0" cy="0" r="70" fill="url(#gradManteauSil)"/>
+                <circle cx="0" cy="0" r="61" fill="url(#gradNoyauFer)"/>
+                <circle cx="0" cy="0" r="30" fill="#94a3b8" opacity="0.8"/>
+                <line x1="0" y1="0" x2="52" y2="-32" stroke="#38bdf8" stroke-width="1.5"/>
+                <circle cx="52" cy="-32" r="2.5" fill="#38bdf8"/>
+                <text x="56" y="-36" fill="#38bdf8" font-size="8.5" font-weight="bold">Noyau métallique : 85 % du rayon</text>
+                <line x1="0" y1="0" x2="-62" y2="34" stroke="#f59e0b" stroke-width="1.2"/>
+                <text x="-66" y="46" text-anchor="end" fill="#f59e0b" font-size="8">Manteau silicaté : ~400 km seulement</text>
+                <text x="0" y="88" text-anchor="middle" fill="#cbd5e1" font-size="8.5">Noyau = ~70 % de la masse totale</text>
+              </g>
+
+              <line x1="460" y1="30" x2="460" y2="205" stroke="#1e293b" stroke-width="1.5"/>
+
+              <g transform="translate(680, 118)">
+                <text x="0" y="-82" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="bold">Terre (Proportions moyennes)</text>
+                <circle cx="0" cy="0" r="72" fill="url(#gradManteauSil)" stroke="#94a3b8" stroke-width="1.2"/>
+                <circle cx="0" cy="0" r="39" fill="url(#gradNoyauFer)"/>
+                <circle cx="0" cy="0" r="14" fill="#94a3b8" opacity="0.8"/>
+                <line x1="0" y1="0" x2="34" y2="-20" stroke="#4ade80" stroke-width="1.5"/>
+                <circle cx="34" cy="-20" r="2.5" fill="#4ade80"/>
+                <text x="38" y="-24" fill="#4ade80" font-size="8.5" font-weight="bold">Noyau terrestre : ~54 % du rayon</text>
+                <text x="0" y="52" text-anchor="middle" fill="#cbd5e1" font-size="8">Manteau silicaté épais et prépondérant</text>
+                <text x="0" y="88" text-anchor="middle" fill="#94a3b8" font-size="8.5">Noyau = ~32 % de la masse totale</text>
+              </g>
+            </svg>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 8px 10px; overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: left; color: #ffffff;">
+              <thead>
+                <tr style="border-bottom: 1.5px solid #64748b; font-weight: bold;">
+                  <th style="padding: 5px 6px;">Paramètre</th>
+                  <th style="padding: 5px 6px;">Valeur physique</th>
+                  <th style="padding: 5px 6px;">Comparaison Terre</th>
+                  <th style="padding: 5px 6px;">Implication astrophysique</th>
+                </tr>
+              </thead>
+              <tbody style="line-height: 1.4;">
+                <tr style="border-bottom: 1px solid #334155;">
+                  <td style="padding: 5px 6px; color: #38bdf8; font-weight: bold;">Rayon équatorial</td>
+                  <td style="padding: 5px 6px;">2 439,7 km</td>
+                  <td style="padding: 5px 6px;">0,383 Terre (≈ 1,4 × Lune)</td>
+                  <td style="padding: 5px 6px;">Plus petite planète ; inférieure aux lunes Ganymède et Titan.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #334155;">
+                  <td style="padding: 5px 6px; color: #4ade80; font-weight: bold;">Densité moyenne</td>
+                  <td style="padding: 5px 6px;">5,427 g/cm³</td>
+                  <td style="padding: 5px 6px;">98,4 % de celle de la Terre</td>
+                  <td style="padding: 5px 6px;">Densité décompressée record : l'astre tellurique intrinsèquement le plus dense.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #334155;">
+                  <td style="padding: 5px 6px; color: #fbbf24; font-weight: bold;">Champ magnétique</td>
+                  <td style="padding: 5px 6px;">~300 nT à l'équateur (dipôle)</td>
+                  <td style="padding: 5px 6px;">~1 % du champ terrestre</td>
+                  <td style="padding: 5px 6px;">Preuve d'une dynamo active : le noyau externe de fer liquide est encore fluide.</td>
+                </tr>
+                <tr>
+                  <td style="padding: 5px 6px; color: #f472b6; font-weight: bold;">Atmosphère / Exosphère</td>
+                  <td style="padding: 5px 6px;">Pression &lt; 10⁻¹⁴ bar (quasi-vide)</td>
+                  <td style="padding: 5px 6px;">Négligeable (exosphère pure)</td>
+                  <td style="padding: 5px 6px;">Atomes arrachés au sol par le vent solaire et les micrométéorites.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ONGLET 2 -->
+        <div id="onglet-mer-geologie" style="display: none; margin: 0; padding: 0;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 8px;">
+            <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
+              <div style="color: #fb923c; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Contraction globale : Escarpements lobés</div>
+              <div style="background: #0f172a; border-radius: 4px; padding: 4px; margin-bottom: 6px;">
+                <svg viewBox="0 0 280 85" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
+                  <g transform="translate(140, 42)">
+                    <path d="M -110 20 L -20 20 L 40 -15 L 110 -15" fill="none" stroke="#64748b" stroke-width="2"/>
+                    <path d="M -30 20 L 30 -15" fill="none" stroke="#ef4444" stroke-width="2.5"/>
+                    <line x1="-80" y1="0" x2="-40" y2="0" stroke="#facc15" stroke-width="1.8"/>
+                    <polygon points="-38,0 -46,-3 -46,3" fill="#facc15"/>
+                    <line x1="80" y1="-5" x2="40" y2="-5" stroke="#facc15" stroke-width="1.8"/>
+                    <polygon points="38,-5 46,-8 46,-2" fill="#facc15"/>
+                    <text x="0" y="32" text-anchor="middle" fill="#94a3b8" font-size="8">Faille inverse : falaise jusqu'à 3 km de haut</text>
+                  </g>
+                </svg>
+              </div>
+              <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.3;">
+                En refroidissant, l'immense noyau s'est rétracté. La croûte s'est rompue sous la compression, créant des falaises de chevauchement géantes (<strong>Discovery Rupes</strong>). Le rayon a diminué de <strong>5 à 7 km</strong>.
+              </p>
+            </div>
+
+            <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
+              <div style="color: #38bdf8; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Le méga-impact du Bassin Caloris</div>
+              <div style="background: #0f172a; border-radius: 4px; padding: 4px; margin-bottom: 6px;">
+                <svg viewBox="0 0 280 85" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
+                  <g transform="translate(140, 42)">
+                    <ellipse cx="0" cy="0" rx="65" ry="24" fill="#1e293b" stroke="#38bdf8" stroke-width="1.4" stroke-dasharray="4,2"/>
+                    <ellipse cx="0" cy="0" rx="42" ry="16" fill="#0f172a" stroke="#60a5fa" stroke-width="1.6"/>
+                    <ellipse cx="0" cy="0" rx="18" ry="7" fill="#b45309" opacity="0.6"/>
+                    <circle cx="0" cy="0" r="3" fill="#ffffff"/>
+                    <text x="0" y="34" text-anchor="middle" fill="#94a3b8" font-size="8">Bassin multi-anneaux (Ø ~1 550 km)</text>
+                  </g>
+                </svg>
+              </div>
+              <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.3;">
+                Créé il y a ~3,9 Ga par un impacteur de 100 km. Les ondes de choc ont convergé aux <strong>antipodes</strong>, y fracturant le relief en un paysage chaotique de monticules désordonnés (<em>weird terrain</em>).
+              </p>
+            </div>
+
+            <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px; grid-column: 1 / -1;">
+              <div style="color: #67e8f9; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Le paradoxe de la glace d'eau aux pôles</div>
+              <div style="background: #0f172a; border-radius: 4px; padding: 6px; margin-bottom: 6px;">
+                <svg viewBox="0 0 600 65" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
+                  <g transform="translate(300, 32)">
+                    <line x1="-260" y1="-18" x2="260" y2="-18" stroke="#facc15" stroke-width="1.5" stroke-dasharray="6,3"/>
+                    <text x="-200" y="-22" fill="#facc15" font-size="7.5">Rayonnement rasant (axe incliné de seulement 0,034°)</text>
+                    <path d="M -100 -12 C -60 -12 -50 18 0 18 C 50 18 60 -12 100 -12" fill="none" stroke="#64748b" stroke-width="2"/>
+                    <path d="M -40 18 Q 0 16 40 18 Z" fill="#38bdf8"/>
+                    <circle cx="0" cy="17" r="2" fill="#ffffff"/>
+                    <text x="0" y="8" text-anchor="middle" fill="#67e8f9" font-size="8" font-weight="bold">Piège thermique éternel : T ≈ -180 °C (glace pure cométaire)</text>
+                  </g>
+                </svg>
+              </div>
+              <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.35;">
+                Mercure a une inclinaison d'axe quasi nulle : le Soleil reste à l'horizon aux pôles. Le fond des cratères profonds (<em>Chao Meng-Fu</em>, <em>Prokofiev</em>) ne voit <strong>jamais</strong> la lumière. De la glace d'eau pure cométaire y reste éternellement gelée à -180 °C sous une couche protectrice d'hydrocarbures sombres.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ONGLET 3 -->
+        <div id="onglet-mer-orbite" style="display: none; margin: 0; padding: 0;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 8px;">
+            <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
+              <div style="color: #a78bfa; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">La résonance spin-orbite 3:2</div>
+              <div style="background: #0f172a; border-radius: 4px; padding: 4px; margin-bottom: 6px;">
+                <svg viewBox="0 0 280 85" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
+                  <g transform="translate(140, 42)">
+                    <ellipse cx="-15" cy="0" rx="90" ry="34" fill="none" stroke="#475569" stroke-width="1.2"/>
+                    <circle cx="-50" cy="0" r="9" fill="#facc15"/>
+                    <text x="-50" y="-14" text-anchor="middle" fill="#facc15" font-size="7.5">Périhélie (46 M km)</text>
+                    <circle cx="-105" cy="0" r="4.5" fill="#94a3b8"/>
+                    <circle cx="75" cy="0" r="4.5" fill="#94a3b8"/>
+                    <text x="75" y="-10" text-anchor="middle" fill="#94a3b8" font-size="7">Aphélie (70 M km)</text>
+                    <text x="0" y="32" text-anchor="middle" fill="#c084fc" font-size="8" font-weight="bold">3 rotations sur son axe pour 2 révolutions</text>
+                  </g>
+                </svg>
+              </div>
+              <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.3;">
+                Verrouillée par marée en <strong>résonance 3:2</strong> : rotation en <strong>58,6 jours</strong> et révolution en <strong>88 jours</strong>. Conséquence : un jour solaire (lever à lever au même point) dure <strong>176 jours terrestres</strong>, soit deux années mercuriennes.
+              </p>
+            </div>
+
+            <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
+              <div style="color: #f87171; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Le delta thermique record : 610 °C</div>
+              <div style="background: #0f172a; border-radius: 4px; padding: 4px; margin-bottom: 6px;">
+                <svg viewBox="0 0 280 85" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
+                  <g transform="translate(140, 42)">
+                    <rect x="-110" y="-25" width="105" height="50" rx="4" fill="#ef4444" opacity="0.25"/>
+                    <text x="-60" y="-5" text-anchor="middle" fill="#fca5a5" font-size="9" font-weight="bold">Midi solaire</text>
+                    <text x="-60" y="14" text-anchor="middle" fill="#f87171" font-size="13" font-weight="bold">+430 °C</text>
+
+                    <rect x="5" y="-25" width="105" height="50" rx="4" fill="#0284c7" opacity="0.25"/>
+                    <text x="55" y="-5" text-anchor="middle" fill="#7dd3fc" font-size="9" font-weight="bold">Nuit polaire/nocturne</text>
+                    <text x="55" y="14" text-anchor="middle" fill="#38bdf8" font-size="13" font-weight="bold">-180 °C</text>
+                  </g>
+                </svg>
+              </div>
+              <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.3;">
+                Dépourvue d'atmosphère pour tamponner le flux et plongée dans des nuits de 88 jours consécutifs, Mercure passe du plomb fondu au gel cryogénique en quelques heures stellaires.
+              </p>
+            </div>
+
+            <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px; grid-column: 1 / -1;">
+              <div style="color: #facc15; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Le triomphe d'Albert Einstein : La précession du périhélie</div>
+              <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.35;">
+                Au XIXe siècle, les calculs newtoniens laissaient un décalage inexpliqué de <strong>43 secondes d'arc par siècle</strong> dans la trajectoire de Mercure, faisant supposer une planète introuvable (<em>Vulcain</em>). En 1915, Einstein démontre que cette avance est causée par la courbure de l'espace-temps produite par la masse du Soleil : la <strong>Relativité Générale</strong> trouvait là sa première confirmation expérimentale.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION : GÉOCHIMIE ET COULEURS DE SURFACE -->
+    <section class="theme-section">
+      <h2 class="section-h2">Spectrométrie & Couleurs de surface</h2>
+
+      <div class="media-single">
+        <img src="https://lh3.googleusercontent.com/d/1J4GrZuFlDDxzSUGGDR1DAn2ceg1G0pvK=s1600" alt="Nuances de couleur et rayons d'impacts">
+      </div>
+
+      <p class="caption-text">
+        Les différences de couleur sur Mercure sont subtiles, mais elles révèlent des informations importantes sur la nature du matériau de la surface de la planète. Un certain nombre de points lumineux avec une teinte bleuâtre sont visibles sur cette image. Ce sont des cratères d’impact relativement récents. Certains des cratères brillants ont des stries lumineuses (appelées « rayons » par les planétologues) qui en émanent. De telles caractéristiques brillantes sont causées par la présence de roches fraîchement concassées qui ont été excavées et déposées lors de la collision hautement énergétique d'un météoroïde avec Mercure pour former un cratère d'impact. La grande zone circulaire de couleur claire en haut à droite de l’image représente l’intérieur du bassin Caloris. Mariner 10 n'a vu que la partie est (à droite) de cet énorme bassin d'impact, dans des conditions d'éclairage qui mettaient l'accent sur les ombres et les différences d'élévation plutôt que sur les différences de luminosité et de couleur. MESSENGER a révélé que Caloris est rempli de plaines lisses plus lumineuses que le terrain environnant, faisant allusion à un contraste de composition entre ces unités géologiques. L'intérieur de Caloris abrite également plusieurs cratères inhabituels aux bords sombres, visibles sur cette image. L'équipe scientifique de MESSENGER travaille avec les images en 11 couleurs afin de mieux comprendre quels minéraux sont présents dans ces roches de la croûte de Mercure.
+      </p>
+
+      <div class="media-single">
+        <img src="https://lh3.googleusercontent.com/d/1K5B_WOx7g2emluTm9viKYhRgfUig7Zw9=s1600" alt="Mosaïque globale MESSENGER en fausses couleurs">
+      </div>
+
+      <p class="caption-text">
+        Cette image est la mosaïque globale en fausses couleurs de la surface de Mercure, réalisée grâce aux données de la sonde spatiale MESSENGER de la NASA (qui a orbité autour de Mercure de 2011 à 2015). À l'œil nu, Mercure est un astre terne et grisâtre, très semblable à la Lune. Pour révéler ce que l'œil humain ne peut distinguer, les scientifiques ont combiné des images prises à travers plusieurs filtres spectraux (infrarouge, visible et proche ultraviolet, notamment à 1 000 nm, 750 nm et 430 nm) et les ont transposées dans les canaux Rouge, Vert et Bleu. Ce traitement met en évidence les variations chimiques, minéralogiques et l'âge des terrains.
+        <br><br>
+        <span style="color:#facc15; font-weight:bold;">🟡 Les zones jaunâtres à orangées (Plaines volcaniques lisses) :</span> Dépôts de laves effusives fluides qui ont inondé de vastes bassins après l'époque du grand bombardement météoritique. En haut à gauche/centre-gauche, remarquez la grande structure circulaire claire : il s'agit du bassin Caloris (Caloris Planitia), un cratère d'impact gigantesque d'environ 1 550 km de diamètre dont l'intérieur a été entièrement comblé par d'anciennes plaines volcaniques orangées composées de roches magmatiques pauvres en fer et enrichies en magnésium.
+        <br><br>
+        <span style="color:#60a5fa; font-weight:bold;">🔵 Les régions bleu sombre / gris bleuté (Matériau LRM) :</span> Surnommé LRM (<em>Low-Reflectance Material</em>), ce matériau sombre provient des profondeurs de la croûte et a été excavé lors d'impacts majeurs. Les analyses ont montré qu'il est riche en carbone sous forme de graphite, vestige probable de la croûte primordiale flottante de Mercure lors du refroidissement de son océan de magma primitif.
+        <br><br>
+        <span style="color:#38bdf8; font-weight:bold;">⚪ / 🔷 Les taches et traînées bleu clair très brillant (Impacts récents) :</span> Cratères d'impact géologiquement « jeunes » (comme Debussy, Kuiper ou Hokusai) et leurs spectaculaires systèmes de rayons. Le matériau éjecté à grande vitesse est frais et n'a pas encore été altéré ni assombri par l'érosion spatiale (vent solaire et micrométéorites).
+      </p>
+
+      <div class="media-single">
+        <img src="https://lh3.googleusercontent.com/d/1j3mpXdwOBwhvjWYxw0s-PIUVJTUceWPF=s1600" alt="Vue rapprochée de la surface mercurienne">
+      </div>
+    </section>
+
+    <!-- SECTION : LES CRATÈRES D'IMPACT -->
+    <section class="theme-section">
+      <h2 class="section-h2">Les cratères d'impact</h2>
+
+      <p class="caption-text">
+        Dépourvue d'atmosphère protectrice, la surface de Mercure est criblée d'innombrables cratères d'impact témoins de milliards d'années de bombardements météoritiques. Parmi eux se distinguent des bassins colossaux comme Caloris, entourés de failles nées du refroidissement et de la contraction de la planète.
+      </p>
+
+      <div class="media-grid-2">
+        <img src="https://lh3.googleusercontent.com/d/1ocVFFwsO8iMDbYXLJRgAUvCbfcUdD5Ns=s1200" alt="Cratère mercurien avec pic central">
+        <img src="https://lh3.googleusercontent.com/d/19zivakH6BB1gQLjZG7NLCu5yT7WDTRF7=s1200" alt="Structure d'impact complexe">
+      </div>
+
+      <!-- BOÎTE EN PROFONDEUR : CRATÈRES -->
+      <div class="box-container">
+        <div class="box-header">
+          <div class="status-dot"></div>
+          <div class="box-title">En profondeur...</div>
+        </div>
+
+        <div class="box-body">
+          <div class="lead-text">
+            Dépourvue d'atmosphère protectrice et figée sur le plan géologique depuis des milliards d'années, Mercure conserve les stigmates intacts du bombardement météoritique primitif, offrant une morphologie d'impacts d'une remarquable variété d'échelles.
+          </div>
+
+          <strong class="deep-subheading">La mécanique hypervéloce de formation par impact</strong>
+          <p>
+            La proximité gravitationnelle du Soleil accélère considérablement les astéroïdes et comètes croisant l'orbite de Mercure. Les collisions s'y produisent à des vitesses moyennes excédant 40 km/s, soit près du double de celles observées sur la Lune, libérant une énergie cinétique colossale instantanément convertie en onde de choc.
+          </p>
+          <p>
+            L'impact traverse trois étapes consécutives : la compression brutale qui vaporise le projectile et fracture la roche, l'excavation durant laquelle une immense dépression transitoire expulse une couronne d'éjectas, puis la modification finale où le cratère s'effondre sous son propre poids et se stabilise.
+          </p>
+
+          <div class="diagram-box">
+            <span class="diagram-header">Schéma 1 — Les étapes de genèse d'un impact météoritique</span>
+            <div class="strata-flow">
+              <div class="strata-card" style="border-top: 2px solid #ef4444;">
+                <div class="strata-name">1. Compression</div>
+                <div class="strata-desc">Vitesse > 40 km/s</div>
+                <div class="strata-temp">Vaporisation & fusion</div>
+              </div>
+              <div class="strata-card" style="border-top: 2px solid #f59e0b;">
+                <div class="strata-name">2. Excavation</div>
+                <div class="strata-desc">Onde de choc divergente</div>
+                <div class="strata-temp">Éjectas en nappe</div>
+              </div>
+              <div class="strata-card" style="border-top: 2px solid #3b82f6;">
+                <div class="strata-name">3. Modification</div>
+                <div class="strata-desc">Rebond élastique central</div>
+                <div class="strata-temp">Terrasses & pic central</div>
+              </div>
+              <div class="strata-card" style="border-top: 2px solid #10b981;">
+                <div class="strata-name">4. Remplissage</div>
+                <div class="strata-desc">Plaines volcaniques</div>
+                <div class="strata-temp">Laves effusives lisses</div>
+              </div>
+            </div>
+          </div>
+
+          <strong class="deep-subheading">L'influence de la gravité sur la morphologie des dépôts</strong>
+          <p>
+            Bien que Mercure ressemble à la Lune au premier coup d'œil, sa densité élevée lui confère une gravité de surface plus de deux fois supérieure (0,38 g contre 0,16 g). Cette différence physique modifie directement la dispersion des débris expulsés lors de l'explosion.
+          </p>
+          <p>
+            Sur Mercure, les couvertures d'éjectas et les cratères secondaires sont bien plus ramassés et confinés à proximité immédiate du rebord du cratère. À diamètre d'impact équivalent, la nappe de gravats mercurienne s'étend sur une distance environ deux fois inférieure à celle observée sur notre satellite naturel, générant des remparts plus épais et compacts.
+          </p>
+
+          <div class="diagram-box">
+            <span class="diagram-header">Schéma 2 — Typologie et échelle structurale des cratères</span>
+            <div class="swatch-list">
+              <div class="swatch-item"><span class="color-dot" style="background:#94a3b8;"></span><span class="swatch-label">Cratère simple (&lt; 10 km)</span><span class="swatch-sub">— Profil régulier en bol hémisphérique</span></div>
+              <div class="swatch-item"><span class="color-dot" style="background:#38bdf8;"></span><span class="swatch-label">Cratère complexe (10 à 100 km)</span><span class="swatch-sub">— Fond plat, gradins et pic central</span></div>
+              <div class="swatch-item"><span class="color-dot" style="background:#f59e0b;"></span><span class="swatch-label">Bassin à anneau (100 à 300 km)</span><span class="swatch-sub">— Couronne circulaire interne de pics rocheux</span></div>
+              <div class="swatch-item"><span class="color-dot" style="background:#ef4444;"></span><span class="swatch-label">Bassin géant (&gt; 300 km)</span><span class="swatch-sub">— Bassin Caloris (1 550 km), multiples anneaux concentriques</span></div>
+              <div class="swatch-item"><span class="color-dot" style="background:#06b6d4;"></span><span class="swatch-label">Cratères à rayons</span><span class="swatch-sub">— Éjectas clairs très récents (ex. Hokusai)</span></div>
+            </div>
+          </div>
+
+          <strong class="deep-subheading">Bassins géants et cavités mystérieuses</strong>
+          <p>
+            L'apogée de ces impacts cataclysmiques s'incarne dans le bassin Caloris, une gigantesque cicatrice d'environ 1 550 kilomètres de diamètre. L'onde de choc générée par cette collision a traversé le corps planétaire entier, convergeant aux antipodes pour fracturer violemment la croûte et donner naissance au fameux « terrain chaotique ».
+          </p>
+          <p>
+            La sonde MESSENGER a également révélé dans de nombreux cratères d'impact des dépressions bleutées sans rebord appelées cavités (« hollows »). Ces structures irrégulières et brillantes suggèrent la sublimation active dans le vide de matériaux volatils piégés sous la surface rocheuse lors de l'impact, prouvant que la géochimie des cratères de Mercure est bien plus active et énigmatique qu'un simple sol inerte.
+          </p>
+        </div>
+
+        <div class="box-footer">
+          Source : <span>NASA / MESSENGER & ESA / BepiColombo</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION : LES PLAINES VOLCANIQUES (PLANITIAE) -->
+    <section class="theme-section">
+      <h2 class="section-h2">Les plaines volcaniques (Planitiae)</h2>
+
+      <p class="caption-text">
+        Vastes étendues lisses s'étirant entre les reliefs tourmentés, les planitiae de Mercure témoignent d'immenses flots de lave effusive qui ont englouti un quart de la planète. Ces mers de roche en fusion ont comblé d'anciens bassins d'impact avant d'être plissées par la lente contraction de l'astre.
+      </p>
+
+      <!-- BOÎTE EN PROFONDEUR : PLANITIAE -->
+      <div class="box-container">
+        <div class="box-header">
+          <div class="status-dot"></div>
+          <div class="box-title">En profondeur...</div>
+        </div>
+
+        <div class="box-body">
+          <div class="lead-text">
+            Désignées sous le terme latin de « planitiae », les vastes étendues peu cratérisées et lisses de Mercure constituent les témoins majeurs d'un gigantesque épisode de volcanisme effusif qui a remodelé plus d'un quart de la surface planétaire.
+          </div>
+
+          <strong class="deep-subheading">La résolution d'une controverse historique</strong>
+          <p>
+            Longtemps après le survol de la sonde Mariner 10 en 1975, l'origine de ces plaines a divisé la communauté scientifique. Une partie des chercheurs y voyait une nappe d'éjectas fluidisés issue des méga-impacts d'astéroïdes, à l'image des terres claires lunaires.
+          </p>
+          <p>
+            C'est la mission MESSENGER en 2008 qui a définitivement tranché l'énigme en découvrant des cheminées volcaniques sinueuses, des dépôts pyroclastiques et des variations de réflectance. Ces plaines sont des mers de lave ultra-fluide qui ont inondé les dépressions d'impact et les anciens reliefs lors d'épisodes de volcanisme de trapp il y a environ 3,7 à 3,8 milliards d'années.
+          </p>
+
+          <div class="diagram-box">
+            <span class="diagram-header">Schéma 1 — Principales unités de plaines lisses (Planitiae)</span>
+            <div class="strata-flow">
+              <div class="strata-card" style="border-top: 2px solid #38bdf8;">
+                <div class="strata-name">Borealis Planitia</div>
+                <div class="strata-desc">Calotte polaire nord</div>
+                <div class="strata-temp">700 à 1 800 m de lave</div>
+              </div>
+              <div class="strata-card" style="border-top: 2px solid #f59e0b;">
+                <div class="strata-name">Caloris Planitia</div>
+                <div class="strata-desc">Cœur du bassin d'impact</div>
+                <div class="strata-temp">Infill volcanique fissuré</div>
+              </div>
+              <div class="strata-card" style="border-top: 2px solid #a855f7;">
+                <div class="strata-name">Stilpnus / Tir</div>
+                <div class="strata-desc">Plaines circum-bassins</div>
+                <div class="strata-temp">Épanchements régionaux</div>
+              </div>
+              <div class="strata-card" style="border-top: 2px solid #10b981;">
+                <div class="strata-name">Plaines intercratères</div>
+                <div class="strata-desc">Terrains plus anciens</div>
+                <div class="strata-temp">Volcanisme primitif altéré</div>
+              </div>
+            </div>
+          </div>
+
+          <strong class="deep-subheading">Les cratères fantômes et l'épaisseur des coulées</strong>
+          <p>
+            Le passage de ces flots magmatiques se trahit par la présence spectaculaire de « cratères fantômes » (<em>ghost craters</em>). Il s'agit d'anciens cratères d'impact préexistants dont le plancher et les parois ont été presque totalement submergés par la lave liquide. Seul le sommet de leur rempart circulaire affleure encore discrètement à la surface sous forme de rides concentriques.
+          </p>
+          <p>
+            L'analyse topographique de ces sépultures minérales a permis de calculer l'épaisseur des mers de basalte. Dans Borealis Planitia, vaste plaine qui recouvre tout le pôle Nord sur une superficie équivalente à 60 % des États-Unis, la couche de lave atteint entre 700 et près de 2 000 mètres d'épaisseur, scellant sous son poids des générations entières de cratères d'impact.
+          </p>
+
+          <div class="diagram-box">
+            <span class="diagram-header">Schéma 2 — Structures tectoniques déformant les planitiae</span>
+            <div class="swatch-list">
+              <div class="swatch-item"><span class="color-dot" style="background:#3b82f6;"></span><span class="swatch-label">Dorsa (Wrinkle ridges)</span><span class="swatch-sub">— Crêtes sinueuses de compression thermique</span></div>
+              <div class="swatch-item"><span class="color-dot" style="background:#f59e0b;"></span><span class="swatch-label">Grabens d'extension</span><span class="swatch-sub">— Fossés d'effondrement radiaires (Pantheon Fossae)</span></div>
+              <div class="swatch-item"><span class="color-dot" style="background:#ef4444;"></span><span class="swatch-label">Escarpements lobés</span><span class="swatch-sub">— Chevauchements nés de la contraction du noyau</span></div>
+              <div class="swatch-item"><span class="color-dot" style="background:#06b6d4;"></span><span class="swatch-label">Faible viscosité</span><span class="swatch-sub">— Magmas proches des komatiites ou basaltes pauvres en fer</span></div>
+            </div>
+          </div>
+
+          <strong class="deep-subheading">Contraction globale et rideaux de compression</strong>
+          <p>
+            Contrairement aux mers de la Lune qui sont très sombres et riches en titane et en fer, les planitiae de Mercure présentent une couleur proche de celle des terrains anciens avoisinants, indiquant une lave très pauvre en fer mais riche en magnésium et en soufre.
+          </p>
+          <p>
+            Après leur mise en place, ces nappes horizontales n'ont pas échappé au destin tectonique unique de Mercure : le refroidissement précoce de son immense noyau métallique a entraîné une contraction volumétrique de la planète entière d'au moins 7 kilomètres de rayon. Cette compression colossale a ridé les planitiae de dorsa (rides sinueuses de flambement) et tranché les coulées volcaniques sous de monumentales failles de chevauchement s'étirant sur des centaines de kilomètres.
+          </p>
+        </div>
+
+        <div class="box-footer">
+          Source : <span>NASA / MESSENGER</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION : LES ESCARPEMENTS LOBÉS (RUPES) -->
+    <section class="theme-section">
+      <h2 class="section-h2">Les escarpements tectoniques (Rupes)</h2>
+
+      <p class="caption-text">
+        Cicatrices spectaculaires zébrant la surface sur des centaines de kilomètres, les rupes de Mercure sont de gigantesques falaises nées du refroidissement de l'astre. En perdant sa chaleur interne, l'immense noyau métallique s'est rétracté, forçant la croûte rocheuse à se plisser et à se chevaucher sur elle-même.
+      </p>
+
+      <!-- BOÎTE EN PROFONDEUR : RUPES -->
+      <div class="box-container">
+        <div class="box-header">
+          <div class="status-dot"></div>
+          <div class="box-title">En profondeur...</div>
+        </div>
+
+        <div class="box-body">
+          <div class="lead-text">
+            Cicatrices spectaculaires zébrant la surface sur des centaines de kilomètres, les rupes de Mercure sont de gigantesques escarpements lobés nés du refroidissement global de la planète et de la contraction de son immense noyau métallique.
+          </div>
+
+          <strong class="deep-subheading">Une tectonique de contraction à l'échelle planétaire</strong>
+          <p>
+            Contrairement à la Terre dont la surface est découpée en plaques mobiles glissant les unes contre les autres, Mercure ne possède qu'une unique lithosphère rigide. L'astre se caractérise par un noyau métallique surdimensionné qui représente près de 85 % de son rayon total.
+          </p>
+          <p>
+            Au fil de son histoire thermique, la lente cristallisation et le refroidissement de ce cœur métallique ont provoqué une diminution sensible de son volume global. Incapable de s'étirer ou de s'enfoncer dans des zones de subduction, la croûte superficielle rigide s'est retrouvée trop grande pour la sphère intérieure en réduction, subissant une contrainte compressive planétaire colossale.
+          </p>
+
+          <div class="diagram-box">
+            <span class="diagram-header">Schéma 1 — Mécanisme de formation par chevauchement tectonique</span>
+            <div class="strata-flow">
+              <div class="strata-card" style="border-top: 2px solid #3b82f6;">
+                <div class="strata-name">1. Refroidissement</div>
+                <div class="strata-desc">Cœur de fer (85 % du rayon)</div>
+                <div class="strata-temp">Perte thermique interne</div>
+              </div>
+              <div class="strata-card" style="border-top: 2px solid #f59e0b;">
+                <div class="strata-name">2. Rétractation</div>
+                <div class="strata-desc">Réduction volumique</div>
+                <div class="strata-temp">-7 km de rayon global</div>
+              </div>
+              <div class="strata-card" style="border-top: 2px solid #ef4444;">
+                <div class="strata-name">3. Rupture de faille</div>
+                <div class="strata-desc">Faille inverse à pendage faible</div>
+                <div class="strata-temp">Poussée compressive</div>
+              </div>
+              <div class="strata-card" style="border-top: 2px solid #10b981;">
+                <div class="strata-name">4. Escarpement lobé</div>
+                <div class="strata-desc">Un bloc chevauche l'autre</div>
+                <div class="strata-temp">Front de falaise (Rupes)</div>
+              </div>
+            </div>
+          </div>
+
+          <strong class="deep-subheading">Anatomie et géométrie des escarpements lobés</strong>
+          <p>
+            Sous l'effort de compression, la croûte mercurienne s'est fracturée le long de failles inverses à faible inclinaison. Un pan entier de croûte s'est soulevé pour glisser au-dessus du compartiment voisin, créant une marche d'escalier monumentale qui serpente sur la planète : c'est l'escarpement lobé.
+          </p>
+          <p>
+            Ces falaises atteignent fréquemment 2 à 3 kilomètres de dénivelé vertical et coupent net les cratères d'impact plus anciens qu'elles traversent, décalant parfois le rempart circulaire d'un cratère de plusieurs kilomètres. L'observation de ces cratères cisaillés confirme le caractère tardif et post-bombardement de ces déformations tectoniques.
+          </p>
+
+          <div class="diagram-box">
+            <span class="diagram-header">Schéma 2 — Principaux escarpements et caractéristiques</span>
+            <div class="swatch-list">
+              <div class="swatch-item"><span class="color-dot" style="background:#ef4444;"></span><span class="swatch-label">Enterprise Rupes</span><span class="swatch-sub">— Longueur ~1 000 km, falaise jusqu'à 3 km</span></div>
+              <div class="swatch-item"><span class="color-dot" style="background:#f59e0b;"></span><span class="swatch-label">Discovery Rupes</span><span class="swatch-sub">— Longueur ~650 km, traverse le cratère Rameau</span></div>
+              <div class="swatch-item"><span class="color-dot" style="background:#3b82f6;"></span><span class="swatch-label">Beagle Rupes</span><span class="swatch-sub">— Longueur ~600 km, déforme Sveinsdóttir</span></div>
+              <div class="swatch-item"><span class="color-dot" style="background:#10b981;"></span><span class="swatch-label">Petits escarpements récents</span><span class="swatch-sub">— Micro-failles (&lt; 50 m) témoignant d'une activité persistante</span></div>
+            </div>
+          </div>
+
+          <strong class="deep-subheading">Une planète toujours vivante sur le plan tectonique</strong>
+          <p>
+            Les données altimétriques de la sonde MESSENGER ont révélé que la contraction globale de Mercure a été bien plus importante que ce que les premières mesures de Mariner 10 laissaient supposer, atteignant une diminution totale de 7 kilomètres de rayon depuis sa formation.
+          </p>
+          <p>
+            Les images haute résolution ont en outre mis en évidence de très petits escarpements lobés, hauts de quelques dizaines de mètres seulement et dépourvus de cratères secondaires à leur base. Leur remarquable état de fraîcheur géologique démontre que la contraction de Mercure n'est pas un vestige éteint du passé lointain : la planète continue encore aujourd'hui de refroidir et d'ajuster sa croûte, générant sans doute de faibles séismes superficiels.
+          </p>
+        </div>
+
+        <div class="box-footer">
+          Source : <span>NASA / MESSENGER & ESA / BepiColombo</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION : EXPLORATEUR GÉOLOGIQUE UNIFIÉ (213 CRATÈRES, PLANITIAE & RUPES) -->
+    <section class="theme-section">
+      <h2 class="section-h2">Atlas des reliefs de Mercure</h2>
+      <p class="caption-text">
+        Explorez l'intégralité des 213 cratères majeurs, mers de laves effusives (planitiae) et escarpements de failles (rupes) répertoriés par les missions spatiales Mariner 10 et MESSENGER. Cliquez sur une formation pour ouvrir la vue haute résolution.
+      </p>
+
+      <div class="atlas-explorer">
+        <div class="atlas-toolbar">
+          <div class="atlas-filters">
+            <button class="atlas-filter-btn active" onclick="setAtlasFilter('all')">Tous les reliefs</button>
+            <button class="atlas-filter-btn" onclick="setAtlasFilter('crater')">Cratères</button>
+            <button class="atlas-filter-btn" onclick="setAtlasFilter('mare')">Planitiae (Plaines)</button>
+            <button class="atlas-filter-btn" onclick="setAtlasFilter('valley')">Rupes (Escarpements)</button>
+          </div>
+
+          <input type="text" id="atlasSearchInput" class="atlas-search" placeholder="Rechercher une formation..." oninput="filterAtlasReliefs()">
+        </div>
+
+        <div class="atlas-counter" id="atlasCounter">Affichage de 213 reliefs</div>
+
+        <!-- GRILLE DES RELIEFS GÉNÉRÉE AUTOMATIQUEMENT PAR JAVASCRIPT -->
+        <div class="atlas-grid" id="atlasGrid"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODALE GRAND FORMAT (LIGHTBOX) -->
+  <div class="atlas-modal-backdrop" id="atlasModal" onclick="closeAtlasModal(event)">
+    <div class="atlas-modal">
+      <button class="modal-close-btn" onclick="closeAtlasModal(null)">✕</button>
+      <div class="modal-img-box">
+        <img id="modalImg" src="" alt="Prise de vue orbitale">
+      </div>
+      <div class="modal-details">
+        <h3 class="modal-title" id="modalTitle">Nom de la formation</h3>
+        <div class="modal-meta" id="modalMeta">Type · Latitude · Longitude</div>
+        <p style="font-size:0.85rem; color:#cbd5e1; margin:0;" id="modalDesc">Description orbitale.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* 1. GESTION DES ONGLETS DE L'INFOGRAPHIE DE MERCURE */
+    function changerOngletMercure(nom) {
+      const onglets = ['structure', 'geologie', 'orbite'];
+      onglets.forEach(o => {
+        const contenu = document.getElementById('onglet-mer-' + o);
+        const bouton = document.getElementById('btn-mer-' + o);
+        if (o === nom) {
+          contenu.style.display = 'block';
+          bouton.style.background = '#2563eb';
+          bouton.style.color = '#ffffff';
+        } else {
+          contenu.style.display = 'none';
+          bouton.style.background = '#1e293b';
+          bouton.style.color = '#94a3b8';
+        }
+      });
+    }
+
+    /* 2. BASE DE DONNÉES GÉOLOGIQUE DE MERCURE (ISSU DU SIMULATEUR 3D) */
+    const MERCURY_DATABASE = [
+      ["Cratère Abedin", 61.7, 349.3, "13XlMbv-4Zkw5ypCnWCXcTZW5L6q9clPH", "crater"],
+      ["Cratère Abu Nuwas", 17.4, 21.1, "12tfV-KE7dnFa9eUswLFoJQXprpafG4dB", "crater"],
+      ["Cratère Africanus Horton", -51.5, 41.2, "1FguUiX20zFUGBh0ovh6Ya0-4d1ngbHuD", "crater"],
+      ["Cratère Ahmad Baba", 62.7, 126.8, "1p-Pfdybe_eIv2yLQERHlf2SQ60QNZP7B", "crater"],
+      ["Cratère Ailey", 45.5, 182.1, "1eyK905eSMpCKAA6poaDwl-TKppU5NuAZ", "crater"],
+      ["Cratère Aksakov", 34.7, 78.9, "1uq5ylQJmxI6DbZki3-JroVegGAKUxz-s", "crater"],
+      ["Cratère Akutagawa", 48.2, 141.1, "15UsoA6Wk84wADKv1nw0ifnB7MjXhuSaU", "crater"],
+      ["Cratère Al-Akhtal", 59.2, 99.7, "1AxBRBMnqb1mDfsyym60lYf451RzBQYi4", "crater"],
+      ["Cratère Alencar", -63.5, 103.5, "1FE4cU8sJkDYZU5u4tSjdsPwzRxjKQQJ8", "crater"],
+      ["Cratère Al-Hamadhani", 38.8, 91.6, "1oyLOBPzOwQJW9_4aSVIhaNcwmJ7T1qxf", "crater"],
+      ["Cratère Al-Jāhiz", 1.2, 21.5, "1X6gOlPpbaf7Z0Zu-67YCeA-NLFak7uvm", "crater"],
+      ["Cratère Alver", -66.1, 77.2, "1CkIRqbaKOR2oYnMs_Fqzk0RjKHSCF5Vy", "crater"],
+      ["Cratère Amaral", -26.4, 242.3, "16BAKPqWF9XdDudhZyYaSciImWuczh7Ut", "crater"],
+      ["Cratère Andal", -47.7, 37.7, "1A55otd-2ytYDj0rfbMdQujUWz27pacYm", "crater"],
+      ["Cratère Aneirin", -27.4, 2.3, "1CLj1x_mcR9wzrrdRMK9tEts2fgnc0aCr", "crater"],
+      ["Cratère Anyte", 79.5, 148.5, "1Sr3TSovCf7AqevbLzAPJcQEoQR2YtF4g", "crater"],
+      ["Cratère Apollodorus", 30.5, 163.3, "1841aXToULRS49OmxcPsXPIUW4nz95f90", "crater"],
+      ["Cratère Atget", 25.6, 193.9, "176J2lIq94FLnUN_uJErb4AeHNgOIH5Ua", "crater"],
+      ["Cratère Bach", -68.5, 103.4, "1irh2VLYxR8twHA9O_Oq3YBiHoSLwGEpf", "crater"],
+      ["Cratère Balagtas", -22.6, 13.7, "1-nl-5MTWGqC9mhyE_SwJ2Vhp9eshegMD", "crater"],
+      ["Cratère Balanchine", 38.5, 184.4, "1la7ZLa7WflGleFfGKjZAzUT88BUJ-V0C", "crater"],
+      ["Cratère Baranauskas", 50.8, 39.7, "1fS7ZCRdbQ_eIr2cSUhCop2h5TCkJnmNi", "crater"],
+      ["Cratère Balzac", 10.3, 144.1, "1zGvRaPeWuJtIHIUPGQ1p7belQC6JAK7L", "crater"],
+      ["Cratère Barma", -41.3, 162.8, "1ynTZg9hYva9Qi-qyu0YKJUthDaW_JN0I", "crater"],
+      ["Cratère Bartók", -45.2, 134.6, "1_hq7jA2AVg5iVgByXxs2EhplOSqASWFq", "crater"],
+      ["Cratère Bashō", -32.7, 170.5, "13h8a4ZcBzFSi9ELJ0757g8-ImhVGJ6v4", "crater"],
+      ["Cratère Beckett", -40.1, 248.8, "1CxqG2l4r0q0CZngJok_7n6MOctOH52E5", "crater"],
+      ["Cratère Beethoven", -21.3, 123.6, "12izhOb1rNdWYDQAZVhGu_350wqJ4keB6", "crater"],
+      ["Cratère Bek", 21.1, 81.9, "1ypRlpes40ym4Mg6Fe1Erxjg3Fbn_adaE", "crater"],
+      ["Cratère Bello", -18.9, 120.0, "1SFMn2O5JN4-GDOdbRsT_fAWjDaOyx6gd", "crater"],
+      ["Cratère Benoit", 7.4, 256.2, "1gSPCvDm2yJeGWHAOv5VJ74fFtn3faEg4", "crater"],
+      ["Cratère Bernini", -79.2, 136.5, "1UpWw--V4jSVaWA0SlYVSbHYQ4WXYWWPK", "crater"],
+      ["Cratère Bjornson", 73.1, 114.0, "1wH8qfsa-7kspHqXANio7k_c2yFeYif9c", "crater"],
+      ["Cratère Boccaccio", -80.5, 29.8, "1djZeBqmeICRlffCtCoOYg2D95cw2WOgZ", "crater"],
+      ["Cratère Boethius", -0.9, 73.3, "1TBlQeKB-8G7jbjZWWxgcsiYmI48lkZcz", "crater"],
+      ["Cratère Botticelli", 63.7, 109.6, "1Ox6WVdHAaxCYja1BlUaSn89yJFw7ae3d", "crater"],
+      ["Cratère Brahms", 58.5, 176.2, "1iZDpEsCdAnsF_rryTAy6ZLUz09ujoI2P", "crater"],
+      ["Cratère Bramante", -47.5, 61.8, "1MPd_8rDoz8hlyvFAK7GAaLdqPdR008DJ", "crater"],
+      ["Cratère Brontë", 38.7, 126.1, "1Nqf42DXODgLlkO6hnJ9Grd4HOVLWxhK-", "crater"],
+      ["Cratère Bruegel", 49.8, 109.5, "1Qa5FajPLoFfBxMsj8dclWQjt0DuNNI-_", "crater"],
+      ["Cratère Brunelleschi", -9.1, 22.2, "1IiGAPNk4mHS75xXdGtWHqdmAW9-bySee", "crater"],
+      ["Cratère Burns", 54.4, 115.7, "1W76b1TXnGDjuqL9gp66IuA7eATOgo2gO", "crater"],
+      ["Cratère Byron", -8.5, 32.7, "1B6OJvIkD1FE4cVb7JAjN7qentbOWx1Mm", "crater"],
+      ["Cratère Callicrates", -66.3, 30.4, "1wdy1X2oY2UADLctjr6RK2U2QUqBlY8Oj", "crater"],
+      ["Cratère Calvino", -3.9, 56.0, "1gfVLg_s17xZgJrh6S75hB1nPdCyINRW_", "crater"],
+      ["Cratère Camões", -70.6, 69.6, "14H9MGvVZPmMJKfL_eNIEqd2ynrUlO4El", "crater"],
+      ["Cratère Carducci", -36.6, 89.9, "1OZGCc66PyzXcGSYNR2UIxn0TfF7Y6Pzo", "crater"],
+      ["Cratère Carolan", 83.8, 31.7, "167FHBlaN9ajgA3iR0-l3vievNIlkvUE7", "crater"],
+      ["Cratère Chaikovskij", 7.4, 50.4, "1_2HInb8JB7nDV5KEU8KtTk3zz-6m7tmg", "crater"],
+      ["Cratère Chao Meng-Fu", -87.3, 134.2, "1WdEwtBCETyt-xivM-EjacORkZE2YhMKe", "crater"],
+      ["Cratère Chekhov", -36.2, 61.5, "1WZpheLhnKm7MJHM9yukC-NmEzVz2PQtJ", "crater"],
+      ["Cratère Chŏng Chʼŏl", 46.4, 118.1, "1mYxbxfYWaeShU5EUIq3EKOLdxc4bgu19", "crater"],
+      ["Cratère Chopin", -65.1, 123.1, "1C6JpnrcULUT-mnlGdGr5XEWCQ6pvzmRj", "crater"],
+      ["Cratère Chu Ta", 2.2, 105.1, "1llyfMv4vJgZn8zdNedWV1i7htJLgE-Vn", "crater"],
+      ["Cratère Coleridge", -55.9, 66.7, "15vJ0V660vnYPlvbH5eIIFucVeNyMXGfS", "crater"],
+      ["Cratère Copland", 37.5, 286.7, "13-2e-QkenbBjSKsvBxIpVkmf6ukvtPak", "crater"],
+      ["Cratère Copley", -38.4, 85.2, "1dY7g2CBX-06Wi8NZ96pHiTzcu47Cgr2E", "crater"],
+      ["Cratère Couperin", 29.8, 151.4, "1FMEaSfEa0DAepFg85M3cEFBeZywBvrmg", "crater"],
+      ["Cratère Cunningham", 30.4, 203.0, "1J91iUZ_Tm035GhQRhxwY7qAtYHuUDiIA", "crater"],
+      ["Cratère Dali", 45.3, 240.6, "1Ewo6q0ErdKjgcQpI6t9nAHqmaQ_peH15", "crater"],
+      ["Cratère Darío", -26.5, 10.0, "1Zf7g40cVYdMuJmUTnJDXdr0LHM8ixRyo", "crater"],
+      ["Cratère De Graft", 22.1, 358.0, "1F2ryJoDYLPy1cxKlMZHta5REaLggjQwU", "crater"],
+      ["Cratère Debussy", -33.9, 347.5, "1AtU9CcEeRwd2752FLEZ3WpvCvlmTCYSP", "crater"],
+      ["Cratère Degas", 37.4, 126.4, "1QRfb1qls-coxGfsD025F0cFXxhJIph24", "crater"],
+      ["Cratère Delacroix", -44.7, 129.0, "17CpSaZ4nFHFGbrUNZNDx_6YKkbGcQckC", "crater"],
+      ["Cratère Derzhavin", 45.6, 35.3, "1_9l5oBSOy-dAnhjbZ3ACGaKAtEY4Yqmi", "crater"],
+      ["Cratère Despréz", 80.8, 100.7, "1Wx04b5sHaon-d9KDnIsLu8w1sD-NVuRT", "crater"],
+      ["Cratère Dickens", -72.9, 153.3, "12pDbLoZ80EJFVxPtY7O4c2m_TJTFWux7", "crater"],
+      ["Cratère Dominici", 1.4, 36.5, "1oIWzK1KnCfYN4KR52j1U1QIKa1SqLBEP", "crater"],
+      ["Cratère Donne", -2.8, 14.0, "1CwsNHinPlG70T-ak19OF_g6TDz9qfh7a", "crater"],
+      ["Cratère Dostoevskij", -45.1, 176.4, "13MDPCEc36bhnvlb9ZXyeTwqWhZRVzALW", "crater"],
+      ["Cratère Dowland", -53.5, 179.5, "1Wtu6Ps-zJXLwPPf9FctXFiuCcWFLIzQ7", "crater"],
+      ["Cratère Dürer", 21.9, 119.0, "1KljlSiZMKcUOuyLeF3ZMcXXAoRUlkbB8", "crater"],
+      ["Cratère Dvorák", -9.6, 166.4, "1be4P0GBDaMW46coLGJGDF3FlThRYtZeD", "crater"],
+      ["Cratère Eastman", 9.6, 234.3, "1Cp3Xla2dso4gL17s8ym-hzugNWLQv_WF", "crater"],
+      ["Cratère Eitoku", -22.1, 156.9, "1gjR-_92WZv0rIUIxOe4Fh5k9YylJfIsB", "crater"],
+      ["Cratère Eminescu", 10.8, 245.8, "1HIBMVn9gjWlA3cHGTsYk9ZC_YIfG_5vR", "crater"],
+      ["Cratère Enwonwu", -9.9, 238.4, "1R83h4GxgCAlQluhN_VRDogN2cPybaDBC", "crater"],
+      ["Cratère Equiano", -40.2, 30.7, "1GXjlapRQv8gIs2hgUmDgnhV8to7SO_gN", "crater"],
+      ["Cratère Faulkner", -8.1, 283.0, "1jTBK1oSDRUXSwO1gOHpS8hpSE86kG6Lh", "crater"],
+      ["Cratère Fet", -4.9, 179.9, "1tddLXa5q8hLT8rfULfata9l-z62X5EB7", "crater"],
+      ["Cratère Firdousi", 3.5, 294.6, "1-33BTD4_J9SmN5Oo8okBbJuRmM1jL98S", "crater"],
+      ["Cratère Flaiano", -21.3, 76.7, "12uRM7rNdAPH6CGTcuhgxDHVW2xScBgFv", "crater"],
+      ["Cratère Flaubert", -13.7, 72.2, "1o31b60howcj7pFYzbtJihM_3Xg43a25t", "crater"],
+      ["Cratère Futabatei", -16.2, 83.0, "1DTAAaZOvvntXoQpPpjoBGcMlcrCNm66F", "crater"],
+      ["Cratère Gainsborough", -36.1, 183.3, "1citAq3MgW-RBLqQZD14dH0GNmbGhLs-p", "crater"],
+      ["Cratère Gauguin", 66.4, 96.3, "1RYghqZVEDEE7Ox3SRJLvGz8roIFkd8C2", "crater"],
+      ["Cratère Geddes", 27.3, 29.7, "1EmQBHJCOoemcRJBVAurygKNPptHWS5-h", "crater"],
+      ["Cratère Ghiberti", -48.4, 80.2, "11wqACR80wWcsg59DZcPKcRXPzqXjBq1m", "crater"],
+      ["Cratère Gibran", 35.5, 110.4, "1le4LnC13SPizCVB1KkOaKq8ZjJBbHYx5", "crater"],
+      ["Cratère Giotto", 12.0, 55.8, "1uBeLr0Dvr0cV-nvjWINDa6P2W6VGbIQT", "crater"],
+      ["Cratère Glinka", 14.8, 111.7, "1GkWPTW2lw1ySRdfhPWOmzwOiQdOq62yY", "crater"],
+      ["Cratère Goethe", 78.5, 44.5, "1oD-nJe2q8dgP7ydAyPq8bAEaqK518gk4", "crater"],
+      ["Cratère Gogol", -28.1, 146.4, "1rR7DUA4XB7dmBE-swJow1dOOqxNCcvIy", "crater"],
+      ["Cratère Goya", -7.2, 152.0, "12jShLsSQ57FY-tgJsQuFfB4BL7TmefSb", "crater"],
+      ["Cratère Grieg", 51.1, 14.0, "1r5DDqeAsyc08qsW4DJsNtYkjUJflun2q", "crater"],
+      ["Cratère Guido d'Arezzo", -38.7, 18.5, "1txBGWvQZvjUMuldlp5bMUvCHKO2bPJ-n", "crater"],
+      ["Cratère Hals", -54.8, 115.0, "1gxXhJcWupMq4z-xkrDEAeRC6KXKOkU7K", "crater"],
+      ["Cratère Han Kan", -72.1, 145.8, "1oT2z_DHTNC5qi3ZZqBRYWmW493wq1my2", "crater"],
+      ["Cratère Handel", 3.4, 34.0, "1smRvXNRjJAzYhqZFESbSUGWVz60H28QK", "crater"],
+      ["Cratère Harunobu", 15.0, 140.7, "1SYWBvsXeDsvTB_lZ7K9kxuzvhEdrpy_N", "crater"],
+      ["Cratère Hauptmann", -23.7, 179.9, "1izUqfuH9RHDgOBRJjN6R1ujE97AH9N7O", "crater"],
+      ["Cratère Hawthorne", -51.3, 115.1, "1zAjTiCKKUSbBD6nbeuCdejmot3ES2igU", "crater"],
+      ["Cratère Haydn", -27.3, 71.6, "1GSIS6vbpNWcgg4A1OvRonxYO80KmCeax", "crater"],
+      ["Cratère Heine", 32.6, 124.9, "1hR-3btYb0180VzaTkHQg-N32dIGgMVZm", "crater"],
+      ["Cratère Hemingway", 17.5, 2.9, "1GeCkVTo0BUGdwgIZYSX3IIEOk0eXBF71", "crater"],
+      ["Cratère Hesiod", -58.5, 35.0, "1PCqGBFFzugb9LMPGtfxSe2DITI_nDpSB", "crater"],
+      ["Cratère Hiroshige", -13.4, 26.7, "1Y39dI8tZtgQvdBvNxr-Yteq45_smI9TQ", "crater"],
+      ["Cratère Hitomaro", -16.2, 15.8, "1BaL0jQXKbKP3TSzSA_EyyBFYZbBzwug0", "crater"],
+      ["Cratère Hodgkins", 29.2, 341.8, "1qkJL4IFhgIF1kG2BjlubHhxdfBrLUH_m", "crater"],
+      ["Cratère Hokusai", 57.8, 342.3, "10JWdI797d3ghMEkERPwk8TV9TDem8tHp", "crater"],
+      ["Cratère Holbein", 35.6, 28.9, "14GyMo2DcJdePiCNcG3CUr44onznB7Izy", "crater"],
+      ["Cratère Holberg", -67.4, 61.1, "1w32QEBOIkW6mrz6RmP7pZL8a61OJ3D-0", "crater"],
+      ["Cratère Holst", -17.4, 315.0, "1VOvwz_3RKiFY--bGpuuSALAjDPiBbkHZ", "crater"],
+      ["Cratère Homer", -1.3, 36.2, "1EJYk5dtP59OHA-j6tv71wBsTVHqBy_vA", "crater"],
+      ["Cratère Horace", -68.9, 52.0, "19WDeu4nRMRDPIA_3M--_EbMQigG4ULla", "crater"],
+      ["Cratère Hovnatanian", -7.6, 187.5, "12H0P1E_l3E4G7sQUsX5dqO5JXNt4t130", "crater"],
+      ["Cratère Hun Kal", -0.5, 20.0, "1e9AeyeB9yTVXwHkF_mLX-C3-P1kOGPWE", "crater"],
+      ["Cratère Ibsen", -24.1, 35.6, "1YECqOrBjU2NmtvSWlwp4KXX2qChlYh9P", "crater"],
+      ["Cratère Ictinus", -79.1, 165.2, "1509eQCvWi8ttxl_JktjzyHLRuZh2rmHe", "crater"],
+      ["Cratère Imhotep", -18.1, 37.3, "1LzjXKtrvKdDKmv8Kk3rwuggORGeWkcgV", "crater"],
+      ["Cratère Izquierdo", -1.6, 253.9, "1luom2_1QtpUbVhunfbQfS4PPNPc4tHhM", "crater"],
+      ["Cratère Janáček", 55.6, 153.8, "1bQrvyJeIUmErbhEDiIe9jERPGqXILDc5", "crater"],
+      ["Cratère Jókai", 72.4, 135.3, "1KV5HFzPiP8opqbUo42_EHfFoonpkQVxg", "crater"],
+      ["Cratère Judah Ha-Levi", 11.2, 107.7, "1xiFFk-6i6e_HoC2CeU2AcnSjLYH3mmAi", "crater"],
+      ["Cratère Kālidāsā", -18.1, 179.8, "1X9lmzyedQqzXENt4rrH5l6PtyMduWMdL", "crater"],
+      ["Cratère Karsh", 35.6, 281.0, "1RqU412yFCJOtzrnHnjOyF9xxyGzWNeB9", "crater"],
+      ["Cratère Keats", -69.9, 154.5, "1YQ-HhUj4SE1lT0tpBgvuz0aP9IHC51yU", "crater"],
+      ["Cratère Kenkō", -21.5, 161.0, "1AEQNo7crMKycdIfe8ByRNTWJm9xosvnk", "crater"],
+      ["Cratère Kertész", 27.4, 214.1, "1GHCiVY38t1fX_w7KTw8A-CQSBoZ2FkrB", "crater"],
+      ["Cratère Khansa", -59.7, 51.9, "17OE1Agwh7s4xteggBqMHBKarGUsSQVC0", "crater"],
+      ["Cratère Kipling", -19.4, 288.0, "1WhItThqGpSq64KPu92YIrT2ta6EQDsEQ", "crater"],
+      ["Cratère Kōshō", 60.1, 139.9, "1wOHVXuqFCRAseZKwxL8qpuavJgKiyO5t", "crater"],
+      ["Cratère Kuan Han-Chʽing", 29.4, 52.4, "176C9NOFo7OEGJBiM_Nb0MfXMgjDvQCQ8", "crater"],
+      ["Cratère Kuiper", -11.3, 31.1, "1p2I4U0pvKVBCF_07vWFjpdLnBodCSe4G", "crater"],
+      ["Cratère Kulthum", 50.7, 266.5, "1OpPWWljydmfkgvOn_HqFhU12rOCcm1GD", "crater"],
+      ["Cratère Kunisada", 1.4, 247.0, "1Fk_8FOqT9u9L6fWMYkV3QawN9egg5Nu_", "crater"],
+      ["Cratère Lange", 6.4, 260.0, "1n964-gbJeg26BzdN7Am3yNAWG9D4Jx7m", "crater"],
+      ["Cratère Larrocha", 43.3, 290.2, "13kr5fa2L5j9xYQ0T7dl1gTuH9JE8aWR-", "crater"],
+      ["Cratère Leopardi", -73.0, 180.1, "1yYcse05JL4EVdLtRaQgbpTi1xfiB8gfm", "crater"],
+      ["Cratère Lermontov", 15.2, 48.1, "1yycPjiVo8dtY2D9806ngdCnOtSNp5VLg", "crater"],
+      ["Cratère Lessing", -28.7, 89.7, "1_MJFnsEVB_gsJKEnszZ_EhxzB9CIL9Y8", "crater"],
+      ["Cratère Li Chʽing-Chao", -77.1, 73.1, "1sm8KP_KcDn5FPRuErH3XsMXQbCYByd3l", "crater"],
+      ["Cratère Li Po", 16.9, 35.0, "18lsaXH43GuZ9Q_a4L4ahGymUWKBK7-XE", "crater"],
+      ["Cratère Liang Kʽai", -40.3, 184.4, "1KMLqAdHwzZcdwAjJHEykyVfoLM0Hp9yi", "crater"],
+      ["Cratère Liszt", -16.1, 168.1, "13NwUQ55QbJytBWejONGAJ1PRzhMhnp9-", "crater"],
+      ["Cratère Lu Hsun", 0.1, 23.4, "1npj0lgOaT3k4daCv8XXPUZ1NOVtT5RXe", "crater"],
+      ["Cratère Lysippus", 0.8, 132.5, "1hOk1ePm6AGuw7MTpJPrjCWNB83PmlVgh", "crater"],
+      ["Cratère Ma Chih-Yuan", -60.1, 78.0, "12_A_qqosmsIVxKlN10VhQ6sBXMm8YsSt", "crater"],
+      ["Cratère Machaut", -1.9, 82.1, "1GGDVpY7wHA0Ull-YSG6DK9KimFnIW0GR", "crater"],
+      ["Cratère Mahler", -20.0, 18.7, "11RQPh6vasQv0B-EPn8vdTHH--3Me9H-j", "crater"],
+      ["Cratère Mansart", 73.2, 118.7, "1Ic3gX5ygdiXByd7-HpU71XlpKs8Hz14m", "crater"],
+      ["Cratère Mansur", 47.8, 162.6, "1aqI2gJqHiIER8WOCIeRaqYa9NsBsQgOr", "crater"],
+      ["Cratère March", 31.1, 175.8, "1tvA8tmMVqctADLGFX6Av087CAyosEt_E", "crater"],
+      ["Cratère Mark Twain", -11.2, 137.9, "1Tr6f2BtH694J1y5CrOSfKJ1rBSjmON6n", "crater"],
+      ["Cratère Martí", -75.6, 164.6, "1JmeY3qq1ZbiZkPabjx6nRP2pdx82xMHk", "crater"],
+      ["Cratère Martial", 69.1, 177.1, "1hxo1YTVTETSBZl8WZS7THhvaMudX_Di9", "crater"],
+      ["Cratère Matabei", -39.7, 13.9, "1qltGC0ZXr-krrKoodI8jZNFm_YyNq22v", "crater"],
+      ["Cratère Matisse", -24.0, 89.8, "1j8RksLPwscJ1ToZN3wB8YT4pG_qA2g8n", "crater"],
+      ["Cratère Mena", 0.2, 130.5, "1pkHoCUyrrtwbHDQXg9lWhvmGtsFGgxlH", "crater"],
+      ["Cratère Michelangelo", -45.0, 109.1, "1yc1rOKuanGKjV9UDsbOJ2co47zno_yhk", "crater"],
+      ["Cratère Mickiewicz", 23.2, 103.1, "1XLJPO7p-z9BYTHY5siore_MRKsPYqBie", "crater"],
+      ["Cratère Milton", -26.2, 174.8, "1uef5xnvkkmDvnUmlYiIM9g14Xm5o_syM", "crater"],
+      ["Cratère Mofolo", -37.7, 28.2, "1atTvlPibpJ_X1iArEPTLs2is0BdHi0xl", "crater"],
+      ["Cratère Molière", 15.6, 16.9, "1zdUI0C5QQ4WztPXglq6j8KllByr21rsf", "crater"],
+      ["Cratère Monet", 44.4, 9.8, "1Zz2I3J4lBc5K9YGm1TQEA-RgReHh8iAB", "crater"],
+      ["Cratère Monteverdi", 63.8, 77.3, "1CQHMXHGXDqPdwS1oZIGPp8stevP3dqeq", "crater"],
+      ["Cratère Moody", -13.1, 215.4, "1ZzuHEuff7Eb27C89Jl8jMNSgFwIuuAml", "crater"],
+      ["Cratère Mozart", 8.0, 190.5, "17UAt0r6KxVW8SVtPOAVLGESzizwq-UVO", "crater"],
+      ["Cratère Munch", 40.6, 207.3, "1xYnUl7uBSAy8Kd6hEYXUbHy9aSBajarx", "crater"],
+      ["Cratère Munkácsy", 21.9, 259.1, "1vUezL-IQSndBiP2VFlh1H-lgqspMYIxp", "crater"],
+      ["Cratère Murasaki", -12.6, 30.2, "1RK0JnRr8l-nxkZEQc1RnnreYRFlVPUdn", "crater"],
+      ["Cratère Mussorgskij", 32.8, 96.5, "1h26k2zhbsnVRLl_EYneq2TogT_-RmN6T", "crater"],
+      ["Cratère Myron", 1.5, 23.0, "1CaR9eS_aBjqeW2JKK4f-siVfdOm5rNKG", "crater"],
+      ["Cratère Nabokov", -14.5, 304.2, "1I0zERb4TeMyZXeeDYdl36uIyak8ZY8B4", "crater"],
+      ["Cratère Nampeyo", -40.6, 50.1, "1ExSRBRdObugXDi5pKHUTm8txx9ldewlI", "crater"],
+      ["Cratère Navoi", 59.0, 200.0, "15_SQkBK0MQFtrEWKS_EZxTcPTVk2IHJy", "crater"],
+      ["Cratère Nāwahī", 36.1, 214.9, "1Oh599EOX4LvV6Pt1Icc10CYH_1zRFkL7", "crater"],
+      ["Cratère Neruda", -52.4, 234.2, "1yejOekrSFTJiqU2SZjFPh3XD8w8WnnW3", "crater"],
+      ["Cratère Neumann", -37.3, 34.5, "1EVAc5aqcrEuOGlnei6_w2m87BQcLKS56", "crater"],
+      ["Cratère Nizāmī", 71.5, 165.0, "19-IGRNoqrR3M8K-3qaFy1j_QEY563iO9", "crater"],
+      ["Cratère Ōkyo", -69.1, 75.8, "1iyoRLcJGGYfAQ7pbvoMyUuOBDcMBEHFW", "crater"],
+      ["Cratère Oskison", 60.6, 214.9, "14oDqLGMBEa-mEJqlvW5k4xSynWNHwWKP", "crater"],
+      ["Cratère Petrarch", -30.6, 26.2, "18cOfv_XwK8l36vzZWTf_PtAjU3gp6Dn2", "crater"],
+      ["Cratère Picasso", 3.3, 309.8, "1f0geGj-sqHEiK9Y07SsH0OBWcKbhwgwq", "crater"],
+      ["Cratère Poe", 44.0, 201.2, "1maPPLPPv1bMJlWpXBKhIZZxB_83CT2m-", "crater"],
+      ["Cratère Polygnotus", -0.3, 68.4, "1VipSlFPazbKtXb2RdHoFE-nNMFUx-6Hh", "crater"],
+      ["Cratère Praxiteles", 27.3, 59.2, "1W0Q9NnQJFArwikXUOAD_jhIU8lBIEYQd", "crater"],
+      ["Cratère Prokofiev", 86.0, 65.5, "11g-cv-DFaOVfS3DeWbQL7WaDXbqjVX5V", "crater"],
+      ["Cratère Qi Baishi", -4.2, 196.0, "1wYkO15WPoS7o2XJF41zSuRhuZxm0wCKV", "crater"],
+      ["Cratère Rachmaninoff", 27.6, 302.4, "1XSNaZtarFumVn8DHv6Mj5YlSGQwCDKq8", "crater"],
+      ["Cratère Raden Saleh", 2.2, 201.3, "11r1Vse_51uOg41-49x9cqSIaRRxyTLCQ", "crater"],
+      ["Cratère Raditladi", 27.3, 240.9, "1b1vTjdEcFaBMLMA7Fn5HPbAm8mbRVK9N", "crater"],
+      ["Cratère Rameau", -54.9, 37.5, "1sTL_wsY1OsJS1Omx-oShcEK6b4VGFDR9", "crater"],
+      ["Cratère Raphael", -19.9, 75.9, "1XCx5AkUsa8-4zPv4p_jerxdyrl2jTssL", "crater"],
+      ["Cratère Rembrandt", -33.2, 88.2, "153cgn_6dUUDCqGycFYBvtRtb55Hd0_9K", "crater"],
+      ["Cratère Renoir", -18.6, 51.9, "1RENKTgmPegn3BKV9gks0b3eMfeVqFfBb", "crater"],
+      ["Cratère Rivera", 69.3, 32.2, "1j6Yz8mSd2fFs0EaJrwQEa7u61V_Nlk3l", "crater"],
+      ["Cratère Rodin", 21.1, 18.2, "1wLmM2bg1zubdoKsDs2WdDF2y2jpVgRj7", "crater"],
+      ["Cratère Rūdaki", -4.0, 51.4, "1nIcnU-xyGLA6WXZDPHAgU1gqYwaPdZxw", "crater"],
+      ["Cratère Sander", 42.6, 205.6, "1zHZJ8q3pTYaPO3y_t-VC3oYRkvasG66l", "crater"],
+      ["Cratère Schubert", -43.4, 54.3, "1FxhNrOAseRzFfumzHJGno6QlgwnBVgKV", "crater"],
+      ["Cratère Shakespeare", 49.7, 150.9, "1NImvyV7sPb75bSNxSA7Kh-bDoKOoI2oC", "crater"],
+      ["Cratère Sinan", 15.5, 29.8, "1MCnfSC4RwSzMb514Mm9A6aV3Ti4SFNqx", "crater"],
+      ["Cratère Stravinsky", 50.5, 73.5, "12VInGkbyJBRXYXzaArtO_jH0ubH0JR78", "crater"],
+      ["Cratère Sullivan", -16.9, 86.3, "1qTe5CfVMJ_dHp-2Ghnz-_RdDCit24tjo", "crater"],
+      ["Cratère Sveinsdóttir", -2.6, 259.9, "1Ax-12t6746Wsj5dINZ8HuREaQDFpGf3b", "crater"],
+      ["Cratère Titian", -3.6, 42.1, "1UTtKV5JA0uHfN9Em0HdB4DxukJHbP_MF", "crater"],
+      ["Cratère To Ngoc Van", 52.3, 111.7, "1O5H6VJxLcTk_bK-ZwCwKFZywo_NF4KyS", "crater"],
+      ["Cratère Velázquez", 37.5, 53.7, "1DTHRFlZlDrZ4wXOsADsNkticzE7NauxU", "crater"],
+      ["Cratère Verdi", 64.7, 168.6, "11JCqFOyZ56UbT-yTiA5DQZw15vBsT5xo", "crater"],
+      ["Cratère Villa-Lobos", 5.3, 340.5, "1RMDMgYEbu75uoCuPzqPkEBiyTr5RLxd2", "crater"],
+      ["Cratère Vivaldi", 13.7, 85.0, "1iSlI0tfxhUhl3tPP-ddyfOcLyvWwODZY", "crater"],
+      ["Cratère Xiao Zhao", 10.6, 236.4, "1Urx8skvkidVvFybZA62PGXRJS0PrWgv8", "crater"],
+      ["Cratère Yeats", 9.2, 34.6, "1PAFhG6F6u55X9uL557HXLYF79Y6KJikp", "crater"],
+      ["Cratère Zola", 50.1, 177.3, "1Ki0dHtEvaEieDHljtwdHUwp84PvMZK-i", "crater"],
+      ["Cratère Van Eyck", 43.2, 158.8, "1vO1cw0nNMQzsbls3KSSWeyQyPuEMTt5D", "crater"],
+
+      /* PLAINES VOLCANIQUES (PLANITIAE) */
+      ["Planitia Aparangi", 67.2, 85.0, "1sS5igThyAAz9EPnWTzaaY38WNPku10-F", "mare"],
+      ["Planitia Borealis", 73.0, 79.5, "1T-lnoD8RAxnn8LeCWERyHM5yUOOFVEcs", "mare"],
+      ["Planitia Budh", 22.0, 150.0, "1IX2agseu3hQ9DGKsl7fwMh1vUVEpolF6", "mare"],
+      ["Planitia Caloris", 30.5, 187.0, "1nAd8sNzmYnTdDTPOennJdjmNGm_XTNrh", "mare"],
+      ["Planitia Odin", 23.3, 170.5, "1Ulx-_pij82U-GTiaPnk67z98vGvEZz1w", "mare"],
+      ["Planitia Sobkou", 39.0, 128.0, "1FwtLvjC6esHLJBr43kAeyHkBQT4Fn4Dr", "mare"],
+      ["Planitia Tir", 1.2, 176.0, "18cQ57V-Z67rWMbEwM12WNeDGzMSLttVf", "mare"],
+      ["Planitia Utaridi", 68.0, 270.0, "1k3JFtuNCC7h5mdqn5rxsJuli-XL2fdMJ", "mare"],
+
+      /* ESCARPEMENTS TECTONIQUES (RUPES) */
+      ["Rupes Discovery", -56.3, 38.3, "1oFAKcbPs1pvnhLmEn_t15svzAtFwVyF8", "valley"]
+    ];
+
+    let currentFilter = 'all';
+
+    function renderAtlasGrid(items) {
+      const grid = document.getElementById('atlasGrid');
+      grid.innerHTML = '';
+
+      items.forEach(item => {
+        const [name, lat, lon, driveId, cat] = item;
+        const imgUrl = `https://lh3.googleusercontent.com/d/${driveId}=s400`;
+
+        const card = document.createElement('div');
+        card.className = 'atlas-card';
+        card.onclick = () => openAtlasModal(name, lat, lon, driveId, cat);
+
+        let tagClass = 'tag-crater';
+        let tagText = 'Cratère';
+        if (cat === 'mare') { tagClass = 'tag-mare'; tagText = 'Planitia'; }
+        else if (cat === 'valley') { tagClass = 'tag-valley'; tagText = 'Rupes'; }
+
+        card.innerHTML = `
+          <div class="atlas-img-box">
+            <img src="${imgUrl}" alt="${name}" loading="lazy" onerror="this.src='https://drive.google.com/thumbnail?id=${driveId}&sz=w400'">
+          </div>
+          <div class="atlas-card-title">${name}</div>
+          <span class="atlas-card-tag ${tagClass}">${tagText}</span>
+        `;
+        grid.appendChild(card);
+      });
+
+      document.getElementById('atlasCounter').innerText = `Affichage de ${items.length} relief${items.length > 1 ? 's' : ''}`;
+    }
+
+    function setAtlasFilter(filter) {
+      currentFilter = filter;
+      document.querySelectorAll('.atlas-filter-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      filterAtlasReliefs();
+    }
+
+    function filterAtlasReliefs() {
+      const query = document.getElementById('atlasSearchInput').value.toLowerCase().trim();
+      
+      const filtered = MERCURY_DATABASE.filter(item => {
+        const [name, lat, lon, driveId, cat] = item;
+        const matchesCat = (currentFilter === 'all') || (cat === currentFilter);
+        const matchesQuery = name.toLowerCase().includes(query);
+        return matchesCat && matchesQuery;
+      });
+
+      renderAtlasGrid(filtered);
+    }
+
+    function openAtlasModal(name, lat, lon, driveId, cat) {
+      const modal = document.getElementById('atlasModal');
+      const img = document.getElementById('modalImg');
+      const title = document.getElementById('modalTitle');
+      const meta = document.getElementById('modalMeta');
+      const desc = document.getElementById('modalDesc');
+
+      img.src = `https://lh3.googleusercontent.com/d/${driveId}=s1200`;
+      img.onerror = () => { img.src = `https://drive.google.com/thumbnail?id=${driveId}&sz=w1200`; };
+      
+      title.innerText = name;
+      meta.innerText = `Type : ${cat.toUpperCase()} · Latitude : ${lat}° · Longitude : ${lon}°`;
+      desc.innerText = `Prise de vue orbitale haute résolution capturée par la mission MESSENGER au-dessus de la région (${lat}°, ${lon}°).`;
+
+      modal.style.display = 'flex';
+    }
+
+    function closeAtlasModal(e) {
+      if (!e || e.target.id === 'atlasModal' || e.target.classList.contains('modal-close-btn')) {
+        document.getElementById('atlasModal').style.display = 'none';
+      }
+    }
+
+    // Initialisation au chargement
+    renderAtlasGrid(MERCURY_DATABASE);
+  </script>
+</body>
+</html>
