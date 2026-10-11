@@ -238,6 +238,24 @@
       color: #38bdf8;
       margin-bottom: 8px;
     }
+  /* STYLE DES TITRES AVEC TRAIT ESTOMPÉ (STYLE VÉNUS) */
+    .section-heading, .section-title-fiche, .section-h2 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #f8fafc;
+      margin: 4rem 0 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .section-heading::after, .section-title-fiche::after, .section-h2::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(245, 158, 11, 0.5), transparent);
+    }
   </style>
 </head>
 <body>
@@ -253,9 +271,15 @@
         Sentinelle de fer calcinée par le Soleil, Mercure est la plus petite et la plus extrême des planètes du Système solaire. Dépourvue d'atmosphère pour adoucir son climat, elle endure un écart thermique vertigineux de plus de six cents degrés entre ses midis de plomb fondu et ses nuits cryogéniques. Sous sa surface balafrée d'escarpements géants nés du rétrécissement de son cœur métallique démesuré, ce monde calciné abrite pourtant de la glace d'eau éternelle au fond de cratères polaires plongés dans l'ombre perpétuelle. Verrouillée dans une singulière résonance gravitationnelle, sa course effrénée a également offert à la physique moderne la toute première confirmation expérimentale de la relativité générale d'Einstein. Un astre de paradoxes absolus qui brave en solitaire la proximité ardente de notre étoile.
       </div>
 
-      <!-- PHOTO PRINCIPALE MERCURE -->
-      <div class="hero-img-box" style="aspect-ratio: auto; border-color: rgba(56, 189, 248, 0.4); box-shadow: 0 0 50px rgba(0,0,0,0.9), 0 0 35px rgba(56, 189, 248, 0.2);">
-        <img src="https://lh3.googleusercontent.com/d/1J4GrZuFlDDxzSUGGDR1DAn2ceg1G0pvK=s1600" alt="Mercure en vraies couleurs">
+      <!-- PHOTO PRINCIPALE MERCURE AVEC LÉGENDE INTÉGRÉE -->
+      <div class="hero-img-box" style="aspect-ratio: auto; border-radius: 14px; overflow: hidden; border: 1px solid rgba(56, 189, 248, 0.4); box-shadow: 0 0 50px rgba(0,0,0,0.9), 0 0 35px rgba(56, 189, 248, 0.2); background: #0b1120; margin-bottom: 3.5rem;">
+        <img src="https://lh3.googleusercontent.com/d/1J4GrZuFlDDxzSUGGDR1DAn2ceg1G0pvK=s1600" alt="Mercure en vraies couleurs" style="width: 100%; height: auto; display: block;">
+        <div style="padding: 1.4rem 1.8rem; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: left;">
+          <h3 style="font-family: 'Cinzel', serif; font-size: 1.15rem; color: #facc15; margin-bottom: 0.6rem;">Mosaïque multispectrale (Sonde MESSENGER)</h3>
+          <p style="font-size: 0.9rem; color: #cbd5e1; line-height: 1.75; margin: 0; text-align: justify;">
+            Les différences de couleur sur Mercure sont subtiles, mais elles révèlent des informations importantes sur la nature des matériaux de surface. Les teintes bleuâtres marquent des roches fraîches excavées par des impacts récents avec leurs rayons lumineux. La grande région claire en haut à droite représente l'intérieur du gigantesque bassin Caloris, rempli de plaines lisses volcaniques.
+          </p>
+        </div>
       </div>
     </header>
 
@@ -481,14 +505,6 @@
     <!-- SECTION : GÉOCHIMIE ET COULEURS DE SURFACE -->
     <section class="theme-section">
       <h2 class="section-h2">Spectrométrie & Couleurs de surface</h2>
-
-      <div class="media-single">
-        <img src="https://lh3.googleusercontent.com/d/1J4GrZuFlDDxzSUGGDR1DAn2ceg1G0pvK=s1600" alt="Nuances de couleur et rayons d'impacts">
-      </div>
-
-      <p class="caption-text">
-        Les différences de couleur sur Mercure sont subtiles, mais elles révèlent des informations importantes sur la nature du matériau de la surface de la planète. Un certain nombre de points lumineux avec une teinte bleuâtre sont visibles sur cette image. Ce sont des cratères d’impact relativement récents. Certains des cratères brillants ont des stries lumineuses (appelées « rayons » par les planétologues) qui en émanent. De telles caractéristiques brillantes sont causées par la présence de roches fraîchement concassées qui ont été excavées et déposées lors de la collision hautement énergétique d'un météoroïde avec Mercure pour former un cratère d'impact. La grande zone circulaire de couleur claire en haut à droite de l’image représente l’intérieur du bassin Caloris. Mariner 10 n'a vu que la partie est (à droite) de cet énorme bassin d'impact, dans des conditions d'éclairage qui mettaient l'accent sur les ombres et les différences d'élévation plutôt que sur les différences de luminosité et de couleur. MESSENGER a révélé que Caloris est rempli de plaines lisses plus lumineuses que le terrain environnant, faisant allusion à un contraste de composition entre ces unités géologiques. L'intérieur de Caloris abrite également plusieurs cratères inhabituels aux bords sombres, visibles sur cette image. L'équipe scientifique de MESSENGER travaille avec les images en 11 couleurs afin de mieux comprendre quels minéraux sont présents dans ces roches de la croûte de Mercure.
-      </p>
 
       <div class="media-single">
         <img src="https://lh3.googleusercontent.com/d/1K5B_WOx7g2emluTm9viKYhRgfUig7Zw9=s1600" alt="Mosaïque globale MESSENGER en fausses couleurs">
