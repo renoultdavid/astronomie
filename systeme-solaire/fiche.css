@@ -377,3 +377,26 @@ body {
     grid-template-columns: 1fr; 
   }
 }
+/* Bouton plein écran discret */
+.btn-fullscreen {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-muted);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+}
+
+.btn-fullscreen:hover {
+  color: var(--cyan-accent);
+  border-color: var(--cyan-accent);
+  background: rgba(56, 189, 248, 0.1);
+}
