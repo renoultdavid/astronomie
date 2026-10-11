@@ -1041,10 +1041,10 @@
               </div>
 
               <div class="btn-launch-container">
-                <a href="./systeme-solaire/planetarium.html" target="_blank" rel="noopener" class="btn-launch" title="Lancer le Planétarium 3D">
+                <button onclick="ouvrirPlanetarium()" class="btn-launch" style="cursor: pointer;" title="Lancer le Planétarium 3D">
                   <span class="btn-launch-title">DÉCOLLAGE</span>
                   <span class="btn-launch-sub">EXPLORATION</span>
-                </a>
+                </button>
                 <div class="launch-ready">Prêt pour engagement</div>
               </div>
 
@@ -1246,6 +1246,11 @@
         <h1 style="font-family:'Cinzel', serif; font-size:2rem; margin-bottom:1rem; color:#38bdf8;">MERCURE</h1>
         <p style="color:#94a3b8;">La planète de fer et de cratères</p>
       </div>
+    </section>
+
+    <!-- VUE 4 : PLANÉTARIUM 3D INTÉGRÉ -->
+    <section id="view-planetarium" class="app-view" style="overflow: hidden;">
+      <iframe id="planetarium-frame" src="" style="width: 100%; height: 100%; border: none; display: block; background: #000;"></iframe>
     </section>
 
   </main>
@@ -1459,6 +1464,15 @@
       }
     }
 
+    /* LANCEMENT DU PLANÉTARIUM 3D SANS SORTIR DU PLEIN ÉCRAN */
+    function ouvrirPlanetarium() {
+      const frame = document.getElementById('planetarium-frame');
+      if (!frame.src || frame.src === '' || frame.src === window.location.href) {
+        frame.src = './systeme-solaire/planetarium.html';
+      }
+      goToView('planetarium');
+    }
+
     function updateMasterBar(viewId) {
       const backBtn = document.getElementById('btn-back');
       const title = document.getElementById('nav-title');
@@ -1470,6 +1484,10 @@
         backBtn.style.display = 'inline-flex';
         backBtn.innerText = '← Atlas Céleste';
         title.innerText = 'Système Solaire';
+      } else if (viewId === 'planetarium') {
+        backBtn.style.display = 'inline-flex';
+        backBtn.innerText = '← Système Solaire';
+        title.innerText = 'Planétarium 3D';
       } else if (viewId.startsWith('astre-')) {
         backBtn.style.display = 'inline-flex';
         backBtn.innerText = '← Système Solaire';
