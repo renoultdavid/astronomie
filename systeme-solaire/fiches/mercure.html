@@ -243,12 +243,15 @@
 <body>
 
   <!-- BARRE SUPÉRIEURE DE NAVIGATION -->
+ <!-- BARRE SUPÉRIEURE DE NAVIGATION -->
   <nav class="fiche-nav">
     <a href="../index.html">← Système Solaire</a>
     <span style="font-family:'Cinzel',serif; font-size:0.9rem; letter-spacing:0.12em; text-transform:uppercase;">Mercure</span>
-    <a href="../planetarium.html" target="_blank" rel="noopener">🪐 Planétarium 3D</a>
+    <div style="display: flex; gap: 8px; align-items: center;">
+      <button class="btn-fullscreen" onclick="toggleFullScreen()" title="Plein écran">⛶ Plein écran</button>
+      <a href="../planetarium.html" target="_blank" rel="noopener">🪐 Planétarium 3D</a>
+    </div>
   </nav>
-
   <main class="fiche-container">
 
     <!-- HERO & INTRODUCTION GÉNÉRALE -->
@@ -1156,6 +1159,19 @@
 
     // Initialisation au chargement
     renderAtlasGrid(MERCURY_DATABASE);
+
+    /* BASCULE PLEIN ÉCRAN POUR CHROME / DESKTOP */
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          console.warn("Plein écran non supporté ou bloqué :", err);
+        });
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
   </script>
 </body>
 </html>
