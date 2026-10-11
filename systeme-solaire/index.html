@@ -10,9 +10,19 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+      --bg-dark: #020617;
+      --payne-dark: #121824;
+      --payne-base: #1e293b;
+      --gold-accent: #facc15;
+      --cyan-accent: #38bdf8;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -20,14 +30,14 @@
     }
 
     body {
-      background-color: #020617;
-      color: #e2e8f0;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
       font-family: 'Montserrat', sans-serif;
-      line-height: 1.65;
+      line-height: 1.6;
       overflow-x: hidden;
       background-image: 
-        radial-gradient(circle at 50% 0%, rgba(30, 58, 138, 0.25) 0%, transparent 60%),
-        radial-gradient(circle at 10% 30%, rgba(56, 189, 248, 0.05) 0%, transparent 40%);
+        radial-gradient(circle at 50% 0%, rgba(30, 58, 138, 0.22) 0%, transparent 55%),
+        radial-gradient(circle at 85% 35%, rgba(56, 189, 248, 0.04) 0%, transparent 40%);
     }
 
     /* BARRE SUPÉRIEURE */
@@ -38,8 +48,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.9rem 2rem;
-      background: rgba(2, 6, 23, 0.88);
+      padding: 0.85rem 2rem;
+      background: rgba(2, 6, 23, 0.9);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -49,7 +59,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      color: #94a3b8;
+      color: var(--text-muted);
       text-decoration: none;
       font-family: 'Cinzel', serif;
       font-size: 0.78rem;
@@ -63,8 +73,8 @@
     }
 
     .nav-back:hover {
-      color: #38bdf8;
-      border-color: #38bdf8;
+      color: var(--cyan-accent);
+      border-color: var(--cyan-accent);
       background: rgba(56, 189, 248, 0.1);
       transform: translateX(-2px);
     }
@@ -74,24 +84,23 @@
       font-size: 0.95rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: #f8fafc;
+      color: var(--text-main);
     }
 
-    /* CONTENEUR GLOBAL */
     .container {
-      max-width: 1140px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 2.5rem 1.5rem 6rem;
+      padding: 2rem 1.5rem 6rem;
     }
 
     /* SECTION 1 : INTRODUCTION */
     .intro-banner {
       background: rgba(15, 23, 42, 0.65);
       border: 1px solid rgba(56, 189, 248, 0.25);
-      border-radius: 14px;
-      padding: clamp(1.4rem, 3vw, 2.2rem);
-      margin-bottom: 3.5rem;
-      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(56, 189, 248, 0.03);
+      border-radius: 12px;
+      padding: clamp(1.2rem, 3vw, 2rem);
+      margin-bottom: 3rem;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
     }
 
     .intro-text {
@@ -104,14 +113,14 @@
 
     .section-title {
       font-family: 'Cinzel', serif;
-      font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+      font-size: clamp(1.2rem, 2.2vw, 1.55rem);
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: #f8fafc;
-      margin-bottom: 1.8rem;
+      color: var(--text-main);
+      margin: 3.5rem 0 1.8rem;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
 
     .section-title::after {
@@ -121,211 +130,25 @@
       background: linear-gradient(90deg, rgba(56, 189, 248, 0.4), transparent);
     }
 
-    /* SECTION 2 : INFOGRAPHIE INTERACTIVE */
-    .info-card {
-      background: rgba(10, 15, 28, 0.92);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 14px;
-      overflow: hidden;
-      margin-bottom: 4.5rem;
-      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.7);
-    }
-
-    .info-header {
-      padding: 1.8rem 1.8rem 1.2rem;
-      text-align: center;
-      background: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(10, 15, 28, 0) 100%);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .info-header h3 {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(1.1rem, 2vw, 1.45rem);
-      letter-spacing: 0.1em;
-      color: #ffffff;
-      margin-bottom: 0.4rem;
-    }
-
-    .info-header p {
-      font-size: 0.82rem;
-      color: #94a3b8;
-      letter-spacing: 0.05em;
-    }
-
-    .tab-pills {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      padding: 1.2rem 1.5rem;
-      flex-wrap: wrap;
-      background: rgba(2, 6, 23, 0.6);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .tab-btn {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      color: #94a3b8;
-      padding: 8px 18px;
-      border-radius: 30px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      cursor: pointer;
-      transition: all 0.25s ease;
-    }
-
-    .tab-btn:hover {
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.3);
-    }
-
-    .tab-btn.active {
-      background: #2563eb;
-      border-color: #38bdf8;
-      color: #ffffff;
-      box-shadow: 0 0 15px rgba(37, 99, 235, 0.5);
-    }
-
-    .tab-content {
-      padding: clamp(1.2rem, 3vw, 2.2rem);
-    }
-
-    .tab-pane {
-      display: none;
-    }
-
-    .tab-pane.active {
-      display: block;
-      animation: fadeIn 0.4s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* SCHÉMA ÉCHELLE LOGARITHMIQUE */
-    .scale-diagram {
-      background: rgba(2, 6, 23, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+    /* SECTION 2 : MODULE INFOGRAPHIE (INTÉGRATION STRICTE DU CODE FOURNI) */
+    #infographie-systeme-solaire {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0b1120;
+      color: #e2e8f0;
+      padding: 12px 14px;
       border-radius: 10px;
-      padding: 1.5rem 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .scale-title {
-      text-align: center;
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #64748b;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-    }
-
-    .scale-track {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: relative;
-      padding: 0 1rem;
-      overflow-x: auto;
-      gap: 1.5rem;
-    }
-
-    .scale-track::before {
-      content: "";
-      position: absolute;
-      top: 30px;
-      left: 2rem;
-      right: 2rem;
-      height: 1px;
-      background: dashed 1px rgba(255, 255, 255, 0.18);
-      z-index: 1;
-    }
-
-    .scale-node {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-width: 110px;
-      text-align: center;
-    }
-
-    .node-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 10px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
-      font-size: 1.3rem;
-    }
-
-    .node-sun { background: radial-gradient(circle, #fef08a, #ea580c); box-shadow: 0 0 25px rgba(234, 88, 12, 0.7); }
-    .node-telluric { background: rgba(30, 41, 59, 0.9); border: 1px solid #f59e0b; }
-    .node-belt { background: rgba(15, 23, 42, 0.9); border: 1px dashed #94a3b8; }
-    .node-giants { background: rgba(30, 41, 59, 0.9); border: 1px solid #38bdf8; }
-    .node-kuiper { background: rgba(15, 23, 42, 0.9); border: 1px dashed #a855f7; }
-    .node-oort { background: rgba(2, 6, 23, 0.9); border: 1px solid #ef4444; }
-
-    .node-label { font-size: 0.74rem; font-weight: 700; color: #f8fafc; margin-bottom: 3px; }
-    .node-dist { font-size: 0.68rem; color: #94a3b8; }
-    .node-sub { font-size: 0.65rem; color: #64748b; margin-top: 2px; }
-
-    /* TABLEAU STYLISÉ */
-    .astro-table {
       width: 100%;
-      border-collapse: collapse;
-      font-size: 0.85rem;
-      border-radius: 8px;
-      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
     }
 
-    .astro-table th {
-      background: rgba(15, 23, 42, 0.9);
-      color: #94a3b8;
-      font-weight: 600;
-      text-align: left;
-      padding: 12px 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .astro-table td {
-      padding: 14px 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      color: #cbd5e1;
-    }
-
-    .astro-table tr:hover td {
-      background: rgba(255, 255, 255, 0.02);
-    }
-
-    .domain-name {
-      font-weight: 700;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    /* SECTION 3 : LE COCKPIT / SAS DE DÉCOLLAGE */
+    /* SECTION 3 : SAS DE DÉCOLLAGE */
     .cockpit-box {
-      position: relative;
       background: radial-gradient(circle at 50% 50%, #0a1128 0%, #020617 100%);
       border: 1px solid rgba(56, 189, 248, 0.25);
       border-radius: 16px;
       overflow: hidden;
-      margin-bottom: 5rem;
+      margin-top: 1rem;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
       padding: 2rem;
     }
@@ -334,7 +157,7 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       flex-wrap: wrap;
       gap: 1rem;
     }
@@ -349,10 +172,10 @@
     }
 
     .hud-sub { font-size: 0.65rem; color: #64748b; letter-spacing: 0.1em; text-transform: uppercase; }
-    .hud-val { color: #38bdf8; font-weight: 700; letter-spacing: 0.05em; }
+    .hud-val { color: var(--cyan-accent); font-weight: 700; letter-spacing: 0.05em; }
 
     .cockpit-radar {
-      height: 240px;
+      height: 220px;
       position: relative;
       display: flex;
       align-items: center;
@@ -372,14 +195,14 @@
     .radar-orbit {
       position: absolute;
       border-radius: 50%;
-      border: 1px dashed rgba(56, 189, 248, 0.25);
+      border: 1px dashed rgba(56, 189, 248, 0.22);
       pointer-events: none;
       transform: scaleY(0.45) rotate(-15deg);
     }
 
     .orbit-1 { width: 140px; height: 140px; }
-    .orbit-2 { width: 260px; height: 260px; border-color: rgba(56, 189, 248, 0.18); }
-    .orbit-3 { width: 420px; height: 420px; border-color: rgba(56, 189, 248, 0.12); }
+    .orbit-2 { width: 260px; height: 260px; border-color: rgba(56, 189, 248, 0.16); }
+    .orbit-3 { width: 420px; height: 420px; border-color: rgba(56, 189, 248, 0.1); }
 
     .cockpit-controls {
       display: flex;
@@ -412,11 +235,10 @@
     .status-bar-fill {
       width: 85%;
       height: 100%;
-      background: #38bdf8;
-      box-shadow: 0 0 10px #38bdf8;
+      background: var(--cyan-accent);
+      box-shadow: 0 0 10px var(--cyan-accent);
     }
 
-    /* BOUTON ROUGE DÉCOLLAGE PULSANT */
     .btn-launch-container {
       display: flex;
       flex-direction: column;
@@ -430,7 +252,7 @@
       height: 110px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #ef4444, #7f1d1d);
-      border: 3px solid rgba(255, 255, 255, 0.8);
+      border: 3px solid rgba(255, 255, 255, 0.85);
       color: #ffffff;
       text-decoration: none;
       display: flex;
@@ -466,7 +288,7 @@
     .launch-ready {
       font-family: 'Share Tech Mono', monospace;
       font-size: 0.65rem;
-      color: #94a3b8;
+      color: var(--text-muted);
       letter-spacing: 0.12em;
       text-transform: uppercase;
     }
@@ -480,135 +302,252 @@
       }
     }
 
-    /* SECTION 4 : LE CARROUSEL DES CORPS CÉLESTES */
-    .carousel-section {
+    /* SECTION 4 : VÉRITABLE CARROUSEL 3D COVERFLOW */
+    .carousel-stage {
       position: relative;
-    }
-
-    .carousel-wrapper {
+      width: 100%;
+      height: 560px;
       display: flex;
-      gap: 1.5rem;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      padding: 1rem 0.5rem 2rem;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(56, 189, 248, 0.4) transparent;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .carousel-wrapper::-webkit-scrollbar {
-      height: 6px;
-    }
-
-    .carousel-wrapper::-webkit-scrollbar-track {
-      background: rgba(2, 6, 23, 0.5);
-      border-radius: 4px;
-    }
-
-    .carousel-wrapper::-webkit-scrollbar-thumb {
-      background: rgba(56, 189, 248, 0.4);
-      border-radius: 4px;
-    }
-
-    .body-card {
-      flex: 0 0 320px;
-      scroll-snap-align: start;
-      background: rgba(11, 17, 33, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 14px;
-      padding: 1.8rem 1.4rem;
-      display: flex;
-      flex-direction: column;
       align-items: center;
-      text-align: center;
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      justify-content: center;
+      perspective: 1200px;
+      margin: 1rem 0;
     }
 
-    .body-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(56, 189, 248, 0.5);
-      background: rgba(15, 23, 42, 0.95);
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7), 0 0 20px rgba(56, 189, 248, 0.15);
-    }
-
-    .body-thumb-container {
-      width: 170px;
-      height: 170px;
-      margin-bottom: 1.4rem;
+    .carousel-track {
       position: relative;
+      width: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    .body-thumb {
+    .card {
+      position: absolute;
+      width: 350px;
+      height: 500px;
+      background: linear-gradient(180deg, var(--payne-dark) 0%, #0a0d14 100%);
+      border: 1px solid rgba(82, 99, 122, 0.35);
+      border-radius: 22px;
+      overflow: hidden;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 2.5rem 1.8rem;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                  opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                  filter 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                  border-color 0.4s ease,
+                  box-shadow 0.4s ease;
+    }
+
+    .card-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.9));
-      transition: transform 0.5s ease;
+      background-size: cover;
+      background-position: center;
+      filter: blur(5px) brightness(0.65);
+      transform: scale(1.15);
+      transition: filter 0.5s ease, brightness 0.5s ease;
+      z-index: 1;
     }
 
-    .body-card:hover .body-thumb {
-      transform: scale(1.06);
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(2, 6, 23, 0.1) 0%, rgba(15, 23, 42, 0.4) 40%, rgba(2, 6, 23, 0.95) 100%);
+      z-index: 2;
     }
 
-    .body-name {
-      font-family: 'Cinzel', serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 0.8rem;
-      letter-spacing: 0.08em;
-    }
-
-    .body-desc {
-      font-size: 0.82rem;
-      color: #94a3b8;
-      line-height: 1.7;
-      text-align: justify;
-      margin-bottom: 1.4rem;
-      flex-grow: 1;
-    }
-
-    .body-link {
-      margin-top: auto;
-      display: inline-flex;
+    .card-content {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 6px;
-      color: #38bdf8;
-      text-decoration: none;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
+      text-align: center;
+      width: 100%;
+    }
+
+    .icon-wrapper {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pulse-ring {
+      position: absolute;
+      inset: -4px;
+      border-radius: 28px;
+      border: 1px solid rgba(56, 189, 248, 0.6);
+      opacity: 0;
+      animation: elegant-pulse 3.2s infinite cubic-bezier(0.25, 1, 0.5, 1);
+      pointer-events: none;
+    }
+
+    @keyframes elegant-pulse {
+      0% { transform: scale(0.96); opacity: 0.8; }
+      50% { transform: scale(1.22); opacity: 0; }
+      100% { transform: scale(1.25); opacity: 0; }
+    }
+
+    .icon-box {
+      width: 110px;
+      height: 110px;
+      border-radius: 26px;
+      overflow: hidden;
+      background-color: #000000;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+    }
+
+    .icon-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.95rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      padding: 6px 16px;
-      border-radius: 20px;
+      color: #ffffff;
+      margin-bottom: 0.4rem;
+      line-height: 1.2;
+    }
+
+    .card-desc {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .card-action {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.6rem;
+      border: 1px solid var(--cyan-accent);
+      border-radius: 30px;
+      color: var(--cyan-accent);
       background: rgba(56, 189, 248, 0.08);
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      transition: all 0.25s ease;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.4s ease;
+      font-weight: 600;
     }
 
-    .body-link:hover {
-      background: #38bdf8;
+    .card[data-pos="0"] {
+      transform: translateX(0) translateZ(140px) scale(1);
+      z-index: 10;
+      opacity: 1;
+      filter: none;
+      border-color: rgba(56, 189, 248, 0.55);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 30px rgba(56, 189, 248, 0.25);
+    }
+
+    .card[data-pos="0"] .card-action {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card[data-pos="0"]:hover .card-action {
+      background: var(--cyan-accent);
       color: #020617;
-      box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
     }
 
-    @media (max-width: 768px) {
-      .cockpit-controls {
-        flex-direction: column;
-        text-align: center;
-      }
-      .hud-box {
-        width: 100%;
-      }
+    .card[data-pos="-1"] {
+      transform: translateX(-310px) translateZ(0) rotateY(18deg) scale(0.85);
+      z-index: 5;
+      opacity: 0.65;
+      filter: brightness(0.65);
+    }
+
+    .card[data-pos="1"] {
+      transform: translateX(310px) translateZ(0) rotateY(-18deg) scale(0.85);
+      z-index: 5;
+      opacity: 0.65;
+      filter: brightness(0.65);
+    }
+
+    .card[data-pos="-2"] {
+      transform: translateX(-560px) translateZ(-80px) rotateY(30deg) scale(0.72);
+      z-index: 2;
+      opacity: 0.35;
+      filter: brightness(0.45);
+    }
+
+    .card[data-pos="2"] {
+      transform: translateX(560px) translateZ(-80px) rotateY(-30deg) scale(0.72);
+      z-index: 2;
+      opacity: 0.35;
+      filter: brightness(0.45);
+    }
+
+    .card[data-pos="hidden"] {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateZ(-200px) scale(0.5);
+    }
+
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(18, 24, 36, 0.75);
+      border: 1px solid rgba(82, 99, 122, 0.4);
+      color: var(--text-main);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 20;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-btn:hover {
+      background: var(--payne-base);
+      border-color: var(--cyan-accent);
+      color: var(--cyan-accent);
+    }
+
+    .nav-prev { left: 1.5rem; }
+    .nav-next { right: 1.5rem; }
+
+    @media (max-width: 900px) {
+      .card { width: 290px; height: 440px; }
+      .card[data-pos="-1"] { transform: translateX(-180px) scale(0.8); }
+      .card[data-pos="1"] { transform: translateX(180px) scale(0.8); }
+      .card[data-pos="-2"], .card[data-pos="2"] { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- BARRE DE RETOUR SUPÉRIEURE -->
+  <!-- BARRE SUPÉRIEURE DE NAVIGATION -->
   <header class="top-nav">
     <a href="../" class="nav-back">← Atlas Céleste</a>
     <div class="nav-brand">Système Solaire</div>
@@ -617,138 +556,271 @@
 
   <main class="container">
 
-    <!-- 1. TEXTE D'INTRODUCTION DU SYSTÈME SOLAIRE -->
+    <!-- 1. PRÉSENTATION GÉNÉRALE -->
     <section class="intro-banner">
       <p class="intro-text">
         Né il y a 4,6 milliards d'années de l'effondrement d'une nébuleuse primordiale, le Système solaire constitue notre oasis gravitationnelle au sein de la Voie lactée. Organisé autour d'un Soleil qui concentre l'écrasante majorité de la matière, il sépare le royaume rocheux des planètes telluriques intérieures des domaines colossaux des géantes gazeuses et glacées. Aux confins de ce ballet mécanique, les ceintures de débris et le lointain nuage d'Oort préservent intacts les matériaux primitifs de la genèse cosmique. Protégé du milieu galactique par le bouclier protecteur de l'héliosphère, cet ensemble poursuit une ronde remarquablement stable jusqu'au crépuscule inéluctable de son étoile centrale. Explorer son architecture permet ainsi de retracer l'enchaînement physique qui a rendu possible l'émergence du vivant sur Terre...
       </p>
     </section>
 
-    <!-- 2. INFOGRAPHIE INTERACTIVE & ARCHITECTURE -->
+    <!-- 2. MODULE ARCHITECTURE ET ÉVOLUTION -->
     <section>
-      <h2 class="section-title">Architecture & Évolution</h2>
+      <div id="infographie-systeme-solaire">
+        <header style="text-align: center; margin: 0 0 10px 0;">
+          <h2 style="color: #f8fafc; margin: 0; font-size: 1.25rem; line-height: 1.2;">Architecture et évolution du Système solaire</h2>
+          <p style="color: #94a3b8; margin: 4px 0 0 0; font-size: 0.8rem;">Organisation des zones orbitales, physique de formation et devenir cosmique</p>
+        </header>
 
-      <div class="info-card">
-        <div class="info-header">
-          <h3>Architecture et évolution du Système solaire</h3>
-          <p>Organisation des zones orbitales, physique de formation et devenir cosmique</p>
+        <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 0 0 12px 0;">
+          <button onclick="changerOngletSS('architecture')" id="btn-ss-architecture" style="padding: 6px 14px; border-radius: 6px; border: none; background: #2563eb; color: #fff; font-weight: 600; cursor: pointer; font-size: 0.8rem;">1. Architecture & Découpage en zones</button>
+          <button onclick="changerOngletSS('formation')" id="btn-ss-formation" style="padding: 6px 14px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.8rem;">2. Genèse & Ligne des glaces</button>
+          <button onclick="changerOngletSS('avenir')" id="btn-ss-avenir" style="padding: 6px 14px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.8rem;">3. Spécificités & Devenir ultime</button>
         </div>
 
-        <div class="tab-pills">
-          <button class="tab-btn active" onclick="switchHubTab(0)">1. Architecture & Découpage en zones</button>
-          <button class="tab-btn" onclick="switchHubTab(1)">2. Genèse & Ligne des glaces</button>
-          <button class="tab-btn" onclick="switchHubTab(2)">3. Spécificités & Devenir ultime</button>
-        </div>
+        <!-- ONGLET 1 -->
+        <div id="onglet-ss-architecture" style="margin: 0; padding: 0;">
+          <div style="background: #070d19; border: 1px solid #1e293b; border-radius: 6px; padding: 8px; margin-bottom: 10px; overflow-x: auto;">
+            <svg viewBox="0 0 920 230" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; aspect-ratio: 920 / 230; min-width: 700px; display: block; margin: 0;">
+              <defs>
+                <radialGradient id="gradSoleilSS" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#ffffff"/>
+                  <stop offset="35%" stop-color="#fef08a"/>
+                  <stop offset="70%" stop-color="#eab308" stop-opacity="0.9"/>
+                  <stop offset="100%" stop-color="#ca8a04" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
 
-        <div class="tab-content">
-          <!-- ONGLET 1 : ARCHITECTURE -->
-          <div class="tab-pane active" id="hub-tab-0">
-            
-            <div class="scale-diagram">
-              <div class="scale-title">Les étages du Système solaire (Échelle logarithmique simplifiée)</div>
-              
-              <div class="scale-track">
-                <div class="scale-node">
-                  <div class="node-icon node-sun">☀️</div>
-                  <div class="node-label">Soleil</div>
-                  <div class="node-dist">Centre</div>
-                  <div class="node-sub">99,86 % de la masse</div>
-                </div>
+              <text x="460" y="16" text-anchor="middle" fill="#94a3b8" font-size="11" letter-spacing="1">LES ÉTAGES DU SYSTÈME SOLAIRE (ÉCHELLE LOGARITHMIQUE SIMPLIFIÉE)</text>
 
-                <div class="scale-node">
-                  <div class="node-icon node-telluric">🌍</div>
-                  <div class="node-label">Planètes telluriques</div>
-                  <div class="node-dist">0,4 à 1,5 UA</div>
-                  <div class="node-sub">Silicates & fer</div>
-                </div>
+              <line x1="40" y1="112" x2="880" y2="112" stroke="#334155" stroke-width="2" stroke-dasharray="4,3"/>
 
-                <div class="scale-node">
-                  <div class="node-icon node-belt">🪨</div>
-                  <div class="node-label">Ceinture principale</div>
-                  <div class="node-dist">2,1 à 3,3 UA</div>
-                  <div class="node-sub">Cérès · Débris résiduels</div>
-                </div>
+              <g transform="translate(45, 112)">
+                <circle cx="0" cy="0" r="32" fill="url(#gradSoleilSS)"/>
+                <circle cx="0" cy="0" r="14" fill="#ffffff"/>
+                <text x="0" y="44" text-anchor="middle" fill="#facc15" font-size="11" font-weight="bold">Soleil</text>
+                <text x="0" y="56" text-anchor="middle" fill="#94a3b8" font-size="8">99,86 % de la masse</text>
+              </g>
 
-                <div class="scale-node">
-                  <div class="node-icon node-giants">🪐</div>
-                  <div class="node-label">Planètes géantes</div>
-                  <div class="node-dist">5,2 à 30 UA</div>
-                  <div class="node-sub">H, He, glaces & gaz</div>
-                </div>
+              <g transform="translate(170, 112)">
+                <rect x="-40" y="-35" width="80" height="70" rx="5" fill="#ca8a04" opacity="0.12" stroke="#ca8a04" stroke-width="1"/>
+                <circle cx="-26" cy="0" r="2.2" fill="#94a3b8"/>
+                <circle cx="-10" cy="0" r="3.2" fill="#fed7aa"/>
+                <circle cx="8" cy="0" r="3.5" fill="#38bdf8"/>
+                <circle cx="26" cy="0" r="2.5" fill="#f87171"/>
+                <text x="0" y="-42" text-anchor="middle" fill="#fde047" font-size="9.5" font-weight="bold">Planètes telluriques</text>
+                <text x="0" y="48" text-anchor="middle" fill="#cbd5e1" font-size="8.5">0,4 à 1,5 UA</text>
+                <text x="0" y="59" text-anchor="middle" fill="#94a3b8" font-size="7.5">Silicates et fer</text>
+              </g>
 
-                <div class="scale-node">
-                  <div class="node-icon node-kuiper">❄️</div>
-                  <div class="node-label">Ceinture de Kuiper</div>
-                  <div class="node-dist">30 à 55 UA</div>
-                  <div class="node-sub">Pluton · Corps glacés</div>
-                </div>
+              <g transform="translate(285, 112)">
+                <rect x="-22" y="-30" width="44" height="60" rx="4" fill="#334155" opacity="0.35"/>
+                <circle cx="-12" cy="-14" r="1.2" fill="#cbd5e1"/>
+                <circle cx="8" cy="-8" r="1.5" fill="#cbd5e1"/>
+                <circle cx="-5" cy="12" r="1.4" fill="#cbd5e1"/>
+                <circle cx="10" cy="15" r="1.1" fill="#cbd5e1"/>
+                <circle cx="0" cy="0" r="2.2" fill="#facc15"/>
+                <text x="0" y="-38" text-anchor="middle" fill="#94a3b8" font-size="9" font-weight="bold">Ceinture principale</text>
+                <text x="0" y="48" text-anchor="middle" fill="#cbd5e1" font-size="8.5">2,1 à 3,3 UA</text>
+                <text x="0" y="59" text-anchor="middle" fill="#94a3b8" font-size="7.5">Cérès • Débris résiduels</text>
+              </g>
 
-                <div class="scale-node">
-                  <div class="node-icon node-oort">☄️</div>
-                  <div class="node-label">Héliopause & Oort</div>
-                  <div class="node-dist">~120 à 100 000 UA</div>
-                  <div class="node-sub">Frontière magnétique</div>
-                </div>
-              </div>
-            </div>
+              <g transform="translate(435, 112)">
+                <rect x="-80" y="-40" width="160" height="80" rx="5" fill="#0284c7" opacity="0.12" stroke="#0284c7" stroke-width="1"/>
+                <circle cx="-52" cy="0" r="9" fill="#fdba74"/>
+                <ellipse cx="-20" cy="0" rx="7" ry="5" fill="#fef08a"/>
+                <ellipse cx="-20" cy="0" rx="14" ry="2" fill="none" stroke="#fef08a" stroke-width="1.2"/>
+                <circle cx="18" cy="0" r="5" fill="#67e8f9"/>
+                <circle cx="48" cy="0" r="4.8" fill="#3b82f6"/>
+                <text x="0" y="-47" text-anchor="middle" fill="#38bdf8" font-size="9.5" font-weight="bold">Planètes géantes (Gazeuses & Glacées)</text>
+                <text x="0" y="52" text-anchor="middle" fill="#cbd5e1" font-size="8.5">5,2 à 30 UA</text>
+                <text x="0" y="63" text-anchor="middle" fill="#94a3b8" font-size="7.5">H, He, glaces de méthane et d'eau</text>
+              </g>
 
-            <table class="astro-table">
+              <g transform="translate(605, 112)">
+                <rect x="-35" y="-30" width="70" height="60" rx="4" fill="#1e293b" stroke="#475569" stroke-dasharray="2,2"/>
+                <circle cx="-18" cy="-8" r="1.3" fill="#93c5fd"/>
+                <circle cx="12" cy="10" r="1.4" fill="#93c5fd"/>
+                <circle cx="0" cy="0" r="2.2" fill="#c084fc"/>
+                <text x="0" y="-38" text-anchor="middle" fill="#a78bfa" font-size="9" font-weight="bold">Ceinture de Kuiper</text>
+                <text x="0" y="48" text-anchor="middle" fill="#cbd5e1" font-size="8.5">30 à 55 UA</text>
+                <text x="0" y="59" text-anchor="middle" fill="#94a3b8" font-size="7.5">Pluton • Disque de corps glacés</text>
+              </g>
+
+              <g transform="translate(775, 112)">
+                <path d="M -30 -35 Q 5 0 -30 35" fill="none" stroke="#f97316" stroke-width="1.8"/>
+                <circle cx="35" cy="0" r="32" fill="#38bdf8" opacity="0.08" stroke="#38bdf8" stroke-dasharray="3,3"/>
+                <circle cx="25" cy="-14" r="1" fill="#ffffff"/>
+                <circle cx="48" cy="10" r="1" fill="#ffffff"/>
+                <circle cx="28" cy="18" r="1.2" fill="#ffffff"/>
+                <text x="15" y="-42" text-anchor="middle" fill="#fb923c" font-size="9" font-weight="bold">Héliopause & Nuage d'Oort</text>
+                <text x="15" y="48" text-anchor="middle" fill="#cbd5e1" font-size="8.5">~120 UA à 100 000 UA</text>
+                <text x="15" y="59" text-anchor="middle" fill="#94a3b8" font-size="7.5">Frontière magnétique et réservoir de comètes</text>
+              </g>
+            </svg>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px; overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.82rem; text-align: left; color: #ffffff;">
               <thead>
-                <tr>
-                  <th>Domaine</th>
-                  <th>Distance au Soleil</th>
-                  <th>Composition dominante</th>
-                  <th>Rôle dans l'équilibre global</th>
+                <tr style="border-bottom: 1.5px solid #64748b; font-weight: bold;">
+                  <th style="padding: 6px 8px;">Domaine</th>
+                  <th style="padding: 6px 8px;">Distance au Soleil</th>
+                  <th style="padding: 6px 8px;">Composition dominante</th>
+                  <th style="padding: 6px 8px;">Rôle dans l'équilibre global</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td><span class="domain-name" style="color:#f59e0b;">● Système interne (Tellurique)</span></td>
-                  <td>0,38 à 1,52 UA</td>
-                  <td>Roches silicatées, noyau métallique dense de fer-nickel</td>
-                  <td>Masse minime (&lt; 0,0005 % du total) mais forte densité moyenne (4 à 5,5 g/cm³).</td>
+              <tbody style="line-height: 1.45;">
+                <tr style="border-bottom: 1px solid #334155;">
+                  <td style="padding: 6px 8px; color: #facc15; font-weight: bold;">Système interne (Tellurique)</td>
+                  <td style="padding: 6px 8px;">0,38 à 1,52 UA</td>
+                  <td style="padding: 6px 8px;">Roches silicatées, noyau métallique dense de fer-nickel</td>
+                  <td style="padding: 6px 8px;">Masse minime (&lt; 0,0005 % du total) mais forte densité moyenne (4 à 5,5 g/cm³).</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #334155;">
+                  <td style="padding: 6px 8px; color: #94a3b8; font-weight: bold;">Ceinture principale</td>
+                  <td style="padding: 6px 8px;">2,1 à 3,3 UA</td>
+                  <td style="padding: 6px 8px;">Astéroïdes rocheux (silicates), carbonés et métalliques</td>
+                  <td style="padding: 6px 8px;">Accrétion planétaire avortée sous les perturbations gravitationnelles de Jupiter.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #334155;">
+                  <td style="padding: 6px 8px; color: #38bdf8; font-weight: bold;">Système externe (Géantes)</td>
+                  <td style="padding: 6px 8px;">5,2 à 30,1 UA</td>
+                  <td style="padding: 6px 8px;">Hydrogène et hélium (Jupiter, Saturne) ; glaces d'eau, NH3, CH4 (Uranus, Neptune)</td>
+                  <td style="padding: 6px 8px;">Concentrent 99 % de la masse planétaire totale et la majeure partie du moment cinétique.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #334155;">
+                  <td style="padding: 6px 8px; color: #a78bfa; font-weight: bold;">Ceinture de Kuiper (KBO)</td>
+                  <td style="padding: 6px 8px;">30 à ~55 UA</td>
+                  <td style="padding: 6px 8px;">Volatils gelés (eau, azote, méthane, monoxyde de carbone)</td>
+                  <td style="padding: 6px 8px;">Réservoir toroïdal source des comètes à courte période (famille de Jupiter).</td>
                 </tr>
                 <tr>
-                  <td><span class="domain-name" style="color:#94a3b8;">● Ceinture principale</span></td>
-                  <td>2,1 à 3,3 UA</td>
-                  <td>Astéroïdes rocheux (silicates), carbonés et métalliques</td>
-                  <td>Accrétion planétaire avortée sous les perturbations gravitationnelles de Jupiter.</td>
-                </tr>
-                <tr>
-                  <td><span class="domain-name" style="color:#38bdf8;">● Système externe (Géantes)</span></td>
-                  <td>5,2 à 30,1 UA</td>
-                  <td>Hydrogène et hélium (Jupiter, Saturne) ; glaces d'eau, NH3, CH4 (Uranus, Neptune)</td>
-                  <td>Concentrent 99 % de la masse planétaire totale et la majeure partie du moment cinétique.</td>
-                </tr>
-                <tr>
-                  <td><span class="domain-name" style="color:#c084fc;">● Ceinture de Kuiper & Oort</span></td>
-                  <td>30 à &gt; 50 000 UA</td>
-                  <td>Volatils gelés (eau, azote, méthane, CO), poussières silicatées</td>
-                  <td>Réservoir cométaire primordial, fossiles intacts de la nébuleuse protosolaire.</td>
+                  <td style="padding: 6px 8px; color: #fb923c; font-weight: bold;">Nuage d'Oort</td>
+                  <td style="padding: 6px 8px;">2 000 à 100 000 UA (jusqu'à ~1,5 al)</td>
+                  <td style="padding: 6px 8px;">Comètes et planétésimaux primitifs de glaces sales</td>
+                  <td style="padding: 6px 8px;">Réservoir sphérique externe délimité par l'influence gravitationnelle des étoiles proches.</td>
                 </tr>
               </tbody>
             </table>
-
           </div>
+        </div>
 
-          <!-- ONGLET 2 : GENÈSE -->
-          <div class="tab-pane" id="hub-tab-1">
-            <p style="font-size: 0.92rem; color: #cbd5e1; line-height: 1.8; text-align: justify;">
-              Il y a 4,568 milliards d'années, une onde de choc issue d'une supernova voisine a déstabilisé un fragment de nuage moléculaire dense. La conservation du moment cinétique a aplati la matière en un disque protoplanétaire en rotation. À une distance critique d'environ 2,7 UA de la proto-étoile se trouvait la <strong>« ligne des glaces »</strong> (snow line) : en deçà, le rayonnement thermique ne permettait qu'aux métaux et silicates réfractaires de condenser en petits corps telluriques. Au-delà, l'eau et les composés volatils ont gelé massivement, multipliant par dix la masse solide disponible et permettant la genèse rapide des noyaux géants de Jupiter et Saturne avant la dissipation du gaz nébulaire.
-            </p>
+        <!-- ONGLET 2 -->
+        <div id="onglet-ss-formation" style="display: none; margin: 0; padding: 0;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 8px;">
+            <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
+              <div style="color: #38bdf8; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">La ligne des glaces (*frost line*) à ~2,7 UA</div>
+              <div style="background: #0f172a; border-radius: 4px; padding: 4px; margin-bottom: 6px;">
+                <svg viewBox="0 0 280 100" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
+                  <rect x="10" y="10" width="125" height="65" fill="#f59e0b" opacity="0.15"/>
+                  <rect x="145" y="10" width="125" height="65" fill="#0284c7" opacity="0.15"/>
+                  <line x1="140" y1="5" x2="140" y2="80" stroke="#f43f5e" stroke-width="2" stroke-dasharray="3,3"/>
+                  <text x="140" y="92" text-anchor="middle" fill="#f43f5e" font-size="7.5" font-weight="bold">Ligne des glaces (T ≈ 150 K)</text>
+                  <g transform="translate(65, 42)">
+                    <circle cx="-25" cy="0" r="4" fill="#f59e0b"/>
+                    <circle cx="15" cy="0" r="5" fill="#38bdf8"/>
+                    <text x="0" y="24" text-anchor="middle" fill="#facc15" font-size="8" font-weight="bold">Zone interne chaude</text>
+                    <text x="0" y="34" text-anchor="middle" fill="#94a3b8" font-size="7">Roches et fer seuls condensés</text>
+                  </g>
+                  <g transform="translate(210, 42)">
+                    <circle cx="0" cy="0" r="14" fill="#0284c7" opacity="0.8"/>
+                    <circle cx="0" cy="0" r="4" fill="#ffffff"/>
+                    <text x="0" y="24" text-anchor="middle" fill="#38bdf8" font-size="8" font-weight="bold">Zone externe froide</text>
+                    <text x="0" y="34" text-anchor="middle" fill="#94a3b8" font-size="7">Glaces massives + capture de gaz</text>
+                  </g>
+                </svg>
+              </div>
+              <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.35;">
+                Près du jeune Soleil, la température empêche la condensation des éléments volatils (eau, méthane). Seuls les métaux et silicates forment des embryons rocheux peu massifs. Au-delà de 2,7 UA, la glace d'eau gèle en abondance : les cœurs planétaires dépassent 10 masses terrestres et capturent gravitationnellement l'hydrogène et l'hélium du disque.
+              </p>
+            </div>
+
+            <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
+              <div style="color: #4ade80; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Chronologie de l'effondrement (il y a 4,567 Ga)</div>
+              <ul style="font-size: 0.74rem; color: #cbd5e1; margin: 0 0 6px 0; padding-left: 16px; line-height: 1.35;">
+                <li><strong>Effondrement gravitationnel :</strong> une poche de nuage moléculaire enrichie par une supernova voisine s'effondre en quelques centaines de milliers d'années.</li>
+                <li><strong>Aplatissement en disque :</strong> la conservation du moment cinétique aplatit la matière en un disque protoplanétaire en rotation autour du proto-Soleil.</li>
+                <li><strong>Accrétion planétésimale :</strong> des grains s'agrègent en planétésimaux, puis en protoplanètes en 10 à 100 millions d'années.</li>
+              </ul>
+              <div style="background: #0f172a; border-radius: 4px; padding: 6px; border-left: 3px solid #4ade80;">
+                <div style="color: #86efac; font-size: 0.74rem; font-weight: bold;">Nettoyage du disque (souffle solaire)</div>
+                <p style="font-size: 0.71rem; color: #94a3b8; margin: 0; line-height: 1.25;">
+                  Le jeune Soleil entre en phase T-Tauri : un vent stellaire violent souffle le gaz résiduel hors du système en 3 à 10 millions d'années, gelant la croissance des géantes.
+                </p>
+              </div>
+            </div>
+
+            <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px; grid-column: 1 / -1;">
+              <div style="color: #fb923c; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Dynamique chaotique primitive : Le modèle de Nice et le Grand Tack</div>
+              <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.35;">
+                Les planètes ne sont pas nées à leurs positions actuelles. Selon le modèle du <em>Grand Tack</em>, Jupiter aurait migré vers l'intérieur jusqu'à 1,5 UA avant d'être rappelée par résonance orbitale avec Saturne, limitant la matière pour Mars. Plus tard (~4,1 à 3,8 Ga), l'instabilité du <em>modèle de Nice</em> a vu Uranus et Neptune échanger leurs orbites et plonger dans la ceinture de Kuiper primitive, éjectant des myriades de comètes vers l'intérieur (le <strong>Grand bombardement tardif</strong> qui a criblé la Lune et apporté l'eau sur Terre) et vers l'extérieur pour former le nuage d'Oort.
+              </p>
+            </div>
           </div>
+        </div>
 
-          <!-- ONGLET 3 : DEVENIR -->
-          <div class="tab-pane" id="hub-tab-2">
-            <p style="font-size: 0.92rem; color: #cbd5e1; line-height: 1.8; text-align: justify;">
-              Le Système solaire est actuellement à la moitié de sa séquence principale. Dans environ 5 milliards d'années, le cœur solaire épuisera son hydrogène et gonflera en une géante rouge engloutissant Mercure, Vénus et possiblement la Terre. Après l'expulsion de ses enveloppes sous forme de nébuleuse planétaire, le Soleil terminera sa vie sous forme d'une naine blanche de carbone et d'oxygène, scellant le destin glacé des géantes rescapées.
-            </p>
+        <!-- ONGLET 3 -->
+        <div id="onglet-ss-avenir" style="display: none; margin: 0; padding: 0;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 8px;">
+            <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
+              <div style="color: #60a5fa; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Les régularités physiques du système</div>
+              <ul style="font-size: 0.74rem; color: #cbd5e1; margin: 0; padding-left: 16px; line-height: 1.4;">
+                <li><strong>Coplanarité stricte :</strong> toutes les planètes gravitent quasiment dans le même plan géométrique (l'<strong>écliptique</strong>, inclinaisons &lt; 7°).</li>
+                <li><strong>Sens prograde uniforme :</strong> toutes les orbites tournent dans le sens anti-horaire (vu du pôle nord céleste).</li>
+                <li><strong>Quasi-circularité :</strong> les excentricités orbitales sont faibles (&lt; 0,1 pour la plupart), garantissant une remarquable stabilité mécanique séculaire.</li>
+              </ul>
+            </div>
+
+            <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
+              <div style="color: #f472b6; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">L'héliosphère : Notre bulle protectrice</div>
+              <div style="background: #0f172a; border-radius: 4px; padding: 4px; margin-bottom: 6px;">
+                <svg viewBox="0 0 280 65" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
+                  <g transform="translate(140, 32)">
+                    <ellipse cx="-20" cy="0" rx="90" ry="24" fill="#38bdf8" opacity="0.2"/>
+                    <path d="M -110 -25 C -95 0 -95 0 -110 25" fill="none" stroke="#f472b6" stroke-width="2"/>
+                    <circle cx="0" cy="0" r="4" fill="#facc15"/>
+                    <text x="-70" y="3" fill="#ffffff" font-size="7">Héliopause (~120 UA)</text>
+                    <text x="40" y="3" fill="#94a3b8" font-size="7">Queue héliosphérique</text>
+                  </g>
+                </svg>
+              </div>
+              <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.3;">
+                Le vent solaire (plasma de protons et d'électrons à 400-800 km/s) repousse le milieu interstellaire galactique, déviant plus de 75 % des rayons cosmiques galactiques hautement énergétiques.
+              </p>
+            </div>
+
+            <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px; grid-column: 1 / -1;">
+              <div style="color: #facc15; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">La fin du Système solaire : Du réchauffement à la naine blanche</div>
+              <div style="background: #0f172a; border-radius: 4px; padding: 6px; margin-bottom: 6px;">
+                <svg viewBox="0 0 600 70" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
+                  <line x1="30" y1="35" x2="570" y2="35" stroke="#475569" stroke-width="2"/>
+                  <circle cx="60" cy="35" r="5" fill="#facc15"/>
+                  <text x="60" y="20" text-anchor="middle" fill="#facc15" font-size="8" font-weight="bold">+0 Ga (Actuel)</text>
+                  <text x="60" y="52" text-anchor="middle" fill="#94a3b8" font-size="7.5">Stabilité adulte (G2V)</text>
+
+                  <circle cx="190" cy="35" r="5" fill="#fb923c"/>
+                  <text x="190" y="20" text-anchor="middle" fill="#fb923c" font-size="8" font-weight="bold">+1 à +2 Ga</text>
+                  <text x="190" y="52" text-anchor="middle" fill="#94a3b8" font-size="7.5">Luminosité +10 % • Fin des océans</text>
+
+                  <circle cx="360" cy="35" r="12" fill="#ef4444"/>
+                  <text x="360" y="16" text-anchor="middle" fill="#ef4444" font-size="8" font-weight="bold">+5 à +5,4 Ga</text>
+                  <text x="360" y="58" text-anchor="middle" fill="#fca5a5" font-size="7.5">Soleil géante rouge (Mercure, Vénus englouties)</text>
+
+                  <circle cx="510" cy="35" r="3" fill="#ffffff" stroke="#38bdf8" stroke-width="1.2"/>
+                  <text x="510" y="20" text-anchor="middle" fill="#ffffff" font-size="8" font-weight="bold">+7 Ga et au-delà</text>
+                  <text x="510" y="52" text-anchor="middle" fill="#94a3b8" font-size="7.5">Naine blanche • Géantes gelées</text>
+                </svg>
+              </div>
+              <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.35;">
+                Dans 1 milliard d'années, la montée en puissance solaire évaporera l'eau de la Terre. Dans 5 milliards d'années, le Soleil devenu <strong>géante rouge</strong> verra son rayon multiplié par 200, engloutissant Mercure et Vénus. Le système s'achèvera en <strong>naine blanche</strong> entourée d'une nébuleuse planétaire évanescente, autour de laquelle orbiteront les géantes gelées survivantes.
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 3. SAS ORBITAL : DÉCOUVERTE VIRTUELLE & BOUTON DÉCOLLAGE -->
+    <!-- 3. SAS DE DÉCOLLAGE VERS LE PLANÉTARIUM 3D -->
     <section>
       <h2 class="section-title">Découverte virtuelle du Système Solaire</h2>
 
@@ -778,9 +850,9 @@
             <div style="color: #64748b; font-size: 0.7rem;">CEINTURE DE KUIPER : <span style="color:#f59e0b;">TRAVERSÉE</span></div>
           </div>
 
-          <!-- LE BOUTON CENTRAL QUI OUVRE LE PLANÉTARIUM 3D -->
+          <!-- LIEN CONFORME ET TESTÉ VERS LE PLANÉTARIUM DANS LE MÊME DOSSIER -->
           <div class="btn-launch-container">
-            <a href="./3d.html" class="btn-launch" title="Lancer le Planétarium 3D">
+            <a href="./planetarium.html" class="btn-launch" title="Lancer le Planétarium 3D">
               <span class="btn-launch-title">DÉCOLLAGE</span>
               <span class="btn-launch-sub">EXPLORATION</span>
             </a>
@@ -796,164 +868,290 @@
       </div>
     </section>
 
-    <!-- 4. CARROUSEL DES HABITANTS DU SYSTÈME SOLAIRE -->
-    <section class="carousel-section">
+    <!-- 4. VÉRITABLE CARROUSEL 3D COVERFLOW (12 ASTRES) -->
+    <section>
       <h2 class="section-title">Tour d'horizon des habitants du Système Solaire</h2>
 
-      <div class="carousel-wrapper">
-        
-        <!-- 1. SOLEIL -->
-        <article class="body-card">
-          <div class="body-thumb-container">
-            <img class="body-thumb" src="https://cdn.jsdelivr.net/gh/renoultdavid/textures@main/soleil.jpg" alt="Soleil">
-          </div>
-          <h3 class="body-name">Soleil</h3>
-          <p class="body-desc">
-            Le Soleil est une étoile naine jaune de type spectral G2V, située au centre de notre Système solaire dont elle concentre l'écrasante majorité de la masse. Véritable réacteur thermonucléaire, il fusionne chaque seconde des centaines de millions de tonnes d'hydrogène en hélium, inondant l'espace de lumière et d'un flux continu de vent solaire.
-          </p>
-          <a class="body-link" href="./3d.html">Explorer en 3D →</a>
-        </article>
+      <div class="carousel-stage">
+        <button class="nav-btn nav-prev" id="prevBtn" aria-label="Précédent">&#10094;</button>
 
-        <!-- 2. MERCURE -->
-        <article class="body-card">
-          <div class="body-thumb-container">
-            <img class="body-thumb" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2104200/mercury.jpg" alt="Mercure">
-          </div>
-          <h3 class="body-name">Mercure</h3>
-          <p class="body-desc">
-            Planète la plus proche du Soleil et la plus petite du Système solaire. Monde tellurique aride et criblé d'impacts météoriques, dépourvu d'atmosphère dense capable de réguler sa chaleur, elle subit des écarts thermiques extrêmes allant de plus de 400 °C le jour à -180 °C la nuit.
-          </p>
-          <a class="body-link" href="./3d.html">Explorer en 3D →</a>
-        </article>
+        <div class="carousel-track" id="track">
 
-        <!-- 3. VÉNUS -->
-        <article class="body-card">
-          <div class="body-thumb-container">
-            <img class="body-thumb" src="https://cdn.jsdelivr.net/gh/renoultdavid/textures@main/Solarsystemscope_texture_4k_venus_atmosphere.jpg" alt="Vénus">
+          <!-- 0. SOLEIL -->
+          <div class="card" data-url="./planetarium.html">
+            <div class="card-bg" style="background-image: url('https://lh3.googleusercontent.com/d/1TAJlRURAObvrq2Tq-1EX5W473Sw2gFqM=s1200');"></div>
+            <div class="card-content">
+              <div class="icon-wrapper">
+                <div class="pulse-ring"></div>
+                <div class="icon-box">
+                  <img src="https://lh3.googleusercontent.com/d/1TAJlRURAObvrq2Tq-1EX5W473Sw2gFqM=s300" alt="Soleil">
+                </div>
+              </div>
+              <h3 class="card-title">Soleil</h3>
+              <span class="card-desc">Étoile Naine Jaune G2V</span>
+              <span class="card-action">Explorez</span>
+            </div>
           </div>
-          <h3 class="body-name">Vénus</h3>
-          <p class="body-desc">
-            Quasi-jumelle de la Terre par sa taille, Vénus est pourtant l'environnement le plus hostile du cortège planétaire. Enveloppée d'une atmosphère ultra-dense de CO2 et de nuages d'acide sulfurique, elle subit un effet de serre emballé qui maintient sa surface à plus de 460 °C sous une pression écrasante de 92 bars.
-          </p>
-          <a class="body-link" href="./3d.html">Explorer en 3D →</a>
-        </article>
 
-        <!-- 4. TERRE & LUNE -->
-        <article class="body-card">
-          <div class="body-thumb-container">
-            <img class="body-thumb" src="https://cdn.jsdelivr.net/gh/renoultdavid/textures@68b6d34056efb1065207f0b5e139d5998cc0a575/Terre.jpg" alt="Terre">
+          <!-- 1. MERCURE -->
+          <div class="card" data-url="./planetarium.html">
+            <div class="card-bg" style="background-image: url('https://lh3.googleusercontent.com/d/1J4GrZuFlDDxzSUGGDR1DAn2ceg1G0pvK=s1200');"></div>
+            <div class="card-content">
+              <div class="icon-wrapper">
+                <div class="pulse-ring"></div>
+                <div class="icon-box">
+                  <img src="https://lh3.googleusercontent.com/d/1J4GrZuFlDDxzSUGGDR1DAn2ceg1G0pvK=s300" alt="Mercure">
+                </div>
+              </div>
+              <h3 class="card-title">Mercure</h3>
+              <span class="card-desc">Monde Tellurique Aride</span>
+              <span class="card-action">Explorez</span>
+            </div>
           </div>
-          <h3 class="body-name">Terre & Lune</h3>
-          <p class="body-desc">
-            Seule oasis biologique connue, la Terre maintient de l'eau liquide en surface depuis plus de 4 milliards d'années grâce à sa distance idéale, sa tectonique des plaques active et son bouclier magnétique protecteur, accompagnée par la Lune en résonance synchrone.
-          </p>
-          <a class="body-link" href="./3d.html">Explorer en 3D →</a>
-        </article>
 
-        <!-- 5. MARS -->
-        <article class="body-card">
-          <div class="body-thumb-container">
-            <img class="body-thumb" src="https://cdn.jsdelivr.net/gh/renoultdavid/textures@68b6d34056efb1065207f0b5e139d5998cc0a575/Mars.jpg" alt="Mars">
+          <!-- 2. VÉNUS -->
+          <div class="card" data-url="./planetarium.html">
+            <div class="card-bg" style="background-image: url('https://lh3.googleusercontent.com/d/1TkLRMhQAsQ-ql8hE4vtpmSXSExf9D-C8=s1200');"></div>
+            <div class="card-content">
+              <div class="icon-wrapper">
+                <div class="pulse-ring"></div>
+                <div class="icon-box">
+                  <img src="https://lh3.googleusercontent.com/d/1TkLRMhQAsQ-ql8hE4vtpmSXSExf9D-C8=s300" alt="Vénus">
+                </div>
+              </div>
+              <h3 class="card-title">Vénus</h3>
+              <span class="card-desc">Fournaise Supercritique</span>
+              <span class="card-action">Explorez</span>
+            </div>
           </div>
-          <h3 class="body-name">Mars</h3>
-          <p class="body-desc">
-            La planète rouge est un désert glacé d'oxyde de fer abritant les plus gigantesques structures volcaniques et canyons du système solaire, dont Olympus Mons et Valles Marineris, conservant les stigmates d'un passé fluvio-lacustre actif.
-          </p>
-          <a class="body-link" href="./3d.html">Explorer en 3D →</a>
-        </article>
 
-        <!-- 6. CEINTURE D'ASTÉROÏDES -->
-        <article class="body-card">
-          <div class="body-thumb-container">
-            <img class="body-thumb" src="https://cdn.jsdelivr.net/gh/renoultdavid/textures@68b6d34056efb1065207f0b5e139d5998cc0a575/Pluton.png" alt="Ceinture d'astéroïdes">
+          <!-- 3. TERRE ET LUNE -->
+          <div class="card" data-url="./planetarium.html">
+            <div class="card-bg" style="background-image: url('https://lh3.googleusercontent.com/d/1YFBFm9eRZaHbi9-sMsvfOYp3qEmwvwBx=s1200');"></div>
+            <div class="card-content">
+              <div class="icon-wrapper">
+                <div class="pulse-ring"></div>
+                <div class="icon-box">
+                  <img src="https://lh3.googleusercontent.com/d/1YFBFm9eRZaHbi9-sMsvfOYp3qEmwvwBx=s300" alt="Terre et Lune">
+                </div>
+              </div>
+              <h3 class="card-title">Terre & Lune</h3>
+              <span class="card-desc">Oasis Océanique et Sélène</span>
+              <span class="card-action">Explorez</span>
+            </div>
           </div>
-          <h3 class="body-name">Astéroïdes (Cérès & Vesta)</h3>
-          <p class="body-desc">
-            Vaste anneau toroïdal entre Mars et Jupiter constitué de vestiges rocheux et métalliques primordiaux. N'ayant jamais pu s'agréger en planète en raison des perturbations gravitationnelles de Jupiter, il abrite la planète naine cryovolcanique Cérès et la protoplanète Vesta.
-          </p>
-          <a class="body-link" href="./3d.html">Explorer en 3D →</a>
-        </article>
 
-        <!-- 7. JUPITER -->
-        <article class="body-card">
-          <div class="body-thumb-container">
-            <img class="body-thumb" src="https://cdn.jsdelivr.net/gh/renoultdavid/textures@68b6d34056efb1065207f0b5e139d5998cc0a575/Jupiter.jpg" alt="Jupiter">
+          <!-- 4. OBJETS GÉOCROISEURS -->
+          <div class="card" data-url="./planetarium.html">
+            <div class="card-bg" style="background-image: url('https://lh3.googleusercontent.com/d/1LbY9faCvvMRB6XVeTiUj6f7WoY_1m00J=s1200');"></div>
+            <div class="card-content">
+              <div class="icon-wrapper">
+                <div class="pulse-ring"></div>
+                <div class="icon-box">
+                  <img src="https://lh3.googleusercontent.com/d/1LbY9faCvvMRB6XVeTiUj6f7WoY_1m00J=s300" alt="Objets Géocroiseurs">
+                </div>
+              </div>
+              <h3 class="card-title">Géocroiseurs</h3>
+              <span class="card-desc">Sentinelles et Astéroïdes NEA</span>
+              <span class="card-action">Explorez</span>
+            </div>
           </div>
-          <h3 class="body-name">Jupiter et ses Lunes</h3>
-          <p class="body-desc">
-            Colossale géante gazeuse concentrant 2,5 fois la masse de toutes les autres planètes réunies. Célèbre pour sa Grande Tache rouge et son océan d'hydrogène métallique fluide, elle règne sur une cour de près de cent satellites dont les lunes galiléennes Io, Europe, Ganymède et Callisto.
-          </p>
-          <a class="body-link" href="./3d.html">Explorer en 3D →</a>
-        </article>
 
-        <!-- 8. SATURNE -->
-        <article class="body-card">
-          <div class="body-thumb-container">
-            <img class="body-thumb" src="https://cdn.jsdelivr.net/gh/renoultdavid/textures@68b6d34056efb1065207f0b5e139d5998cc0a575/Saturne.jpg" alt="Saturne">
+          <!-- 5. MARS ET SES LUNES -->
+          <div class="card" data-url="./planetarium.html">
+            <div class="card-bg" style="background-image: url('https://lh3.googleusercontent.com/d/13EqujHgQXAqKAC9Iqr-mUYjASTWf4j6J=s1200');"></div>
+            <div class="card-content">
+              <div class="icon-wrapper">
+                <div class="pulse-ring"></div>
+                <div class="icon-box">
+                  <img src="https://lh3.googleusercontent.com/d/13EqujHgQXAqKAC9Iqr-mUYjASTWf4j6J=s300" alt="Mars">
+                </div>
+              </div>
+              <h3 class="card-title">Mars & Lunes</h3>
+              <span class="card-desc">Désert Oxydé & Volcanisme</span>
+              <span class="card-action">Explorez</span>
+            </div>
           </div>
-          <h3 class="body-name">Saturne et ses Lunes</h3>
-          <p class="body-desc">
-            Joyau du système solaire paré d'anneaux étincelants composés de glace pure. D'une densité inférieure à celle de l'eau, elle abrite un vortex polaire hexagonal stable et un cortège de satellites extraordinaires dominé par Titan et le cryovolcanisme actif d'Encelade.
-          </p>
-          <a class="body-link" href="./3d.html">Explorer en 3D →</a>
-        </article>
 
-        <!-- 9. URANUS -->
-        <article class="body-card">
-          <div class="body-thumb-container">
-            <img class="body-thumb" src="https://cdn.jsdelivr.net/gh/renoultdavid/textures@68b6d34056efb1065207f0b5e139d5998cc0a575/Uranus.jpg" alt="Uranus">
+          <!-- 6. CEINTURE D'ASTÉROÏDES (VESTA ET CÉRÈS) -->
+          <div class="card" data-url="./planetarium.html">
+            <div class="card-bg" style="background-image: url('https://lh3.googleusercontent.com/d/1x8qrBm7klU3KKvJ2HrKVXBh9ffvbadKG=s1200');"></div>
+            <div class="card-content">
+              <div class="icon-wrapper">
+                <div class="pulse-ring"></div>
+                <div class="icon-box">
+                  <img src="https://lh3.googleusercontent.com/d/1x8qrBm7klU3KKvJ2HrKVXBh9ffvbadKG=s300" alt="Ceinture d'astéroïdes">
+                </div>
+              </div>
+              <h3 class="card-title">Astéroïdes</h3>
+              <span class="card-desc">Vesta, Cérès & Débris Primordiaux</span>
+              <span class="card-action">Explorez</span>
+            </div>
           </div>
-          <h3 class="body-name">Uranus et ses Lunes</h3>
-          <p class="body-desc">
-            Géante de glaces à l'atmosphère aigue-marine couchée sur son orbite avec une obliquité record de 98°. Enveloppée de fluides d'eau, de méthane et d'ammoniac sous pression, elle possède le champ magnétique le plus asymétrique et tordu du système planétaire.
-          </p>
-          <a class="body-link" href="./3d.html">Explorer en 3D →</a>
-        </article>
 
-        <!-- 10. NEPTUNE -->
-        <article class="body-card">
-          <div class="body-thumb-container">
-            <img class="body-thumb" src="https://cdn.jsdelivr.net/gh/renoultdavid/textures@68b6d34056efb1065207f0b5e139d5998cc0a575/Neptune.jpg" alt="Neptune">
+          <!-- 7. JUPITER ET SES LUNES -->
+          <div class="card" data-url="./planetarium.html">
+            <div class="card-bg" style="background-image: url('https://lh3.googleusercontent.com/d/1TA0q_3GxY-bZRJUaHER_xvd0hplG3yTd=s1200');"></div>
+            <div class="card-content">
+              <div class="icon-wrapper">
+                <div class="pulse-ring"></div>
+                <div class="icon-box">
+                  <img src="https://lh3.googleusercontent.com/d/1TA0q_3GxY-bZRJUaHER_xvd0hplG3yTd=s300" alt="Jupiter">
+                </div>
+              </div>
+              <h3 class="card-title">Jupiter & Lunes</h3>
+              <span class="card-desc">Colosse Gazeux & Mondes Galiléens</span>
+              <span class="card-action">Explorez</span>
+            </div>
           </div>
-          <h3 class="body-name">Neptune et ses Lunes</h3>
-          <p class="body-desc">
-            Monde bleu outremer balayé par les vents les plus supersoniques du système solaire (dépassant 2 000 km/h). Découverte par le calcul mathématique pur, elle retient en orbite rétrograde la lune cryogénique géante Triton et ses geysers d'azote sous pression.
-          </p>
-          <a class="body-link" href="./3d.html">Explorer en 3D →</a>
-        </article>
 
-        <!-- 11. KUIPER & PLUTON -->
-        <article class="body-card">
-          <div class="body-thumb-container">
-            <img class="body-thumb" src="https://cdn.jsdelivr.net/gh/renoultdavid/textures@68b6d34056efb1065207f0b5e139d5998cc0a575/Pluton.png" alt="Pluton">
+          <!-- 8. SATURNE ET SES LUNES -->
+          <div class="card" data-url="./planetarium.html">
+            <div class="card-bg" style="background-image: url('https://lh3.googleusercontent.com/d/1e0j2BVS8oQ-6mHr4NAjvxzR3IU0KWurX=s1200');"></div>
+            <div class="card-content">
+              <div class="icon-wrapper">
+                <div class="pulse-ring"></div>
+                <div class="icon-box">
+                  <img src="https://lh3.googleusercontent.com/d/1e0j2BVS8oQ-6mHr4NAjvxzR3IU0KWurX=s300" alt="Saturne">
+                </div>
+              </div>
+              <h3 class="card-title">Saturne & Lunes</h3>
+              <span class="card-desc">Anneaux de Glace, Titan & Encelade</span>
+              <span class="card-action">Explorez</span>
+            </div>
           </div>
-          <h3 class="body-name">Ceinture de Kuiper & Pluton</h3>
-          <p class="body-desc">
-            Royaume des glaces d'azote et des mondes nains transneptuniens. Formant un système binaire synchronisé avec Charon, Pluton surprend par son activité géologique jeune, son glacier d'azote convectif de Sputnik Planitia et ses montagnes d'eau pure de 4 000 mètres.
-          </p>
-          <a class="body-link" href="./3d.html">Explorer en 3D →</a>
-        </article>
 
+          <!-- 9. URANUS ET SES LUNES -->
+          <div class="card" data-url="./planetarium.html">
+            <div class="card-bg" style="background-image: url('https://lh3.googleusercontent.com/d/1yNDD_jXi3Yfl2WtMOODbc2yJqomUPJiq=s1200');"></div>
+            <div class="card-content">
+              <div class="icon-wrapper">
+                <div class="pulse-ring"></div>
+                <div class="icon-box">
+                  <img src="https://lh3.googleusercontent.com/d/1yNDD_jXi3Yfl2WtMOODbc2yJqomUPJiq=s300" alt="Uranus">
+                </div>
+              </div>
+              <h3 class="card-title">Uranus & Lunes</h3>
+              <span class="card-desc">Géante de Glaces Oblique</span>
+              <span class="card-action">Explorez</span>
+            </div>
+          </div>
+
+          <!-- 10. NEPTUNE ET SES LUNES -->
+          <div class="card" data-url="./planetarium.html">
+            <div class="card-bg" style="background-image: url('https://lh3.googleusercontent.com/d/1nQp6H0Q3N_xv4F6pgXw31eSEXIHhSNEp=s1200');"></div>
+            <div class="card-content">
+              <div class="icon-wrapper">
+                <div class="pulse-ring"></div>
+                <div class="icon-box">
+                  <img src="https://lh3.googleusercontent.com/d/1nQp6H0Q3N_xv4F6pgXw31eSEXIHhSNEp=s300" alt="Neptune">
+                </div>
+              </div>
+              <h3 class="card-title">Neptune & Lunes</h3>
+              <span class="card-desc">Vents Supersoniques & Triton</span>
+              <span class="card-action">Explorez</span>
+            </div>
+          </div>
+
+          <!-- 11. CEINTURE DE KUIPER ET PLUTON -->
+          <div class="card" data-url="./planetarium.html">
+            <div class="card-bg" style="background-image: url('https://lh3.googleusercontent.com/d/19b9h9Y1iz1B9p09d2M2SkmN48UX_vC_s=s1200');"></div>
+            <div class="card-content">
+              <div class="icon-wrapper">
+                <div class="pulse-ring"></div>
+                <div class="icon-box">
+                  <img src="https://lh3.googleusercontent.com/d/19b9h9Y1iz1B9p09d2M2SkmN48UX_vC_s=s300" alt="Kuiper et Pluton">
+                </div>
+              </div>
+              <h3 class="card-title">Kuiper & Pluton</h3>
+              <span class="card-desc">Confins Azotés & Naines Glacées</span>
+              <span class="card-action">Explorez</span>
+            </div>
+          </div>
+
+        </div>
+
+        <button class="nav-btn nav-next" id="nextBtn" aria-label="Suivant">&#10095;</button>
       </div>
     </section>
 
   </main>
 
+  <!-- SCRIPTS D'INTERACTION -->
   <script>
-    function switchHubTab(index) {
-      const buttons = document.querySelectorAll('.tab-pills .tab-btn');
-      const panes = document.querySelectorAll('.tab-content .tab-pane');
-
-      buttons.forEach((btn, idx) => {
-        if (idx === index) btn.classList.add('active');
-        else btn.classList.remove('active');
-      });
-
-      panes.forEach((pane, idx) => {
-        if (idx === index) pane.classList.add('active');
-        else pane.classList.remove('active');
+    /* 1. GESTION DES ONGLETS DE L'INFOGRAPHIE */
+    function changerOngletSS(nom) {
+      const onglets = ['architecture', 'formation', 'avenir'];
+      onglets.forEach(o => {
+        const contenu = document.getElementById('onglet-ss-' + o);
+        const bouton = document.getElementById('btn-ss-' + o);
+        if (o === nom) {
+          contenu.style.display = 'block';
+          bouton.style.background = '#2563eb';
+          bouton.style.color = '#ffffff';
+        } else {
+          contenu.style.display = 'none';
+          bouton.style.background = '#1e293b';
+          bouton.style.color = '#94a3b8';
+        }
       });
     }
+
+    /* 2. GESTION DU CARROUSEL 3D COVERFLOW (12 CARTES) */
+    const cards = Array.from(document.querySelectorAll('.card'));
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    let currentIndex = 0; // Démarre sur le Soleil
+    const total = cards.length;
+
+    function updateCarousel() {
+      cards.forEach((card, i) => {
+        let diff = (i - currentIndex) % total;
+        if (diff > total / 2) diff -= total;
+        if (diff < -total / 2) diff += total;
+
+        if (diff >= -2 && diff <= 2) {
+          card.setAttribute('data-pos', diff);
+        } else {
+          card.setAttribute('data-pos', 'hidden');
+        }
+      });
+    }
+
+    function rotateNext() {
+      currentIndex = (currentIndex + 1) % total;
+      updateCarousel();
+    }
+
+    function rotatePrev() {
+      currentIndex = (currentIndex - 1 + total) % total;
+      updateCarousel();
+    }
+
+    nextBtn.addEventListener('click', rotateNext);
+    prevBtn.addEventListener('click', rotatePrev);
+
+    cards.forEach((card, index) => {
+      card.addEventListener('click', () => {
+        const pos = card.getAttribute('data-pos');
+        if (pos === '0') {
+          // Si on clique sur la carte centrale active, on ouvre le lien
+          window.location.href = card.getAttribute('data-url');
+        } else {
+          // Sinon on pivote pour placer la carte au centre
+          currentIndex = index;
+          updateCarousel();
+        }
+      });
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') rotateNext();
+      if (e.key === 'ArrowLeft') rotatePrev();
+    });
+
+    updateCarousel();
   </script>
 </body>
 </html>
