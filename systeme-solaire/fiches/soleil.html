@@ -3,113 +3,911 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Le Soleil — Anatomie & Activité</title>
-  
-  <link rel="icon" type="image/jpeg" href="../../icon-512.jpeg">
+  <title>Le Soleil — Anatomie, Activité & Phénomènes</title>
+
+  <link rel="icon" type="image/jpeg" sizes="512x512" href="../../icon-512.jpeg">
+  <link rel="apple-touch-icon" href="../../icon-512.jpeg">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Liaison avec la feuille de style commune -->
-  <link rel="stylesheet" href="../fiche.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #020617;
+      --payne-dark: #0b1120;
+      --payne-base: #1e293b;
+      --gold-accent: #f59e0b;
+      --cyan-accent: #38bdf8;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 85% 25%, rgba(56, 189, 248, 0.04) 0%, transparent 40%);
+    }
+
+    /* BARRE SUPÉRIEURE */
+    .fiche-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.85rem 2rem;
+      background: rgba(2, 6, 23, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .fiche-nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.3s ease;
+    }
+
+    .fiche-nav a:hover {
+      color: var(--gold-accent);
+      border-color: var(--gold-accent);
+      background: rgba(245, 158, 11, 0.1);
+    }
+
+    .fiche-nav .nav-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-main);
+    }
+
+    .fiche-container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 6rem;
+    }
+
+    /* EN-TÊTE / HERO */
+    .hero-section {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-sub {
+      font-size: 0.92rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-accent);
+      margin-bottom: 2rem;
+    }
+
+    .intro-card {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      border-radius: 12px;
+      padding: clamp(1.2rem, 3vw, 2rem);
+      margin-bottom: 2.5rem;
+      text-align: justify;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      line-height: 1.85;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    /* PHOTO PRINCIPALE ROGNÉE EN BAS (LÉGENDE MASQUÉE) */
+    .hero-img-box {
+      width: min(580px, 92vw);
+      margin: 0 auto 3.5rem;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.95), 0 0 40px rgba(245, 158, 11, 0.25);
+      background-color: #000;
+    }
+
+    .hero-img-box img {
+      width: 100%;
+      display: block;
+      /* Rogne 5.5% du bas pour supprimer la légende texte tout en préservant le disque */
+      clip-path: inset(0 0 5.5% 0);
+      margin-bottom: -5.5%;
+    }
+
+    /* SECTIONS THÉMATIQUES */
+    .theme-block {
+      margin-top: 4.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px dashed rgba(255, 255, 255, 0.12);
+    }
+
+    .theme-h2 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 1.5rem;
+    }
+
+    .grid-duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 1.5rem;
+    }
+
+    .grid-duo img, .media-wide img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: block;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+    }
+
+    .media-wide {
+      margin-bottom: 1.5rem;
+    }
+
+    .narrative-p {
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      text-align: justify;
+      line-height: 1.8;
+      margin-bottom: 1.4rem;
+    }
+
+    /* STYLES DES BOÎTES « EN PROFONDEUR... » */
+    .box-container {
+      width: 100%;
+      margin: 1.8rem 0;
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      height: 480px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
+    }
+
+    .box-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      background: #111c35;
+      border-bottom: 1px solid #1e293b;
+      flex-shrink: 0;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      background: #f59e0b;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #f59e0b;
+    }
+
+    .box-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+
+    .box-body {
+      flex-grow: 1;
+      overflow-y: scroll !important;
+      -webkit-overflow-scrolling: touch;
+      padding: 18px 20px;
+    }
+
+    .lead-text {
+      border-left: 3px solid #f59e0b;
+      padding: 8px 12px;
+      margin-bottom: 18px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #cbd5e1;
+      background: rgba(245, 158, 11, 0.08);
+    }
+
+    .deep-subheading {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fbbf24;
+      margin-top: 18px;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .box-body p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #94a3b8;
+      margin: 0 0 12px 0;
+      text-align: justify;
+    }
+
+    .diagram-box {
+      background: #090d16;
+      border: 1px solid #1e293b;
+      border-radius: 6px;
+      padding: 12px;
+      margin: 14px 0;
+    }
+
+    .diagram-header {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      color: #64748b;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .strata-flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .strata-card {
+      flex: 1 1 120px;
+      padding: 8px 10px;
+      border-radius: 5px;
+      background: #111827;
+      border: 1px solid #1f2937;
+      text-align: center;
+    }
+
+    .strata-name {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #e2e8f0;
+    }
+
+    .strata-desc {
+      font-size: 0.72rem;
+      color: #94a3b8;
+      margin: 2px 0;
+    }
+
+    .strata-temp {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #f59e0b;
+    }
+
+    .swatch-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .swatch-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #111827;
+      border: 1px solid #1f2937;
+      border-radius: 4px;
+      padding: 5px 8px;
+      font-size: 0.75rem;
+    }
+
+    .color-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .swatch-label { font-weight: 700; color: #f1f5f9; }
+    .swatch-sub { color: #64748b; }
+
+    .box-footer {
+      padding: 10px 18px;
+      background: #090d16;
+      border-top: 1px solid #1e293b;
+      font-size: 0.75rem;
+      color: #64748b;
+      flex-shrink: 0;
+    }
+
+    .box-footer span { color: #94a3b8; }
+
+    @media (max-width: 768px) {
+      .grid-duo { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Navigation haute -->
+  <!-- BARRE SUPÉRIEURE DE NAVIGATION -->
   <nav class="fiche-nav">
     <a href="../index.html">← Système Solaire</a>
-    <span style="font-family:'Cinzel',serif; font-size:0.9rem; letter-spacing:0.1em;">Le Soleil</span>
-    <a href="../planetarium.html">🪐 Vue 3D</a>
+    <span class="nav-title">Le Soleil</span>
+    <a href="../planetarium.html" target="_blank" rel="noopener">🪐 Planétarium 3D</a>
   </nav>
 
   <main class="fiche-container">
 
-    <!-- Hero visuel -->
-    <header class="hero-astro">
+    <!-- HERO & INTRODUCTION GÉNÉRALE -->
+    <header class="hero-section">
       <h1 class="hero-title">Le Soleil</h1>
       <p class="hero-sub">Notre étoile de référence (Naine jaune G2V)</p>
-      
+
+      <div class="intro-card">
+        Cœur battant de notre système planétaire, le Soleil est une naine jaune ordinaire aux dimensions pourtant colossales à notre échelle. Dans la forge infernale de son noyau, des centaines de millions de tonnes d'hydrogène fusionnent chaque seconde, libérant le flux d'énergie continue qui a permis l'éclosion et le maintien du vivant sur Terre. Agité par les convulsions de son champ magnétique, il modèle l'espace interplanétaire au gré de ses tempêtes et de son vent de particules chargées. Arrivé aujourd'hui à la moitié de son existence, il poursuit une lente et inéluctable montée en puissance. Dans cinq milliards d'années, son chant du cygne en géante rouge viendra consumer les mondes intérieurs avant de laisser place au silence froid d'une naine blanche.
+      </div>
+
+      <!-- PHOTO PRINCIPALE EN ULTRAVIOLET ROGNÉE -->
       <div class="hero-img-box">
-        <img src="https://lh3.googleusercontent.com/d/1TAJlRURAObvrq2Tq-1EX5W473Sw2gFqM=s1200" alt="Le Soleil">
+        <img src="https://lh3.googleusercontent.com/d/1w5xXp43ofkVIex3Ec1w5mXmLGLEraw7o=s1600" alt="Le Soleil en ultraviolet coronal">
       </div>
     </header>
 
-    <!-- SECTION : LES TACHES SOLAIRES -->
-    <section class="theme-section">
-      <h2 class="section-h2">Les taches solaires</h2>
-      
-      <div class="media-grid-2">
-        <img src="https://drive.google.com/thumbnail?id=VOTRE_ID_IMAGE_1&sz=w1000" alt="Gros plan tache solaire">
-        <img src="https://drive.google.com/thumbnail?id=VOTRE_ID_IMAGE_2&sz=w1000" alt="Papillon magnétique de Maunder">
-      </div>
-
-      <div class="deep-box">
-        <div class="deep-tag">En profondeur...</div>
+    <!-- MODULE INTERACTIF : ARCHITECTURE & ÉVOLUTION DU SOLEIL -->
+    <section>
+      <div id="infographie-soleil" style="font-family: system-ui, -apple-system, sans-serif; background: #0b1120; color: #e2e8f0; padding: 10px 14px; border-radius: 10px; width: 100%; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.6);">
         
-        <div class="deep-quote">
-          Visibles à la surface du Soleil sous forme d'empreintes sombres, les taches solaires ne sont pas des trous, mais des anomalies magnétiques colossales où l'énergie thermique interne se retrouve temporairement prise au piège.
+        <header style="text-align: center; margin: 0 0 8px 0;">
+          <h2 style="color: #f8fafc; margin: 0; font-size: 1.25rem; line-height: 1.2;">Le Soleil : notre étoile de référence (Naine jaune G2V)</h2>
+          <p style="color: #94a3b8; margin: 4px 0 0 0; font-size: 0.8rem;">Anatomie interne, activité magnétique et évolution stellaire</p>
+        </header>
+
+        <!-- Sélecteur d'onglets compact -->
+        <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 0 0 10px 0;">
+          <button onclick="changerOngletSoleil('anatomie')" id="btn-sol-anatomie" style="padding: 6px 14px; border-radius: 6px; border: none; background: #2563eb; color: #fff; font-weight: 600; cursor: pointer; font-size: 0.8rem;">1. Anatomie & Structure interne</button>
+          <button onclick="changerOngletSoleil('activite')" id="btn-sol-activite" style="padding: 6px 14px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.8rem;">2. Activité & Magnétisme</button>
+          <button onclick="changerOngletSoleil('cycle')" id="btn-sol-cycle" style="padding: 6px 14px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.8rem;">3. Genèse & Devenir cosmique</button>
         </div>
 
-        <div class="deep-subtitle">Le blocage de la convection thermique</div>
-        <p class="deep-p">
-          Le Soleil évacue sa chaleur interne vers la surface grâce à de gigantesques cellules de convection : le plasma chaud monte, rayonne son énergie dans l'espace, puis redescend une fois refroidi. Ce mécanisme fonctionne en continu sur toute la photosphère sous la forme d'un bouillonnement granulaire régulier.
-        </p>
-        <p class="deep-p">
-          Une tache naît lorsqu'un faisceau très dense de lignes de champ magnétique émerge des profondeurs. Cette force magnétique agit comme un garrot sur le plasma ionisé : les particules chargées ne peuvent plus circuler librement verticalement. Privée de son apport continu de matière surchauffée venue des profondeurs, la région de surface se refroidit nettement par rapport au reste du disque.
-        </p>
+        <!-- ONGLET 1 : ANATOMIE -->
+        <div id="onglet-sol-anatomie" style="margin: 0; padding: 0;">
+          <div style="background: #070d19; border: 1px solid #1e293b; border-radius: 6px; padding: 6px 8px; margin-bottom: 8px; overflow-x: auto;">
+            <svg viewBox="0 0 920 230" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; aspect-ratio: 920 / 230; min-width: 700px; display: block; margin: 0;">
+              <defs>
+                <radialGradient id="gradNoyau" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#ffffff"/>
+                  <stop offset="60%" stop-color="#fef08a"/>
+                  <stop offset="100%" stop-color="#facc15"/>
+                </radialGradient>
+                <radialGradient id="gradRadiative" cx="50%" cy="50%" r="50%">
+                  <stop offset="60%" stop-color="#f59e0b"/>
+                  <stop offset="100%" stop-color="#ea580c"/>
+                </radialGradient>
+                <radialGradient id="gradConvective" cx="50%" cy="50%" r="50%">
+                  <stop offset="70%" stop-color="#dc2626"/>
+                  <stop offset="100%" stop-color="#991b1b"/>
+                </radialGradient>
+                <radialGradient id="gradCouronne" cx="50%" cy="50%" r="50%">
+                  <stop offset="85%" stop-color="#fef08a" stop-opacity="0.6"/>
+                  <stop offset="100%" stop-color="#070d19" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
 
-        <div class="schema-box">
-          <div class="schema-title">Schéma 1 — Gradient thermique et contraste de surface</div>
-          <div class="schema-columns">
-            <div class="schema-col">
-              <div class="schema-col-title">Photosphère libre</div>
-              <div class="schema-col-sub">Convection normale</div>
-              <div class="schema-col-val" style="color:#facc15;">~5 800 K (très lumineux)</div>
+              <g transform="translate(10, 220)">
+                <circle cx="0" cy="0" r="210" fill="url(#gradCouronne)"/>
+                <path d="M 0 -170 A 170 170 0 0 1 170 0 L 0 0 Z" fill="url(#gradConvective)"/>
+                <path d="M 90 -105 C 120 -140 145 -115 110 -80" fill="none" stroke="#fca5a5" stroke-width="1.5" stroke-dasharray="3,2"/>
+                <path d="M 30 -140 C 50 -170 80 -150 50 -120" fill="none" stroke="#fca5a5" stroke-width="1.5" stroke-dasharray="3,2"/>
+                <path d="M 130 -50 C 165 -60 165 -20 135 -30" fill="none" stroke="#fca5a5" stroke-width="1.5" stroke-dasharray="3,2"/>
+                <path d="M 0 -115 A 115 115 0 0 1 115 0 L 0 0 Z" fill="url(#gradRadiative)"/>
+                <path d="M 35 -15 L 45 -25 L 38 -40 L 55 -45 L 60 -30 L 75 -50 L 65 -65 L 85 -75" fill="none" stroke="#fde047" stroke-width="1.2"/>
+                <path d="M 0 -45 A 45 45 0 0 1 45 0 L 0 0 Z" fill="url(#gradNoyau)"/>
+              </g>
+
+              <g stroke="#64748b" stroke-width="1.2" fill="none">
+                <polyline points="45,200 240,200"/>
+                <polyline points="95,160 240,160"/>
+                <polyline points="140,110 240,110"/>
+                <polyline points="175,65 240,65"/>
+                <polyline points="205,25 240,25"/>
+              </g>
+
+              <text x="250" y="203" fill="#fef08a" font-size="10" font-weight="bold">Le Cœur (Noyau) : 15 millions de K</text>
+              <text x="250" y="215" fill="#94a3b8" font-size="8">Siège exclusif de la fusion thermonucléaire (H → He).</text>
+
+              <text x="250" y="157" fill="#fb923c" font-size="10" font-weight="bold">Zone Radiative : 2 à 7 millions de K</text>
+              <text x="250" y="169" fill="#94a3b8" font-size="8">L'énergie se propage par rebonds successifs de photons (100 000 ans pour la traverser).</text>
+
+              <text x="250" y="107" fill="#ef4444" font-size="10" font-weight="bold">Zone Convective : 2 millions à 5 800 K</text>
+              <text x="250" y="119" fill="#94a3b8" font-size="8">Le plasma, devenu opaque, bout. L'énergie monte par de gigantesques courants thermiques.</text>
+
+              <text x="250" y="62" fill="#facc15" font-size="10" font-weight="bold">Photosphère : 5 800 K (Surface visible)</text>
+              <text x="250" y="74" fill="#94a3b8" font-size="8">Épaisse d'à peine 400 km. Émet la quasi-totalité de la lumière solaire.</text>
+
+              <text x="250" y="22" fill="#cbd5e1" font-size="10" font-weight="bold">Couronne solaire : 1 à 3 millions de K</text>
+              <text x="250" y="34" fill="#94a3b8" font-size="8">Atmosphère externe surchauffée par le champ magnétique (visible lors des éclipses).</text>
+
+              <g transform="translate(680, 20)">
+                <rect x="0" y="0" width="220" height="180" rx="6" fill="#1e293b" stroke="#334155"/>
+                <text x="110" y="25" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="bold">CARTE D'IDENTITÉ</text>
+                <line x1="20" y1="35" x2="200" y2="35" stroke="#475569" stroke-width="1"/>
+                <text x="20" y="55" fill="#94a3b8" font-size="9">Diamètre : <tspan fill="#f8fafc">1,39 million de km (109 × Terre)</tspan></text>
+                <text x="20" y="75" fill="#94a3b8" font-size="9">Masse : <tspan fill="#f8fafc">1,989 × 10^30 kg (333 000 × Terre)</tspan></text>
+                <text x="20" y="95" fill="#94a3b8" font-size="9">Composition : <tspan fill="#f8fafc">~73 % Hydrogène, ~25 % Hélium</tspan></text>
+                <text x="20" y="115" fill="#94a3b8" font-size="9">Luminosité : <tspan fill="#f8fafc">3,828 × 10^26 Watts</tspan></text>
+                <text x="20" y="135" fill="#94a3b8" font-size="9">Âge : <tspan fill="#f8fafc">4,57 milliards d'années</tspan></text>
+                <text x="20" y="155" fill="#94a3b8" font-size="9">Rotation : <tspan fill="#f8fafc">Différentielle (25 j. équat., 35 pôles)</tspan></text>
+              </g>
+            </svg>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 8px;">
+            <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
+              <div style="color: #facc15; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">La fusion proton-proton</div>
+              <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.35;">
+                Dans le cœur surcompressé (150 g/cm³), la température atteint 15 millions de degrés. Chaque seconde, <strong>600 millions de tonnes d'hydrogène</strong> fusionnent en hélium. Ce faisant, ~4 millions de tonnes de masse sont directement converties en énergie pure (selon E=mc²), générant la pression qui empêche l'étoile de s'effondrer.
+              </p>
             </div>
-            <div class="schema-col">
-              <div class="schema-col-title">Pénombre</div>
-              <div class="schema-col-sub">Lignes inclinées</div>
-              <div class="schema-col-val" style="color:#fb923c;">~5 000 K (zone intermédiaire)</div>
+            <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
+              <div style="color: #38bdf8; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Le mystère du chauffage coronal</div>
+              <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.35;">
+                La photosphère (la surface) est à "seulement" 5 800 K. Pourtant, la couronne, située bien plus haut dans le vide, dépasse <strong>1 million de kelvins</strong>. Ce paradoxe thermodynamique s'explique par la reconnexion brutale des lignes de champ magnétique et la dissipation d'ondes d'Alfvén qui injectent une énergie colossale dans l'atmosphère externe.
+              </p>
             </div>
-            <div class="schema-col">
-              <div class="schema-col-title">Ombre centrale</div>
-              <div class="schema-col-sub">Champ vertical intense</div>
-              <div class="schema-col-val" style="color:#f87171;">~3 800 K (sombre par contraste)</div>
+          </div>
+        </div>
+
+        <!-- ONGLET 2 : ACTIVITÉ -->
+        <div id="onglet-sol-activite" style="display: none; margin: 0; padding: 0;">
+          <div style="background: #070d19; border: 1px solid #1e293b; border-radius: 6px; padding: 6px 8px; margin-bottom: 8px; overflow-x: auto;">
+            <svg viewBox="0 0 920 200" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; aspect-ratio: 920 / 200; min-width: 700px; display: block; margin: 0;">
+              <defs>
+                <linearGradient id="gradSurface" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#f59e0b"/>
+                  <stop offset="100%" stop-color="#b45309"/>
+                </linearGradient>
+              </defs>
+              <rect x="0" y="160" width="920" height="40" fill="url(#gradSurface)"/>
+              <path d="M 0 160 Q 20 155 40 160 Q 60 165 80 160 Q 100 155 120 160 T 200 160 T 280 160 T 360 160 T 440 160 T 520 160 T 600 160 T 680 160 T 760 160 T 840 160 T 920 160" fill="none" stroke="#fef08a" stroke-width="2"/>
+              <g transform="translate(180, 160)">
+                <ellipse cx="-20" cy="8" rx="15" ry="6" fill="#451a03"/>
+                <ellipse cx="-20" cy="8" rx="8" ry="3" fill="#000000"/>
+                <ellipse cx="20" cy="4" rx="12" ry="5" fill="#451a03"/>
+                <ellipse cx="20" cy="4" rx="6" ry="2" fill="#000000"/>
+                <path d="M -20 8 C -30 -60 30 -60 20 4" fill="none" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4,2"/>
+                <path d="M -15 8 C -20 -40 25 -40 15 4" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="4,2"/>
+                <line x1="0" y1="-70" x2="0" y2="-40" stroke="#64748b" stroke-width="1.2"/>
+                <text x="0" y="-75" text-anchor="middle" fill="#38bdf8" font-size="9" font-weight="bold">Boucles coronales</text>
+              </g>
+              <g transform="translate(460, 160)">
+                <path d="M -20 0 L -10 -40 L 0 -20 L 10 -60 L 20 -20 L 30 -40 L 40 0" fill="#facc15" opacity="0.8"/>
+                <circle cx="10" cy="-60" r="12" fill="#ffffff" opacity="0.8"/>
+                <path d="M -10 -60 L 30 -60 M 10 -80 L 10 -40" stroke="#ffffff" stroke-width="2"/>
+                <line x1="10" y1="-85" x2="10" y2="-105" stroke="#64748b" stroke-width="1.2"/>
+                <text x="10" y="-110" text-anchor="middle" fill="#facc15" font-size="9" font-weight="bold">Éruption solaire (Flash X)</text>
+              </g>
+              <g transform="translate(740, 160)">
+                <path d="M -40 -30 C -80 -120 80 -120 40 -30" fill="none" stroke="#ef4444" stroke-width="4" opacity="0.8"/>
+                <path d="M -20 -40 C -40 -90 40 -90 20 -40" fill="none" stroke="#fca5a5" stroke-width="2"/>
+                <circle cx="0" cy="-80" r="4" fill="#ffffff"/>
+                <line x1="0" y1="-125" x2="0" y2="-145" stroke="#64748b" stroke-width="1.2"/>
+                <text x="0" y="-150" text-anchor="middle" fill="#ef4444" font-size="9" font-weight="bold">Éjection de masse coronale (CME)</text>
+                <text x="0" y="-138" text-anchor="middle" fill="#94a3b8" font-size="7.5">Plasma propulsé dans l'espace</text>
+              </g>
+              <text x="180" y="190" text-anchor="middle" fill="#cbd5e1" font-size="8.5" font-weight="bold">Taches solaires (Zones froides magnétiques)</text>
+            </svg>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 8px;">
+            <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
+              <div style="color: #fb923c; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Le cycle de Schwabe (11 ans)</div>
+              <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.35;">
+                En raison de la rotation différentielle (l'équateur tourne plus vite que les pôles), le champ magnétique du Soleil s'enroule, se torsade et finit par s'extérioriser sous forme de taches. Tous les 11 ans en moyenne, le champ magnétique atteint un paroxysme de tension (maximum solaire), puis se rompt et s'inverse.
+              </p>
             </div>
+            <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
+              <div style="color: #facc15; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Taches, Éruptions et CME</div>
+              <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.35;">
+                Les <strong>taches solaires</strong> sont des zones où le champ magnétique bloque la convection (elles sont à ~3 800 K, paraissant noires par contraste). Lorsque ces lignes se reconnectent brutalement, elles déclenchent une <strong>éruption</strong> souvent suivie d'une <strong>CME</strong>.
+              </p>
+            </div>
+            <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
+              <div style="color: #38bdf8; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Vent solaire & Météo spatiale</div>
+              <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.35;">
+                Le Soleil perd environ 1 million de tonnes de matière par seconde sous forme de <strong>vent solaire</strong> continu. Si une CME percute la magnétosphère terrestre, elle déclenche une tempête géomagnétique : splendides aurores polaires mais risques pour les satellites et les réseaux électriques.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ONGLET 3 : DEVENIR -->
+        <div id="onglet-sol-cycle" style="display: none; margin: 0; padding: 0;">
+          <div style="background: #070d19; border: 1px solid #1e293b; border-radius: 6px; padding: 6px 8px; margin-bottom: 8px; overflow-x: auto;">
+            <svg viewBox="0 0 920 180" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; aspect-ratio: 920 / 180; min-width: 700px; display: block; margin: 0;">
+              <text x="460" y="16" text-anchor="middle" fill="#94a3b8" font-size="11" letter-spacing="1">CHRONOLOGIE ET ÉVOLUTION STELLAIRE DU SOLEIL</text>
+              <line x1="40" y1="100" x2="880" y2="100" stroke="#334155" stroke-width="2"/>
+              <circle cx="80" cy="100" r="6" fill="#1e293b" stroke="#64748b" stroke-width="1.5"/>
+              <text x="80" y="70" text-anchor="middle" fill="#cbd5e1" font-size="9" font-weight="bold">-4,57 Ga</text>
+              <text x="80" y="125" text-anchor="middle" fill="#94a3b8" font-size="8">Nébuleuse</text>
+              <circle cx="200" cy="100" r="8" fill="#fb923c"/>
+              <text x="200" y="70" text-anchor="middle" fill="#cbd5e1" font-size="9" font-weight="bold">-4,5 Ga</text>
+              <text x="200" y="125" text-anchor="middle" fill="#fb923c" font-size="8">Phase T-Tauri</text>
+              <circle cx="360" cy="100" r="14" fill="#facc15" stroke="#ffffff" stroke-width="1.5"/>
+              <text x="360" y="55" text-anchor="middle" fill="#facc15" font-size="10" font-weight="bold">Aujourd'hui (0 Ga)</text>
+              <text x="360" y="125" text-anchor="middle" fill="#facc15" font-size="8.5">Naine jaune G2V</text>
+              <circle cx="520" cy="100" r="16" fill="#f59e0b"/>
+              <text x="520" y="70" text-anchor="middle" fill="#cbd5e1" font-size="9" font-weight="bold">+1,5 à 3 Ga</text>
+              <text x="520" y="125" text-anchor="middle" fill="#f59e0b" font-size="8">Hausse luminosité</text>
+              <circle cx="700" cy="100" r="32" fill="#ef4444" opacity="0.8"/>
+              <text x="700" y="50" text-anchor="middle" fill="#fca5a5" font-size="10" font-weight="bold">+5 à +5,4 Ga</text>
+              <text x="700" y="145" text-anchor="middle" fill="#ef4444" font-size="8.5">Géante rouge</text>
+              <circle cx="860" cy="100" r="4" fill="#ffffff" stroke="#38bdf8" stroke-width="1.2"/>
+              <circle cx="860" cy="100" r="20" fill="none" stroke="#2dd4bf" stroke-width="1.5" stroke-dasharray="3,2"/>
+              <text x="860" y="70" text-anchor="middle" fill="#cbd5e1" font-size="9" font-weight="bold">+7 Ga et au-delà</text>
+              <text x="860" y="130" text-anchor="middle" fill="#ffffff" font-size="8">Naine blanche</text>
+            </svg>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 8px 10px; overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: left; color: #ffffff;">
+              <thead>
+                <tr style="border-bottom: 1.5px solid #64748b; font-weight: bold;">
+                  <th style="padding: 6px 8px;">Phase</th>
+                  <th style="padding: 6px 8px;">Moteur énergétique</th>
+                  <th style="padding: 6px 8px;">Impact sur la Terre</th>
+                </tr>
+              </thead>
+              <tbody style="line-height: 1.4;">
+                <tr style="border-bottom: 1px solid #334155;">
+                  <td style="padding: 6px 8px; color: #facc15; font-weight: bold;">Séquence Principale (Actuel)</td>
+                  <td style="padding: 6px 8px;">Fusion d'Hydrogène (H → He) dans le noyau à 15 MK.</td>
+                  <td style="padding: 6px 8px;">Luminosité stable garantissant la zone habitable.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #334155;">
+                  <td style="padding: 6px 8px; color: #fb923c; font-weight: bold;">Fin de Séquence (+1,5 Ga)</td>
+                  <td style="padding: 6px 8px;">Contraction du cœur d'hélium, hausse de température (+10 %).</td>
+                  <td style="padding: 6px 8px;">Emballement de l'effet de serre ; fin de l'eau liquide.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #334155;">
+                  <td style="padding: 6px 8px; color: #ef4444; font-weight: bold;">Géante Rouge (+5 Ga)</td>
+                  <td style="padding: 6px 8px;">Fusion de l'H en coquille, puis Flash de l'Hélium (He → C, O).</td>
+                  <td style="padding: 6px 8px;">Le Soleil gonfle jusqu'à l'orbite terrestre. Roches fondues.</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px 8px; color: #38bdf8; font-weight: bold;">Naine Blanche (+7 Ga)</td>
+                  <td style="padding: 6px 8px;">Plus aucune fusion. Refroidissement thermique d'un cœur C/O.</td>
+                  <td style="padding: 6px 8px;">Cadavre gelé. Nuit noire stellaire éternelle.</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SECTION : LES FILAMENTS -->
-    <section class="theme-section">
-      <h2 class="section-h2">Les filaments</h2>
-      
-      <div class="media-grid-2">
-        <img src="https://drive.google.com/thumbnail?id=VOTRE_ID_IMAGE_3&sz=w1000" alt="Filament sur disque">
-        <img src="https://drive.google.com/thumbnail?id=VOTRE_ID_IMAGE_4&sz=w1000" alt="Protubérance sur le limbe">
+    <!-- SECTION : LES TACHES SOLAIRES -->
+    <section class="theme-block">
+      <h2 class="theme-h2">Les taches solaires</h2>
+
+      <div class="grid-duo">
+        <img src="https://lh3.googleusercontent.com/d/19R6pMkFAzyOpg-IQOHZd1vH3jONzeuyV=s1200" alt="Gros plan sur une tache solaire">
+        <img src="https://lh3.googleusercontent.com/d/1WvdSgLSQcBf83s8A79OEjaUV61lrB61M=s1200" alt="Diagramme papillon de Maunder">
       </div>
 
-      <div class="media-single">
-        <img src="https://drive.google.com/thumbnail?id=VOTRE_ID_IMAGE_5&sz=w1200" alt="Éjection de masse coronale">
-      </div>
-
-      <p class="caption-text">
-        Cette image capturée par le satellite SDO le 31 août 2012 immortalise une spectaculaire éjection de masse coronale (CME) survenant sur le limbe oriental du Soleil...
-      </p>
-
-      <div class="deep-box">
-        <div class="deep-tag">En profondeur...</div>
-        <div class="deep-quote">
-          Longs serpents sombres zébrant la surface ou arches lumineuses géantes suspendues dans le vide spatial, les filaments et les protubérances désignent en réalité exactement le même phénomène physique, perçu sous deux angles d'observation différents.
+      <!-- BOÎTE EN PROFONDEUR : TACHES SOLAIRES -->
+      <div class="box-container">
+        <div class="box-header">
+          <div class="status-dot"></div>
+          <div class="box-title">En profondeur...</div>
         </div>
-        <div class="deep-subtitle">Une même réalité, deux perspectives d'observation</div>
-        <p class="deep-p">
-          La distinction entre filament et protubérance relève d'un pur effet de perspective géométrique. Lorsque cette gigantesque nappe de plasma est observée de face...
-        </p>
+
+        <div class="box-body">
+          <div class="lead-text">
+            Visibles à la surface du Soleil sous forme d'empreintes sombres, les taches solaires ne sont pas des trous, mais des anomalies magnétiques colossales où l'énergie thermique interne se retrouve temporairement prise au piège.
+          </div>
+
+          <strong class="deep-subheading">Le blocage de la convection thermique</strong>
+          <p>
+            Le Soleil évacue sa chaleur interne vers la surface grâce à de gigantesques cellules de convection : le plasma chaud monte, rayonne son énergie dans l'espace, puis redescend une fois refroidi. Ce mécanisme fonctionne en continu sur toute la photosphère sous la forme d'un bouillonnement granulaire régulier.
+          </p>
+          <p>
+            Une tache naît lorsqu'un faisceau très dense de lignes de champ magnétique émerge des profondeurs. Cette force magnétique agit comme un garrot sur le plasma ionisé : les particules chargées ne peuvent plus circuler librement verticalement. Privée de son apport continu de matière surchauffée venue des profondeurs, la région de surface se refroidit nettement par rapport au reste du disque.
+          </p>
+
+          <div class="diagram-box">
+            <span class="diagram-header">Schéma 1 — Gradient thermique et contraste de surface</span>
+            <div class="strata-flow">
+              <div class="strata-card" style="border-top: 2px solid #facc15;">
+                <div class="strata-name">Photosphère libre</div>
+                <div class="strata-desc">Convection normale</div>
+                <div class="strata-temp" style="color:#facc15;">~5 800 K (très lumineux)</div>
+              </div>
+              <div class="strata-card" style="border-top: 2px solid #fb923c;">
+                <div class="strata-name">Pénombre</div>
+                <div class="strata-desc">Lignes inclinées</div>
+                <div class="strata-temp" style="color:#fb923c;">~5 000 K (zone intermédiaire)</div>
+              </div>
+              <div class="strata-card" style="border-top: 2px solid #ef4444;">
+                <div class="strata-name">Ombre centrale</div>
+                <div class="strata-desc">Champ vertical intense</div>
+                <div class="strata-temp" style="color:#f87171;">~3 800 K (sombre par contraste)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box-footer">
+          Source : <span>NASA / SDO (Solar Dynamics Observatory)</span>
+        </div>
       </div>
     </section>
 
+    <!-- SECTION : LES FILAMENTS -->
+    <section class="theme-block">
+      <h2 class="theme-h2">Les filaments</h2>
+
+      <div class="grid-duo">
+        <img src="https://lh3.googleusercontent.com/d/1I8R3cFKe9dn9CnRxHbEYdBOy56Lz2Jkq=s1200" alt="Filament solaire">
+        <img src="https://lh3.googleusercontent.com/d/1W6siSBgp1zemT69Ny4ousYrxRUjwmc7e=s1200" alt="Protubérance sur le limbe">
+      </div>
+
+      <div class="media-wide">
+        <img src="https://lh3.googleusercontent.com/d/1h8VhhxTvbmbtdmdYOtRNnsCvGSW1XmXZ=s1600" alt="Éjection de masse coronale du 31 août 2012">
+      </div>
+
+      <p class="narrative-p">
+        Cette image capturée par le satellite SDO le 31 août 2012 immortalise une spectaculaire éjection de masse coronale (CME) survenant sur le limbe oriental du Soleil.
+        <br><br>
+        Au premier plan visuel, un gigantesque ruban de matière ionisée se détend et s'étire vers le vide spatial à gauche, fendant l'espace sur des centaines de milliers de kilomètres. La structure présente une silhouette courbée et effilochée, rappelant un fouet incandescent dont l'extrémité se dissipe dans l'obscurité du cosmos.
+        <br><br>
+        Le cliché est le résultat d'une superposition composite combinant deux longueurs d'onde précises de l'ultraviolet extrême :
+        <br>
+        • <strong>Le canal 304 Å</strong> (teinté de rouge et d'orange intense) met en valeur les filaments denses de plasma d'hélium à environ 50 000 kelvins qui composent le corps principal du filament éjecté.
+        <br>
+        • <strong>Le canal 171 Å</strong> (aux nuances dorées et jaunes brillantes) révèle la couronne calme et les gaz chauffés à près de 600 000 kelvins, soulignant les lignes de champ magnétique environnantes.
+        <br><br>
+        À la base de l'expulsion, près du bord supérieur gauche du disque solaire, éclate un point d'une luminosité blanche aveuglante : c'est le foyer de l'éruption, d'où s'échappent d'intenses gerbes de lumière et des boucles magnétiques torsadées. Tout autour, la surface du Soleil apparaît comme un tapis granuleux et tourmenté, marbré de crêtes incandescentes et de petites poches lumineuses d'activité magnétique disséminées sur l'hémisphère visible.
+      </p>
+
+      <!-- BOÎTE EN PROFONDEUR : FILAMENTS ET PROTUBÉRANCES -->
+      <div class="box-container">
+        <div class="box-header">
+          <div class="status-dot"></div>
+          <div class="box-title">En profondeur...</div>
+        </div>
+
+        <div class="box-body">
+          <div class="lead-text">
+            Longs serpents sombres zébrant la surface ou arches lumineuses géantes suspendues dans le vide spatial, les filaments et les protubérances désignent en réalité exactement le même phénomène physique, perçu sous deux angles d'observation différents.
+          </div>
+
+          <strong class="deep-subheading">Une même réalité, deux perspectives d'observation</strong>
+          <p>
+            La distinction entre filament et protubérance relève d'un pur effet de perspective géométrique. Lorsque cette gigantesque nappe de plasma est observée de face, directement projetée sur le disque solaire éblouissant, elle absorbe une partie de la lumière sous-jacente et ressort sous la forme d'un ruban sombre et sinueux : on l'appelle alors un filament.
+          </p>
+          <p>
+            Lorsque la rotation du Soleil amène cette même structure sur le limbe, c'est-à-dire le bord visible du disque, elle se détache désormais sur la noirceur du vide spatial. La matière incandescente n'est plus en absorption mais émet sa propre lumière, apparaissant alors sous forme d'une arche étincelante et aérienne : on parle dans ce cas de protubérance.
+          </p>
+
+          <div class="diagram-box">
+            <span class="diagram-header">Schéma 1 — Effet de perspective selon la ligne de visée</span>
+            <div class="strata-flow">
+              <div class="strata-card" style="border-top: 2px solid #64748b;">
+                <div class="strata-name">Vue de face (Disque)</div>
+                <div class="strata-desc">Fond : photosphère brûlante</div>
+                <div class="strata-temp">Filament sombre (absorption)</div>
+              </div>
+              <div class="strata-card" style="border-top: 2px solid #ef4444;">
+                <div class="strata-name">Vue de profil (Limbe)</div>
+                <div class="strata-desc">Fond : vide spatial noir</div>
+                <div class="strata-temp">Protubérance brillante (émission)</div>
+              </div>
+              <div class="strata-card" style="border-top: 2px solid #f59e0b;">
+                <div class="strata-name">Gaz piégé</div>
+                <div class="strata-desc">Chromosphère en lévitation</div>
+                <div class="strata-temp">~10 000 K (froid vs couronne)</div>
+              </div>
+            </div>
+          </div>
+
+          <strong class="deep-subheading">Le hamac magnétique de la couronne</strong>
+          <p>
+            La présence de ces formations soulève une énigme thermodynamique : comment du plasma dense et relativement froid, avoisinant 10 000 kelvins, peut-il léviter durant des semaines au cœur d'une couronne solaire portée à plus d'un million de kelvins sans s'évaporer ni retomber sous le poids de la gravité ?
+          </p>
+          <p>
+            La réponse réside dans la configuration du champ magnétique local. Les lignes magnétiques s'incurvent pour former de vastes creux horizontaux au-dessus de la surface, agissant comme un véritable hamac magnétique. Le plasma chromosphérique s'y accumule et reste confiné, soutenu contre la gravité par la pression magnétique sous-jacente qui l'isole thermiquement du milieu coronal environnant.
+          </p>
+
+          <div class="diagram-box">
+            <span class="diagram-header">Schéma 2 — Cycle de vie et signature instrumentale</span>
+            <div class="swatch-list">
+              <div class="swatch-item"><span class="color-dot" style="background:#ef4444;"></span><span class="swatch-label">Hydrogène alpha (6563 Å)</span><span class="swatch-sub">— Filtre de référence pour le suivi des rubans</span></div>
+              <div class="swatch-item"><span class="color-dot" style="background:#f97316;"></span><span class="swatch-label">Hélium II (304 Å)</span><span class="swatch-sub">— Imagerie spatiale haute résolution de la base</span></div>
+              <div class="swatch-item"><span class="color-dot" style="background:#3b82f6;"></span><span class="swatch-label">Phase quiescente</span><span class="swatch-sub">— Équilibre stable durant plusieurs rotations solaires</span></div>
+              <div class="swatch-item"><span class="color-dot" style="background:#dc2626;"></span><span class="swatch-label">Phase éruptive</span><span class="swatch-sub">— Rupture magnétique et éjection de masse coronale</span></div>
+            </div>
+          </div>
+
+          <strong class="deep-subheading">Rupture d'équilibre et éjection de masse coronale</strong>
+          <p>
+            Tant que les forces magnétiques demeurent stables, la protubérance est dite quiescente : elle peut s'étendre sur des centaines de milliers de kilomètres, dépassant largement le diamètre de la Terre, et persister pendant plusieurs mois. Les mouvements de convection en surface continuent néanmoins de tordre et de comprimer les lignes de champ qui la soutiennent.
+          </p>
+          <p>
+            Lorsque la tension magnétique accumulée devient excessive, l'équilibre se rompt par reconnexion magnétique brutale. La structure magnétique se détend violemment comme un arc libérant sa flèche : la protubérance est projetée dans l'espace interplanétaire sous forme d'une éjection de masse coronale (CME). Ces milliards de tonnes de matière électrisée propulsées à grande vitesse constituent le moteur principal des grandes tempêtes géomagnétiques ressenties sur Terre.
+          </p>
+        </div>
+
+        <div class="box-footer">
+          Source : <span>NASA / SDO (Solar Dynamics Observatory)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION : LES COULEURS DU SOLEIL -->
+    <section class="theme-block">
+      <h2 class="theme-h2">Les couleurs du Soleil</h2>
+
+      <p class="narrative-p">
+        Ces compositions spectaculaires sont issues de la mission Solar Dynamics Observatory (SDO) de la NASA. Elles démontrent que notre étoile est loin d'être un disque jaune immuable et révèlent son activité dynamique à travers différentes composantes du spectre électromagnétique.
+      </p>
+
+      <div class="grid-duo">
+        <img src="https://lh3.googleusercontent.com/d/1CntfrtW9ryWi4ppEe7qwVuz4EbFe32om=s1200" alt="Les filtres SDO AIA et HMI">
+        <img src="https://lh3.googleusercontent.com/d/1m37rIZRKiBcdxiwd9QE81F95bv7lhVw6=s1200" alt="Échiquier spectral du Soleil">
+      </div>
+
+      <p class="narrative-p">
+        <strong>À gauche :</strong> La planche comparative présente les observations combinées de deux instruments embarqués. L'imageur HMI cartographie les mouvements du gaz par effet Doppler, mesure la polarité du champ magnétique en noir et blanc, et fournit une vue en lumière blanche de la surface. De son côté, la suite de télescopes AIA capte simultanément dix canaux différents pour enregistrer en continu l'évolution de la couronne et les mécanismes d'éruption.
+        <br><br>
+        <strong>À droite :</strong> La seconde image réunit ces multiples observations sous forme d'échiquier pour reconstituer le disque solaire global. Ce montage met en lumière les interactions directes entre les différentes strates de l'étoile : une zone de forte polarité magnétique à la surface correspond précisément à la base d'une arche coronaire géante plusieurs centaines de milliers de kilomètres plus haut. Cette vision d'ensemble est essentielle pour modéliser la météo spatiale et anticiper les tempêtes solaires susceptibles d'affecter les télécommunications et les réseaux électriques terrestres.
+      </p>
+
+      <!-- BOÎTE EN PROFONDEUR : COULEURS ET LONGUEURS D'ONDE -->
+      <div class="box-container">
+        <div class="box-header">
+          <div class="status-dot"></div>
+          <div class="box-title">En profondeur...</div>
+        </div>
+
+        <div class="box-body">
+          <div class="lead-text">
+            Notre étoile n'est pas une sphère homogène. En l'observant à travers différentes longueurs d'onde du spectre électromagnétique, les astrophysiciens découpent visuellement son atmosphère par paliers thermiques pour en révéler les mécanismes cachés.
+          </div>
+
+          <strong class="deep-subheading">Le principe du thermomètre sélectif</strong>
+          <p>
+            Le rayonnement solaire couvre l'ensemble du spectre, de la lumière visible aux rayons X en passant par les ultraviolets extrêmes. Dans les conditions extrêmes de l'atmosphère solaire, les atomes perdent leurs électrons et s'ionisent sous l'effet de l'agitation thermique. Chaque ion (fer, hélium ou carbone) n'émet ou n'absorbe de la lumière qu'à des longueurs d'onde très spécifiques, mesurées en ångströms (Å).
+          </p>
+          <p>
+            En équipant les télescopes de filtres optiques ultra-précis centrés sur ces longueurs d'onde précises, on isole exclusivement le rayonnement émis par des gaz portés à une température exacte. Chaque filtre agit ainsi comme un thermomètre réglé sur un seuil thermique particulier.
+          </p>
+
+          <div class="diagram-box">
+            <span class="diagram-header">Schéma 1 — Strates thermiques observées</span>
+            <div class="strata-flow">
+              <div class="strata-card" style="border-top: 2px solid #6366f1;">
+                <div class="strata-name">Photosphère</div>
+                <div class="strata-desc">Surface visible</div>
+                <div class="strata-temp">4 500 – 6 000 K</div>
+              </div>
+              <div class="strata-card" style="border-top: 2px solid #3b82f6;">
+                <div class="strata-name">Chromosphère</div>
+                <div class="strata-desc">Basse atmosphère</div>
+                <div class="strata-temp">10 000 – 50 000 K</div>
+              </div>
+              <div class="strata-card" style="border-top: 2px solid #0d9488;">
+                <div class="strata-name">Transition</div>
+                <div class="strata-desc">Base de la couronne</div>
+                <div class="strata-temp">~600 000 K</div>
+              </div>
+              <div class="strata-card" style="border-top: 2px solid #ef4444;">
+                <div class="strata-name">Couronne</div>
+                <div class="strata-desc">Arches & Éruptions</div>
+                <div class="strata-temp">1 à 10+ M K</div>
+              </div>
+            </div>
+          </div>
+
+          <strong class="deep-subheading">L'étagement des strates en profondeur</strong>
+          <p>
+            L'atmosphère du Soleil présente une particularité contre-intuitive : sa température augmente à mesure que l'on s'éloigne du cœur vers les couches supérieures. La photosphère, surface apparente, tourne autour de 6 000 kelvins. À cette profondeur, les longueurs d'onde visibles révèlent les granules thermiques et les taches sombres formées par de forts champs magnétiques freinant la convection.
+          </p>
+          <p>
+            Plus haut, dans la chromosphère et la zone de transition, la matière atteint 10 000 à plusieurs centaines de milliers de kelvins. Enfin, la couronne solaire externe franchit plusieurs millions de kelvins sous l'action du chauffage magnétique. Observer à très courtes longueurs d'onde permet ainsi de percer la surface pour ne capturer que les gaz coronaux en suspension.
+          </p>
+
+          <div class="diagram-box">
+            <span class="diagram-header">Schéma 2 — Longueurs d'onde et températures associées</span>
+            <div class="swatch-list">
+              <div class="swatch-item"><span class="color-dot" style="background:#eab308;"></span><span class="swatch-label">4500 Å</span><span class="swatch-sub">— 6 000 K</span></div>
+              <div class="swatch-item"><span class="color-dot" style="background:#84cc16;"></span><span class="swatch-label">1600 Å</span><span class="swatch-sub">— 10 000 K</span></div>
+              <div class="swatch-item"><span class="color-dot" style="background:#ef4444;"></span><span class="swatch-label">304 Å</span><span class="swatch-sub">— 50 000 K</span></div>
+              <div class="swatch-item"><span class="color-dot" style="background:#ca8a04;"></span><span class="swatch-label">171 Å</span><span class="swatch-sub">— 600 000 K</span></div>
+              <div class="swatch-item"><span class="color-dot" style="background:#b45309;"></span><span class="swatch-label">193 Å</span><span class="swatch-sub">— 1,25 M K</span></div>
+              <div class="swatch-item"><span class="color-dot" style="background:#ec4899;"></span><span class="swatch-label">211 Å</span><span class="swatch-sub">— 2,0 M K</span></div>
+              <div class="swatch-item"><span class="color-dot" style="background:#3b82f6;"></span><span class="swatch-label">335 Å</span><span class="swatch-sub">— 2,5 M K</span></div>
+              <div class="swatch-item"><span class="color-dot" style="background:#22c55e;"></span><span class="swatch-label">094 Å</span><span class="swatch-sub">— 6,0 M K</span></div>
+              <div class="swatch-item"><span class="color-dot" style="background:#06b6d4;"></span><span class="swatch-label">131 Å</span><span class="swatch-sub">— 10 M K</span></div>
+            </div>
+          </div>
+
+          <strong class="deep-subheading">Le rôle des fausses couleurs conventionnelles</strong>
+          <p>
+            Les rayonnements ultraviolets extrêmes sont totalement invisibles à l'œil humain et bloqués par l'atmosphère terrestre, ce qui impose l'usage d'observatoires spatiaux. Les images brutes transmises par les capteurs ne sont que des matrices d'intensité lumineuse en niveaux de gris.
+          </p>
+          <p>
+            Pour interpréter instantanément ces flux, la NASA attribue une fausse couleur conventionnelle à chaque canal. Le rouge vif signale l'hélium de la chromosphère à 50 000 K, le doré correspond au fer ionisé de la couronne calme, tandis que le bleu sarcelle met immédiatement en exergue les régions de plasma surchauffé lors des éruptions solaires majeures.
+          </p>
+        </div>
+
+        <div class="box-footer">
+          Source : <span>NASA / SDO (Solar Dynamics Observatory)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION : LES TRANSITS D'AUTRES PLANÈTES -->
+    <section class="theme-block">
+      <h2 class="theme-h2">Les transits d'autres planètes</h2>
+
+      <div class="media-wide">
+        <img src="https://lh3.googleusercontent.com/d/1TAJlRURAObvrq2Tq-1EX5W473Sw2gFqM=s1600" alt="Transit de Mercure devant le Soleil">
+      </div>
+
+      <p class="narrative-p">
+        Le 11 novembre 2019, le Soleil était plutôt calme, connaissant un minimum au cours de son cycle d'activité de 11 ans. En fait, le seul endroit visible était en réalité la planète Mercure, effectuant un transit tranquille de 5 heures et demie devant le disque solaire calme.
+        <br><br>
+        Mesurant environ 1/200ème du diamètre apparent du Soleil, la silhouette de la planète la plus intérieure du système solaire est proche du centre dans cet instantané net du plein Soleil. Prise avec un filtre alpha à hydrogène et un télescope solaire sécurisé, l'image capture également les proéminences autour du limbe solaire, le plasma lumineux piégé dans des champs magnétiques en arc.
+        <br><br>
+        Bien entendu, seules les planètes intérieures Mercure et Vénus peuvent transiter par le Soleil pour apparaître en silhouette vues de la Terre. Suite à son transit en 2016, il s'agissait du 4e des 14 transits de Mercure à travers le disque solaire au 21e siècle. Le prochain transit de Mercure aura lieu le 13 novembre 2032.
+      </p>
+    </section>
+
   </main>
+
+  <script>
+    /* GESTION DES ONGLETS DE L'INFOGRAPHIE DU SOLEIL */
+    function changerOngletSoleil(nom) {
+      const onglets = ['anatomie', 'activite', 'cycle'];
+      onglets.forEach(o => {
+        const contenu = document.getElementById('onglet-sol-' + o);
+        const bouton = document.getElementById('btn-sol-' + o);
+        if (o === nom) {
+          contenu.style.display = 'block';
+          bouton.style.background = '#2563eb';
+          bouton.style.color = '#ffffff';
+        } else {
+          contenu.style.display = 'none';
+          bouton.style.background = '#1e293b';
+          bouton.style.color = '#94a3b8';
+        }
+      });
+    }
+  </script>
 </body>
 </html>
