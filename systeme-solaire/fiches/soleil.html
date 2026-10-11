@@ -21,7 +21,10 @@
   <nav class="fiche-nav">
     <a href="../index.html">← Système Solaire</a>
     <span class="nav-title">Le Soleil</span>
-    <a href="../planetarium.html" target="_blank" rel="noopener">🪐 Planétarium 3D</a>
+    <div style="display: flex; gap: 8px; align-items: center;">
+      <button class="btn-fullscreen" onclick="toggleFullScreen()" title="Plein écran">⛶ Plein écran</button>
+      <a href="../planetarium.html" target="_blank" rel="noopener">🪐 Planétarium 3D</a>
+    </div>
   </nav>
 
   <main class="fiche-container">
@@ -553,7 +556,7 @@
 
   </main>
 
-  <script>
+ <script>
     /* GESTION DES ONGLETS DE L'INFOGRAPHIE DU SOLEIL */
     function changerOngletSoleil(nom) {
       const onglets = ['anatomie', 'activite', 'cycle'];
@@ -570,6 +573,19 @@
           bouton.style.color = '#94a3b8';
         }
       });
+    }
+
+    /* BASCULE PLEIN ÉCRAN POUR CHROME / NAVIGATEURS DESKTOP */
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          console.warn("Plein écran non supporté ou bloqué :", err);
+        });
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
     }
   </script>
 </body>
