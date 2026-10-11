@@ -87,6 +87,52 @@
       color: var(--text-main);
     }
 
+    /* BOUTON MAISON & PLEIN ÉCRAN */
+    .btn-home {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn-home:hover {
+      color: var(--gold-accent);
+      border-color: var(--gold-accent);
+      background: rgba(250, 204, 21, 0.12);
+      transform: scale(1.05);
+    }
+
+    .btn-fullscreen {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-fullscreen:hover {
+      color: var(--cyan-accent);
+      border-color: var(--cyan-accent);
+      background: rgba(56, 189, 248, 0.1);
+    }
+
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -553,7 +599,6 @@
     <div class="nav-brand">Système Solaire</div>
     <div style="width: 110px;"></div>
   </header>
-
   <main class="container">
 
     <!-- 1. PRÉSENTATION GÉNÉRALE -->
@@ -1152,6 +1197,19 @@
     });
 
     updateCarousel();
+
+    /* BASCULE PLEIN ÉCRAN */
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          console.warn("Plein écran non supporté ou bloqué :", err);
+        });
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
   </script>
 </body>
 </html>
