@@ -445,72 +445,6 @@
       background: rgba(56, 189, 248, 0.12);
     }
 
-    /* COQUE MAÎTRESSE IMMERSIVE PLEIN ÉCRAN */
-    #worldModal {
-      position: fixed;
-      inset: 0;
-      z-index: 1000;
-      background: #020617;
-      display: none;
-      flex-direction: column;
-      width: 100vw;
-      height: 100vh;
-      height: 100dvh;
-    }
-
-    #worldModal.active {
-      display: flex;
-    }
-
-    .world-modal-bar {
-      height: 48px;
-      background: rgba(2, 6, 23, 0.95);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 1.2rem;
-      flex-shrink: 0;
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-    }
-
-    .btn-close-world {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      color: #cbd5e1;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-family: 'Cinzel', serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.25s ease;
-    }
-
-    .btn-close-world:hover {
-      color: #ffd166;
-      border-color: #ffd166;
-      background: rgba(255, 209, 102, 0.15);
-    }
-
-    .world-modal-title {
-      font-family: 'Cinzel', serif;
-      font-size: 0.8rem;
-      color: #94a3b8;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-    }
-
-    #worldFrame {
-      width: 100%;
-      height: calc(100% - 48px);
-      border: none;
-      background: #020617;
-    }
   </style>
 </head>
 <body>
@@ -618,18 +552,6 @@
     </a>
   </aside>
 
-  <!-- COQUE MAÎTRESSE IMMERSIVE PLEIN ÉCRAN -->
-  <div id="worldModal">
-    <div class="world-modal-bar">
-      <button class="btn-close-world" onclick="closeWorld()">← Retour à l'Atlas Céleste</button>
-      <span id="worldModalTitle" class="world-modal-title">EXPLORATION</span>
-      <div style="display: flex; gap: 8px; align-items: center;">
-        <a href="https://renoultdavid.github.io/accueil/" class="btn-home-celeste" title="Accueil général" style="width:30px; height:30px; font-size:0.85rem;">🏠</a>
-        <button onclick="toggleFullScreen()" class="btn-fs-celeste" title="Plein écran" style="padding:4px 10px; font-size:0.68rem;">⛶ Plein écran</button>
-      </div>
-    </div>
-    <iframe id="worldFrame" src="" title="Exploration"></iframe>
-  </div>
 
   <script>
     const WORLDS = {
@@ -701,10 +623,7 @@
       drawerImg.src = data.image;
 
       document.getElementById('drawerText').innerText = data.text;
-      document.getElementById('drawerBtn').onclick = (e) => {
-        e.preventDefault();
-        launchWorld(data.link, data.title);
-      };
+      document.getElementById('drawerBtn').href = data.link;
 
       drawer.classList.add('active');
       backdrop.classList.add('active');
@@ -715,23 +634,6 @@
       drawer.classList.remove('active');
       backdrop.classList.remove('active');
       document.body.classList.remove('drawer-open');
-    }
-
-    /* GESTION DE LA COQUE IMMERSIVE MAÎTRESSE */
-    function launchWorld(url, title) {
-      closePanel();
-      const modal = document.getElementById('worldModal');
-      const frame = document.getElementById('worldFrame');
-      document.getElementById('worldModalTitle').innerText = title || "EXPLORATION";
-      frame.src = url;
-      modal.classList.add('active');
-    }
-
-    function closeWorld() {
-      const modal = document.getElementById('worldModal');
-      const frame = document.getElementById('worldFrame');
-      modal.classList.remove('active');
-      frame.src = ''; // Libère la mémoire
     }
 
     /* BASCULE PLEIN ÉCRAN */
