@@ -455,6 +455,350 @@
       background: #ffffff;
       color: #000000;
     }
+
+    /* VUE 2 : SYSTÈME SOLAIRE */
+    :root {
+      --payne-dark: #121824;
+      --payne-base: #1e293b;
+      --gold-accent: #facc15;
+      --cyan-accent: #38bdf8;
+      --text-muted: #94a3b8;
+    }
+
+    .ss-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 6rem;
+    }
+
+    .intro-banner {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 12px;
+      padding: clamp(1.2rem, 3vw, 2rem);
+      margin-bottom: 3rem;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
+    }
+
+    .intro-text {
+      font-size: clamp(0.92rem, 1.2vw, 1.05rem);
+      font-weight: 300;
+      color: #cbd5e1;
+      text-align: justify;
+      line-height: 1.85;
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #f8fafc;
+      margin: 3.5rem 0 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .section-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(56, 189, 248, 0.4), transparent);
+    }
+
+    #infographie-systeme-solaire {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0b1120;
+      color: #e2e8f0;
+      padding: 12px 14px;
+      border-radius: 10px;
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    /* SAS DE DÉCOLLAGE */
+    .cockpit-box {
+      background: radial-gradient(circle at 50% 50%, #0a1128 0%, #020617 100%);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 1rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+      padding: 2rem;
+    }
+    .cockpit-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .hud-box {
+      background: rgba(4, 9, 24, 0.85);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.8rem;
+    }
+    .hud-sub { font-size: 0.65rem; color: #64748b; letter-spacing: 0.1em; text-transform: uppercase; }
+    .hud-val { color: var(--cyan-accent); font-weight: 700; letter-spacing: 0.05em; }
+
+    .cockpit-radar {
+      height: 220px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 1rem 0;
+    }
+    .radar-sun {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fde047, #f59e0b);
+      box-shadow: 0 0 35px #f59e0b, 0 0 70px rgba(245, 158, 11, 0.4);
+      z-index: 2;
+    }
+    .radar-orbit {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px dashed rgba(56, 189, 248, 0.22);
+      pointer-events: none;
+      transform: scaleY(0.45) rotate(-15deg);
+    }
+    .orbit-1 { width: 140px; height: 140px; }
+    .orbit-2 { width: 260px; height: 260px; border-color: rgba(56, 189, 248, 0.16); }
+    .orbit-3 { width: 420px; height: 420px; border-color: rgba(56, 189, 248, 0.1); }
+
+    .cockpit-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(2, 6, 23, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 1.2rem 1.8rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .control-status { min-width: 200px; font-family: 'Share Tech Mono', monospace; font-size: 0.78rem; }
+    .status-bar-bg { width: 140px; height: 5px; background: rgba(255, 255, 255, 0.1); border-radius: 3px; margin: 6px 0; overflow: hidden; }
+    .status-bar-fill { width: 85%; height: 100%; background: var(--cyan-accent); box-shadow: 0 0 10px var(--cyan-accent); }
+
+    .btn-launch-container { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .btn-launch {
+      position: relative;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #ef4444, #7f1d1d);
+      border: 3px solid rgba(255, 255, 255, 0.85);
+      color: #ffffff;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 35px rgba(239, 68, 68, 0.65), 0 0 70px rgba(239, 68, 68, 0.3);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: launchPulse 2.8s infinite ease-in-out;
+    }
+    .btn-launch:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 50px rgba(239, 68, 68, 0.9);
+      background: radial-gradient(circle at 35% 35%, #f87171, #991b1b);
+    }
+    .btn-launch-title { font-family: 'Cinzel', serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.12em; }
+    .btn-launch-sub { font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.85; margin-top: 2px; }
+    .launch-ready { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--text-muted); letter-spacing: 0.12em; text-transform: uppercase; }
+
+    @keyframes launchPulse {
+      0%, 100% { box-shadow: 0 0 25px rgba(239, 68, 68, 0.5); }
+      50% { box-shadow: 0 0 45px rgba(239, 68, 68, 0.85); }
+    }
+
+    /* CARROUSEL 3D COVERFLOW */
+    .carousel-stage {
+      position: relative;
+      width: 100%;
+      height: 560px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1200px;
+      margin: 1rem 0;
+    }
+    .carousel-track {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      position: absolute;
+      width: 350px;
+      height: 500px;
+      background: linear-gradient(180deg, var(--payne-dark) 0%, #0a0d14 100%);
+      border: 1px solid rgba(82, 99, 122, 0.35);
+      border-radius: 22px;
+      overflow: hidden;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 2.5rem 1.8rem;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                  opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                  filter 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                  border-color 0.4s ease,
+                  box-shadow 0.4s ease;
+    }
+    .card-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      filter: blur(5px) brightness(0.65);
+      transform: scale(1.15);
+      transition: filter 0.5s ease;
+      z-index: 1;
+    }
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(2, 6, 23, 0.1) 0%, rgba(15, 23, 42, 0.4) 40%, rgba(2, 6, 23, 0.95) 100%);
+      z-index: 2;
+    }
+    .card-content {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+    .icon-wrapper {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card .pulse-ring {
+      position: absolute;
+      inset: -4px;
+      border-radius: 28px;
+      border: 1px solid rgba(56, 189, 248, 0.6);
+      opacity: 0;
+      animation: elegant-pulse 3.2s infinite cubic-bezier(0.25, 1, 0.5, 1);
+      pointer-events: none;
+    }
+    @keyframes elegant-pulse {
+      0% { transform: scale(0.96); opacity: 0.8; }
+      50% { transform: scale(1.22); opacity: 0; }
+      100% { transform: scale(1.25); opacity: 0; }
+    }
+    .icon-box {
+      width: 110px;
+      height: 110px;
+      border-radius: 26px;
+      overflow: hidden;
+      background-color: #000000;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+    }
+    .icon-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .card-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.95rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 0.4rem;
+      line-height: 1.2;
+    }
+    .card-desc {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+    .card-action {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.6rem;
+      border: 1px solid var(--cyan-accent);
+      border-radius: 30px;
+      color: var(--cyan-accent);
+      background: rgba(56, 189, 248, 0.08);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.4s ease;
+      font-weight: 600;
+    }
+    .card[data-pos="0"] {
+      transform: translateX(0) translateZ(140px) scale(1);
+      z-index: 10;
+      opacity: 1;
+      filter: none;
+      border-color: rgba(56, 189, 248, 0.55);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 30px rgba(56, 189, 248, 0.25);
+    }
+    .card[data-pos="0"] .card-action { opacity: 1; transform: translateY(0); }
+    .card[data-pos="0"]:hover .card-action { background: var(--cyan-accent); color: #020617; }
+    .card[data-pos="-1"] { transform: translateX(-310px) translateZ(0) rotateY(18deg) scale(0.85); z-index: 5; opacity: 0.65; filter: brightness(0.65); }
+    .card[data-pos="1"] { transform: translateX(310px) translateZ(0) rotateY(-18deg) scale(0.85); z-index: 5; opacity: 0.65; filter: brightness(0.65); }
+    .card[data-pos="-2"] { transform: translateX(-560px) translateZ(-80px) rotateY(30deg) scale(0.72); z-index: 2; opacity: 0.35; filter: brightness(0.45); }
+    .card[data-pos="2"] { transform: translateX(560px) translateZ(-80px) rotateY(-30deg) scale(0.72); z-index: 2; opacity: 0.35; filter: brightness(0.45); }
+    .card[data-pos="hidden"] { opacity: 0; pointer-events: none; transform: translateZ(-200px) scale(0.5); }
+
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(18, 24, 36, 0.75);
+      border: 1px solid rgba(82, 99, 122, 0.4);
+      color: #ffffff;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 20;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
+    }
+    .nav-btn:hover { background: var(--payne-base); border-color: var(--cyan-accent); color: var(--cyan-accent); }
+    .nav-prev { left: 1.5rem; }
+    .nav-next { right: 1.5rem; }
+
+    @media (max-width: 900px) {
+      .card { width: 290px; height: 440px; }
+      .card[data-pos="-1"] { transform: translateX(-180px) scale(0.8); }
+      .card[data-pos="1"] { transform: translateX(180px) scale(0.8); }
+      .card[data-pos="-2"], .card[data-pos="2"] { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -553,12 +897,346 @@
 
     <!-- VUE 2 : SYSTÈME SOLAIRE -->
     <section id="view-systeme-solaire" class="app-view">
-      <div style="padding: 3rem; text-align: center;">
-        <h1 style="font-family:'Cinzel', serif; font-size:2rem; margin-bottom:1rem; color:#ffd166;">LE SYSTÈME SOLAIRE</h1>
-        <p style="color:#94a3b8; margin-bottom:2rem;">Hub d'exploration planétaire</p>
-        <button onclick="goToView('astre-mercure')" style="padding:10px 20px; border-radius:20px; background:rgba(255,255,255,0.1); color:#fff; border:1px solid rgba(255,255,255,0.2); cursor:pointer;">
-          Voir la fiche de Mercure →
-        </button>
+      <div class="ss-container">
+
+        <!-- 1. PRÉSENTATION GÉNÉRALE -->
+        <section class="intro-banner">
+          <p class="intro-text">
+            Né il y a 4,6 milliards d'années de l'effondrement d'une nébuleuse primordiale, le Système solaire constitue notre oasis gravitationnelle au sein de la Voie lactée. Organisé autour d'un Soleil qui concentre l'écrasante majorité de la matière, il sépare le royaume rocheux des planètes telluriques intérieures des domaines colossaux des géantes gazeuses et glacées. Aux confins de ce ballet mécanique, les ceintures de débris et le lointain nuage d'Oort préservent intacts les matériaux primitifs de la genèse cosmique. Protégé du milieu galactique par le bouclier protecteur de l'héliosphère, cet ensemble poursuit une ronde remarquablement stable jusqu'au crépuscule inéluctable de son étoile centrale. Explorer son architecture permet ainsi de retracer l'enchaînement physique qui a rendu possible l'émergence du vivant sur Terre...
+          </p>
+        </section>
+
+        <!-- 2. MODULE INFOGRAPHIE -->
+        <section>
+          <div id="infographie-systeme-solaire">
+            <header style="text-align: center; margin: 0 0 10px 0;">
+              <h2 style="color: #f8fafc; margin: 0; font-size: 1.25rem; line-height: 1.2;">Architecture et évolution du Système solaire</h2>
+              <p style="color: #94a3b8; margin: 4px 0 0 0; font-size: 0.8rem;">Organisation des zones orbitales, physique de formation et devenir cosmique</p>
+            </header>
+
+            <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 0 0 12px 0;">
+              <button onclick="changerOngletSS('architecture')" id="btn-ss-architecture" style="padding: 6px 14px; border-radius: 6px; border: none; background: #2563eb; color: #fff; font-weight: 600; cursor: pointer; font-size: 0.8rem;">1. Architecture & Découpage en zones</button>
+              <button onclick="changerOngletSS('formation')" id="btn-ss-formation" style="padding: 6px 14px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.8rem;">2. Genèse & Ligne des glaces</button>
+              <button onclick="changerOngletSS('avenir')" id="btn-ss-avenir" style="padding: 6px 14px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.8rem;">3. Spécificités & Devenir ultime</button>
+            </div>
+
+            <!-- ONGLET 1 -->
+            <div id="onglet-ss-architecture" style="margin: 0; padding: 0;">
+              <div style="background: #070d19; border: 1px solid #1e293b; border-radius: 6px; padding: 8px; margin-bottom: 10px; overflow-x: auto;">
+                <svg viewBox="0 0 920 230" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; aspect-ratio: 920 / 230; min-width: 700px; display: block; margin: 0;">
+                  <defs>
+                    <radialGradient id="gradSoleilSS" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stop-color="#ffffff"/>
+                      <stop offset="35%" stop-color="#fef08a"/>
+                      <stop offset="70%" stop-color="#eab308" stop-opacity="0.9"/>
+                      <stop offset="100%" stop-color="#ca8a04" stop-opacity="0"/>
+                    </radialGradient>
+                  </defs>
+                  <text x="460" y="16" text-anchor="middle" fill="#94a3b8" font-size="11" letter-spacing="1">LES ÉTAGES DU SYSTÈME SOLAIRE (ÉCHELLE LOGARITHMIQUE SIMPLIFIÉE)</text>
+                  <line x1="40" y1="112" x2="880" y2="112" stroke="#334155" stroke-width="2" stroke-dasharray="4,3"/>
+                  <g transform="translate(45, 112)">
+                    <circle cx="0" cy="0" r="32" fill="url(#gradSoleilSS)"/>
+                    <circle cx="0" cy="0" r="14" fill="#ffffff"/>
+                    <text x="0" y="44" text-anchor="middle" fill="#facc15" font-size="11" font-weight="bold">Soleil</text>
+                    <text x="0" y="56" text-anchor="middle" fill="#94a3b8" font-size="8">99,86 % de la masse</text>
+                  </g>
+                  <g transform="translate(170, 112)">
+                    <rect x="-40" y="-35" width="80" height="70" rx="5" fill="#ca8a04" opacity="0.12" stroke="#ca8a04" stroke-width="1"/>
+                    <circle cx="-26" cy="0" r="2.2" fill="#94a3b8"/>
+                    <circle cx="-10" cy="0" r="3.2" fill="#fed7aa"/>
+                    <circle cx="8" cy="0" r="3.5" fill="#38bdf8"/>
+                    <circle cx="26" cy="0" r="2.5" fill="#f87171"/>
+                    <text x="0" y="-42" text-anchor="middle" fill="#fde047" font-size="9.5" font-weight="bold">Planètes telluriques</text>
+                    <text x="0" y="48" text-anchor="middle" fill="#cbd5e1" font-size="8.5">0,4 à 1,5 UA</text>
+                    <text x="0" y="59" text-anchor="middle" fill="#94a3b8" font-size="7.5">Silicates et fer</text>
+                  </g>
+                  <g transform="translate(285, 112)">
+                    <rect x="-22" y="-30" width="44" height="60" rx="4" fill="#334155" opacity="0.35"/>
+                    <circle cx="-12" cy="-14" r="1.2" fill="#cbd5e1"/>
+                    <circle cx="8" cy="-8" r="1.5" fill="#cbd5e1"/>
+                    <circle cx="-5" cy="12" r="1.4" fill="#cbd5e1"/>
+                    <circle cx="10" cy="15" r="1.1" fill="#cbd5e1"/>
+                    <circle cx="0" cy="0" r="2.2" fill="#facc15"/>
+                    <text x="0" y="-38" text-anchor="middle" fill="#94a3b8" font-size="9" font-weight="bold">Ceinture principale</text>
+                    <text x="0" y="48" text-anchor="middle" fill="#cbd5e1" font-size="8.5">2,1 à 3,3 UA</text>
+                    <text x="0" y="59" text-anchor="middle" fill="#94a3b8" font-size="7.5">Cérès • Débris résiduels</text>
+                  </g>
+                  <g transform="translate(435, 112)">
+                    <rect x="-80" y="-40" width="160" height="80" rx="5" fill="#0284c7" opacity="0.12" stroke="#0284c7" stroke-width="1"/>
+                    <circle cx="-52" cy="0" r="9" fill="#fdba74"/>
+                    <ellipse cx="-20" cy="0" rx="7" ry="5" fill="#fef08a"/>
+                    <ellipse cx="-20" cy="0" rx="14" ry="2" fill="none" stroke="#fef08a" stroke-width="1.2"/>
+                    <circle cx="18" cy="0" r="5" fill="#67e8f9"/>
+                    <circle cx="48" cy="0" r="4.8" fill="#3b82f6"/>
+                    <text x="0" y="-47" text-anchor="middle" fill="#38bdf8" font-size="9.5" font-weight="bold">Planètes géantes</text>
+                    <text x="0" y="52" text-anchor="middle" fill="#cbd5e1" font-size="8.5">5,2 à 30 UA</text>
+                    <text x="0" y="63" text-anchor="middle" fill="#94a3b8" font-size="7.5">H, He, glaces</text>
+                  </g>
+                  <g transform="translate(605, 112)">
+                    <rect x="-35" y="-30" width="70" height="60" rx="4" fill="#1e293b" stroke="#475569" stroke-dasharray="2,2"/>
+                    <circle cx="-18" cy="-8" r="1.3" fill="#93c5fd"/>
+                    <circle cx="12" cy="10" r="1.4" fill="#93c5fd"/>
+                    <circle cx="0" cy="0" r="2.2" fill="#c084fc"/>
+                    <text x="0" y="-38" text-anchor="middle" fill="#a78bfa" font-size="9" font-weight="bold">Ceinture de Kuiper</text>
+                    <text x="0" y="48" text-anchor="middle" fill="#cbd5e1" font-size="8.5">30 à 55 UA</text>
+                    <text x="0" y="59" text-anchor="middle" fill="#94a3b8" font-size="7.5">Pluton • Corps glacés</text>
+                  </g>
+                  <g transform="translate(775, 112)">
+                    <path d="M -30 -35 Q 5 0 -30 35" fill="none" stroke="#f97316" stroke-width="1.8"/>
+                    <circle cx="35" cy="0" r="32" fill="#38bdf8" opacity="0.08" stroke="#38bdf8" stroke-dasharray="3,3"/>
+                    <circle cx="25" cy="-14" r="1" fill="#ffffff"/>
+                    <circle cx="48" cy="10" r="1" fill="#ffffff"/>
+                    <circle cx="28" cy="18" r="1.2" fill="#ffffff"/>
+                    <text x="15" y="-42" text-anchor="middle" fill="#fb923c" font-size="9" font-weight="bold">Héliopause & Oort</text>
+                    <text x="15" y="48" text-anchor="middle" fill="#cbd5e1" font-size="8.5">~120 à 100 000 UA</text>
+                    <text x="15" y="59" text-anchor="middle" fill="#94a3b8" font-size="7.5">Comètes primitives</text>
+                  </g>
+                </svg>
+              </div>
+            </div>
+
+            <!-- ONGLET 2 -->
+            <div id="onglet-ss-formation" style="display: none; margin: 0; padding: 0;">
+              <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.6; padding: 10px;">
+                Au-delà de 2,7 UA (la ligne des glaces), la vapeur d'eau condense en glace massive. Les cœurs des planètes géantes ont ainsi pu grossir très rapidement jusqu'à capturer les gaz légers (hydrogène et hélium) de la nébuleuse primordiale.
+              </p>
+            </div>
+
+            <!-- ONGLET 3 -->
+            <div id="onglet-ss-avenir" style="display: none; margin: 0; padding: 0;">
+              <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.6; padding: 10px;">
+                Dans 5 milliards d'années, le Soleil enflera en une géante rouge engloutissant Mercure et Vénus. Il achèvera sa vie en naine blanche résiduelle entourée d'une nébuleuse planétaire évanescente.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. SAS DE DÉCOLLAGE -->
+        <section>
+          <h2 class="section-title">Découverte virtuelle du Système Solaire</h2>
+          <div class="cockpit-box">
+            <div class="cockpit-header">
+              <div class="hud-box">
+                <div class="hud-sub">Secteur de navigation</div>
+                <div class="hud-val">APPROCHE HÉLIOSPHÈRE // SYSTÈME SOLAIRE</div>
+              </div>
+              <div class="hud-box" style="text-align: right;">
+                <div class="hud-sub">Vélocité d'approche</div>
+                <div class="hud-val">11.42 km/s</div>
+              </div>
+            </div>
+
+            <div class="cockpit-radar">
+              <div class="radar-orbit orbit-1"></div>
+              <div class="radar-orbit orbit-2"></div>
+              <div class="radar-orbit orbit-3"></div>
+              <div class="radar-sun"></div>
+            </div>
+
+            <div class="cockpit-controls">
+              <div class="control-status">
+                <div style="color: #64748b; font-size: 0.7rem;">RÉACTEUR MATIÈRE : <span style="color:#38bdf8;">NOMINAL</span></div>
+                <div class="status-bar-bg"><div class="status-bar-fill"></div></div>
+                <div style="color: #64748b; font-size: 0.7rem;">CEINTURE DE KUIPER : <span style="color:#f59e0b;">TRAVERSÉE</span></div>
+              </div>
+
+              <div class="btn-launch-container">
+                <a href="./systeme-solaire/planetarium.html" target="_blank" rel="noopener" class="btn-launch" title="Lancer le Planétarium 3D">
+                  <span class="btn-launch-title">DÉCOLLAGE</span>
+                  <span class="btn-launch-sub">EXPLORATION</span>
+                </a>
+                <div class="launch-ready">Prêt pour engagement</div>
+              </div>
+
+              <div class="control-status" style="text-align: right;">
+                <div style="color: #64748b; font-size: 0.7rem;">CIBLAGE ORBITAL</div>
+                <div style="color: #94a3b8; font-size: 0.72rem;">&gt; Coordonnées héliocentriques acquises.</div>
+                <div style="color: #38bdf8; font-size: 0.72rem;">&gt; Destination : <strong>Observatoire Solaire</strong></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. CARROUSEL 3D COVERFLOW (12 ASTRES) -->
+        <section>
+          <h2 class="section-title">Tour d'horizon des habitants du Système Solaire</h2>
+          <div class="carousel-stage">
+            <button class="nav-btn nav-prev" id="prevBtn" aria-label="Précédent">&#10094;</button>
+
+            <div class="carousel-track" id="track">
+              <!-- 0. SOLEIL -->
+              <div class="card" data-astre="soleil">
+                <div class="card-bg" style="background-image: url('https://lh3.googleusercontent.com/d/1TAJlRURAObvrq2Tq-1EX5W473Sw2gFqM=s1200');"></div>
+                <div class="card-content">
+                  <div class="icon-wrapper">
+                    <div class="pulse-ring"></div>
+                    <div class="icon-box"><img src="https://lh3.googleusercontent.com/d/1TAJlRURAObvrq2Tq-1EX5W473Sw2gFqM=s300" alt="Soleil"></div>
+                  </div>
+                  <h3 class="card-title">Soleil</h3>
+                  <span class="card-desc">Étoile Naine Jaune G2V</span>
+                  <span class="card-action">Explorez</span>
+                </div>
+              </div>
+
+              <!-- 1. MERCURE -->
+              <div class="card" data-astre="mercure">
+                <div class="card-bg" style="background-image: url('https://lh3.googleusercontent.com/d/1J4GrZuFlDDxzSUGGDR1DAn2ceg1G0pvK=s1200');"></div>
+                <div class="card-content">
+                  <div class="icon-wrapper">
+                    <div class="pulse-ring"></div>
+                    <div class="icon-box"><img src="https://lh3.googleusercontent.com/d/1J4GrZuFlDDxzSUGGDR1DAn2ceg1G0pvK=s300" alt="Mercure"></div>
+                  </div>
+                  <h3 class="card-title">Mercure</h3>
+                  <span class="card-desc">Monde Tellurique Aride</span>
+                  <span class="card-action">Explorez</span>
+                </div>
+              </div>
+
+              <!-- 2. VÉNUS -->
+              <div class="card" data-astre="venus">
+                <div class="card-bg" style="background-image: url('https://lh3.googleusercontent.com/d/1TkLRMhQAsQ-ql8hE4vtpmSXSExf9D-C8=s1200');"></div>
+                <div class="card-content">
+                  <div class="icon-wrapper">
+                    <div class="pulse-ring"></div>
+                    <div class="icon-box"><img src="https://lh3.googleusercontent.com/d/1TkLRMhQAsQ-ql8hE4vtpmSXSExf9D-C8=s300" alt="Vénus"></div>
+                  </div>
+                  <h3 class="card-title">Vénus</h3>
+                  <span class="card-desc">Fournaise Supercritique</span>
+                  <span class="card-action">Explorez</span>
+                </div>
+              </div>
+
+              <!-- 3. TERRE ET LUNE -->
+              <div class="card" data-astre="terre">
+                <div class="card-bg" style="background-image: url('https://lh3.googleusercontent.com/d/1YFBFm9eRZaHbi9-sMsvfOYp3qEmwvwBx=s1200');"></div>
+                <div class="card-content">
+                  <div class="icon-wrapper">
+                    <div class="pulse-ring"></div>
+                    <div class="icon-box"><img src="https://lh3.googleusercontent.com/d/1YFBFm9eRZaHbi9-sMsvfOYp3qEmwvwBx=s300" alt="Terre et Lune"></div>
+                  </div>
+                  <h3 class="card-title">Terre & Lune</h3>
+                  <span class="card-desc">Oasis Océanique et Sélène</span>
+                  <span class="card-action">Explorez</span>
+                </div>
+              </div>
+
+              <!-- 4. GÉOCROISEURS -->
+              <div class="card" data-astre="geocroiseurs">
+                <div class="card-bg" style="background-image: url('https://lh3.googleusercontent.com/d/1LbY9faCvvMRB6XVeTiUj6f7WoY_1m00J=s1200');"></div>
+                <div class="card-content">
+                  <div class="icon-wrapper">
+                    <div class="pulse-ring"></div>
+                    <div class="icon-box"><img src="https://lh3.googleusercontent.com/d/1LbY9faCvvMRB6XVeTiUj6f7WoY_1m00J=s300" alt="Objets Géocroiseurs"></div>
+                  </div>
+                  <h3 class="card-title">Géocroiseurs</h3>
+                  <span class="card-desc">Sentinelles et Astéroïdes NEA</span>
+                  <span class="card-action">Explorez</span>
+                </div>
+              </div>
+
+              <!-- 5. MARS -->
+              <div class="card" data-astre="mars">
+                <div class="card-bg" style="background-image: url('https://lh3.googleusercontent.com/d/13EqujHgQXAqKAC9Iqr-mUYjASTWf4j6J=s1200');"></div>
+                <div class="card-content">
+                  <div class="icon-wrapper">
+                    <div class="pulse-ring"></div>
+                    <div class="icon-box"><img src="https://lh3.googleusercontent.com/d/13EqujHgQXAqKAC9Iqr-mUYjASTWf4j6J=s300" alt="Mars"></div>
+                  </div>
+                  <h3 class="card-title">Mars & Lunes</h3>
+                  <span class="card-desc">Désert Oxydé & Volcanisme</span>
+                  <span class="card-action">Explorez</span>
+                </div>
+              </div>
+
+              <!-- 6. ASTÉROÏDES -->
+              <div class="card" data-astre="asteroides">
+                <div class="card-bg" style="background-image: url('https://lh3.googleusercontent.com/d/1x8qrBm7klU3KKvJ2HrKVXBh9ffvbadKG=s1200');"></div>
+                <div class="card-content">
+                  <div class="icon-wrapper">
+                    <div class="pulse-ring"></div>
+                    <div class="icon-box"><img src="https://lh3.googleusercontent.com/d/1x8qrBm7klU3KKvJ2HrKVXBh9ffvbadKG=s300" alt="Ceinture d'astéroïdes"></div>
+                  </div>
+                  <h3 class="card-title">Astéroïdes</h3>
+                  <span class="card-desc">Vesta, Cérès & Débris</span>
+                  <span class="card-action">Explorez</span>
+                </div>
+              </div>
+
+              <!-- 7. JUPITER -->
+              <div class="card" data-astre="jupiter">
+                <div class="card-bg" style="background-image: url('https://lh3.googleusercontent.com/d/1TA0q_3GxY-bZRJUaHER_xvd0hplG3yTd=s1200');"></div>
+                <div class="card-content">
+                  <div class="icon-wrapper">
+                    <div class="pulse-ring"></div>
+                    <div class="icon-box"><img src="https://lh3.googleusercontent.com/d/1TA0q_3GxY-bZRJUaHER_xvd0hplG3yTd=s300" alt="Jupiter"></div>
+                  </div>
+                  <h3 class="card-title">Jupiter & Lunes</h3>
+                  <span class="card-desc">Colosse Gazeux & Mondes</span>
+                  <span class="card-action">Explorez</span>
+                </div>
+              </div>
+
+              <!-- 8. SATURNE -->
+              <div class="card" data-astre="saturne">
+                <div class="card-bg" style="background-image: url('https://lh3.googleusercontent.com/d/1e0j2BVS8oQ-6mHr4NAjvxzR3IU0KWurX=s1200');"></div>
+                <div class="card-content">
+                  <div class="icon-wrapper">
+                    <div class="pulse-ring"></div>
+                    <div class="icon-box"><img src="https://lh3.googleusercontent.com/d/1e0j2BVS8oQ-6mHr4NAjvxzR3IU0KWurX=s300" alt="Saturne"></div>
+                  </div>
+                  <h3 class="card-title">Saturne & Lunes</h3>
+                  <span class="card-desc">Anneaux de Glace & Titan</span>
+                  <span class="card-action">Explorez</span>
+                </div>
+              </div>
+
+              <!-- 9. URANUS -->
+              <div class="card" data-astre="uranus">
+                <div class="card-bg" style="background-image: url('https://lh3.googleusercontent.com/d/1yNDD_jXi3Yfl2WtMOODbc2yJqomUPJiq=s1200');"></div>
+                <div class="card-content">
+                  <div class="icon-wrapper">
+                    <div class="pulse-ring"></div>
+                    <div class="icon-box"><img src="https://lh3.googleusercontent.com/d/1yNDD_jXi3Yfl2WtMOODbc2yJqomUPJiq=s300" alt="Uranus"></div>
+                  </div>
+                  <h3 class="card-title">Uranus & Lunes</h3>
+                  <span class="card-desc">Géante de Glaces Oblique</span>
+                  <span class="card-action">Explorez</span>
+                </div>
+              </div>
+
+              <!-- 10. NEPTUNE -->
+              <div class="card" data-astre="neptune">
+                <div class="card-bg" style="background-image: url('https://lh3.googleusercontent.com/d/1nQp6H0Q3N_xv4F6pgXw31eSEXIHhSNEp=s1200');"></div>
+                <div class="card-content">
+                  <div class="icon-wrapper">
+                    <div class="pulse-ring"></div>
+                    <div class="icon-box"><img src="https://lh3.googleusercontent.com/d/1nQp6H0Q3N_xv4F6pgXw31eSEXIHhSNEp=s300" alt="Neptune"></div>
+                  </div>
+                  <h3 class="card-title">Neptune & Lunes</h3>
+                  <span class="card-desc">Vents Supersoniques & Triton</span>
+                  <span class="card-action">Explorez</span>
+                </div>
+              </div>
+
+              <!-- 11. KUIPER -->
+              <div class="card" data-astre="kuiper">
+                <div class="card-bg" style="background-image: url('https://lh3.googleusercontent.com/d/19b9h9Y1iz1B9p09d2M2SkmN48UX_vC_s=s1200');"></div>
+                <div class="card-content">
+                  <div class="icon-wrapper">
+                    <div class="pulse-ring"></div>
+                    <div class="icon-box"><img src="https://lh3.googleusercontent.com/d/19b9h9Y1iz1B9p09d2M2SkmN48UX_vC_s=s300" alt="Kuiper et Pluton"></div>
+                  </div>
+                  <h3 class="card-title">Kuiper & Pluton</h3>
+                  <span class="card-desc">Confins Azotés & Naines</span>
+                  <span class="card-action">Explorez</span>
+                </div>
+              </div>
+            </div>
+
+            <button class="nav-btn nav-next" id="nextBtn" aria-label="Suivant">&#10095;</button>
+          </div>
+        </section>
+
       </div>
     </section>
 
@@ -673,7 +1351,88 @@
       const data = WORLDS[activeWorldKey];
       closePanel();
       goToView(data.viewId);
+      if (data.viewId === 'systeme-solaire') {
+        updateCarousel();
+      }
     }
+
+    /* GESTION DES ONGLETS DE L'INFOGRAPHIE */
+    function changerOngletSS(nom) {
+      const onglets = ['architecture', 'formation', 'avenir'];
+      onglets.forEach(o => {
+        const contenu = document.getElementById('onglet-ss-' + o);
+        const bouton = document.getElementById('btn-ss-' + o);
+        if (contenu && bouton) {
+          if (o === nom) {
+            contenu.style.display = 'block';
+            bouton.style.background = '#2563eb';
+            bouton.style.color = '#ffffff';
+          } else {
+            contenu.style.display = 'none';
+            bouton.style.background = '#1e293b';
+            bouton.style.color = '#94a3b8';
+          }
+        }
+      });
+    }
+
+    /* GESTION DU CARROUSEL 3D COVERFLOW (12 CARTES) */
+    const ssCards = Array.from(document.querySelectorAll('.carousel-track .card'));
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let currentCardIndex = 0;
+    const totalCards = ssCards.length;
+
+    function updateCarousel() {
+      if (totalCards === 0) return;
+      ssCards.forEach((card, i) => {
+        let diff = (i - currentCardIndex) % totalCards;
+        if (diff > totalCards / 2) diff -= totalCards;
+        if (diff < -totalCards / 2) diff += totalCards;
+
+        if (diff >= -2 && diff <= 2) {
+          card.setAttribute('data-pos', diff);
+        } else {
+          card.setAttribute('data-pos', 'hidden');
+        }
+      });
+    }
+
+    function rotateNext() {
+      currentCardIndex = (currentCardIndex + 1) % totalCards;
+      updateCarousel();
+    }
+
+    function rotatePrev() {
+      currentCardIndex = (currentCardIndex - 1 + totalCards) % totalCards;
+      updateCarousel();
+    }
+
+    if (nextBtn) nextBtn.addEventListener('click', rotateNext);
+    if (prevBtn) prevBtn.addEventListener('click', rotatePrev);
+
+    ssCards.forEach((card, index) => {
+      card.addEventListener('click', () => {
+        const pos = card.getAttribute('data-pos');
+        if (pos === '0') {
+          const astre = card.getAttribute('data-astre');
+          goToView('astre-' + astre);
+        } else {
+          currentCardIndex = index;
+          updateCarousel();
+        }
+      });
+    });
+
+    window.addEventListener('keydown', (e) => {
+      const ssView = document.getElementById('view-systeme-solaire');
+      if (ssView && ssView.classList.contains('active')) {
+        if (e.key === 'ArrowRight') rotateNext();
+        if (e.key === 'ArrowLeft') rotatePrev();
+      }
+    });
+
+    updateCarousel();
 
     /* GESTION DE LA NAVIGATION INTERNE */
     let navigationStack = ['portal'];
