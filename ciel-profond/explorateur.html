@@ -213,13 +213,50 @@
       background: #0b1120;
       border: 1px solid #334155;
       border-radius: 16px;
-      max-width: 900px;
-      width: 100%;
-      max-height: 90vh;
+      max-width: 1180px;
+      width: 95vw;
+      max-height: 92vh;
       overflow-y: auto;
       position: relative;
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
-      padding: 2.2rem;
+      padding: 2.2rem 2.8rem;
+    }
+
+    /* Flèches de navigation circulaire */
+    .modal-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(11, 17, 32, 0.85);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #38bdf8;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      transition: all 0.25s ease;
+      z-index: 10;
+      backdrop-filter: blur(6px);
+      user-select: none;
+    }
+    .modal-nav-btn:hover {
+      background: #38bdf8;
+      color: #020617;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.6);
+      border-color: #38bdf8;
+    }
+    .modal-nav-prev { left: 14px; }
+    .modal-nav-next { right: 14px; }
+
+    @media (max-width: 768px) {
+      .modal-container { padding: 1.5rem 1rem; }
+      .modal-nav-btn { top: auto; bottom: 14px; transform: none; width: 38px; height: 38px; }
+      .modal-nav-prev { left: 20px; }
+      .modal-nav-next { right: 20px; }
     }
     .modal-container::-webkit-scrollbar {
       width: 6px;
@@ -386,6 +423,10 @@
     <div class="modal-container">
       <button class="modal-close-btn" onclick="closeModal()">✕</button>
       
+      <!-- Boutons Flèches Précédent / Suivant -->
+      <button class="modal-nav-btn modal-nav-prev" onclick="naviguerModal(-1)" title="Objet précédent (Flèche Gauche)">‹</button>
+      <button class="modal-nav-btn modal-nav-next" onclick="naviguerModal(1)" title="Objet suivant (Flèche Droite)">›</button>
+
       <div class="modal-header-titles">
         <h2 id="mNomPrincipal">Nom</h2>
         <div class="modal-sub" id="mAutreNom">Autre nom</div>
@@ -410,6 +451,9 @@
           <td><strong>Ascension Droite :</strong> <span id="mAD">-</span></td>
           <td><strong>Déclinaison :</strong> <span id="mDec">-</span></td>
         </tr>
+        <tr>
+          <td colspan="2"><strong>Vitesse radiale :</strong> <span id="mVitesseRadiale">-</span></td>
+        </tr>
       </table>
 
       <div class="modal-text" id="mTexte"></div>
@@ -419,7 +463,7 @@
   <!-- CHARGEMENT DU FICHIER DATA SÉPARÉ -->
   <script src="./data/data-objets.js"></script>
 
-  <script>
+ <script>
     const SUB_CATEGORIES = {
       galaxie: [
         { val: "spirale", label: "Galaxie spirale" },
@@ -468,6 +512,7 @@
     const ITEMS_PER_PAGE = 48;
     let visibleLimit = ITEMS_PER_PAGE;
     let currentFiltered = [];
+    let currentModalIndex = -1;
 
     function populateConstellations() {
       const constellations = [...new Set(dataset.map(item => item.constellation))].filter(Boolean).sort();
@@ -551,10 +596,10 @@
         return;
       }
 
-      toDisplay.forEach(item => {
+      toDisplay.forEach((item, index) => {
         const card = document.createElement('div');
         card.className = 'object-card';
-        card.onclick = () => openModal(item);
+        card.onclick = () => openModalByIndex(index);
 
         let specBadges = '';
         if (item.specificites && Array.isArray(item.specificites)) {
@@ -586,7 +631,11 @@
       }
     }
 
-    function openModal(item) {
+    function openModalByIndex(index) {
+      if (index < 0 || index >= currentFiltered.length) return;
+      currentModalIndex = index;
+      const item = currentFiltered[index];
+
       document.getElementById('mNomPrincipal').textContent = item.nomPrincipal;
       document.getElementById('mAutreNom').textContent = item.autreNom || '';
       
@@ -607,6 +656,11 @@
       document.getElementById('mMagnitude').textContent = c.magnitude || '-';
       document.getElementById('mAD').textContent = c.ad || '-';
       document.getElementById('mDec').textContent = c.dec || '-';
+      
+      const elVit = document.getElementById('mVitesseRadiale');
+      if (elVit) {
+        elVit.textContent = c.vitesseRadiale || 'Non déterminée / Négligeable';
+      }
 
       let badgesHtml = `<span class="badge ${getBadgeClass(item.categoriePrincipale)}">${item.categoriePrincipale.replace('_', ' ')}</span>`;
       if (item.sousCategorie) {
@@ -620,16 +674,39 @@
       document.getElementById('mBadges').innerHTML = badgesHtml;
 
       document.getElementById('mTexte').innerHTML = `<p>${item.texte}</p>`;
+      
+      const btnPrev = document.querySelector('.modal-nav-prev');
+      const btnNext = document.querySelector('.modal-nav-next');
+      if (btnPrev) btnPrev.style.display = (index > 0) ? 'flex' : 'none';
+      if (btnNext) btnNext.style.display = (index < currentFiltered.length - 1) ? 'flex' : 'none';
+
       document.getElementById('modalOverlay').classList.add('active');
+    }
+
+    function naviguerModal(direction) {
+      const nouveauIndex = currentModalIndex + direction;
+      if (nouveauIndex >= 0 && nouveauIndex < currentFiltered.length) {
+        openModalByIndex(nouveauIndex);
+      }
     }
 
     function closeModal() {
       document.getElementById('modalOverlay').classList.remove('active');
+      currentModalIndex = -1;
     }
 
     function closeModalOnBackdrop(e) {
       if (e.target.id === 'modalOverlay') closeModal();
     }
+
+    window.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('modalOverlay');
+      if (modal && modal.classList.contains('active')) {
+        if (e.key === 'ArrowLeft') naviguerModal(-1);
+        if (e.key === 'ArrowRight') naviguerModal(1);
+        if (e.key === 'Escape') closeModal();
+      }
+    });
 
     loadMoreBtn.addEventListener('click', () => {
       visibleLimit += ITEMS_PER_PAGE;
