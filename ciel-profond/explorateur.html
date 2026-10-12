@@ -359,6 +359,42 @@
       text-align: center;
       font-style: italic;
     }
+    /* BANDEAU DE VIGNETTES MULTI-IMAGES */
+    .gallery-thumbs-row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin: 10px 0 16px;
+      flex-wrap: wrap;
+    }
+    .thumb-btn {
+      width: 72px;
+      height: 48px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 2px solid #1e293b;
+      cursor: pointer;
+      opacity: 0.55;
+      transition: all 0.2s ease;
+      background: #000;
+      padding: 0;
+    }
+    .thumb-btn:hover {
+      opacity: 0.9;
+      border-color: #94a3b8;
+    }
+    .thumb-btn.active {
+      opacity: 1;
+      border-color: #38bdf8;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+      transform: scale(1.05);
+    }
+    .thumb-btn img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
     /* Pastille d'invitation au zoom */
     .zoom-hint-btn {
@@ -550,7 +586,7 @@
         <div class="card-badges" id="mBadges"></div>
       </div>
 
-      <div class="modal-hero-img-box" onclick="ouvrirPleinEcranImage(event)">
+     <div class="modal-hero-img-box" onclick="ouvrirPleinEcranImage(event)">
         <img id="mImage" src="" alt="" title="Cliquer pour admirer en grand format">
         <div class="zoom-hint-btn">
           <span class="zoom-pulse-dot"></span>
@@ -558,6 +594,9 @@
         </div>
         <div class="modal-caption" id="mLegendeImage"></div>
       </div>
+
+      <!-- RANGÉE DE VIGNETTES (SI MULTIPLES IMAGES) -->
+      <div class="gallery-thumbs-row" id="mThumbsRow" style="display: none;"></div>
 
       <table class="coords-table">
         <tr>
@@ -779,15 +818,50 @@
       document.getElementById('mNomPrincipal').textContent = item.nomPrincipal;
       document.getElementById('mAutreNom').textContent = item.autreNom || '';
       
-      const modalImg = document.getElementById('mImage');
-      modalImg.src = item.image;
-      if (item.rognerVertical) {
-        modalImg.classList.add('crop-vertically');
-      } else {
-        modalImg.classList.remove('crop-vertically');
+     const modalImg = document.getElementById('mImage');
+      const captionEl = document.getElementById('mLegendeImage');
+      const thumbsRow = document.getElementById('mThumbsRow');
+
+      // Liste des images de la fiche (soit le tableau dédié, soit l'image unique)
+      const listeImages = (item.imagesGalerie && item.imagesGalerie.length > 0)
+        ? item.imagesGalerie
+        : [{ url: item.image, legende: item.legendeImage || item.nomPrincipal, rognerVertical: item.rognerVertical }];
+
+      function afficherImageActive(imgObj, activeBtn) {
+        modalImg.src = imgObj.url;
+        captionEl.textContent = imgObj.legende || item.nomPrincipal;
+        if (imgObj.rognerVertical) {
+          modalImg.classList.add('crop-vertically');
+        } else {
+          modalImg.classList.remove('crop-vertically');
+        }
+        if (thumbsRow) {
+          thumbsRow.querySelectorAll('.thumb-btn').forEach(b => b.classList.remove('active'));
+          if (activeBtn) activeBtn.classList.add('active');
+        }
       }
 
-      document.getElementById('mLegendeImage').textContent = item.legendeImage || item.nomPrincipal;
+      // Construction des vignettes si plus d'une image
+      thumbsRow.innerHTML = '';
+      if (listeImages.length > 1) {
+        thumbsRow.style.display = 'flex';
+        listeImages.forEach((imgObj, i) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'thumb-btn' + (i === 0 ? ' active' : '');
+          btn.onclick = (e) => {
+            e.stopPropagation();
+            afficherImageActive(imgObj, btn);
+          };
+          btn.innerHTML = `<img src="${imgObj.url}" alt="${imgObj.legende || ''}">`;
+          thumbsRow.appendChild(btn);
+        });
+      } else {
+        thumbsRow.style.display = 'none';
+      }
+
+      // Charge la première image par défaut
+      afficherImageActive(listeImages[0], thumbsRow.querySelector('.thumb-btn'));
       document.getElementById('mCatalogues').textContent = item.catalogues ? item.catalogues.join(', ') : '-';
       document.getElementById('mConstellation').textContent = item.constellation || '-';
       
