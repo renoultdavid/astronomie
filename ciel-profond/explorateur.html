@@ -693,11 +693,10 @@
       const constel = filterConstellation.value;
       const sortMode = filterSort.value;
 
-      // 1. Détermination de la liste de base selon l'ordre chronologique
-      // On clone le tableau avec slice() pour ne pas altérer le jeu de données d'origine
+      // 1. Détermination de la liste de base
       let baseList = dataset.slice();
       if (sortMode === 'recent') {
-        baseList.reverse(); // Le dernier objet saisi dans data-objets.js se place en tête de liste
+        // Tu ajoutes tes fiches en tête de fichier : on conserve donc l'ordre naturel tel quel
       } else if (sortMode === 'alpha_asc') {
         baseList.sort((a, b) => a.nomPrincipal.localeCompare(b.nomPrincipal, 'fr', { numeric: true }));
       } else if (sortMode === 'alpha_desc') {
