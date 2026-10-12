@@ -307,63 +307,67 @@
     .theme-stars .core-dot { background: #f8fafc; box-shadow: 0 0 10px #f8fafc; }
     .theme-stars .pulse-ring { border-color: rgba(248, 250, 252, 0.85); }
     .theme-stars .label-pill { border-color: rgba(248, 250, 252, 0.4); }
-    /* BANDEAU SOMMITAL EXPLORATEUR */
+    /* BANDEAU SOMMITAL EXPLORATEUR - STYLE OR ÉCLATANT */
     .top-explorer-banner {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: 38px;
+      height: 40px;
       z-index: 25;
-      background: linear-gradient(180deg, rgba(2, 6, 23, 0.9) 0%, rgba(2, 6, 23, 0.35) 75%, transparent 100%);
-      border-bottom: 1px solid rgba(56, 189, 248, 0.25);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.28) 0%, rgba(217, 119, 6, 0.12) 65%, transparent 100%);
+      border-bottom: 1.5px solid rgba(251, 191, 36, 0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 12px;
       cursor: pointer;
       text-decoration: none;
-      transition: all 0.3s ease;
+      transition: all 0.35s ease;
+      box-shadow: 0 4px 18px rgba(245, 158, 11, 0.25);
     }
     .top-explorer-banner:hover {
-      background: linear-gradient(180deg, rgba(14, 25, 45, 0.95) 0%, rgba(14, 25, 45, 0.6) 80%, transparent 100%);
-      border-bottom-color: #38bdf8;
-      box-shadow: 0 4px 20px rgba(56, 189, 248, 0.2);
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.45) 0%, rgba(217, 119, 6, 0.22) 75%, transparent 100%);
+      border-bottom-color: #fde047;
+      box-shadow: 0 6px 28px rgba(250, 204, 21, 0.45);
     }
     .banner-lens-icon {
-      width: 16px;
-      height: 16px;
-      stroke: #38bdf8;
+      width: 18px;
+      height: 18px;
+      stroke: #fbbf24;
       fill: none;
-      stroke-width: 2;
+      stroke-width: 2.2;
       stroke-linecap: round;
       stroke-linejoin: round;
-      filter: drop-shadow(0 0 6px #38bdf8);
+      filter: drop-shadow(0 0 6px #f59e0b);
       transition: transform 0.3s ease;
     }
     .top-explorer-banner:hover .banner-lens-icon {
-      transform: scale(1.15) rotate(-10deg);
-      stroke: #facc15;
-      filter: drop-shadow(0 0 8px #facc15);
+      transform: scale(1.18) rotate(-10deg);
+      stroke: #fef08a;
+      filter: drop-shadow(0 0 10px #facc15);
     }
     .banner-text {
       font-family: 'Cinzel', serif;
-      font-size: clamp(0.7rem, 0.95vw, 0.82rem);
-      letter-spacing: 0.22em;
+      font-size: clamp(0.72rem, 1vw, 0.85rem);
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: #e2e8f0;
-      font-weight: 600;
+      color: #fef3c7;
+      font-weight: 700;
+      text-shadow: 0 0 12px rgba(245, 158, 11, 0.6);
     }
     .banner-badge-hint {
       font-size: 0.65rem;
-      color: #94a3b8;
-      letter-spacing: 0.12em;
+      color: #fde68a;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 1px 8px;
+      background: rgba(245, 158, 11, 0.2);
+      border: 1px solid rgba(251, 191, 36, 0.6);
+      padding: 2px 9px;
       border-radius: 12px;
+      font-weight: 600;
     }
 
     @keyframes breathe {
