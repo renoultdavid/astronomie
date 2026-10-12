@@ -307,9 +307,64 @@
     .theme-stars .core-dot { background: #f8fafc; box-shadow: 0 0 10px #f8fafc; }
     .theme-stars .pulse-ring { border-color: rgba(248, 250, 252, 0.85); }
     .theme-stars .label-pill { border-color: rgba(248, 250, 252, 0.4); }
-    .theme-explorer .core-dot { background: #10b981; box-shadow: 0 0 10px #10b981; }
-    .theme-explorer .pulse-ring { border-color: rgba(16, 185, 129, 0.85); }
-    .theme-explorer .label-pill { border-color: rgba(16, 185, 129, 0.5); color: #6ee7b7; }
+    /* BANDEAU SOMMITAL EXPLORATEUR */
+    .top-explorer-banner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 38px;
+      z-index: 25;
+      background: linear-gradient(180deg, rgba(2, 6, 23, 0.9) 0%, rgba(2, 6, 23, 0.35) 75%, transparent 100%);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.25);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .top-explorer-banner:hover {
+      background: linear-gradient(180deg, rgba(14, 25, 45, 0.95) 0%, rgba(14, 25, 45, 0.6) 80%, transparent 100%);
+      border-bottom-color: #38bdf8;
+      box-shadow: 0 4px 20px rgba(56, 189, 248, 0.2);
+    }
+    .banner-lens-icon {
+      width: 16px;
+      height: 16px;
+      stroke: #38bdf8;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 0 6px #38bdf8);
+      transition: transform 0.3s ease;
+    }
+    .top-explorer-banner:hover .banner-lens-icon {
+      transform: scale(1.15) rotate(-10deg);
+      stroke: #facc15;
+      filter: drop-shadow(0 0 8px #facc15);
+    }
+    .banner-text {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.7rem, 0.95vw, 0.82rem);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #e2e8f0;
+      font-weight: 600;
+    }
+    .banner-badge-hint {
+      font-size: 0.65rem;
+      color: #94a3b8;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 1px 8px;
+      border-radius: 12px;
+    }
 
     @keyframes breathe {
       0%, 100% { transform: scale(0.85); opacity: 0.35; }
@@ -835,6 +890,15 @@
         />
         
         <div class="cosmic-overlay"></div>
+        <!-- BANDEAU SOMMITAL DISCRET : MOTEUR DE RECHERCHE DU CIEL PROFOND -->
+        <div class="top-explorer-banner" onclick="openPanel('explorer')">
+          <svg class="banner-lens-icon" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span class="banner-text">Explorateur Céleste &amp; Base de Données</span>
+          <span class="banner-badge-hint">Filtres croisés</span>
+        </div>
 
         <!-- 1. Système Solaire -->
         <div class="hotspot theme-solar" style="top: 78%; left: 24%;" onclick="openPanel('solar')">
@@ -896,15 +960,6 @@
           <div class="label-pill">Le monde des étoiles</div>
         </div>
         
-        <!-- 7. Explorateur Céleste -->
-        <div class="hotspot theme-explorer" style="top: 86%; left: 48%;" onclick="openPanel('explorer')">
-          <div class="pulse-anchor">
-            <div class="pulse-ring pulse-ring-1"></div>
-            <div class="pulse-ring pulse-ring-2"></div>
-            <div class="core-dot"></div>
-          </div>
-          <div class="label-pill">Explorateur &amp; Catalogue Céleste</div>
-        </div>
       </div>
     </section>
 
