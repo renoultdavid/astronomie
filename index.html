@@ -307,6 +307,9 @@
     .theme-stars .core-dot { background: #f8fafc; box-shadow: 0 0 10px #f8fafc; }
     .theme-stars .pulse-ring { border-color: rgba(248, 250, 252, 0.85); }
     .theme-stars .label-pill { border-color: rgba(248, 250, 252, 0.4); }
+    .theme-explorer .core-dot { background: #10b981; box-shadow: 0 0 10px #10b981; }
+    .theme-explorer .pulse-ring { border-color: rgba(16, 185, 129, 0.85); }
+    .theme-explorer .label-pill { border-color: rgba(16, 185, 129, 0.5); color: #6ee7b7; }
 
     @keyframes breathe {
       0%, 100% { transform: scale(0.85); opacity: 0.35; }
@@ -892,6 +895,16 @@
           </div>
           <div class="label-pill">Le monde des étoiles</div>
         </div>
+        
+        <!-- 7. Explorateur Céleste -->
+        <div class="hotspot theme-explorer" style="top: 86%; left: 48%;" onclick="openPanel('explorer')">
+          <div class="pulse-anchor">
+            <div class="pulse-ring pulse-ring-1"></div>
+            <div class="pulse-ring pulse-ring-2"></div>
+            <div class="core-dot"></div>
+          </div>
+          <div class="label-pill">Explorateur &amp; Catalogue Céleste</div>
+        </div>
       </div>
     </section>
 
@@ -1318,6 +1331,14 @@
         fallback: "https://drive.google.com/thumbnail?id=1nFWVD2p3fb8PVfNI79uX1YRFQbcETwfX&sz=w1200",
         text: "Hors de l'atmosphère terrestre, les étoiles brillent d'un éclat pur et immuable, sans la moindre scintillation, révélant la physique intime des réacteurs thermonucléaires.",
         viewId: "etoiles"
+      },
+      explorer: {
+        badge: "Base de Données",
+        title: "Explorateur du Ciel Profond",
+        image: "https://lh3.googleusercontent.com/d/1FFmfpqSioN4LCxnx7uv5CrWPQ5Cw8z1t=s1200",
+        fallback: "https://drive.google.com/thumbnail?id=1FFmfpqSioN4LCxnx7uv5CrWPQ5Cw8z1t&sz=w1200",
+        text: "Accédez à la base de données interactive et filtrez par constellations, types morphologiques ou catalogues pour explorer les nébuleuses, galaxies et amas répertoriés.",
+        viewId: "explorateur"
       }
     };
 
@@ -1356,9 +1377,17 @@
       if (data.viewId === 'systeme-solaire') {
         goToView('systeme-solaire');
         updateCarousel();
-      } else {
-        // Pour les Nébuleuses, Galaxies, Amas, etc. -> Ouvre l'explorateur en plein écran sans recharger !
+      } else if (data.viewId === 'explorateur') {
+        // Clic sur le nouveau bouton vert émeraude -> Ouvre l'Explorateur Céleste
         ouvrirFicheAstre('explorateur');
+      } else {
+        // Clic sur Galaxies, Nébuleuses, etc. -> Préparé pour leurs fiches didactiques générales
+        const frame = document.getElementById('fiche-frame');
+        frame.src = `./ciel-profond/fiches/${data.viewId}.html`;
+        goToView('fiche-astre');
+        
+        const title = document.getElementById('nav-title');
+        if (title) title.innerText = data.title.toUpperCase();
       }
     }
 
