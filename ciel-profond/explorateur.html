@@ -326,7 +326,8 @@
         <input type="text" id="searchInput" class="search-bar" placeholder="Rechercher par nom, alias, catalogue (ex. Messier 1, Crabe, NGC 1952)...">
       </div>
 
-      <div class="selectors-row">
+     <div class="selectors-row">
+        <!-- 1. Catégorie principale -->
         <select id="filterCategory" class="custom-select">
           <option value="all">Toutes les catégories</option>
           <option value="galaxie">Galaxies</option>
@@ -336,10 +337,21 @@
           <option value="etoile">Étoiles remarquables</option>
         </select>
 
+        <!-- 2. Morphologie / Type -->
         <select id="filterSubCategory" class="custom-select" disabled>
-          <option value="all">Tous les sous-types</option>
+          <option value="all">Tous les types morphologiques</option>
         </select>
 
+        <!-- 3. Spécificités remarquables (Starburst, Seyfert, Grand Dessein...) -->
+        <select id="filterSpecialite" class="custom-select">
+          <option value="all">Toutes spécificités</option>
+          <option value="grand_dessein">Grand Dessein</option>
+          <option value="starburst">Starburst (Flambée d'étoiles)</option>
+          <option value="seyfert">Noyau actif / Seyfert</option>
+          <option value="remanent">Rémanent / Pulsar actif</option>
+        </select>
+
+        <!-- 4. Constellation -->
         <select id="filterConstellation" class="custom-select">
           <option value="all">Toutes les constellations</option>
         </select>
@@ -394,14 +406,15 @@
   <script src="./data/data-objets.js"></script>
 
   <script>
+    // Configuration des sous-types morphologiques
     const SUB_CATEGORIES = {
       galaxie: [
         { val: "spirale", label: "Galaxie spirale" },
-        { val: "spirale_barree", label: "Galaxie spirale barrée" },
         { val: "elliptique", label: "Galaxie elliptique" },
         { val: "lenticulaire", label: "Galaxie lenticulaire" },
         { val: "irreguliere", label: "Galaxie irrégulière" },
-        { val: "interaction", label: "En interaction / Fusion" }
+        { val: "interaction", label: "En interaction / Fusion" },
+        { val: "amas_groupe", label: "Amas / Groupe de galaxies" }
       ],
       nebuleuse: [
         { val: "reste_supernova", label: "Reste de supernova" },
@@ -430,6 +443,7 @@
     const searchInput = document.getElementById('searchInput');
     const filterCategory = document.getElementById('filterCategory');
     const filterSubCategory = document.getElementById('filterSubCategory');
+    const filterSpecialite = document.getElementById('filterSpecialite');
     const filterConstellation = document.getElementById('filterConstellation');
     const galleryContainer = document.getElementById('galleryContainer');
     const filteredCount = document.getElementById('filteredCount');
@@ -437,6 +451,7 @@
 
     function populateConstellations() {
       const constellations = [...new Set(dataset.map(item => item.constellation))].filter(Boolean).sort();
+      filterConstellation.innerHTML = '<option value="all">Toutes les constellations</option>';
       constellations.forEach(c => {
         const opt = document.createElement('option');
         opt.value = c;
@@ -447,7 +462,7 @@
 
     function updateSubCategoryDropdown() {
       const cat = filterCategory.value;
-      filterSubCategory.innerHTML = '<option value="all">Tous les sous-types</option>';
+      filterSubCategory.innerHTML = '<option value="all">Tous les types morphologiques</option>';
       if (cat !== 'all' && SUB_CATEGORIES[cat]) {
         SUB_CATEGORIES[cat].forEach(sub => {
           const opt = document.createElement('option');
@@ -473,17 +488,30 @@
       const q = searchInput.value.toLowerCase().trim();
       const cat = filterCategory.value;
       const sub = filterSubCategory.value;
+      const spec = filterSpecialite.value;
       const constel = filterConstellation.value;
 
+      // Filtrage strict : chaque objet n'est compté qu'une seule fois
       const filtered = dataset.filter(item => {
         const matchSearch = item.nomPrincipal.toLowerCase().includes(q) ||
                             (item.autreNom && item.autreNom.toLowerCase().includes(q)) ||
                             (item.catalogues && item.catalogues.some(c => c.toLowerCase().includes(q)));
+        
         const matchCat = (cat === 'all' || item.categoriePrincipale === cat);
         const matchSub = (sub === 'all' || item.sousCategorie === sub);
+        
+        let matchSpec = true;
+        if (spec !== 'all') {
+          if (Array.isArray(item.specificites)) {
+            matchSpec = item.specificites.includes(spec);
+          } else {
+            matchSpec = (item.specificites === spec);
+          }
+        }
+
         const matchConstel = (constel === 'all' || item.constellation === constel);
 
-        return matchSearch && matchCat && matchSub && matchConstel;
+        return matchSearch && matchCat && matchSub && matchSpec && matchConstel;
       });
 
       galleryContainer.innerHTML = '';
@@ -499,6 +527,12 @@
         const card = document.createElement('div');
         card.className = 'object-card';
         card.onclick = () => openModal(item);
+
+        let specBadges = '';
+        if (item.specificites && Array.isArray(item.specificites)) {
+          specBadges = item.specificites.map(s => `<span class="badge" style="background:rgba(245,158,11,0.15); color:#fbbf24; border:1px solid rgba(245,158,11,0.35);">${s.replace('_', ' ')}</span>`).join('');
+        }
+
         card.innerHTML = `
           <div class="card-img-wrap">
             <img src="${item.image}" alt="${item.nomPrincipal}" loading="lazy">
@@ -506,6 +540,7 @@
           <div class="card-body">
             <div class="card-badges">
               <span class="badge ${getBadgeClass(item.categoriePrincipale)}">${item.categoriePrincipale.replace('_', ' ')}</span>
+              ${specBadges}
               ${item.constellation ? `<span class="badge badge-constellation">${item.constellation}</span>` : ''}
             </div>
             <div class="card-title">${item.nomPrincipal}</div>
@@ -530,10 +565,16 @@
       document.getElementById('mAD').textContent = c.ad || '-';
       document.getElementById('mDec').textContent = c.dec || '-';
 
-      document.getElementById('mBadges').innerHTML = `
-        <span class="badge ${getBadgeClass(item.categoriePrincipale)}">${item.categoriePrincipale.replace('_', ' ')}</span>
-        ${item.sousCategorie ? `<span class="badge" style="background:#1e293b; color:#94a3b8; border:1px solid #334155;">${item.sousCategorie.replace('_', ' ')}</span>` : ''}
-      `;
+      let badgesHtml = `<span class="badge ${getBadgeClass(item.categoriePrincipale)}">${item.categoriePrincipale.replace('_', ' ')}</span>`;
+      if (item.sousCategorie) {
+        badgesHtml += `<span class="badge" style="background:#1e293b; color:#94a3b8; border:1px solid #334155;">${item.sousCategorie.replace('_', ' ')}</span>`;
+      }
+      if (item.specificites && Array.isArray(item.specificites)) {
+        item.specificites.forEach(s => {
+          badgesHtml += `<span class="badge" style="background:rgba(245,158,11,0.15); color:#fbbf24; border:1px solid rgba(245,158,11,0.35);">${s.replace('_', ' ')}</span>`;
+        });
+      }
+      document.getElementById('mBadges').innerHTML = badgesHtml;
 
       document.getElementById('mTexte').innerHTML = `<p>${item.texte}</p>`;
       document.getElementById('modalOverlay').classList.add('active');
@@ -553,6 +594,7 @@
       renderGallery();
     });
     filterSubCategory.addEventListener('change', renderGallery);
+    filterSpecialite.addEventListener('change', renderGallery);
     filterConstellation.addEventListener('change', renderGallery);
 
     populateConstellations();
