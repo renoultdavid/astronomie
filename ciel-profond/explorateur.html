@@ -355,6 +355,13 @@
         <select id="filterConstellation" class="custom-select">
           <option value="all">Toutes les constellations</option>
         </select>
+
+        <!-- 5. Option de tri -->
+        <select id="filterSort" class="custom-select">
+          <option value="recent">Tri : Derniers ajouts</option>
+          <option value="alpha_asc">Nom (A → Z)</option>
+          <option value="alpha_desc">Nom (Z → A)</option>
+        </select>
       </div>
 
       <div class="status-counter-bar">
@@ -365,6 +372,13 @@
 
     <!-- GRILLE DES OBJETS -->
     <div class="gallery-grid" id="galleryContainer"></div>
+
+    <!-- BOUTON CHARGEMENT PROGRESSIF -->
+    <div id="loadMoreWrap" style="text-align: center; margin-top: 2rem; display: none;">
+      <button id="loadMoreBtn" style="background: #0b1120; border: 1px solid #38bdf8; color: #38bdf8; padding: 10px 24px; border-radius: 20px; font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 0.15em; cursor: pointer; transition: all 0.2s;">
+        Afficher plus d'objets
+      </button>
+    </div>
   </div>
 
   <!-- POP-UP MODAL POUR LA FICHE -->
@@ -406,7 +420,6 @@
   <script src="./data/data-objets.js"></script>
 
   <script>
-    // Configuration des sous-types morphologiques
     const SUB_CATEGORIES = {
       galaxie: [
         { val: "spirale", label: "Galaxie spirale" },
@@ -445,9 +458,16 @@
     const filterSubCategory = document.getElementById('filterSubCategory');
     const filterSpecialite = document.getElementById('filterSpecialite');
     const filterConstellation = document.getElementById('filterConstellation');
+    const filterSort = document.getElementById('filterSort');
     const galleryContainer = document.getElementById('galleryContainer');
     const filteredCount = document.getElementById('filteredCount');
     const totalCount = document.getElementById('totalCount');
+    const loadMoreWrap = document.getElementById('loadMoreWrap');
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+
+    const ITEMS_PER_PAGE = 48;
+    let visibleLimit = ITEMS_PER_PAGE;
+    let currentFiltered = [];
 
     function populateConstellations() {
       const constellations = [...new Set(dataset.map(item => item.constellation))].filter(Boolean).sort();
@@ -484,15 +504,17 @@
       return 'badge-nebuleuse';
     }
 
-    function renderGallery() {
+    function renderGallery(resetLimit = true) {
+      if (resetLimit) visibleLimit = ITEMS_PER_PAGE;
+
       const q = searchInput.value.toLowerCase().trim();
       const cat = filterCategory.value;
       const sub = filterSubCategory.value;
       const spec = filterSpecialite.value;
       const constel = filterConstellation.value;
+      const sortMode = filterSort.value;
 
-      // Filtrage strict : chaque objet n'est compté qu'une seule fois
-      const filtered = dataset.filter(item => {
+      currentFiltered = dataset.filter(item => {
         const matchSearch = item.nomPrincipal.toLowerCase().includes(q) ||
                             (item.autreNom && item.autreNom.toLowerCase().includes(q)) ||
                             (item.catalogues && item.catalogues.some(c => c.toLowerCase().includes(q)));
@@ -502,28 +524,34 @@
         
         let matchSpec = true;
         if (spec !== 'all') {
-          if (Array.isArray(item.specificites)) {
-            matchSpec = item.specificites.includes(spec);
-          } else {
-            matchSpec = (item.specificites === spec);
-          }
+          matchSpec = Array.isArray(item.specificites) ? item.specificites.includes(spec) : (item.specificites === spec);
         }
 
         const matchConstel = (constel === 'all' || item.constellation === constel);
-
         return matchSearch && matchCat && matchSub && matchSpec && matchConstel;
       });
 
-      galleryContainer.innerHTML = '';
-      filteredCount.textContent = filtered.length;
+      if (sortMode === 'recent') {
+        currentFiltered = [...currentFiltered].reverse();
+      } else if (sortMode === 'alpha_asc') {
+        currentFiltered.sort((a, b) => a.nomPrincipal.localeCompare(b.nomPrincipal, 'fr', { numeric: true }));
+      } else if (sortMode === 'alpha_desc') {
+        currentFiltered.sort((a, b) => b.nomPrincipal.localeCompare(a.nomPrincipal, 'fr', { numeric: true }));
+      }
+
+      filteredCount.textContent = currentFiltered.length;
       totalCount.textContent = dataset.length;
 
-      if (filtered.length === 0) {
+      const toDisplay = currentFiltered.slice(0, visibleLimit);
+      galleryContainer.innerHTML = '';
+
+      if (toDisplay.length === 0) {
         galleryContainer.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #64748b; padding: 40px;">Aucun objet ne correspond aux critères de sélection.</div>';
+        loadMoreWrap.style.display = 'none';
         return;
       }
 
-      filtered.forEach(item => {
+      toDisplay.forEach(item => {
         const card = document.createElement('div');
         card.className = 'object-card';
         card.onclick = () => openModal(item);
@@ -549,12 +577,27 @@
         `;
         galleryContainer.appendChild(card);
       });
+
+      if (visibleLimit < currentFiltered.length) {
+        loadMoreWrap.style.display = 'block';
+        loadMoreBtn.textContent = `Afficher plus (${visibleLimit} / ${currentFiltered.length})`;
+      } else {
+        loadMoreWrap.style.display = 'none';
+      }
     }
 
     function openModal(item) {
       document.getElementById('mNomPrincipal').textContent = item.nomPrincipal;
       document.getElementById('mAutreNom').textContent = item.autreNom || '';
-      document.getElementById('mImage').src = item.image;
+      
+      const modalImg = document.getElementById('mImage');
+      modalImg.src = item.image;
+      if (item.rognerVertical) {
+        modalImg.classList.add('crop-vertically');
+      } else {
+        modalImg.classList.remove('crop-vertically');
+      }
+
       document.getElementById('mLegendeImage').textContent = item.legendeImage || item.nomPrincipal;
       document.getElementById('mCatalogues').textContent = item.catalogues ? item.catalogues.join(', ') : '-';
       document.getElementById('mConstellation').textContent = item.constellation || '-';
@@ -588,18 +631,24 @@
       if (e.target.id === 'modalOverlay') closeModal();
     }
 
-    searchInput.addEventListener('input', renderGallery);
+    loadMoreBtn.addEventListener('click', () => {
+      visibleLimit += ITEMS_PER_PAGE;
+      renderGallery(false);
+    });
+
+    searchInput.addEventListener('input', () => renderGallery(true));
     filterCategory.addEventListener('change', () => {
       updateSubCategoryDropdown();
-      renderGallery();
+      renderGallery(true);
     });
-    filterSubCategory.addEventListener('change', renderGallery);
-    filterSpecialite.addEventListener('change', renderGallery);
-    filterConstellation.addEventListener('change', renderGallery);
+    filterSubCategory.addEventListener('change', () => renderGallery(true));
+    filterSpecialite.addEventListener('change', () => renderGallery(true));
+    filterConstellation.addEventListener('change', () => renderGallery(true));
+    filterSort.addEventListener('change', () => renderGallery(true));
 
     populateConstellations();
     updateSubCategoryDropdown();
-    renderGallery();
+    renderGallery(true);
   </script>
 </body>
 </html>
