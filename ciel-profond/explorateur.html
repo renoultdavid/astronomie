@@ -48,6 +48,43 @@
       color: #f59e0b;
       text-transform: uppercase;
     }
+    /* GRAND COMPTEUR D'OBJETS SOMMITAL */
+    .total-counter-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 14px;
+      background: rgba(11, 17, 32, 0.85);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      padding: 8px 18px;
+      border-radius: 30px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), inset 0 0 12px rgba(56, 189, 248, 0.1);
+      backdrop-filter: blur(8px);
+    }
+    .total-counter-icon {
+      width: 18px;
+      height: 18px;
+      stroke: #38bdf8;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 0 6px #38bdf8);
+    }
+    .total-counter-number {
+      font-family: 'Cinzel', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #38bdf8;
+      letter-spacing: 0.05em;
+      text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+    }
+    .total-counter-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #94a3b8;
+    }
 
     /* PANNEAU DE FILTRES */
     .filter-panel {
@@ -423,6 +460,18 @@
     <header class="engine-header">
       <h1>Explorateur Céleste</h1>
       <div class="subtitle">Catalogue Dynamique du Ciel Profond</div>
+      
+      <!-- GRAND COMPTEUR SOMMITAL AVEC ICÔNE COMPTEUR -->
+      <div class="total-counter-badge">
+        <svg class="total-counter-icon" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9"></circle>
+          <path d="M12 7v5l3 3"></path>
+          <path d="M7 12h1"></path>
+          <path d="M16 12h1"></path>
+        </svg>
+        <span id="grandTotalCount" class="total-counter-number">0</span>
+        <span class="total-counter-label">Objets répertoriés</span>
+      </div>
     </header>
 
     <!-- FORMULAIRE DE FILTRAGE MULTI-CRITÈRES -->
@@ -604,6 +653,7 @@
     function updateSubCategoryDropdown() {
       const cat = filterCategory.value;
       filterSubCategory.innerHTML = '<option value="all">Tous les types morphologiques</option>';
+      
       if (cat !== 'all' && SUB_CATEGORIES[cat]) {
         SUB_CATEGORIES[cat].forEach(sub => {
           const opt = document.createElement('option');
@@ -614,6 +664,14 @@
         filterSubCategory.disabled = false;
       } else {
         filterSubCategory.disabled = true;
+      }
+
+      // Grise le filtre spécificités si la catégorie n'est pas "galaxie"
+      if (cat === 'galaxie' || cat === 'all') {
+        filterSpecialite.disabled = false;
+      } else {
+        filterSpecialite.value = 'all';
+        filterSpecialite.disabled = true;
       }
     }
 
@@ -635,7 +693,19 @@
       const constel = filterConstellation.value;
       const sortMode = filterSort.value;
 
-      currentFiltered = dataset.filter(item => {
+      // 1. Détermination de la liste de base selon l'ordre chronologique
+      // On clone le tableau avec slice() pour ne pas altérer le jeu de données d'origine
+      let baseList = dataset.slice();
+      if (sortMode === 'recent') {
+        baseList.reverse(); // Le dernier objet saisi dans data-objets.js se place en tête de liste
+      } else if (sortMode === 'alpha_asc') {
+        baseList.sort((a, b) => a.nomPrincipal.localeCompare(b.nomPrincipal, 'fr', { numeric: true }));
+      } else if (sortMode === 'alpha_desc') {
+        baseList.sort((a, b) => b.nomPrincipal.localeCompare(a.nomPrincipal, 'fr', { numeric: true }));
+      }
+
+      // 2. Application des filtres
+      currentFiltered = baseList.filter(item => {
         const matchSearch = item.nomPrincipal.toLowerCase().includes(q) ||
                             (item.autreNom && item.autreNom.toLowerCase().includes(q)) ||
                             (item.catalogues && item.catalogues.some(c => c.toLowerCase().includes(q)));
@@ -652,16 +722,11 @@
         return matchSearch && matchCat && matchSub && matchSpec && matchConstel;
       });
 
-      if (sortMode === 'recent') {
-        currentFiltered = [...currentFiltered].reverse();
-      } else if (sortMode === 'alpha_asc') {
-        currentFiltered.sort((a, b) => a.nomPrincipal.localeCompare(b.nomPrincipal, 'fr', { numeric: true }));
-      } else if (sortMode === 'alpha_desc') {
-        currentFiltered.sort((a, b) => b.nomPrincipal.localeCompare(a.nomPrincipal, 'fr', { numeric: true }));
-      }
-
+      // 3. Mise à jour des compteurs (le grand en haut + les barres secondaires)
       filteredCount.textContent = currentFiltered.length;
       totalCount.textContent = dataset.length;
+      const grandTotalEl = document.getElementById('grandTotalCount');
+      if (grandTotalEl) grandTotalEl.textContent = dataset.length;
 
       const toDisplay = currentFiltered.slice(0, visibleLimit);
       galleryContainer.innerHTML = '';
