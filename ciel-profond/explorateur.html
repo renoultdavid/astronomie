@@ -362,7 +362,7 @@
       background: rgba(2, 6, 23, 0.96);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      z-index: 100;
+      z-index: 9999;
       display: none;
       align-items: center;
       justify-content: center;
@@ -501,7 +501,7 @@
         <div class="card-badges" id="mBadges"></div>
       </div>
 
-      <div class="modal-hero-img-box" onclick="ouvrirPleinEcranImage()">
+      <div class="modal-hero-img-box" onclick="ouvrirPleinEcranImage(event)">
         <img id="mImage" src="" alt="" title="Cliquer pour admirer en grand format">
         <div class="zoom-hint-btn">
           <span class="zoom-pulse-dot"></span>
@@ -770,7 +770,8 @@
       document.getElementById('modalOverlay').classList.remove('active');
       currentModalIndex = -1;
     }
-   function ouvrirPleinEcranImage() {
+   function ouvrirPleinEcranImage(e) {
+      if (e) e.stopPropagation();
       const src = document.getElementById('mImage').src;
       if (!src) return;
       document.getElementById('lightboxImg').src = src;
