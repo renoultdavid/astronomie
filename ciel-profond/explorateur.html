@@ -294,6 +294,7 @@
       border: 1px solid #1e293b;
       background: #000;
       margin: 1.5rem 0;
+      position: relative;
     }
     .modal-hero-img-box img {
       width: 100%;
@@ -301,6 +302,16 @@
       object-fit: contain;
       display: block;
       background: #000;
+      cursor: zoom-in;
+      transition: filter 0.2s ease;
+    }
+    .modal-hero-img-box img:hover {
+      filter: brightness(1.08);
+    }
+    .modal-hero-img-box img.crop-vertically {
+      object-fit: cover;
+      object-position: center 50%;
+      transform: scale(1.18);
     }
     .modal-caption {
       padding: 8px 14px;
@@ -310,6 +321,63 @@
       border-top: 1px solid #1e293b;
       text-align: center;
       font-style: italic;
+    }
+
+    /* Pastille d'invitation au zoom */
+    .zoom-hint-btn {
+      position: absolute;
+      bottom: 42px;
+      right: 14px;
+      background: rgba(2, 6, 23, 0.8);
+      border: 1px solid rgba(56, 189, 248, 0.6);
+      color: #38bdf8;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      pointer-events: none;
+      backdrop-filter: blur(4px);
+    }
+    .zoom-pulse-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #38bdf8;
+      box-shadow: 0 0 8px #38bdf8;
+      animation: pulseDot 1.8s infinite;
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    /* VISIONNEUSE MAXIMALE PLEIN ÉCRAN */
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+      padding: 1.5vh 1.5vw;
+    }
+    .lightbox-overlay.active {
+      display: flex;
+    }
+    .lightbox-img {
+      max-width: 97vw;
+      max-height: 94vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.95), 0 0 20px rgba(56, 189, 248, 0.2);
     }
 
     .modal-header-titles h2 {
@@ -433,8 +501,12 @@
         <div class="card-badges" id="mBadges"></div>
       </div>
 
-      <div class="modal-hero-img-box">
-        <img id="mImage" src="" alt="">
+      <div class="modal-hero-img-box" onclick="ouvrirPleinEcranImage()">
+        <img id="mImage" src="" alt="" title="Cliquer pour admirer en grand format">
+        <div class="zoom-hint-btn">
+          <span class="zoom-pulse-dot"></span>
+          <span>Agrandir ⤢</span>
+        </div>
         <div class="modal-caption" id="mLegendeImage"></div>
       </div>
 
@@ -458,6 +530,10 @@
 
       <div class="modal-text" id="mTexte"></div>
     </div>
+  </div>
+  <!-- VISIONNEUSE PLEIN ÉCRAN POUR L'IMAGE -->
+  <div class="lightbox-overlay" id="lightboxOverlay" onclick="fermerPleinEcranImage()" title="Cliquer pour revenir à la fiche">
+    <img id="lightboxImg" class="lightbox-img" src="" alt="">
   </div>
 
   <!-- CHARGEMENT DU FICHIER DATA SÉPARÉ -->
@@ -694,12 +770,28 @@
       document.getElementById('modalOverlay').classList.remove('active');
       currentModalIndex = -1;
     }
+   function ouvrirPleinEcranImage() {
+      const src = document.getElementById('mImage').src;
+      if (!src) return;
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('lightboxOverlay').classList.add('active');
+    }
+
+    function fermerPleinEcranImage() {
+      document.getElementById('lightboxOverlay').classList.remove('active');
+    }
 
     function closeModalOnBackdrop(e) {
       if (e.target.id === 'modalOverlay') closeModal();
     }
 
     window.addEventListener('keydown', (e) => {
+      const lb = document.getElementById('lightboxOverlay');
+      if (lb && lb.classList.contains('active')) {
+        if (e.key === 'Escape') fermerPleinEcranImage();
+        return;
+      }
+
       const modal = document.getElementById('modalOverlay');
       if (modal && modal.classList.contains('active')) {
         if (e.key === 'ArrowLeft') naviguerModal(-1);
