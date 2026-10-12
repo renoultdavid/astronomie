@@ -1,5 +1,28 @@
 const OBJETS_CIEL_PROFOND = [
   {
+    id: "ngc3324",
+    nomPrincipal: "NGC 3324",
+    autreNom: "Nébuleuse Gabriela Mistral",
+    catalogues: ["ESO 128-EN6", "Gum 31", "Caldwell 92 part"],
+    categoriePrincipale: "nebuleuse",
+    sousCategorie: "emission",
+    specificites: [],
+    constellation: "Carène",
+    image: "https://lh3.googleusercontent.com/d/1WXHDBBzdRPGsI1wB12nEkRZTK3S2Af3T",
+    imagesGalerie: [
+      {
+        url: "https://lh3.googleusercontent.com/d/1WXHDBBzdRPGsI1wB12nEkRZTK3S2Af3T",
+        legende: "Les « Falaises Cosmiques » en infrarouge — Télescope spatial James Webb (NIRCam/MIRI)"
+      },
+      {
+        url: "https://lh3.googleusercontent.com/d/1458WrebUUOFCs29-UNJ66bxvTvnj-6t0",
+        legende: "Vue grand champ de la nébuleuse en émission NGC 3324 — Observatoire Européen Austral (ESO)"
+      }
+    ],
+    coordonnees: { ad: "10h 37m 16s", dec: "-58° 37′ 10″", magnitude: "7.5", distance: "7 600 al", vitesseRadiale: "-4.3 km/s" },
+    texte: "NGC 3324 est une spectaculaire région HII et pouponnière stellaire située dans la constellation australe de la Carène, nichée en périphérie nord-ouest du vaste complexe moléculaire de la nébuleuse de la Carène (NGC 3372). Découverte en 1826 par l'astronome James Dunlop, elle abrite un amas ouvert très jeune dont les étoiles massives de type O et B, notamment les systèmes binaires HD 92206 et CPD -57 3580, sculptent l'environnement gazeux par de violents vents stellaires et un intense rayonnement ultraviolet. Ce feedback radiatif a creusé une formidable cavité au sein du nuage moléculaire parent, créant un front d'ionisation particulièrement abrupt surnommé les « Falaises Cosmiques ». En lumière visible, le profil tourmenté des crêtes de poussières sombres et du gaz brillant évoque la silhouette de la poétesse chilienne Gabriela Mistral, lui conférant son surnom usuel. En 2022, le télescope spatial James Webb a immortalisé la bordure de cette cavité dans l'infrarouge proche et moyen, révélant avec une netteté inédite des dizaines de proto-étoiles enfouies, des jets bipolaires de matière moléculaire (objets Herbig-Haro) et des colonnes d'érosion hydrodynamique où s'enclenche une nouvelle génération d'étoiles par compression des gaz froids."
+  },
+  {
     id: "ngc604",
     nomPrincipal: "NGC 604",
     autreNom: "Nébuleuse géante de M33",
