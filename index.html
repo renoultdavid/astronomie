@@ -1352,9 +1352,13 @@
       if (!activeWorldKey) return;
       const data = WORLDS[activeWorldKey];
       closePanel();
-      goToView(data.viewId);
+      
       if (data.viewId === 'systeme-solaire') {
+        goToView('systeme-solaire');
         updateCarousel();
+      } else {
+        // Pour les Nébuleuses, Galaxies, Amas, etc. -> Ouvre l'explorateur en plein écran sans recharger !
+        ouvrirFicheAstre('explorateur');
       }
     }
 
@@ -1429,22 +1433,29 @@
     /* CHARGEMENT DYNAMIQUE DES FICHES EN PLEIN ÉCRAN */
     function ouvrirFicheAstre(nomAstre) {
       const frame = document.getElementById('fiche-frame');
-      frame.src = `./systeme-solaire/fiches/${nomAstre}.html`;
       
-      // On affiche bien la section fiche-astre
+      // Si on demande l'explorateur du ciel profond :
+      if (nomAstre === 'explorateur') {
+        frame.src = './ciel-profond/explorateur.html';
+      } else {
+        // Sinon c'est une fiche classique du système solaire :
+        const fichier = (nomAstre === 'terre' || nomAstre === 'terrelune') ? 'terrelune' : nomAstre;
+        frame.src = `./systeme-solaire/fiches/${fichier}.html`;
+      }
+      
       goToView('fiche-astre');
-      
-      // Table des noms d'affichage
+
+      // Noms propres pour la barre du haut
       const noms = {
         terrelune: "TERRE & LUNE",
         terre: "TERRE & LUNE",
         venus: "VÉNUS",
         geocroiseurs: "GÉOCROISEURS",
         asteroides: "ASTÉROÏDES",
-        kuiper: "KUIPER & PLUTON"
+        kuiper: "KUIPER & PLUTON",
+        explorateur: "EXPLORATEUR CÉLESTE"
       };
 
-      // On affiche le nom de l'astre dans la barre du haut
       const title = document.getElementById('nav-title');
       if (title) {
         title.innerText = noms[nomAstre] || nomAstre.toUpperCase();
