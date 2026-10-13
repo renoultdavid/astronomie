@@ -1565,12 +1565,21 @@ const OBJETS_CIEL_PROFOND_2 = [
     catalogues: ["UGC 8616", "MCG +02-35-015", "PGC 48130"],
     categoriePrincipale: "galaxie",
     sousCategorie: "spirale",
-    specificites: ["starburst"],
+    specificites: ["starburst", "barrée"],
     constellation: "Bouvier",
-    image: "https://lh3.googleusercontent.com/d/14nZPIrp_BwGdrMB1e2BRcDxB0JEi-Cfc",
-    legendeImage: "L'anneau circum-nucléaire et les bras spiraux de NGC 5248 — Hubble",
+    image: "https://lh3.googleusercontent.com/d/15--KQIKunlYpJeRibKuQh7irQs4RDXFY",
+    imagesGalerie: [
+      {
+        url: "https://lh3.googleusercontent.com/d/14nZPIrp_BwGdrMB1e2BRcDxB0JEi-Cfc",
+        legende: "L'anneau circum-nucléaire et les bras spiraux de NGC 5248 — Hubble"
+      },
+      {
+        url: "https://lh3.googleusercontent.com/d/15--KQIKunlYpJeRibKuQh7irQs4RDXFY",
+        legende: "Les structures de poussière et les super-amas centraux de NGC 5248 — Hubble"
+      }
+    ],
     coordonnees: { ad: "13h 37m 32s", dec: "+08° 53′ 07″", magnitude: "10.3", distance: "50 millions al", vitesseRadiale: "+1 150 km/s" },
-    texte: "NGC 5248 (Caldwell 45) est une somptueuse galaxie spirale intermédiaire de classe (R')SAB(rs)bc située dans la constellation du Bouvier, découverte par William Herschel en 1784. Située à environ cinquante millions d'années-lumière de la Terre et s'étendant sur un diamètre réel d'environ quatre-vingt-quinze mille années-lumière, elle est observée sous un angle semi-frontal d'environ quarante-six degrés qui met en valeur une architecture dynamique d'une remarquable complexité. Elle présente une double structure spirale emboîtée, où deux bras principaux à grand dessein émergent d'une petite barre centrale avant de se prolonger par de larges bras externes plus diffus et asymétriques. Cependant, la célébrité de NGC 5248 en astrophysique découle de son activité nucléaire : son centre abrite une extraordinaire structure annulaire de sursaut de formation stellaire circum-nucléaire (starburst ring) d'environ cinq cents parsecs de diamètre, accompagnée d'un second anneau intérieur encore plus compact. Les observations haute résolution du télescope spatial Hubble et de l'interféromètre ALMA dévoilent une chaîne de super-amas d'étoiles jeunes ultra-massives nés de la compression hydrodynamique du gaz moléculaire froid. Ce gaz est canalisé vers l'intérieur à des vitesses supersoniques le long d'une spirale de poussière miniature régie par des résonances internes de Lindblad. En son centre réside un noyau actif de type LINER abritant un trou noir supermassif en accrétion modérée. Membre du nuage de la Vierge III, NGC 5248 ne montre aucun signe d'interaction violente récente, illustrant de façon exemplaire comment les instabilités gravitationnelles internes et les ondes de densité spiralées peuvent entretenir spontanément un sursaut de natalité stellaire majeur sans nécessiter de collision galactique extérieure."
+    texte: "NGC 5248 (Caldwell 45) est une galaxie spirale intermédiaire de classe (R')SAB(rs)bc située dans la constellation du Bouvier, découverte par William Herschel en 1784. Située à environ cinquante millions d'années-lumière de la Terre et s'étendant sur un diamètre réel d'environ quatre-vingt-quinze mille années-lumière, elle est observée sous un angle semi-frontal d'environ quarante-six degrés qui met en valeur une architecture dynamique complexe. Elle présente une double structure spirale emboîtée, où deux bras principaux à grand dessein émergent d'une petite barre centrale avant de se prolonger par de larges bras externes plus diffus et asymétriques. Son centre abrite une structure annulaire de sursaut de formation stellaire circum-nucléaire (starburst ring) d'environ cinq cents parsecs de diamètre, accompagnée d'un second anneau intérieur encore plus compact. Les observations haute résolution du télescope spatial Hubble et de l'interféromètre ALMA dévoilent une chaîne de super-amas d'étoiles jeunes massives nés de la compression hydrodynamique du gaz moléculaire froid. Ce gaz est canalisé vers l'intérieur le long d'une spirale de poussière miniature régie par des résonances internes de Lindblad. En son cœur réside un noyau actif de type LINER abritant un trou noir supermassif en accrétion modérée. Membre du nuage de la Vierge III, NGC 5248 ne montre aucun signe d'interaction violente récente, illustrant la manière dont les instabilités gravitationnelles internes et les ondes de densité spiralées peuvent entretenir spontanément un sursaut de natalité stellaire majeur sans nécessiter de collision extérieure."
   },
     {
     id: "ngc5005",
