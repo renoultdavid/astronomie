@@ -1,5 +1,47 @@
 const OBJETS_CIEL_PROFOND_2 = [
 {
+    id: "ngc3359",
+    nomPrincipal: "NGC 3359",
+    autreNom: "",
+    catalogues: ["UGC 5866", "MCG +11-13-039", "PGC 32249"],
+    categoriePrincipale: "galaxie",
+    sousCategorie: "spirale",
+    specificites: ["barrée"],
+    constellation: "Grande Ourse",
+    image: "https://lh3.googleusercontent.com/d/1AVnMfDBtVfeQcjB0e-tSNniH2bVSGCNz",
+    legendeImage: "La barre stellaire jeune et les bras asymétriques de NGC 3359 — Hubble",
+    coordonnees: { ad: "10h 46m 36s", dec: "+63° 13′ 25″", magnitude: "10.6", distance: "49 millions al", vitesseRadiale: "+1 014 km/s" },
+    texte: "NGC 3359 est une galaxie spirale barrée de classe SB(rs)c située dans la constellation boréale de la Grande Ourse, découverte par William Herschel en 1793. Évoluant à une distance d'environ quarante-neuf millions d'années-lumière de la Terre et s'étendant sur un diamètre réel d'environ soixante-cinq mille années-lumière, elle est observée sous une vue semi-inclinée d'environ cinquante et un degrés. Elle constitue l'un des laboratoires d'observation les plus remarquables pour l'étude de l'apparition récente des barres stellaires : la modélisation cinématique et la distribution de ses populations stellaires indiquent que sa barre centrale ne s'est formée qu'il y a environ quatre cents à cinq cents millions d'années, ce qui en fait une structure jeune à l'échelle cosmologique. Cette barre stellaire rectiligne est bordée de deux sillons longitudinaux de poussière sombre absorbante et traverse un bulbe compact de faible masse. Deux bras spiraux principaux asymétriques et morcelés émergent des extrémités de la barre, densément peuplés de dizaines de jeunes super-amas d'étoiles bleues massives de types spectraux O et B et de nébuleuses d'hydrogène ionisé en émission H-alpha. L'imagerie optique haute résolution de la caméra WFC3 du télescope spatial Hubble résout les fronts de compression du gaz moléculaire froid canalisé vers le centre le long des axes de cisaillement. Les cartographies radioastronomiques de la raie HI à 21 centimètres révèlent un réservoir d'hydrogène neutre étendu et asymétrique, témoignant d'instabilités dynamiques internes sans signe de collision destructive récente."
+  },
+  {
+    id: "ngc3507",
+    nomPrincipal: "NGC 3507",
+    autreNom: "",
+    catalogues: ["UGC 6123", "MCG +03-28-052", "PGC 33390"],
+    categoriePrincipale: "galaxie",
+    sousCategorie: "spirale",
+    specificites: ["barrée", "seyfert"],
+    constellation: "Lion",
+    image: "https://lh3.googleusercontent.com/d/110QlFmZ-KFnZEbleS9rq6GI4qiBZsjmH",
+    legendeImage: "Le bulbe lumineux et la structure barrée de NGC 3507 — Hubble",
+    coordonnees: { ad: "11h 03m 25s", dec: "+18° 08′ 08″", magnitude: "11.8", distance: "52 millions al", vitesseRadiale: "+982 km/s" },
+    texte: "NGC 3507 est une galaxie spirale barrée de classe SB(s)b située dans la constellation du Lion, découverte par William Herschel en 1784. Évoluant à une distance d'environ cinquante-deux millions d'années-lumière de la Terre et s'étendant sur un diamètre réel d'environ cinquante-cinq mille années-lumière, elle est observée sous un angle presque rigoureusement de face avec une inclinaison minimale d'environ vingt-cinq degrés. Son disque stellaire est articulé autour d'un bulbe volumineux et brillant composé d'une population d'étoiles dorées anciennes de population II, traversé par une barre stellaire bien définie bordée de deux couloirs continus de poussière sombre interstellaire absorbante. De chaque extrémité de cette barre émergent des bras spiraux amples et symétriques qui s'enroulent harmonieusement à travers le plan galactique, jalonnés de régions HII d'hydrogène ionisé et de jeunes amas d'étoiles bleues massives. En son cœur réside un noyau galactique actif de type LINER / Seyfert de faible luminosité, propulsé par un trou noir supermassif accrétant le gaz résiduel drainé par les couples de torsion gravitationnels de la barre. Sur le plan visuel et observationnel, elle apparaît projetée au premier plan à proximité immédiate d'une étoile brillante de magnitude 11 appartenant à notre propre Voie lactée, visible juste au bord de son bulbe. L'imagerie haute résolution obtenue par le télescope spatial Hubble permet de cartographier la transition entre les zones de formation stellaire actives du disque et la cinématique stable des résonances orbitales de Lindblad sans perturbations extérieures majeures."
+  },
+  {
+    id: "ngc3511",
+    nomPrincipal: "NGC 3511",
+    autreNom: "",
+    catalogues: ["ESO 502-018", "MCG -04-26-016", "PGC 33385"],
+    categoriePrincipale: "galaxie",
+    sousCategorie: "spirale",
+    specificites: ["barrée", "interaction"],
+    constellation: "Coupe",
+    image: "https://lh3.googleusercontent.com/d/1zvAq7KNyQxvSAB7aH37WYKzYvbZ2hyTN",
+    legendeImage: "Le profil incliné et les bras asymétriques de NGC 3511 — Hubble",
+    coordonnees: { ad: "11h 03m 24s", dec: "-23° 05′ 12″", magnitude: "10.8", distance: "45 millions al", vitesseRadiale: "+1 104 km/s" },
+    texte: "NGC 3511 est une galaxie spirale intermédiaire de classe SA(s)c située dans la constellation australe de la Coupe, découverte par William Herschel en 1786. Située à environ quarante-cinq millions d'années-lumière de la Terre et mesurant près de soixante-quinze mille années-lumière de diamètre, elle forme une paire gravitationnelle physique liée avec sa voisine immédiate, la galaxie spirale barrée NGC 3513, distante de seulement quelques dizaines de kiloparsecs en séparation projetée. Observée sous une forte inclinaison d'environ soixante-dix degrés par rapport à notre ligne de visée, elle présente un profil étiré dominé par un bulbe stellaire de dimensions modestes, d'où s'élancent des bras spiraux asymétriques et texturés. Ces bras sont profondément entaillés par un réseau dense et continu de bandes de poussière sombre et opaque qui absorbent la lumière émise par les étoiles du plan équatorial. L'imagerie optique haute résolution de la caméra WFC3 du télescope spatial Hubble résout de multiples condensations d'hydrogène ionisé en émission H-alpha et de jeunes super-amas d'étoiles bleues massives nés de la compression hydrodynamique continue le long des fronts d'ondes de densité. Les observations radio interférométriques de la raie HI à 21 cm montrent des déformations cinématiques modérées dans l'enveloppe de gaz neutre externe, résultant de l'interaction de marée séculaire avec NGC 3513. NGC 3511 offre ainsi un banc d'essai pour étudier la structure verticale des poussières interstellaires et la régulation de la natalité stellaire au sein des couples de spirales en interaction gravitationnelle."
+  },
+    {
     id: "ngc1808",
     nomPrincipal: "NGC 1808",
     autreNom: "Arp 120",
