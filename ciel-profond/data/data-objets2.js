@@ -1,5 +1,19 @@
 const OBJETS_CIEL_PROFOND_2 = [
 {
+    id: "lmc_n44c",
+    nomPrincipal: "N44C",
+    autreNom: "LHA 120-N 44C",
+    catalogues: ["ESO 057-EN014", "DEM L 199"],
+    categoriePrincipale: "nebuleuse",
+    sousCategorie: "emission",
+    specificites: [],
+    constellation: "Dorade",
+    image: "https://lh3.googleusercontent.com/d/1IxSJFJ9O29eD6xaRGOZehI6RQoGUdjLe",
+    legendeImage: "Le nuage ionisé et la pouponnière stellaire de N44C dans le GNM — Hubble",
+    coordonnees: { ad: "05h 22m 12s", dec: "-67° 58′ 34″", magnitude: "10.6", distance: "160 000 al", vitesseRadiale: "+288 km/s" },
+    texte: "N44C (LHA 120-N 44C) est une nébuleuse en émission remarquable située dans la constellation australe de la Dorade, faisant partie intégrante du vaste complexe nébulaire N44 au sein du Grand Nuage de Magellan. Évoluant à une distance d'environ cent soixante mille années-lumière de la Terre, cette région HII compacte correspond à une poche de gaz interstellaire soumise à une photo-ionisation particulièrement énergétique. Contrairement aux régions d'émission ordinaires dont le spectre est dominé par l'hydrogène et l'oxygène doublement ionisé, N44C présente une signature astrophysique rare caractérisée par une raie d'émission très intense de l'hélium deux fois ionisé (He II à 468,6 nanomètres). Cette raie requiert un flux de photons ultraviolets extrêmes dépassant 54,4 électron-volts, une énergie normalement inaccessible au rayonnement thermique d'une seule étoile de la séquence principale. L'étoile excitatrice centrale est une étoile bleue très chaude de type spectral O4-6n(f)p, mais la température de sa photosphère ne suffit pas à expliquer l'ampleur de l'ionisation observée. Les astrophysiciens suspectent la présence d'une source compagne compacte accrétante, telle qu'une étoile à neutrons ou un trou noir de masse stellaire, émettant un rayonnement X dur qui surchauffe et ionise le gaz environnant. L'imagerie optique haute résolution combinant les caméras ACS et WFC3 du télescope spatial Hubble résout les délicates volutes de poussière sombre et les piliers d'érosion sculptés par le vent stellaire violent au cœur du nuage. N44C offre ainsi un terrain d'étude privilégié pour analyser la photo-ionisation extrême et les interactions gaz-étoiles dans un environnement extragalactique à métallicité modérée."
+  },
+    {
     id: "iras23077_6707",
     nomPrincipal: "IRAS 23077+6707",
     autreNom: "Le Sandwich de Dracula (Dracula's Chivito)",
