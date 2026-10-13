@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Les Objets Géocroiseurs (NEO) — Planétarium</title>
+  <link rel="stylesheet" href="../../fiche.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #020617;
+      color: #e2e8f0;
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.8;
+      overflow-x: hidden;
+      padding-bottom: 5rem;
+    }
+
+    /* BARRE SUPÉRIEURE DE NAVIGATION */
+    .top-nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: rgba(11, 17, 32, 0.85);
+      border-bottom: 1px solid #1e293b;
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .back-hub-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #38bdf8;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      transition: color 0.2s, transform 0.2s;
+    }
+    .back-hub-btn:hover {
+      color: #f59e0b;
+      transform: translateX(-3px);
+    }
+
+    .fiche-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    /* EN-TÊTE */
+    .hero-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .hero-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #f59e0b;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+    .hero-header h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 3.8vw, 3rem);
+      letter-spacing: 0.12em;
+      color: #ffffff;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+    .hero-header .subtitle {
+      font-size: 1.05rem;
+      color: #94a3b8;
+      font-weight: 300;
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    /* TEXTES PRINCIPAUX */
+    .prose-block {
+      font-size: 1rem;
+      color: #cbd5e1;
+      text-align: justify;
+      font-weight: 300;
+      margin-bottom: 1.8rem;
+    }
+    .prose-block p {
+      margin-bottom: 1.4rem;
+    }
+
+    /* TITRES DE SECTIONS */
+    .section-main-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin: 3.5rem 0 1.5rem;
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-main-title::before {
+      content: "";
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: #f59e0b;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #f59e0b;
+    }
+
+    .subsection-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.35rem;
+      color: #38bdf8;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin: 2.5rem 0 1rem;
+    }
+
+    /* CARTES D'OBJETS AVEC IMAGES */
+    .object-showcase {
+      background: #0b1120;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 1.8rem;
+      margin: 2rem 0 2.8rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    .object-showcase-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      color: #f8fafc;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .object-tag {
+      font-size: 0.7rem;
+      font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 2px 10px;
+      border-radius: 14px;
+    }
+
+    /* CONTENEUR D'IMAGE ZOOMABLE */
+    .zoomable-img-wrap {
+      position: relative;
+      width: 100%;
+      background: #000;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #1e293b;
+      margin: 1.2rem 0 1.5rem;
+      cursor: zoom-in;
+    }
+    .zoomable-img-wrap img {
+      width: 100%;
+      max-height: 460px;
+      object-fit: contain;
+      display: block;
+      transition: filter 0.25s ease;
+      background: #000;
+    }
+    .zoomable-img-wrap:hover img {
+      filter: brightness(1.08);
+    }
+    .zoom-hint-tag {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(2, 6, 23, 0.85);
+      border: 1px solid rgba(56, 189, 248, 0.6);
+      color: #38bdf8;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      pointer-events: none;
+      backdrop-filter: blur(4px);
+    }
+    .zoom-pulse {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #38bdf8;
+      box-shadow: 0 0 8px #38bdf8;
+      animation: pulseAnim 1.8s infinite;
+    }
+    @keyframes pulseAnim {
+      0%, 100% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    /* BOX 2 INTERACTIVE SPÉCIFIQUE (COMÈTES) */
+    .box2-frame {
+      width: 100%;
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      margin: 2rem 0;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    }
+    .box2-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      background: #111c35;
+      border-bottom: 1px solid #1e293b;
+    }
+    .box2-dot {
+      width: 9px;
+      height: 9px;
+      background: #f59e0b;
+      border-radius: 50%;
+    }
+    .box2-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .box2-tabs-nav {
+      display: flex;
+      background: #090d16;
+      border-bottom: 1px solid #1e293b;
+      padding: 0 12px;
+      gap: 4px;
+      overflow-x: auto;
+    }
+    .box2-tab-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 10px 14px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      font-family: inherit;
+    }
+    .box2-tab-btn:hover {
+      color: #f1f5f9;
+    }
+    .box2-tab-btn.active {
+      color: #fbbf24;
+      border-bottom-color: #fbbf24;
+      background: rgba(245, 158, 11, 0.05);
+    }
+    .box2-body {
+      padding: 18px 20px;
+      max-height: 520px;
+      overflow-y: auto;
+    }
+    .box2-pane {
+      display: none;
+    }
+    .box2-pane.active {
+      display: block;
+    }
+    .box2-lead {
+      border-left: 3px solid #f59e0b;
+      padding: 8px 12px;
+      margin-bottom: 16px;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: #cbd5e1;
+      background: rgba(245, 158, 11, 0.08);
+    }
+    .box2-sectitle {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fbbf24;
+      margin: 16px 0 6px 0;
+      display: block;
+    }
+    .box2-p {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: #94a3b8;
+      margin-bottom: 12px;
+    }
+    .box2-diagram {
+      background: #090d16;
+      border: 1px solid #1e293b;
+      border-radius: 6px;
+      padding: 12px;
+      margin: 14px 0;
+    }
+    .box2-diag-head {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      color: #64748b;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .box2-flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .box2-card {
+      flex: 1 1 120px;
+      padding: 8px 10px;
+      border-radius: 5px;
+      background: #111827;
+      border: 1px solid #1f2937;
+      text-align: center;
+    }
+    .box2-card-name {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #e2e8f0;
+    }
+    .box2-card-desc {
+      font-size: 0.72rem;
+      color: #94a3b8;
+      margin: 2px 0;
+    }
+    .box2-card-temp {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #f59e0b;
+    }
+    .box2-swatches {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .box2-swatch {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #111827;
+      border: 1px solid #1f2937;
+      border-radius: 4px;
+      padding: 5px 8px;
+      font-size: 0.75rem;
+    }
+    .box2-dot-col {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      display: inline-block;
+    }
+    .box2-swatch-lbl {
+      font-weight: 700;
+      color: #f1f5f9;
+    }
+    .box2-swatch-sub {
+      color: #64748b;
+    }
+    .box2-footer {
+      padding: 10px 18px;
+      background: #090d16;
+      border-top: 1px solid #1e293b;
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+    .box2-footer span {
+      color: #94a3b8;
+    }
+
+    /* VISIONNEUSE PLEIN ÉCRAN LIGHTBOX */
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+      padding: 1.5vh 1.5vw;
+    }
+    .lightbox-overlay.active {
+      display: flex;
+    }
+    .lightbox-img {
+      max-width: 97vw;
+      max-height: 94vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.95), 0 0 20px rgba(56, 189, 248, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRE SUPÉRIEURE DE NAVIGATION -->
+  <nav class="top-nav-bar">
+    <a href="../planetarium.html" class="back-hub-btn">
+      <span>‹</span> Retour au Planétarium
+    </a>
+    <div style="font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: #64748b;">
+      Système Solaire Interne
+    </div>
+  </nav>
+
+  <div class="fiche-wrapper">
+
+    <!-- EN-TÊTE DE LA FICHE -->
+    <header class="hero-header">
+      <div class="hero-badge">Défense Planétaire & Origines Cosmiques</div>
+      <h1>Les Objets Géocroiseurs</h1>
+      <div class="subtitle">
+        Sentinelles du voisinage terrestre : astéroïdes, comètes et dynamique de la veille spatiale
+      </div>
+    </header>
+
+    <!-- INTRODUCTION GÉNÉRALE -->
+    <div class="prose-block">
+      <p>
+        Les objets géocroiseurs, désignés sous l'acronyme international NEO pour <em>Near-Earth Objects</em>, regroupent l'ensemble des corps célestes du Système solaire dont la trajectoire les amène à s'approcher de l'orbite terrestre. Bien que l'immensité de l'espace réduise considérablement la probabilité d'une collision à court terme, ces visiteurs du voisinage planétaire suscitent une attention constante de la communauté scientifique, tant pour l'évaluation des risques d'impact que pour leur formidable potentiel d'information sur les origines de notre monde. Ces objets se divisent principalement en deux grandes familles aux caractéristiques physiques et aux dynamiques orbitales très distinctes : les astéroïdes et les comètes géocroiseurs.
+      </p>
+      <p>
+        La première et de loin la plus nombreuse de ces familles est celle des astéroïdes géocroiseurs. Constituant l'immense majorité des objets recensés au plus près de la Terre, ils sont principalement composés de roches, de silicates et de métaux, hérités de la formation des planètes intérieures ou expulsés de la ceinture principale sous l'effet de perturbations gravitationnelles. Classés selon la forme et la position de leur orbite par rapport à celle de notre planète, ils présentent une grande diversité de formes et de structures, allant du bloc rocheux compact aux agrégats de débris maintenus par une faible gravité, et ont fait l'objet de missions spatiales pionnières venues en prélever des fragments ou tester nos capacités de défense planétaire.
+      </p>
+      <p>
+        La seconde famille réunit les comètes géocroiseurs, des corps célestes fascinants issus pour la plupart des régions les plus reculées et glacées du Système solaire. Composées d'un mélange de glaces volatiles, de poussières et de composés organiques primordiaux, ces comètes se distinguent par leur comportement dynamique à mesure qu'elles s'approchent du Soleil, la sublimation de leurs gaz donnant naissance à une atmosphère diffuse et à de spectaculaires chevelures. Si leur nombre parmi les géocroiseurs est bien plus modeste que celui des astéroïdes, leur observation et leur exploration <em>in situ</em> ouvrent une fenêtre unique sur la composition primitive de notre nébuleuse et sur l'apport possible d'eau et de briques du vivant sur la Terre primitive.
+      </p>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- SECTION 1 : LES ASTÉROÏDES GÉOCROISEURS                          -->
+    <!-- ================================================================= -->
+    <h2 class="section-main-title">Les Astéroïdes</h2>
+
+    <!-- INFOGRAPHIE INTERACTIVE 1 (NEO & SCHÉMA VECTORIEL) -->
+    <div id="infographie-neo" style="background: #0b1120; border: 1px solid #1e293b; color: #e2e8f0; padding: 14px 16px; border-radius: 10px; width: 100%; margin: 2rem 0;">
+      
+      <header style="text-align: center; margin-bottom: 12px;">
+        <h3 style="color: #f8fafc; margin: 0; font-size: 1.15rem; font-family: 'Cinzel', serif;">Les Objets Géocroiseurs (NEO) : populations et veille spatiale</h3>
+        <p style="color: #94a3b8; margin-top: 4px; font-size: 0.8rem;">Classification orbitale (Atens, Apollons, Amors), risques d'impact et stratégies de déviation</p>
+      </header>
+
+      <!-- Sélecteur d'onglets compact -->
+      <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 12px;">
+        <button onclick="changerOngletNEO('familles')" id="btn-neo-familles" style="padding: 6px 14px; border-radius: 6px; border: none; background: #2563eb; color: #fff; font-weight: 600; cursor: pointer; font-size: 0.8rem;">1. Familles orbitales & Schéma</button>
+        <button onclick="changerOngletNEO('pha')" id="btn-neo-pha" style="padding: 6px 14px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.8rem;">2. Astéroïdes potentiellement dangereux (PHA)</button>
+        <button onclick="changerOngletNEO('defense')" id="btn-neo-defense" style="padding: 6px 14px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.8rem;">3. Surveillance & Défense planétaire</button>
+      </div>
+
+      <!-- ONGLET 1 : FAMILLES ORBITALES ET SCHÉMA VECTORIEL -->
+      <div id="onglet-neo-familles">
+        <div style="background: #070d19; border: 1px solid #1e293b; border-radius: 6px; padding: 8px; margin-bottom: 10px; overflow-x: auto;">
+          <svg viewBox="0 0 920 230" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; min-width: 700px; display: block;">
+            <defs>
+              <radialGradient id="gradSoleilNEO" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="40%" stop-color="#fef08a"/>
+                <stop offset="100%" stop-color="#eab308" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+
+            <text x="460" y="16" text-anchor="middle" fill="#94a3b8" font-size="11" letter-spacing="1">CLASSIFICATION ORBITALE DES GÉOCROISEURS (ATENS, APOLLONS, AMORS)</text>
+
+            <g transform="translate(460, 125)">
+              <circle cx="0" cy="0" r="75" fill="none" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4,4"/>
+              <circle cx="0" cy="-75" r="5" fill="#38bdf8"/>
+              <text x="0" y="-85" text-anchor="middle" fill="#38bdf8" font-size="8.5" font-weight="bold">Orbite de la Terre (1,0 UA)</text>
+
+              <!-- Soleil au centre -->
+              <circle cx="0" cy="0" r="18" fill="url(#gradSoleilNEO)"/>
+              <circle cx="0" cy="0" r="6" fill="#ffffff"/>
+
+              <!-- 1. Orbite d'un Amor -->
+              <ellipse cx="25" cy="0" rx="105" ry="50" fill="none" stroke="#fbbf24" stroke-width="1.5" transform="rotate(-15)"/>
+              <text x="110" y="-45" fill="#fbbf24" font-size="8" font-weight="bold">Amors (périhélie q > 1,0 UA)</text>
+
+              <!-- 2. Orbite d'un Apollon -->
+              <ellipse cx="-15" cy="0" rx="115" ry="42" fill="none" stroke="#f87171" stroke-width="1.5" transform="rotate(25)"/>
+              <text x="-120" y="40" fill="#f87171" font-size="8" font-weight="bold">Apollons (demi-grand axe a > 1,0 UA, q < 1,017 UA)</text>
+
+              <!-- 3. Orbite d'un Aten -->
+              <ellipse cx="-20" cy="0" rx="65" ry="32" fill="none" stroke="#a78bfa" stroke-width="1.5" transform="rotate(-40)"/>
+              <text x="-65" y="-35" fill="#a78bfa" font-size="8" font-weight="bold">Atens (demi-grand axe a < 1,0 UA, aphélie Q > 0,983 UA)</text>
+            </g>
+          </svg>
+        </div>
+
+        <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px; overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: left; color: #ffffff;">
+            <thead>
+              <tr style="border-bottom: 1.5px solid #64748b; font-weight: bold;">
+                <th style="padding: 6px;">Famille orbitale</th>
+                <th style="padding: 6px;">Définition géométrique</th>
+                <th style="padding: 6px;">Comportement dynamique</th>
+                <th style="padding: 6px;">Exemples notoires</th>
+              </tr>
+            </thead>
+            <tbody style="line-height: 1.45;">
+              <tr style="border-bottom: 1px solid #334155;">
+                <td style="padding: 6px; color: #f87171; font-weight: bold;">Apollons</td>
+                <td style="padding: 6px;">Demi-grand axe a ≥ 1,0 UA et périhélie q ≤ 1,017 UA</td>
+                <td style="padding: 6px;">Leurs orbites croisent celle de la Terre en y passant la majeure partie du temps à l'extérieur.</td>
+                <td style="padding: 6px;">(1862) Apollo, (65803) Didymos</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #334155;">
+                <td style="padding: 6px; color: #a78bfa; font-weight: bold;">Atens</td>
+                <td style="padding: 6px;">Demi-grand axe a &lt; 1,0 UA et aphélie Q ≥ 0,983 UA</td>
+                <td style="padding: 6px;">Passent l'essentiel de leur temps à l'intérieur de l'orbite terrestre tout en croisant l'écliptique.</td>
+                <td style="padding: 6px;">(2062) Aten, (99942) Apophis</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #334155;">
+                <td style="padding: 6px; color: #fbbf24; font-weight: bold;">Amors</td>
+                <td style="padding: 6px;">Périhélie 1,017 UA &lt; q ≤ 1,3 UA</td>
+                <td style="padding: 6px;">Évoluent entre la Terre et Mars sans croiser directement l'orbite terrestre (mais s'en approchent).</td>
+                <td style="padding: 6px;">(433) Éros, (1221) Amor</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px; color: #38bdf8; font-weight: bold;">Atiras (Iras)</td>
+                <td style="padding: 6px;">Aphélie Q &lt; 1,0 UA</td>
+                <td style="padding: 6px;">Entièrement intérieurs à l'orbite terrestre (ne croisent jamais la Terre).</td>
+                <td style="padding: 6px;">(163693) Atira</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ONGLET 2 : PHA -->
+      <div id="onglet-neo-pha" style="display: none;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px;">
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px;">
+            <div style="color: #ef4444; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Critères des PHA (<em>Potentially Hazardous Asteroids</em>)</div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; margin-bottom: 6px; line-height: 1.4;">
+              Un objet géocroiseur est classé comme PHA s'il remplit deux conditions géométriques strictes :
+            </p>
+            <ul style="font-size: 0.74rem; color: #94a3b8; padding-left: 16px; line-height: 1.45;">
+              <li><strong>Distance d'intersection orbitale minimale (MOID) :</strong> inférieure à 0,05 UA (environ 7,5 millions de km, soit 19,5 distances lunaires).</li>
+              <li><strong>Magnitude absolue (H) :</strong> inférieure ou égale à 22,0, ce qui correspond statistiquement à un diamètre supérieur à environ <strong>140 mètres</strong>.</li>
+            </ul>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px;">
+            <div style="color: #facc15; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Échelles d'évaluation des risques d'impact</div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; margin-bottom: 6px; line-height: 1.4;">
+              Pour classifier la dangerosité des trajectoires calculées, les astronomes utilisent deux échelles de référence :
+            </p>
+            <ul style="font-size: 0.74rem; color: #94a3b8; padding-left: 16px; line-height: 1.45;">
+              <li><strong>Échelle de Turin (0 à 10) :</strong> destinée au grand public, basée sur la probabilité mathématique et l'énergie cinétique destructrice (0 = risque nul ; 10 = collision planétaire assurée).</li>
+              <li><strong>Échelle de Palerme :</strong> échelle logarithmique continue réservée aux spécialistes pour comparer le danger d'un impact futur au risque de fond annuel moyen.</li>
+            </ul>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px; grid-column: 1 / -1;">
+            <div style="color: #fb923c; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Énergies d'impact et effets destructeurs selon la taille</div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; line-height: 1.45;">
+              Les petits astéroïdes (diamètre inférieur à 25 m) se désintègrent généralement dans la haute atmosphère (type météore de Tcheliabinsk en 2013). Entre 50 et 140 m, un impact détruit une zone de l'échelle d'une métropole (type Toungouska en 1908). Au-delà de 1 km de diamètre, l'impact libérerait des millions de mégatonnes d'énergie, injectant des suies et poussières stratosphériques capables d'altérer le climat global et de provoquer une extinction de masse (comme l'impact de Chicxulub il y a 66 millions d'années).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ONGLET 3 : DÉFENSE PLANÉTAIRE -->
+      <div id="onglet-neo-defense" style="display: none;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px;">
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px;">
+            <div style="color: #38bdf8; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Programmes de veille (NASA & ESA)</div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; line-height: 1.45;">
+              Des télescopes automatisés (Pan-STARRS, ATLAS, Catalina Sky Survey) scannent le ciel nocturne en continu pour détecter les géocroiseurs par astrométrie. Plus de 35 000 NEO ont été recensés, dont plus de 95 % des géants de plus de 1 km. Les observatoires spatiaux infrarouges (comme la mission <em>NEO Surveyor</em>) permettront de repérer les astéroïdes sombres venant de la direction du Soleil.
+            </p>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px;">
+            <div style="color: #4ade80; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">La mission DART : Déviation cinétique réussie</div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; line-height: 1.45;">
+              Le 26 septembre 2022, la sonde <strong>DART</strong> de la NASA a percuté à 6,1 km/s la lunelette <em>Dimorphos</em> (en orbite autour de Didymos). Cet impact cinétique a raccourci sa période orbitale de 33 minutes (dépassant largement les 73 secondes prévues), validant pour la première fois la déviation d'un astéroïde par impacteur cinétique.
+            </p>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px; grid-column: 1 / -1;">
+            <div style="color: #facc15; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Alternatives stratégiques pour les menaces futures</div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; line-height: 1.45;">
+              Pour un corps massif détecté plusieurs décennies à l'avance, d'autres concepts sont étudiés : le <strong>tracteur gravitationnel</strong> (un vaisseau massif dont l'attraction mutuelle dévie lentement la trajectoire de l'astéroïde sans contact) ou l'explosion nucléaire à distance pour vaporiser la surface d'un corps menaçant et induire une poussée par recul.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TEXTE INTRODUCTIF ASTÉROÏDES -->
+    <div class="prose-block">
+      <p>
+        Parmi la grande population des objets du voisinage terrestre, les astéroïdes géocroiseurs, souvent désignés sous le sigle NEA (<em>Near-Earth Asteroids</em>), représentent de très loin le groupe le plus vaste et le mieux répertorié. Véritables reliques de l'aube du Système solaire, ces blocs de roche, de métal et de poussière n'ont pas réussi à s'agglomérer pour former des planètes il y a plus de 4,5 milliards d'années. Longtemps confinés dans la ceinture principale située entre Mars et Jupiter, nombre d'entre eux ont vu leur trajectoire déviée au fil des éons par de subtiles résonances gravitationnelles ou sous l'effet du rayonnement solaire, se retrouvant propulsés sur des orbites qui croisent ou frôlent désormais celle de notre planète.
+      </p>
+      <p>
+        Loin d'être de simples rochers uniformes, ces corps célestes dévoilent une diversité surprenante de compositions et de structures physiques. Certains sont des fragments métalliques ou silicatés massifs et denses, tandis que beaucoup d'autres se révèlent être des « tas de gravats » poreux et fragiles, maintenus ensemble par une infime force de gravitation. Pour mieux appréhender leur dynamique orbitale et évaluer d'éventuels risques à long terme, les astronomes les classent en plusieurs grands sous-groupes selon la manière dont leurs chemins côtoient celui de la Terre. Ces fragments d'histoire planétaire constituent aujourd'hui des cibles prioritaires pour l'exploration spatiale, offrant à la fois des clés majeures sur nos origines cosmiques et un terrain d'expérimentation essentiel pour les technologies de défense planétaire.
+      </p>
+    </div>
+
+    <!-- SOUS-FAMILLE 1 : AMOR -->
+    <h3 class="subsection-title">Famille Amor</h3>
+    <div class="prose-block">
+      <p>
+        Ces astéroïdes évoluent sur des orbites extérieures à celle de notre planète sans jamais la couper directement, s’approchant toutefois de très près de la trajectoire terrestre.
+      </p>
+    </div>
+
+    <!-- ÉROS -->
+    <div class="object-showcase">
+      <div class="object-showcase-title">
+        <span>433 Éros</span>
+        <span class="object-tag">Famille Amor • Type S</span>
+      </div>
+      <div class="zoomable-img-wrap" onclick="ouvrirZoomDirect('https://lh3.googleusercontent.com/d/1f9A_yeNnI09dxqGesOAXRmsBxNVSI8h4')">
+        <img src="https://lh3.googleusercontent.com/d/1f9A_yeNnI09dxqGesOAXRmsBxNVSI8h4" alt="433 Éros — Mission NEAR Shoemaker">
+        <div class="zoom-hint-tag"><span class="zoom-pulse"></span><span>Agrandir ⤢</span></div>
+      </div>
+      <div class="prose-block">
+        <p>
+          433 Éros est le premier astéroïde géocroiseur jamais découvert (en 1898 par Carl Gustav Witt et Auguste Charlois) et demeure le plus grand représentant connu de la famille des Amor. Avec ses dimensions d'environ 34 × 11 × 11 kilomètres et sa silhouette allongée évoquant une cacahuète ou une banane, il dépasse de loin la taille de la grande majorité des autres géocroiseurs répertoriés.
+        </p>
+        <p>
+          Sur le plan géologique, Éros est un astéroïde de type S (silicaté), composé principalement de pyroxènes, d'olivine et de métaux fer-nickel. Sa surface est marquée par de multiples cratères d'impact, de vastes dépressions et une épaisse couche de régolithe jonchée de blocs rocheux, témoignant d'une longue histoire de collisions au sein du Système solaire.
+        </p>
+        <p>
+          Éros occupe également une place historique majeure dans l'exploration spatiale : en février 2000, il est devenu le premier astéroïde à être mis en orbite par une sonde spatiale humaine, la mission américaine NEAR Shoemaker de la NASA. Après une année complète de cartographie détaillée, de mesures magnétiques et d'analyses minéralogiques depuis l'orbite, la sonde s'est posée en douceur à sa surface le 12 février 2001, transmettant des données scientifiques inédites jusqu'à son extinction.
+        </p>
+      </div>
+    </div>
+
+    <!-- 1999 JM8 -->
+    <div class="object-showcase">
+      <div class="object-showcase-title">
+        <span>53319 (1999 JM8)</span>
+        <span class="object-tag">PHA • Imagerie Radar Arecibo</span>
+      </div>
+      <div class="zoomable-img-wrap" onclick="ouvrirZoomDirect('https://lh3.googleusercontent.com/d/1L_oxnub-atoSwscYmvBVsWEye-re2OHx')">
+        <img src="https://lh3.googleusercontent.com/d/1L_oxnub-atoSwscYmvBVsWEye-re2OHx" alt="53319 (1999 JM8) — Modèle Radar Arecibo / Goldstone">
+        <div class="zoom-hint-tag"><span class="zoom-pulse"></span><span>Agrandir ⤢</span></div>
+      </div>
+      <div class="prose-block">
+        <p>
+          53319 (1999 JM8) est un astéroïde géocroiseur massif découvert en mai 1999 par le programme LINEAR. Avec un diamètre estimé à environ 7 kilomètres, il figure parmi les plus grands objets potentiellement dangereux (PHA) répertoriés, son orbite très allongée l'amenant à croiser celle de la Terre (périhélie à environ 0,98 UA, ce qui le classe techniquement parmi les Apollon les plus volumineux, bien qu'il ait longtemps été approché comme un cas limite).
+        </p>
+        <p>
+          Sur le plan physique, l'objet se distingue par une surface particulièrement sombre, affichant un albédo extrêmement faible (environ 2 à 3 %) caractéristique des astéroïdes carbonés de type C ou X. Autre singularité marquante : sa rotation est extraordinairement lente et désordonnée. Il met près de six jours (environ 136 à 144 heures) pour effectuer un tour sur lui-même, en basculant dans l'espace selon un mouvement de toupie chaotique (tumbling), un comportement très similaire à celui de Toutatis.
+        </p>
+        <p>
+          Bien qu'aucune sonde spatiale ne l'ait visité, 1999 JM8 est célèbre dans la communauté astronomique grâce aux campagnes d'imagerie radar menées en 1999 par les radiotélescopes d'Arecibo et de Goldstone. Ces observations par écho radar, d'une résolution exceptionnelle de 15 mètres par pixel, ont permis de reconstituer fidèlement sa forme patatoïde, parsemée de cratères d'impact majeurs et de profondes dépressions, offrant ainsi les animations en niveaux de gris très reconnaissables qui illustrent souvent cet astéroïde.
+        </p>
+      </div>
+    </div>
+
+    <!-- SOUS-FAMILLE 2 : APOLLON -->
+    <h3 class="subsection-title">Famille Apollon</h3>
+    <div class="prose-block">
+      <p>
+        Ces corps célestes croisent effectivement l'orbite de la Terre tout en passant la majeure partie de leur périple plus loin du Soleil que notre planète.
+      </p>
+    </div>
+
+    <!-- TOUTATIS -->
+    <div class="object-showcase">
+      <div class="object-showcase-title">
+        <span>4179 Toutatis</span>
+        <span class="object-tag">Famille Apollon • Corps Binaire de Contact</span>
+      </div>
+      <div class="zoomable-img-wrap" onclick="ouvrirZoomDirect('https://lh3.googleusercontent.com/d/1I9mOISLbO8DgevgRNrrw4z7_PWyRzyIW')">
+        <img src="https://lh3.googleusercontent.com/d/1I9mOISLbO8DgevgRNrrw4z7_PWyRzyIW" alt="4179 Toutatis — Survol Chang'e 2">
+        <div class="zoom-hint-tag"><span class="zoom-pulse"></span><span>Agrandir ⤢</span></div>
+      </div>
+      <div class="prose-block">
+        <p>
+          4179 Toutatis est l'un des astéroïdes géocroiseurs les plus emblématiques de la famille des Apollon, découvert en 1989 par l'astronome français Christian Pollas. Présentant une orbite en résonance quasi-parfaite avec celle de Jupiter (3:1) et proche de celle de la Terre (1:4), il effectue des passages périodiques relativement rapprochés de notre planète, ce qui en a fait une cible privilégiée pour l'évaluation des risques d'impact.
+        </p>
+        <p>
+          D'une longueur totale avoisinant 4,5 kilomètres, Toutatis présente une morphologie très atypique de corps binaire de contact, ressemblant à deux lobes rocheux inégaux collés l'un à l'autre. Il est également célèbre pour sa cinématique complexe : il ne tourne pas autour d'un axe fixe, mais présente une rotation chaotique en culbute continue (tumbling), combinant une période de précession d'environ 7,3 jours et une rotation propre d'environ 5,4 jours. Sa surface rocheuse et silicatée (type S) est couverte de failles, de blocs d'impact et de cratères profonds.
+        </p>
+        <p>
+          Toutatis a bénéficié d'une double observation historique. Longtemps scruté par les radars terrestres d'Arecibo et de Goldstone lors de son passage record à moins de 1,5 million de kilomètres en 2004, il a ensuite été survolé à très grande vitesse le 13 décembre 2012 par la sonde spatiale chinoise Chang'e 2. Passant à seulement 3,2 kilomètres de sa surface, la sonde a capturé des clichés optiques d'une netteté exceptionnelle, révélant ses arêtes vives et confirmant sa structure bilobée.
+        </p>
+      </div>
+    </div>
+
+    <!-- CASTALIE -->
+    <div class="object-showcase">
+      <div class="object-showcase-title">
+        <span>4769 Castalie</span>
+        <span class="object-tag">Famille Apollon • Modèle 3D Arecibo</span>
+      </div>
+      <div class="zoomable-img-wrap" onclick="ouvrirZoomDirect('https://lh3.googleusercontent.com/d/1-ZSXHXnWpeV54Y2IErqYoyTDA-BZfA6_')">
+        <img src="https://lh3.googleusercontent.com/d/1-ZSXHXnWpeV54Y2IErqYoyTDA-BZfA6_" alt="4769 Castalie — Modèle Radar Steven Ostro">
+        <div class="zoom-hint-tag"><span class="zoom-pulse"></span><span>Agrandir ⤢</span></div>
+      </div>
+      <div class="prose-block">
+        <p>
+          4769 Castalie (désigné provisoirement 1989 PB) est un astéroïde géocroiseur de la famille des Apollon, découvert le 9 août 1989 par l'astronome américaine Eleanor Helin depuis l'observatoire du mont Palomar. Quelques jours seulement après sa détection, l'objet a croisé l'orbite de la Terre à une distance d'environ 4 millions de kilomètres (environ onze fois la distance Terre-Lune), offrant une opportunité idéale pour une étude immédiate.
+        </p>
+        <p>
+          D'une dimension maximale d'environ 1,8 kilomètre, Castalie présente une morphologie de corps binaire de contact très marquée. Il se compose de deux lobes distincts d'environ 800 mètres de large chacun, reliés par un isthme étroit. Cet assemblage témoigne probablement de la collision douce et de la fusion de deux corps distincts à l'aube du Système solaire, maintenus ensemble par leur très faible gravité mutuelle.
+        </p>
+        <p>
+          Castalie occupe une place charnière dans l'histoire de l'astronomie : il a été le tout premier astéroïde modélisé en trois dimensions grâce au radar. Observé lors de son passage de 1989 par le radiotélescope d'Arecibo sous la direction de Steven J. Ostro, l'analyse des échos radar a permis de reconstituer son volume bilobé et sa période de rotation (environ quatre heures), ouvrant la voie à une nouvelle ère de caractérisation géométrique des géocroiseurs depuis la Terre.
+        </p>
+      </div>
+    </div>
+
+    <!-- ITOKAWA -->
+    <div class="object-showcase">
+      <div class="object-showcase-title">
+        <span>25143 Itokawa</span>
+        <span class="object-tag">Famille Apollon • Agrégat de Débris • Hayabusa</span>
+      </div>
+      <div class="zoomable-img-wrap" onclick="ouvrirZoomDirect('https://lh3.googleusercontent.com/d/1DYrqwkqEr3Q4Gr9W5iQd5t7_Uqiap4oy')">
+        <img src="https://lh3.googleusercontent.com/d/1DYrqwkqEr3Q4Gr9W5iQd5t7_Uqiap4oy" alt="25143 Itokawa — Sonde Hayabusa (JAXA)">
+        <div class="zoom-hint-tag"><span class="zoom-pulse"></span><span>Agrandir ⤢</span></div>
+      </div>
+      <div class="prose-block">
+        <p>
+          25143 Itokawa est un astéroïde géocroiseur de la famille des Apollon, découvert en 1998 par le programme LINEAR. Nommé en hommage à Hideo Itokawa, père du programme spatial japonais, ce petit corps céleste mesure environ 535 × 294 × 209 mètres et présente une silhouette allongée en forme de loutre ou de cacahuète.
+        </p>
+        <p>
+          Sur le plan géologique, Itokawa est un astéroïde silicaté de type S dont l'étude a bouleversé la planétologie. Les observations ont révélé qu'il ne s'agit pas d'un bloc monolithique solide, mais d'un véritable agrégat de débris (<em>rubble pile</em>). Sa densité globale très faible (environ 1,9 g/cm³) et sa porosité estimée à près de 40 % montrent qu'il est constitué de deux lobes majeurs fragmentés, réassemblés sous l'effet d'une infime gravité mutuelle. Sa surface est parsemée de rochers anguleux et de plaines de gravier fin dépourvues de cratères d'impact marqués.
+        </p>
+        <p>
+          Itokawa est entré dans l'histoire de la conquête spatiale grâce à la mission japonaise Hayabusa de la JAXA. Arrivée à sa proximité en 2005, la sonde a réalisé une cartographie détaillée avant de se poser brièvement à sa surface pour collecter des particules. Malgré d'importantes avaries techniques sur le trajet retour, la capsule a atterri avec succès sur Terre en juin 2010, fournissant les tout premiers échantillons de matière prélevés directement sur un astéroïde, confirmant le lien de parenté direct entre les astéroïdes de type S et les météorites appelées chondrites ordinaires.
+        </p>
+      </div>
+    </div>
+
+    <!-- DIDYMOS -->
+    <div class="object-showcase">
+      <div class="object-showcase-title">
+        <span>65803 Didymos & Dimorphos</span>
+        <span class="object-tag">Système Binaire • Cible DART & Hera</span>
+      </div>
+      <div class="zoomable-img-wrap" onclick="ouvrirZoomDirect('https://lh3.googleusercontent.com/d/1kowmEn0wqAZupXGpmMviNSo3US7kbuX_')">
+        <img src="https://lh3.googleusercontent.com/d/1kowmEn0wqAZupXGpmMviNSo3US7kbuX_" alt="65803 Didymos et sa lune Dimorphos — NASA / DART">
+        <div class="zoom-hint-tag"><span class="zoom-pulse"></span><span>Agrandir ⤢</span></div>
+      </div>
+      <div class="prose-block">
+        <p>
+          65803 Didymos est un astéroïde géocroiseur de la famille des Apollon, découvert en 1996 par Joe Montani dans le cadre du programme Spacewatch. Son nom, qui signifie « jumeau » en grec, a été choisi après la découverte en 2003 de sa nature binaire : Didymos est en réalité un système double composé d'un corps primaire d'environ 780 mètres de diamètre et d'une petite lune naturelle de 160 mètres baptisée Dimorphos, en orbite à environ 1,2 kilomètre de distance.
+        </p>
+        <p>
+          Sur le plan géophysique, Didymos est un astéroïde silicaté de type S en rotation très rapide sur lui-même (un tour en 2,26 heures seulement), ce qui lui confère une forme aplatie de toupie (« flak ») à crête équatoriale prononcée. Cette rotation frôle la limite de rupture mécanique, ce qui a probablement éjecté dans l'espace les matériaux rocheux ayant ensuite coalescé pour former son petit compagnon Dimorphos, lui-même constitué d'un amas de débris très poreux.
+        </p>
+        <p>
+          Le couple Didymos-Dimorphos est entré dans l'histoire en devenant le théâtre du tout premier test de défense planétaire de l'humanité. Le 26 septembre 2022, la sonde américaine DART de la NASA a percuté de plein fouet Dimorphos à plus de 22 000 km/h, prouvant avec succès qu'un impact cinétique pouvait modifier l'orbite d'un corps céleste (la période orbitale de Dimorphos a été réduite de 33 minutes). Pour compléter cette expérience inédite, l'Agence spatiale européenne (ESA) a dépêché la mission Hera, lancée en 2024 pour cartographier en détail le cratère d'impact, mesurer la masse précise des deux corps et analyser les déformations subies par le système.
+        </p>
+      </div>
+    </div>
+
+    <!-- BENNU -->
+    <div class="object-showcase">
+      <div class="object-showcase-title">
+        <span>101955 Bennu</span>
+        <span class="object-tag">Famille Apollon • Type B • Mission OSIRIS-REx</span>
+      </div>
+      <div class="zoomable-img-wrap" onclick="ouvrirZoomDirect('https://lh3.googleusercontent.com/d/11h6XeCYqr2VSTn1EONZi6WavD6GwPrgV')">
+        <img src="https://lh3.googleusercontent.com/d/11h6XeCYqr2VSTn1EONZi6WavD6GwPrgV" alt="101955 Bennu — Sonde OSIRIS-REx (NASA)">
+        <div class="zoom-hint-tag"><span class="zoom-pulse"></span><span>Agrandir ⤢</span></div>
+      </div>
+      <div class="prose-block">
+        <p>
+          101955 Bennu (initialement désigné 1999 RQ36) est un astéroïde géocroiseur de la famille des Apollon, découvert en septembre 1999 par le programme LINEAR. Avec un diamètre moyen d'environ 490 mètres et une forme caractéristique de toupie (« flak ») dotée d'un bourrelet équatorial marqué, il figure parmi les objets les plus surveillés du Système solaire en raison d'une probabilité d'impact non négligeable avec la Terre vers la fin du XXIIe siècle (notamment en 2182).
+        </p>
+        <p>
+          Sur le plan géologique, Bennu est un astéroïde carboné primitif de type B. Les observations ont révélé qu'il s'agit d'un agrégat de débris (<em>rubble pile</em>) d'une porosité remarquable (supérieure à 50 %), constitué de blocs rocheux peu cohésifs assemblés après la dislocation d'un astéroïde parent bien plus vaste. Sa surface, extrêmement sombre et accidentée, est riche en minéraux hydratés (argiles) et en matière organique complexe. Lors de l'approche de la sonde, les caméras ont même surpris un phénomène rare : l'éjection spontanée de petites particules de roche dans l'espace, faisant de Bennu un astéroïde actif.
+        </p>
+        <p>
+          Bennu a été la cible phare de la mission américaine OSIRIS-REx de la NASA. Après une insertion orbitale en 2018 et une cartographie millimétrique, la sonde s'est brièvement posée sur le site Nightingale le 20 octobre 2020 pour collecter des matériaux de surface. La capsule de retour a atterri sur Terre le 24 septembre 2023, rapportant environ 121,6 grammes d'échantillons pristins. Les premières analyses de ces fragments ont confirmé la présence abondante d'eau piégée dans les minéraux et de molécules carbonées prébiotiques, renforçant l'hypothèse d'un ensemencement précoce de la Terre primitive par des corps similaires.
+        </p>
+      </div>
+    </div>
+
+    <!-- RYUGU -->
+    <div class="object-showcase">
+      <div class="object-showcase-title">
+        <span>162173 Ryugu</span>
+        <span class="object-tag">Famille Apollon • Type Cb • Hayabusa2</span>
+      </div>
+      <div class="zoomable-img-wrap" onclick="ouvrirZoomDirect('https://lh3.googleusercontent.com/d/1fx_kulndhmYGWXfyBHofTVe__HKeAcbu')">
+        <img src="https://lh3.googleusercontent.com/d/1fx_kulndhmYGWXfyBHofTVe__HKeAcbu" alt="162173 Ryugu — Sonde Hayabusa2 (JAXA)">
+        <div class="zoom-hint-tag"><span class="zoom-pulse"></span><span>Agrandir ⤢</span></div>
+      </div>
+      <div class="prose-block">
+        <p>
+          162173 Ryugu (désigné provisoirement 1999 JU3) est un astéroïde géocroiseur de la famille des Apollon, découvert en mai 1999 par le programme LINEAR. Mesurant environ 900 mètres de diamètre moyen, il arbore une silhouette caractéristique en toupie (<em>spinning top</em>) marquée par un renflement équatorial très net, résultat d'une phase de rotation rapide au cours de son histoire.
+        </p>
+        <p>
+          Sur le plan géologique, Ryugu est un astéroïde carboné primitif de type C (plus précisément sous-type Cb). À l'instar de Bennu, il s'agit d'un agrégat de débris (<em>rubble pile</em>) particulièrement poreux et fragile, né de la dislocation et du réassemblage des fragments d'un corps parent détruit par un impact cataclysmique il y a plusieurs milliards d'années. Sa surface, d'un noir d'encre (albédo d'environ 4 %), est tapissée d'innombrables blocs rocheux anguleux de tailles variées, sans aucune étendue plane notable de régolithe fin.
+        </p>
+        <p>
+          Ryugu a été exploré en profondeur par la mission spatiale japonaise Hayabusa2 de la JAXA entre 2018 et 2019. L'engin a déployé plusieurs petits atterrisseurs (dont le rover franco-allemand MASCOT), tiré un projectile pour créer un cratère artificiel et prélevé de la matière à deux reprises, en surface et en sous-sol. La capsule d'échantillons est revenue sur Terre en décembre 2020 avec plus de 5,4 grammes de matériau intact. L'analyse de ces fragments a révélé une composition proche des chondrites carbonées de type CI, exceptionnellement riche en minéraux hydratés, en acides aminés et en bases azotées (dont l'uracile), fournissant des indices majeurs sur l'origine des molécules prébiotiques à l'aube de la Terre.
+        </p>
+      </div>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- SECTION 2 : LES COMÈTES GÉOCROISEUSES                            -->
+    <!-- ================================================================= -->
+    <h2 class="section-main-title">Les Comètes Géocroiseurs</h2>
+
+    <!-- INFOGRAPHIE INTERACTIVE 2 : COMÈTES GÉOCROISEUSES -->
+    <div class="box2-frame">
+      <div class="box2-header">
+        <div class="box2-dot"></div>
+        <div class="box2-title">En profondeur... Les Comètes Géocroiseuses (NEC)</div>
+      </div>
+
+      <div class="box2-tabs-nav">
+        <button class="box2-tab-btn active" onclick="switchCometTab(event, 'tab2-orbites')">Orbites & Trajectoires</button>
+        <button class="box2-tab-btn" onclick="switchCometTab(event, 'tab2-structure')">Physico-chimie & Dégazage</button>
+        <button class="box2-tab-btn" onclick="switchCometTab(event, 'tab2-menace')">Impact & Surveillance</button>
+      </div>
+
+      <div class="box2-body">
+        <!-- ONGLET 1 -->
+        <div id="tab2-orbites" class="box2-pane active">
+          <div class="box2-lead">
+            Les comètes géocroiseuses, ou NEC (<em>Near-Earth Comets</em>), sont des corps glacés venus des confins du Système solaire dont les trajectoires elliptiques extrêmes croisent la sphère orbitale de la Terre à moins de 1,3 unité astronomique du Soleil.
+          </div>
+
+          <strong class="box2-sectitle">La déstabilisation gravitationnelle des réservoirs lointains</strong>
+          <p class="box2-p">
+            Les comètes proviennent de deux grands refuges primordiaux : la ceinture de Kuiper, au-delà de Neptune, et le gigantesque nuage d'Oort aux frontières de l'héliosphère. Sous l'effet des marées galactiques ou du passage d'une étoile voisine, ces blocs de glaces sales quittent leurs orbites quasi circulaires pour plonger vers le cœur du Système solaire.
+          </p>
+          <p class="box2-p">
+            En s'approchant des planètes géantes comme Jupiter ou Saturne, les corps subissent de violentes frondes gravitationnelles. Ces perturbations orbitales réduisent leur période de révolution ou accentuent leur inclinaison, les injectant directement sur des orbites sécantes à celle de la Terre.
+          </p>
+
+          <div class="box2-diagram">
+            <span class="box2-diag-head">Schéma 1 — Familles orbitales de comètes géocroiseuses</span>
+            <div class="box2-flow">
+              <div class="box2-card" style="border-top: 2px solid #3b82f6;">
+                <div class="box2-card-name">Famille de Jupiter (JFC)</div>
+                <div class="box2-card-desc">Période &lt; 20 ans</div>
+                <div class="box2-card-temp">q ≤ 1,3 UA, faible inclinaison</div>
+              </div>
+              <div class="box2-card" style="border-top: 2px solid #0d9488;">
+                <div class="box2-card-name">Type Halley (HTC)</div>
+                <div class="box2-card-desc">20 ans &lt; P &lt; 200 ans</div>
+                <div class="box2-card-temp">Orbites très inclinées ou rétrogrades</div>
+              </div>
+              <div class="box2-card" style="border-top: 2px solid #ef4444;">
+                <div class="box2-card-name">Longue période (LPC)</div>
+                <div class="box2-card-desc">Période &gt; 200 ans à l'infini</div>
+                <div class="box2-card-temp">Nuage d'Oort, plongée parabolique</div>
+              </div>
+            </div>
+          </div>
+
+          <strong class="box2-sectitle">Le critère géométrique de la MOID</strong>
+          <p class="box2-p">
+            Pour quantifier le danger de rapprochement, les astronomes utilisent la distance minimale d'intersection orbitale, notée MOID (<em>Minimum Orbit Intersection Distance</em>). Elle mesure la distance spatiale la plus courte reliant l'ellipse de la comète à celle de la Terre, indépendamment de la position instantanée des deux corps sur leurs parcours respectifs.
+          </p>
+          <p class="box2-p">
+            Si la MOID est inférieure à 0,05 unité astronomique (environ 7,5 millions de kilomètres) et que le diamètre du noyau dépasse quelques dizaines de mètres, l'objet est classé parmi les comètes potentiellement dangereuses. Même lorsque le noyau reste à distance respectueuse, la Terre traverse régulièrement le sillage de poussières abandonné sur l'orbite, donnant naissance aux essaims annuels d'étoiles filantes.
+          </p>
+
+          <div class="box2-diagram">
+            <span class="box2-diag-head">Schéma 2 — Paramètres de détection orbitale</span>
+            <div class="box2-swatches">
+              <div class="box2-swatch"><span class="box2-dot-col" style="background:#38bdf8;"></span><span class="box2-swatch-lbl">Périhélie (q ≤ 1,3 UA)</span><span class="box2-swatch-sub">— Seuil de classification géocroiseur</span></div>
+              <div class="box2-swatch"><span class="box2-dot-col" style="background:#f59e0b;"></span><span class="box2-swatch-lbl">Tisserand (T_j)</span><span class="box2-swatch-sub">— Invariant d'interaction jupitérienne (2 &lt; T_j &lt; 3)</span></div>
+              <div class="box2-swatch"><span class="box2-dot-col" style="background:#ef4444;"></span><span class="box2-swatch-lbl">MOID ≤ 0,05 UA</span><span class="box2-swatch-sub">— Proximité critique avec l'orbite terrestre</span></div>
+              <div class="box2-swatch"><span class="box2-dot-col" style="background:#10b981;"></span><span class="box2-swatch-lbl">Traînée météoritique</span><span class="box2-swatch-sub">— Ruban de météoroïdes traversé par la Terre</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ONGLET 2 -->
+        <div id="tab2-structure" class="box2-pane">
+          <div class="box2-lead">
+            Sous la chaleur du Soleil, ces agglomérats poreux de roches primitives et de glaces s'activent : la sublimation brutale des éléments volatils génère une chevelure lumineuse et libère des forces de propulsion non gravitationnelles.
+          </div>
+
+          <strong class="box2-sectitle">Anatomie d'une boule de neige sale</strong>
+          <p class="box2-p">
+            Le noyau d'une comète est une matrice carbonée très sombre, plus noire que du charbon, emprisonnant des grains silicatés, de la matière organique complexe et des glaces d'eau, de monoxyde et de dioxyde de carbone. Sa structure interne présente une forte porosité globale (souvent supérieure à 70 %), ce qui lui confère une densité très faible, voisine de 0,5 g/cm³.
+          </p>
+          <p class="box2-p">
+            Lorsque la comète franchit la ligne des glaces à l'approche de l'orbite de Mars, le rayonnement solaire réchauffe la croûte minérale. Les glaces enfouies subliment instantanément, passant de l'état solide à l'état gazeux, et percent la surface sous forme de geysers et de jets sous haute pression qui forment la chevelure (coma) et les queues de poussières et d'ions.
+          </p>
+
+          <div class="box2-diagram">
+            <span class="box2-diag-head">Schéma 1 — Composants physiques d'une comète active</span>
+            <div class="box2-flow">
+              <div class="box2-card" style="border-top: 2px solid #334155;">
+                <div class="box2-card-name">Noyau solide</div>
+                <div class="box2-card-desc">1 à 50 km de diamètre</div>
+                <div class="box2-card-temp">Glaces + poussières carbonées</div>
+              </div>
+              <div class="box2-card" style="border-top: 2px solid #38bdf8;">
+                <div class="box2-card-name">Coma (chevelure)</div>
+                <div class="box2-card-desc">Halo de gaz et poussières</div>
+                <div class="box2-card-temp">Jusqu'à 100 000 km</div>
+              </div>
+              <div class="box2-card" style="border-top: 2px solid #cbd5e1;">
+                <div class="box2-card-name">Queue de poussière</div>
+                <div class="box2-card-desc">Incurvée par radiation solaire</div>
+                <div class="box2-card-temp">Grains silicatés micrométriques</div>
+              </div>
+              <div class="box2-card" style="border-top: 2px solid #3b82f6;">
+                <div class="box2-card-name">Queue ionique</div>
+                <div class="box2-card-desc">Rectiligne (vent solaire)</div>
+                <div class="box2-card-temp">Plasma CO+, H2O+, N2+</div>
+              </div>
+            </div>
+          </div>
+
+          <strong class="box2-sectitle">Forces non gravitationnelles et comètes dormantes</strong>
+          <p class="box2-p">
+            L'éjection asymétrique des jets de gaz agit exactement comme les tuyères d'un moteur-fusée. Cette poussée thermique dévie continuellement la comète de l'orbite keplérienne calculée par la gravitation pure : ce sont les forces non gravitationnelles d'effet Yarkovsky-O'Keefe-Radzievskii-Paddack, rendant les prédictions d'impact à long terme plus complexes que pour de simples astéroïdes rocheux.
+          </p>
+          <p class="box2-p">
+            Après des dizaines de passages au périhélie, une comète finit par épuiser ses glaces de surface. Une gangue étanche de résidus météoritiques réfractaires et de bitumes organiques scelle alors le noyau : la comète devient dormante ou éteinte, prenant l'apparence trompeuse d'un astéroïde carboné de type C ou D tout en conservant parfois un réservoir de glace piégé en profondeur.
+          </p>
+
+          <div class="box2-diagram">
+            <span class="box2-diag-head">Schéma 2 — Évolution géochimique du noyau</span>
+            <div class="box2-swatches">
+              <div class="box2-swatch"><span class="box2-dot-col" style="background:#38bdf8;"></span><span class="box2-swatch-lbl">Glace d'eau (H2O)</span><span class="box2-swatch-sub">— Sublimation active en deçà de 3 UA</span></div>
+              <div class="box2-swatch"><span class="box2-dot-col" style="background:#a855f7;"></span><span class="box2-swatch-lbl">Volatils super-froids (CO, CO2)</span><span class="box2-swatch-sub">— Dégazage dès l'orbite de Jupiter</span></div>
+              <div class="box2-swatch"><span class="box2-dot-col" style="background:#f59e0b;"></span><span class="box2-swatch-lbl">Jets directionnels</span><span class="box2-swatch-sub">— Accélérations parasites non gravitationnelles</span></div>
+              <div class="box2-swatch"><span class="box2-dot-col" style="background:#64748b;"></span><span class="box2-swatch-lbl">Manteau réfractaire</span><span class="box2-swatch-sub">— Extinction progressive et stade astéroïdal</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ONGLET 3 -->
+        <div id="tab2-menace" class="box2-pane">
+          <div class="box2-lead">
+            Bien que moins nombreuses que les astéroïdes parmi les objets géocroiseurs, les comètes représentent une menace spécifique majeure en raison de leurs vitesses d'impact record et de leurs temps de préavis réduits.
+          </div>
+
+          <strong class="box2-sectitle">L'énergie d'impact amplifiée par l'hypervélocité</strong>
+          <p class="box2-p">
+            L'énergie destructrice d'une collision planétaire est proportionnelle au carré de la vitesse relative. Tandis qu'un astéroïde géocroiseur ordinaire percute la Terre à environ 15 à 20 km/s, une comète sur orbite rétrograde peut frapper notre atmosphère à des vitesses colossales pouvant atteindre 70 km/s.
+          </p>
+          <p class="box2-p">
+            À masse égale, une comète de type Halley libère ainsi une énergie cinétique dix à quinze fois supérieure à celle d'un astéroïde typique. De plus, la fragilité structurelle et la porosité de ces blocs provoquent souvent des explosions atmosphériques aériennes de puissance thermonucléaire (phénomènes d'airburst), capables de dévaster des milliers de kilomètres carrés sans laisser de cratère classique.
+          </p>
+
+          <div class="box2-diagram">
+            <span class="box2-diag-head">Schéma 1 — Comparatif énergétique de menace géocroiseuse</span>
+            <div class="box2-flow">
+              <div class="box2-card" style="border-top: 2px solid #3b82f6;">
+                <div class="box2-card-name">Astéroïde moyen (NEA)</div>
+                <div class="box2-card-desc">Vitesse ~17 km/s</div>
+                <div class="box2-card-temp">Énergie cinétique de référence</div>
+              </div>
+              <div class="box2-card" style="border-top: 2px solid #f59e0b;">
+                <div class="box2-card-name">Comète prograde (JFC)</div>
+                <div class="box2-card-desc">Vitesse ~30 à 40 km/s</div>
+                <div class="box2-card-temp">Énergie × 3 à 5</div>
+              </div>
+              <div class="box2-card" style="border-top: 2px solid #ef4444;">
+                <div class="box2-card-name">Comète rétrograde (LPC)</div>
+                <div class="box2-card-desc">Vitesse jusqu'à 72 km/s</div>
+                <div class="box2-card-temp">Énergie × 15 à 20</div>
+              </div>
+            </div>
+          </div>
+
+          <strong class="box2-sectitle">Le défi critique du préavis et de la défense planétaire</strong>
+          <p class="box2-p">
+            Alors que plus de 90 % des astéroïdes géocroiseurs de plus d'un kilomètre sont désormais répertoriés et suivis des décennies à l'avance, les comètes à longue période arrivant du nuage d'Oort échappent aux catalogues. Inactives et invisibles au-delà de l'orbite de Jupiter en raison de leur albédo extrêmement faible, elles ne sont souvent détectées que quelques mois ou semaines avant leur passage au plus près de la Terre.
+          </p>
+          <p class="box2-p">
+            Ce délai infime rend inapplicables les techniques d'impacteur cinétique lent testées avec succès sur des astéroïdes. Les réseaux de télescopes de surveillance automatique et les futures missions d'interception d'alerte rapide constituent aujourd'hui le premier rempart pour identifier ces visiteurs imprévisibles avant qu'ils ne coupent la trajectoire terrestre.
+          </p>
+
+          <div class="box2-diagram">
+            <span class="box2-diag-head">Schéma 2 — Réseau de veille et défense spatiale</span>
+            <div class="box2-swatches">
+              <div class="box2-swatch"><span class="box2-dot-col" style="background:#38bdf8;"></span><span class="box2-swatch-lbl">Sondages automatiques</span><span class="box2-swatch-sub">— ATLAS, Pan-STARRS, Vera Rubin Observatory</span></div>
+              <div class="box2-swatch"><span class="box2-dot-col" style="background:#f59e0b;"></span><span class="box2-swatch-lbl">Télescopes spatiaux IR</span><span class="box2-swatch-sub">— Détection thermique des noyaux sombres sans dégazage</span></div>
+              <div class="box2-swatch"><span class="box2-dot-col" style="background:#a855f7;"></span><span class="box2-swatch-lbl">Comet Interceptor (ESA)</span><span class="box2-swatch-sub">— Sonde en attente au point L2 pour comète vierge</span></div>
+              <div class="box2-swatch"><span class="box2-dot-col" style="background:#ef4444;"></span><span class="box2-swatch-lbl">Délai d'intervention</span><span class="box2-swatch-sub">— Inférieur à 12 mois pour les corps neufs</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="box2-footer">
+        Source : <span>NASA / JPL Center for Near Earth Object Studies & ESA Planetary Defence Office</span>
+      </div>
+    </div>
+
+    <!-- 9P/TEMPEL 1 -->
+    <div class="object-showcase">
+      <div class="object-showcase-title">
+        <span>9P/Tempel (Tempel 1)</span>
+        <span class="object-tag">Comète Périodique (JFC) • Deep Impact & Stardust</span>
+      </div>
+      <div class="zoomable-img-wrap" onclick="ouvrirZoomDirect('https://lh3.googleusercontent.com/d/1iwo3gu9zKH1Vc445ROh6G0uFjn3wOGjU')">
+        <img src="https://lh3.googleusercontent.com/d/1iwo3gu9zKH1Vc445ROh6G0uFjn3wOGjU" alt="Noyau de 9P/Tempel 1 — Mission Deep Impact (NASA)">
+        <div class="zoom-hint-tag"><span class="zoom-pulse"></span><span>Agrandir ⤢</span></div>
+      </div>
+      <div class="prose-block">
+        <p>
+          9P/Tempel (couramment appelée Tempel 1) est une comète périodique de la famille de Jupiter, découverte le 3 avril 1867 par l'astronome allemand Ernst Wilhelm Tempel. Évoluant sur une orbite elliptique d'environ 5,5 ans qui croise le voisinage de l'orbite terrestre, son noyau mesure approximativement 7,6 × 4,9 kilomètres. Sa trajectoire a été modifiée à plusieurs reprises au cours des siècles passés sous l'effet des perturbations gravitationnelles répétées de la planète Jupiter.
+        </p>
+        <p>
+          Sur le plan physique et structural, le noyau de Tempel 1 présente un relief contrasté, alternant des terrains lisses, des falaises abruptes et de vastes dépressions d'origine probablement collisionnelle ou érosive. Comme la plupart des noyaux cométaires, sa surface est très sombre (albédo d'environ 4 %) et recouverte d'un manteau de poussières et de matière carbonée masquant des glaces d'eau, de monoxyde et de dioxyde de carbone. L'activité de dégazage s'y manifeste par des jets discrets s'échappant de zones localisées chauffées par le Soleil.
+        </p>
+        <p>
+          Tempel 1 a marqué l'histoire de l'astronautique en étant au cœur de deux missions d'exploration distinctes. Le 4 juillet 2005, le percuteur de la mission américaine Deep Impact de la NASA a délibérément percuté son noyau à plus de 37 000 km/h, libérant un immense panache de poussières fines, d'eau et de composés organiques piégés sous la croûte, confirmant la présence d'eau gelée sous la surface. Le 14 février 2011, la sonde Stardust (dans le cadre de la mission étendue Stardust-NExT) a survolé à nouveau Tempel 1, permettant pour la toute première fois d'imager le cratère artificiel laissé par l'impacteur et de mesurer l'érosion subie par le noyau après un cycle orbital complet autour du Soleil.
+        </p>
+      </div>
+    </div>
+
+    <!-- 67P/TCHOURIOUMOV-GUÉRASSIMENKO -->
+    <div class="object-showcase">
+      <div class="object-showcase-title">
+        <span>67P/Tchourioumov-Guérassimenko</span>
+        <span class="object-tag">Comète Bilobée • Mission Rosetta & Philae (ESA)</span>
+      </div>
+      <div class="zoomable-img-wrap" onclick="ouvrirZoomDirect('https://lh3.googleusercontent.com/d/1LbY9faCvvMRB6XVeTiUj6f7WoY_1m00J')">
+        <img src="https://lh3.googleusercontent.com/d/1LbY9faCvvMRB6XVeTiUj6f7WoY_1m00J" alt="67P/Tchourioumov-Guérassimenko — Sonde Rosetta (ESA)">
+        <div class="zoom-hint-tag"><span class="zoom-pulse"></span><span>Agrandir ⤢</span></div>
+      </div>
+      <div class="prose-block">
+        <p>
+          67P/Tchourioumov-Guérassimenko (souvent surnommée « Tchouri ») est une comète périodique de la famille de Jupiter, découverte en 1969 par les astronomes soviétiques Klim Tchourioumov et Svetlana Guérassimenko. Elle accomplit une révolution autour du Soleil en environ 6,4 ans sur une orbite elliptique dont le périhélie s'approche de celle de la Terre (vers 1,24 UA), tandis que son aphélie s'étire au-delà de l'orbite de Jupiter.
+        </p>
+        <p>
+          Sur le plan morphologique et géologique, la comète a surpris les chercheurs par sa forme singulière de corps bilobé, souvent comparée à un canard en plastique géant. Mesurant environ 4,3 × 4,1 × 2,1 kilomètres dans ses plus grandes dimensions, elle est formée de deux lobes distincts reliés par une zone étroite appelée le « cou ». Les données ont confirmé qu'il s'agit du résultat d'une collision à très faible vitesse entre deux comètes primitives au tout début de la formation du Système solaire. Le noyau se révèle extrêmement poreux (environ 75 % de vide) et d'une densité très faible (0,53 g/cm³), recouvert d'une croûte sombre de poussières et de composés organiques complexes masquant les glaces d'eau, de monoxyde de carbone et de méthane.
+        </p>
+        <p>
+          67P occupe une place légendaire dans l'histoire de l'astronomie grâce à la mission Rosetta de l'Agence spatiale européenne (ESA). Arrivée à proximité en août 2014, la sonde est devenue le premier engin à se placer en orbite autour d'un noyau cométaire et à l'escorter pendant plus de deux ans le long de son périhélie, observant en direct le réveil de ses jets de gaz et de poussières. Le 12 novembre 2014, la mission a également réussi le tout premier atterrissage en douceur sur une comète avec le module Philae. Parmi les découvertes majeures issues de cette exploration figurent la détection d'oxygène moléculaire, de nombreux composés organiques volatils (dont l'acide aminé glycine) et la mesure d'un rapport deutérium/hydrogène dans la glace d'eau nettement supérieur à celui des océans terrestres, nuançant fortement l'hypothèse selon laquelle les comètes de cette famille auraient été la source principale de l'eau sur Terre.
+        </p>
+      </div>
+    </div>
+
+    <!-- 103P/HARTLEY 2 -->
+    <div class="object-showcase">
+      <div class="object-showcase-title">
+        <span>103P/Hartley (Hartley 2)</span>
+        <span class="object-tag">Comète Hyperactive • Mission EPOXI (NASA)</span>
+      </div>
+      <div class="zoomable-img-wrap" onclick="ouvrirZoomDirect('https://lh3.googleusercontent.com/d/16c0oxo9akcEYwe-w7o5Zl7hh7GSYoE3c')">
+        <img src="https://lh3.googleusercontent.com/d/16c0oxo9akcEYwe-w7o5Zl7hh7GSYoE3c" alt="103P/Hartley 2 — Mission EPOXI (NASA)">
+        <div class="zoom-hint-tag"><span class="zoom-pulse"></span><span>Agrandir ⤢</span></div>
+      </div>
+      <div class="prose-block">
+        <p>
+          103P/Hartley (communément désignée Hartley 2) est une petite comète périodique de la famille de Jupiter, découverte en mars 1986 par l'astronome australien Malcolm Hartley depuis l'observatoire de Siding Spring. Elle accomplit sa trajectoire elliptique autour du Soleil en environ 6,48 ans, avec un périhélie situé à environ 1,06 UA, ce qui la fait frôler l'orbite de la Terre.
+        </p>
+        <p>
+          Sur le plan morphologique, Hartley 2 est un corps allongé et bilobé mesurant environ 2,25 kilomètres de long pour quelques centaines de mètres d'épaisseur, lui donnant une silhouette caractéristique de quille de bowling ou de cacahuète. Les deux lobes rugueux et criblés de blocs rocheux sont reliés par un col central plus lisse et inactif. Malgré sa petite taille, elle présente une activité de dégazage d'une vigueur exceptionnelle : ses émissions sont principalement propulsées par la sublimation explosive de poches de dioxyde de carbone (CO2) solide, qui expulsent de violents geysers de vapeur d'eau et de véritables nuages de grains de glace de la taille d'une balle de golf ou d'une boule de neige.
+        </p>
+        <p>
+          Hartley 2 a été immortalisée par la mission spatiale de la NASA EPOXI (réutilisation de la sonde Deep Impact). Le 4 novembre 2010, la sonde a réalisé un survol spectaculaire à seulement 694 kilomètres du noyau, capturant des images d'une précision inédite de ses jets cométaires et de la structure de sa surface. Une découverte capitale issue des analyses spectroscopiques (notamment grâce au télescope spatial Herschel) a révélé que le rapport isotopique deutérium/hydrogène (D/H) de son eau était identique à celui des océans terrestres, relançant pour la première fois avec force l'hypothèse selon laquelle les comètes de la famille de Jupiter ont pu jouer un rôle direct dans l'apport de l'eau sur Terre.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- VISIONNEUSE PLEIN ÉCRAN LIGHTBOX -->
+  <div class="lightbox-overlay" id="lightboxOverlay" onclick="fermerZoom()" title="Cliquer ou appuyer sur Échap pour fermer">
+    <img id="lightboxImg" class="lightbox-img" src="" alt="Agrandissement haute définition">
+  </div>
+
+  <script>
+    // GESTION DES ONGLETS DE LA PREMIÈRE INFOGRAPHIE (NEO)
+    function changerOngletNEO(nom) {
+      const onglets = ['familles', 'pha', 'defense'];
+      onglets.forEach(o => {
+        const contenu = document.getElementById('onglet-neo-' + o);
+        const bouton = document.getElementById('btn-neo-' + o);
+        if (o === nom) {
+          contenu.style.display = 'block';
+          bouton.style.background = '#2563eb';
+          bouton.style.color = '#ffffff';
+        } else {
+          contenu.style.display = 'none';
+          bouton.style.background = '#1e293b';
+          bouton.style.color = '#94a3b8';
+        }
+      });
+    }
+
+    // GESTION DES ONGLETS DE LA DEUXIÈME INFOGRAPHIE (COMÈTES)
+    function switchCometTab(evt, tabId) {
+      const tabPanes = document.querySelectorAll('.box2-pane');
+      tabPanes.forEach(pane => pane.classList.remove('active'));
+
+      const tabBtns = document.querySelectorAll('.box2-tab-btn');
+      tabBtns.forEach(btn => btn.classList.remove('active'));
+
+      document.getElementById(tabId).classList.add('active');
+      evt.currentTarget.classList.add('active');
+    }
+
+    // GESTION DU ZOOM PLEIN ÉCRAN LIGHTBOX
+    function ouvrirZoomDirect(url) {
+      const overlay = document.getElementById('lightboxOverlay');
+      const img = document.getElementById('lightboxImg');
+      img.src = url;
+      overlay.classList.add('active');
+    }
+
+    function fermerZoom() {
+      document.getElementById('lightboxOverlay').classList.remove('active');
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        fermerZoom();
+      }
+    });
+  </script>
+</body>
+</html>
