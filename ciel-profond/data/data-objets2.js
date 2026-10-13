@@ -1,5 +1,19 @@
 const OBJETS_CIEL_PROFOND_2 = [
 {
+    id: "iras16399_0937",
+    nomPrincipal: "IRAS 16399-0937",
+    autreNom: "2MASX J16424018-0943192",
+    catalogues: ["LIRG J1642.6-0943", "PGC 58914"],
+    categoriePrincipale: "galaxie",
+    sousCategorie: "interaction",
+    specificites: ["starburst"],
+    constellation: "Ophiuchus",
+    image: "https://lh3.googleusercontent.com/d/1sBcQgVs6rVVE9rOdPI7oCG20p0oqCINO",
+    legendeImage: "Le double noyau en fusion et le mégamaser de IRAS 16399-0937 — Hubble",
+    coordonnees: { ad: "16h 42m 40s", dec: "-09° 43′ 19″", magnitude: "14.8", distance: "370 millions al", vitesseRadiale: "+8 095 km/s" },
+    texte: "IRAS 16399-0937 est une galaxie lumineuse en infrarouge (LIRG) située dans la constellation d'Ophiuchus, découverte lors du recensement spatial du télescope infrarouge IRAS dans les années 1980. Évoluant à une distance d'environ trois cent soixante-dix millions d'années-lumière de la Terre, cette galaxie en fusion avancée est célèbre en astrophysique pour héberger un puissant mégamaser à hydroxyles (OH megamaser), dont l'émission stimulée en ondes centimétriques dépasse de cent millions de fois les masers circumstellaires de la Voie lactée. L'imagerie optique et proche infrarouge haute résolution des instruments ACS et NICMOS du télescope spatial Hubble a révélé que son centre abrite un double noyau galactique en interaction gravitationnelle directe, séparé d'environ onze mille années-lumière et enveloppé dans un même tourbillon dense de gaz et de poussières sombres. Les deux composantes présentent des caractéristiques physiques contrastées : le noyau sud (IRAS 16399S) constitue une région de sursaut de formation stellaire extrême où de jeunes amas massifs se forment à un rythme effréné, tandis que le noyau nord (IRAS 16399N) abrite une région d'émission nucléaire de faible ionisation (LINER) propulsée par un trou noir supermassif d'environ cent millions de masses solaires. La collision frontale des réservoirs de gaz froid comprime le milieu interstellaire, pompant les niveaux énergétiques des molécules OH qui amplifient le rayonnement radio de fond. Les observations interférométriques en radioastronomie et les données de spectroscopie infrarouge confirment que IRAS 16399-0937 illustre une phase de transition majeure où la coalescence de deux cœurs galactiques alimente simultanément flambées stellaires et activité de trou noir supermassif."
+  },
+    {
     id: "hh49_50",
     nomPrincipal: "HH 49-50",
     autreNom: "Herbig-Haro 49/50",
