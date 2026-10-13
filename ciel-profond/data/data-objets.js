@@ -10485,10 +10485,19 @@ texte: "NGC 3982 est une somptueuse galaxie spirale intermédiaire de classe SAB
     sousCategorie: "emission",
     specificites: [],
     constellation: "Sagittaire",
-    image: "https://lh3.googleusercontent.com/d/17MC4RNih1z0wZ1PowfbOKJCYnwSkFjoq",
-    legendeImage: "Nébuleuse Trifide (Messier 20) — Imagerie optique en haute résolution",
+    image: "https://lh3.googleusercontent.com/d/1TG4mE3F4Y2Msul9hagDv64D0VzvKmgev",
+    imagesGalerie: [
+      {
+        url: "https://lh3.googleusercontent.com/d/17MC4RNih1z0wZ1PowfbOKJCYnwSkFjoq",
+        legende: "Nébuleuse Trifide (Messier 20) — Imagerie optique en haute résolution"
+      },
+      {
+        url: "https://lh3.googleusercontent.com/d/1TG4mE3F4Y2Msul9hagDv64D0VzvKmgev",
+        legende: "Vue d'ensemble et gros plan sur les piliers de gaz — Rubin / Hubble"
+      }
+    ],
     coordonnees: { ad: "18h 02m 23s", dec: "-23° 01′ 48″", magnitude: "6.3", distance: "5 200 al", vitesseRadiale: "+2.0 km/s" },
-    texte: "Messier 20 (NGC 6514), mondialement célèbre sous le nom de nébuleuse Trifide, est l'un des paysages célestes les plus somptueux et photographiés du ciel profond, niché dans la constellation du Sagittaire. Découverte par Charles Messier en 1764, elle associe de façon spectaculaire trois types de nébuleuses en une seule vue : une nébuleuse en émission rougeoyante en H-alpha au sud, une nébuleuse par réflexion azurée au nord illuminée par de jeunes étoiles chaudes, et un réseau tripartite de nébuleuses obscures (Barnard 85) qui découpe le cœur rouge en trois lobes distincts, lui valant son nom de Trifide. L'étoile triple massive centrale HD 164492 (de type O7.5III) injecte l'énergie nécessaire à l'ionisation du gaz. Les clichés de Hubble ont dévoilé des piliers de gaz denses et des jets stellaires supersoniques de plusieurs années-lumière de long (objets de Herbig-Haro), prouvant que M20 est un site de genèse stellaire foisonnant âgé de moins de 300 000 ans."
+    texte: "Messier 20 (NGC 6514, nébuleuse Trifide) est un complexe nébulaire remarquable situé dans la constellation du Sagittaire, découvert par Charles Messier en 1764. Évoluant à une distance d'environ cinq mille deux cents années-lumière de la Terre et s'étendant sur un diamètre réel d'environ quarante années-lumière, cet objet associe en une même structure physique trois composantes nébulaires distinctes : une nébuleuse en émission (région HII) ionisée par le rayonnement ultraviolet, une nébuleuse par réflexion et un réseau de nébuleuses obscures d'absorption. La partie sud est dominée par le rayonnement de l'hydrogène ionisé excité principalement par le système stellaire multiple massif HD 164492, dont l'étoile principale de classe spectrale O7.5III chauffe le milieu interstellaire environnant. Ce secteur d'émission est découpé en trois lobes distincts par des bandes de poussière froide opaque répertoriées sous la désignation Barnard 85, conférant sa morphologie tripartite à l'ensemble. Au nord de cette région chaude se déploie une nébuleuse par réflexion azurée, où les grains de poussière diffusent préférentiellement la lumière bleue d'étoiles jeunes de types spectraux B. L'imagerie optique à haute résolution obtenue par le télescope spatial Hubble, combinée aux vues grand champ de l'observatoire Vera C. Rubin, met en évidence des piliers de gaz denses en cours de photo-évaporation et des jets circumstellaires collimatés de type Herbig-Haro s'étirant sur plusieurs années-lumière. Âgé de moins de trois cent mille ans, Messier 20 constitue un laboratoire de référence pour l'étude conjointe de la photo-ionisation, de l'érosion radiative des nuages moléculaires et de la genèse des étoiles massives."
   },
   {
     id: "m42",
