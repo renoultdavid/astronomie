@@ -1,5 +1,51 @@
 const OBJETS_CIEL_PROFOND_2 = [
 {
+    id: "ngc6744",
+    nomPrincipal: "NGC 6744",
+    autreNom: "Caldwell 101",
+    catalogues: ["ESO 104-42", "IRAS 19050-6356", "PGC 62836"],
+    categoriePrincipale: "galaxie",
+    sousCategorie: "spirale",
+    specificites: ["grand dessein", "interaction"],
+    constellation: "Paon",
+    image: "https://lh3.googleusercontent.com/d/1_DcPzKu5KgBeuK4Z9oZ38D-lDQX8WZjM",
+    imagesGalerie: [
+      {
+        url: "https://lh3.googleusercontent.com/d/1_DcPzKu5KgBeuK4Z9oZ38D-lDQX8WZjM",
+        legende: "L'architecture spirale et la compagne satellite de NGC 6744 — Hubble / ESO"
+      },
+      {
+        url: "https://lh3.googleusercontent.com/d/1UwfBZdlIX7gS7TO8J3euyRQU_vgt-R7H",
+        legende: "Le disque stellaire étendu et les bras poussiéreux de NGC 6744 — ESO / WFI"
+      }
+    ],
+    coordonnees: { ad: "19h 09m 46s", dec: "-63° 51′ 27″", magnitude: "8.3", distance: "30 millions al", vitesseRadiale: "+841 km/s" },
+    texte: "NGC 6744 (Caldwell 101) est une imposante galaxie spirale intermédiaire de classe SAB(r)bc située dans la constellation australe du Paon, découverte par James Dunlop en 1826. Évoluant à une distance d'environ trente millions d'années-lumière de la Terre et s'étendant sur un diamètre réel monumental de près de cent soixante-quinze mille années-lumière, elle est considérée comme l'un des analogues morphologiques les plus fidèles de notre Voie lactée dans l'Univers local. Observée sous une inclinaison modérée d'environ cinquante degrés, elle présente un bulbe central sphéroïdal et doré composé d'étoiles âgées de population II, traversé par une barre stellaire discrète et ceinturé par un anneau interne de poussière. De cette région émergent deux bras spiraux principaux amples qui se fragmentent ensuite en ramifications externes étendues, densément jalonnées par des centaines de régions HII en émission H-alpha et de jeunes amas stellaires bleus massifs. À l'extrémité de l'un de ses bras spiraux externes réside une petite galaxie satellite déformée, la naine irrégulière NGC 6744A, dessinant une configuration dynamique analogue au couple formé par la Voie lactée et le Grand Nuage de Magellan. En 2005, la galaxie a hébergé la supernova de type Ic SN 2005at. Les observations photométriques et spectroscopiques haute résolution obtenues par l'instrument WFI de l'ESO et le télescope spatial Hubble mettent en évidence un gradient de métallicité et une distribution de la poussière comparables à ceux observés dans le disque galactique local, faisant de NGC 6744 une référence pour calibrer la morphologie et la dynamique des grandes spirales barrées."
+  },
+  {
+    id: "ngc6872",
+    nomPrincipal: "NGC 6872",
+    autreNom: "",
+    catalogues: ["ESO 073-32", "AM 2011-705", "PGC 64413"],
+    categoriePrincipale: "galaxie",
+    sousCategorie: "spirale",
+    specificites: ["interaction", "barrée"],
+    constellation: "Paon",
+    image: "https://lh3.googleusercontent.com/d/1KyvjEjpDGtkFKd8wiSQmI9QiGYXvKzby",
+    imagesGalerie: [
+      {
+        url: "https://lh3.googleusercontent.com/d/1KyvjEjpDGtkFKd8wiSQmI9QiGYXvKzby",
+        legende: "Les bras de marée colossaux de NGC 6872 et la lenticulaire IC 4970 — VLT / ESO"
+      },
+      {
+        url: "https://lh3.googleusercontent.com/d/1DXmY4pNfMjKUBXLzwgV1t_M3q1lBLSng",
+        legende: "Le champ d'interaction et la formation stellaire de NGC 6872 — Hubble / ESO"
+      }
+    ],
+    coordonnees: { ad: "20h 16m 56s", dec: "-70° 46′ 05″", magnitude: "11.7", distance: "212 millions al", vitesseRadiale: "+4 695 km/s" },
+    texte: "NGC 6872 (surnommée la galaxie du Condor) est une galaxie spirale barrée géante de classe SB(s)b pec située dans la constellation australe du Paon, découverte par John Herschel en 1835. Évoluant à environ deux cent douze millions d'années-lumière de la Terre au cœur du groupe de Pavo, elle s'étend sur une envergure totale de plus de cinq cent vingt mille années-lumière de bout en bout, ce qui en fait l'une des galaxies spirales les plus étendues répertoriées dans l'Univers. Cette envergure résulte d'une interaction de marée violente avec sa voisine immédiate, la galaxie lenticulaire compacte IC 4970, qui a traversé son disque il y a environ cent trente millions d'années. Cette collision a étiré ses deux bras spiraux principaux en de gigantesques queues de marée asymétriques. L'imagerie optique du Very Large Telescope (VLT) de l'ESO combinée aux données ultraviolettes du satellite GALEX révèle une vague de formation stellaire le long de ces bras étirés, ponctuée d'amas d'étoiles jeunes et massives. À l'extrémité du bras nord-est, la compression du gaz a initié la formation d'une galaxie naine de marée (tidal dwarf galaxy). Le centre de NGC 6872 est traversé par une barre stellaire allongée et abrite un noyau à faible niveau d'activité. Les simulations numériques et les observations en radioastronomie de la raie HI confirment que la rencontre orbitale a redistribué le réservoir gazeux sans disloquer la barre, offrant un modèle pour analyser l'évolution des disques géants soumis à des collisions rasantes."
+  },
+    {
     id: "ngc5291",
     nomPrincipal: "NGC 5291",
     autreNom: "Seashell Galaxy",
