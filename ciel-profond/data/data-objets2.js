@@ -1,5 +1,19 @@
 const OBJETS_CIEL_PROFOND_2 = [
 {
+    id: "oes28619",
+    nomPrincipal: "OES 286-19",
+    autreNom: "AM 2055-425",
+    catalogues: ["ESO 286-IG019", "PGC 65780", "IRAS 20550-4250"],
+    categoriePrincipale: "galaxie",
+    sousCategorie: "interaction",
+    specificites: ["starburst"],
+    constellation: "Microscope",
+    image: "https://lh3.googleusercontent.com/d/1F8neCEV_cotRVD58fcu862dV_mnb4qKZ",
+    legendeImage: "La fusion paroxystique et la queue de marée rectiligne de OES 286-19 — Hubble",
+    coordonnees: { ad: "20h 58m 27s", dec: "-42° 39′ 01″", magnitude: "14.0", distance: "580 millions al", vitesseRadiale: "+12 800 km/s" },
+    texte: "OES 286-19 (ESO 286-IG019 / AM 2055-425) est une galaxie lumineuse en infrarouge (LIRG) située dans la constellation australe du Microscope, découverte lors des recensements photographiques conjoints de l'ESO et de l'observatoire de Haute-Provence. Évoluant à une distance cosmologique d'environ cinq cent quatre-vingts millions d'années-lumière de la Terre (correspondant à un décalage vers le rouge de z = 0,043), ce système témoigne d'une collision majeure parvenue à une phase très avancée de coalescence entre deux galaxies spirales comparables riches en gaz. Le profil morphologique du complexe se singularise par la présence d'une immense queue de marée rectiligne et étroite qui s'étire dans l'espace intergalactique sur une longueur projetée de plus de cent cinquante mille années-lumière, accompagnée d'un second panache de marée incurvé à l'opposé, formés par l'éjection gravitationnelle de matière stellaire et gazeuse lors du passage périastral. L'imagerie optique haute résolution de la caméra ACS du télescope spatial Hubble résout un cœur chaotique et tourmenté où les nuages moléculaires froids sont comprimés par des fronts d'ondes de choc hydrodynamiques à grande échelle. Cette compression alimente une violente flambée de natalité stellaire (starburst), matérialisée par des dizaines de super-amas d'étoiles jeunes, massives et bleues de types spectraux O et B qui percent à travers un réseau dense de filaments de poussière sombre et opaque en cours d'effondrement. Les observations spectroscopiques et les mesures dans l'infrarouge moyen obtenues par les télescopes spatiaux IRAS et Spitzer confirment un taux d'émission thermique de poussière supérieur à dix puissance onze luminosités solaires, trahissant l'échauffement intense du milieu par les étoiles nouvellement formées. OES 286-19 constitue ainsi un archétype pour modéliser la formation des queues de marée collinéaires et la transformation progressive de couples de disques spiraux en une future galaxie elliptique géante relaxée."
+  },
+    {
     id: "lmc_n44c",
     nomPrincipal: "N44C",
     autreNom: "LHA 120-N 44C",
