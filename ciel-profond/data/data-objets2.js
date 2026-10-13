@@ -1,5 +1,33 @@
 const OBJETS_CIEL_PROFOND_2 = [
 {
+    id: "sh2_200",
+    nomPrincipal: "Sh2-200",
+    autreNom: "HDW 2",
+    catalogues: ["Sharpless 200", "PN G138.8+02.8", "PK 138+02.1"],
+    categoriePrincipale: "nebuleuse",
+    sousCategorie: "planetaire",
+    specificites: [],
+    constellation: "Cassiopée",
+    image: "https://lh3.googleusercontent.com/d/1D7boe7mzdu8Cfi5yacpWhVY-NPBfW-zR",
+    legendeImage: "L'enveloppe sphérique ténue et ionisée de Sh2-200 — Imagerie optique",
+    coordonnees: { ad: "03h 11m 24s", dec: "+62° 47′ 55″", magnitude: "14.0", distance: "3 600 al", vitesseRadiale: "-38 km/s" },
+    texte: "Sh2-200 (également cataloguée HDW 2) est une nébuleuse planétaire très évoluée et diffuse située dans la constellation boréale de Cassiopée, intégrée par Stewart Sharpless en 1959 dans son catalogue de régions HII avant d'être réidentifiée comme nébuleuse planétaire ancienne. Évoluant à une distance d'environ trois mille six cents années-lumière de la Terre et s'étendant sur un diamètre réel d'environ cinq années-lumière, elle illustre le stade de dissipation terminale des enveloppes gazeuses rejetées par une étoile de masse intermédiaire. Sa brillance de surface est particulièrement faible, résultant de l'expansion séculaire et de la dilution progressive du gaz dans le milieu interstellaire environnant. Sa morphologie optique présente une coquille circulaire presque parfaite mais ténue, dont les parois extérieures sont mises en valeur par l'émission de l'oxygène doublement ionisé ([O III]) et de l'hydrogène (H-alpha). L'étoile centrale, une naine blanche chaude en cours de refroidissement rapide, maintient un faible niveau de photo-ionisation résiduelle à travers la cavité centrale évidée par les vents stellaires passés. L'imagerie optique à longue pose et filtres à bande étroite révèle des asymétries subtiles le long du bord nord-ouest, témoignant de l'interaction hydrodynamique et du ralentissement de la coquille contre les nuages de gaz du bras de Persée de la Voie lactée. Les analyses spectroscopiques indiquent une vitesse d'expansion modérée d'environ trente kilomètres par seconde, confirmant un âge cinématique avancé dépassant plusieurs dizaines de milliers d'années. Sh2-200 constitue un cas d'étude précieux pour mesurer le taux d'enrichissement chimique du milieu interstellaire par les nébuleuses planétaires parvenues à leur phase ultime de dispersion."
+  },
+  {
+    id: "snr_0509_675",
+    nomPrincipal: "SNR 0509-67.5",
+    autreNom: "Bulle de supernova de la Dorade",
+    catalogues: ["MCSNR J0509-6731", "RX J0509.5-6731"],
+    categoriePrincipale: "nebuleuse",
+    sousCategorie: "reste_supernova",
+    specificites: ["remanent"],
+    constellation: "Dorade",
+    image: "https://lh3.googleusercontent.com/d/1KVkJguwoTKJqC8EHpaoVZkcZH0spDgv-",
+    legendeImage: "La bulle d'onde de choc symétrique de SNR 0509-67.5 — Hubble / Chandra",
+    coordonnees: { ad: "05h 09m 31s", dec: "-67° 31′ 17″", magnitude: "15.3", distance: "160 000 al", vitesseRadiale: "+280 km/s" },
+    texte: "SNR 0509-67.5 est un rémanent de supernova jeune situé dans la constellation australe de la Dorade, au sein de la galaxie satellite du Grand Nuage de Magellan. Évoluant à une distance d'environ cent soixante mille années-lumière de la Terre et s'étendant sur un diamètre réel d'environ vingt-trois années-lumière, cet objet constitue le vestige d'une explosion thermonucléaire cataclysmique de type Ia survenue il y a environ quatre cents ans, dont la lumière a atteint la Terre vers l'an 1600 sans avoir été consignée historiquement dans l'hémisphère sud. L'analyse des échos lumineux réfléchis par les nuages de poussière circumstellaires environnants a permis de confirmer formellement la sous-classe de l'événement, classé comme une supernova de type Ia sur-lumineuse issue de la détonation complète d'une naine blanche de masse limite de Chandrasekhar. L'imagerie optique haute résolution du télescope spatial Hubble dévoile une coquille gazeuse d'une régularité et d'une symétrie sphérique quasi parfaites, délimitée par une fine enveloppe fluorescente d'hydrogène ionisé brillant en H-alpha. Cette enveloppe matérialise l'onde de choc collisionnelle supersonique qui se propage à travers le milieu interstellaire à une vitesse vertigineuse de plus de cinq mille kilomètres par seconde. Les observations conjointes en rayons X réalisées par l'observatoire spatial Chandra résolvent une émission thermique intense issue du plasma choqué à plusieurs millions de kelvins, enrichi de manière prépondérante en fer et en silicium synthétisés lors de la nucléosynthèse explosive. L'absence de tout vestige compact ou d'étoile compagne survivante au centre géométrique renforce le scénario de fusion de deux naines blanches (double dégénérescence). SNR 0509-67.5 est aujourd'hui un étalon astrophysique fondamental pour modéliser la physique des ondes de choc non radiatives et la cinématique des rémanents thermonucléaires purs."
+  },
+    {
     id: "sgr_a_m87",
     nomPrincipal: "Sagittarius A* / M87*",
     autreNom: "Sgr A* / M87* (Comparaison d'échelle)",
