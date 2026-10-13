@@ -11894,10 +11894,19 @@ texte: "NGC 3982 est une somptueuse galaxie spirale intermédiaire de classe SAB
     sousCategorie: "planetaire",
     specificites: [],
     constellation: "Gémeaux",
-    image: "https://lh3.googleusercontent.com/d/1pEHXlWWX65c46TepzzpK_KIa7A-5XmN6",
-    legendeImage: "Nébuleuse de l'Esquimau (NGC 2392) — Chandra / HST",
+    image: "https://lh3.googleusercontent.com/d/1lP8ha8ijaw_En-PitB02Y2CraqPB56xX",
+    imagesGalerie: [
+      {
+        url: "https://lh3.googleusercontent.com/d/1pEHXlWWX65c46TepzzpK_KIa7A-5XmN6",
+        legende: "Nébuleuse de l'Esquimau (NGC 2392) — Chandra / HST"
+      },
+      {
+        url: "https://lh3.googleusercontent.com/d/1lP8ha8ijaw_En-PitB02Y2CraqPB56xX",
+        legende: "Structures internes de poussières et coquilles de gaz — JWST"
+      }
+    ],
     coordonnees: { ad: "07h 29m 11s", dec: "+20° 54′ 42″", magnitude: "9.2", distance: "6 500 al", vitesseRadiale: "+75 km/s" },
-    texte: "NGC 2392 (Caldwell 39), historiquement célèbre sous le nom de nébuleuse de l'Esquimau ou de la Tête de Clown, est une nébuleuse planétaire complexe et spectaculaire située dans la constellation des Gémeaux, découverte par William Herschel en 1787. Sa structure en double coquille évoque un visage entouré d'une capuche de parka en fourrure : la bulle interne est formée par un tore gazeux brillant parsemé de filaments rapides, tandis que le disque externe est hérissé de dizaines de filaments et de filaments cométaires filant radialement vers l'extérieur sur plusieurs années-lumière. L'astre central, une étoile chaude de type spectral O8, génère des vents stellaires supersoniques soufflant à plus de 1 500 km/s. Les données combinées en rayons X de Chandra et en imagerie optique de Hubble révèlent une bulle de plasma surchauffée à plusieurs millions de kelvins logée au cœur de la coquille, démontrant le rôle fondamental de la turbulence thermique dans la genèse de ces motifs rayonnants."
+    texte: "NGC 2392 (Caldwell 39, historiquement désignée sous le nom de nébuleuse de l'Esquimau ou de la Tête de Clown) est une nébuleuse planétaire à double enveloppe située dans la constellation des Gémeaux, découverte par William Herschel en 1787. Évoluant à une distance d'environ six mille cinq cents années-lumière de la Terre et s'étendant sur un diamètre réel d'environ une demi-année-lumière, cet objet illustre la fin de vie d'une étoile de masse intermédiaire parvenue au stade d'éjection active de ses couches externes. Sa morphologie optique présente une double coquille emboîtée asymétrique : une bulle intérieure ovoïde de gaz chaud hautement ionisé est entourée d'un vaste disque externe hérissé de dizaines de filaments radiaux et de nœuds cométaires denses qui s'étirent sur plusieurs années-lumière. L'astre central, une étoile chaude de type spectral O8 affichant une température de surface de près de quarante mille kelvins, engendre de violents vents stellaires supersoniques soufflant à plus de mille cinq cents kilomètres par seconde. Les observations combinées en rayons X par le télescope spatial Chandra et en optique par le télescope spatial Hubble mettent en évidence une cavité de plasma surchauffée à plusieurs millions de kelvins logée au cœur de la bulle interne, résultant de la collision hydrodynamique entre les vents stellaires rapides et les éjectas antérieurs plus lents. Les récentes observations dans le proche et moyen infrarouge obtenues par le télescope spatial James Webb (JWST) résolvent la distribution fine des poussières carbonées résiduelles et de l'hydrogène moléculaire dans l'enveloppe externe, révélant la destruction sélective des grains de poussière par le champ de rayonnement ultraviolet extrême. Les mesures spectroscopiques indiquent un taux d'expansion de la coquille d'environ cinquante kilomètres par seconde, prédisant la dispersion totale de la matière nébulaire dans le milieu interstellaire d'ici environ dix mille ans."
   },
   {
     id: "ngc2438",
