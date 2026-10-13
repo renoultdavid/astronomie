@@ -1,1 +1,421 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le Monde des Amas Ouverts — Atlas Céleste</title>
+  <link rel="stylesheet" href="../../fiche.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #020617;
+      color: #e2e8f0;
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.8;
+      overflow-x: hidden;
+      padding-bottom: 5rem;
+    }
+
+    .fiche-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    /* EN-TÊTE */
+    .hero-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .hero-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+    .hero-header h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 3.8vw, 3rem);
+      letter-spacing: 0.12em;
+      color: #ffffff;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+    .hero-header .subtitle {
+      font-size: 1.05rem;
+      color: #94a3b8;
+      font-weight: 300;
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    /* TEXTES PRINCIPAUX */
+    .prose-block {
+      font-size: 1rem;
+      color: #cbd5e1;
+      text-align: justify;
+      font-weight: 300;
+      margin-bottom: 2rem;
+    }
+    .prose-block p {
+      margin-bottom: 1.4rem;
+    }
+
+    /* TITRES DE SECTIONS */
+    .section-main-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.7rem;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin: 3.5rem 0 1.5rem;
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-main-title::before {
+      content: "";
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: #38bdf8;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #38bdf8;
+    }
+
+    /* VISIONNEUSE PLEIN ÉCRAN LIGHTBOX */
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+      padding: 1.5vh 1.5vw;
+    }
+    .lightbox-overlay.active {
+      display: flex;
+    }
+    .lightbox-img {
+      max-width: 97vw;
+      max-height: 94vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.95), 0 0 20px rgba(56, 189, 248, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="fiche-wrapper">
+
+    <!-- EN-TÊTE DE LA FICHE -->
+    <header class="hero-header">
+      <div class="hero-badge">Population I • Bras Spiraux</div>
+      <h1>Les Amas Ouverts</h1>
+      <div class="subtitle">
+        Pouponnières galactiques, fratries stellaires et dispersion séculaire
+      </div>
+    </header>
+
+    <!-- TEXTE D'INTRODUCTION -->
+    <div class="prose-block">
+      <p>
+        Nés au cœur des mêmes nuages moléculaires, les amas ouverts sont de jeunes essaims d'étoiles sœurs qui illuminent le disque de notre galaxie. Rassemblant de quelques dizaines à quelques milliers d'astres flamboyants, ils jalonnent les bras spiraux de leur éclat bleuté et témoignent d'une fertilité stellaire récente.
+      </p>
+      <p>
+        Mais leur union reste précaire : faiblement retenus par la gravité, ils subissent le cisaillement des marées galactiques et les perturbations des nuages voisins. En quelques centaines de millions d'années seulement, ces fratries finissent par se disloquer pour essaimer leurs membres dans le vaste champ stellaire. Un destin éphémère que notre propre Soleil a lui-même connu il y a quatre milliards et demi d'années.
+      </p>
+    </div>
+
+    <!-- INFOGRAPHIE INTERACTIVE DES AMAS OUVERTS -->
+    <div id="infographie-amas-ouverts" style="font-family: system-ui, -apple-system, sans-serif; background: #0b1120; color: #e2e8f0; padding: 12px 14px; border-radius: 10px; width: 100%; border: 1px solid #1e293b; margin: 2rem 0 3rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
+      
+      <header style="text-align: center; margin-bottom: 12px;">
+        <h2 style="color: #f8fafc; margin: 0; font-size: 1.2rem; font-family: 'Cinzel', serif;">Les amas ouverts : essaims fertiles du disque galactique</h2>
+        <p style="color: #94a3b8; margin-top: 3px; font-size: 0.8rem;">Pouponnières stellaires, classification de Trumpler et dispersion séculaire</p>
+      </header>
+
+      <!-- Sélecteur d'onglets compact -->
+      <div style="display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin-bottom: 12px;">
+        <button onclick="changerOngletAO('distrib')" id="btn-ao-distrib" style="padding: 6px 14px; border-radius: 6px; border: none; background: #2563eb; color: #fff; font-weight: 600; cursor: pointer; font-size: 0.8rem;">1. Emplacement dans le disque</button>
+        <button onclick="changerOngletAO('trumpler')" id="btn-ao-trumpler" style="padding: 6px 14px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.8rem;">2. Classification de Trumpler & H-R</button>
+        <button onclick="changerOngletAO('dissolution')" id="btn-ao-dissolution" style="padding: 6px 14px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.8rem;">3. Dissolution & Courants stellaires</button>
+      </div>
+
+      <!-- ONGLET 1 : EMPLACEMENT DANS LE DISQUE -->
+      <div id="onglet-ao-distrib">
+        <div style="background: #070d19; border: 1px solid #1e293b; border-radius: 6px; padding: 8px; margin-bottom: 10px; overflow-x: auto;">
+          <svg viewBox="0 0 920 220" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; min-width: 700px; display: block;">
+            <defs>
+              <radialGradient id="gradBulbeAO" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="40%" stop-color="#fed7aa" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="#ea580c" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+
+            <text x="460" y="16" text-anchor="middle" fill="#94a3b8" font-size="11" letter-spacing="1">CONFINEMENT DES AMAS OUVERTS DANS LE DISQUE MINCE</text>
+
+            <!-- Vue par la tranche (gauche) -->
+            <g transform="translate(230, 115)">
+              <text x="0" y="-75" text-anchor="middle" fill="#38bdf8" font-size="10" font-weight="bold">Vue par la tranche : Disque galactique</text>
+              <circle cx="0" cy="0" r="75" fill="none" stroke="#334155" stroke-width="1" stroke-dasharray="3,3"/>
+              <text x="0" y="-55" text-anchor="middle" fill="#64748b" font-size="8">Halo (dépourvu d'amas ouverts)</text>
+              <rect x="-110" y="-8" width="220" height="16" fill="#0284c7" opacity="0.25" rx="3"/>
+              <ellipse cx="0" cy="0" rx="110" ry="5" fill="#38bdf8" opacity="0.5"/>
+              <ellipse cx="0" cy="0" rx="18" ry="14" fill="url(#gradBulbeAO)"/>
+              
+              <circle cx="-75" cy="-2" r="2.5" fill="#67e8f9"/>
+              <circle cx="-50" cy="3" r="3" fill="#67e8f9"/>
+              <circle cx="-25" cy="-3" r="2" fill="#67e8f9"/>
+              <circle cx="35" cy="2" r="2.8" fill="#67e8f9"/>
+              <circle cx="65" cy="-2" r="3" fill="#67e8f9"/>
+              <circle cx="85" cy="1" r="2.2" fill="#67e8f9"/>
+              
+              <text x="0" y="32" text-anchor="middle" fill="#cbd5e1" font-size="8.5">Confinés à moins de 300 pc du plan médian</text>
+              <text x="0" y="44" text-anchor="middle" fill="#94a3b8" font-size="7.5">(Étoiles jeunes de Population I riches en métaux)</text>
+            </g>
+
+            <line x1="460" y1="30" x2="460" y2="200" stroke="#1e293b" stroke-width="1.5"/>
+
+            <!-- Vue de face (droite) : traceurs des bras spiraux -->
+            <g transform="translate(680, 115)">
+              <text x="0" y="-75" text-anchor="middle" fill="#4ade80" font-size="10" font-weight="bold">Vue de face : Balises des bras spiraux</text>
+              <circle cx="0" cy="0" r="10" fill="url(#gradBulbeAO)"/>
+              <path d="M 0 -10 C 35 -30 65 0 50 35 C 38 60 -15 65 -45 40" fill="none" stroke="#1e3a5f" stroke-width="12" stroke-linecap="round"/>
+              <path d="M 0 10 C -35 30 -65 0 -50 -35 C -38 -60 15 -65 45 -40" fill="none" stroke="#1e3a5f" stroke-width="12" stroke-linecap="round"/>
+              <circle cx="45" cy="-15" r="2.8" fill="#38bdf8"/>
+              <circle cx="58" cy="12" r="3.2" fill="#67e8f9"/>
+              <circle cx="35" cy="45" r="2.5" fill="#38bdf8"/>
+              <circle cx="-45" cy="15" r="3" fill="#67e8f9"/>
+              <circle cx="-58" cy="-12" r="2.5" fill="#38bdf8"/>
+              <circle cx="-35" cy="-45" r="3.2" fill="#67e8f9"/>
+              
+              <text x="0" y="72" text-anchor="middle" fill="#cbd5e1" font-size="8.5">Nés dans les poches de gaz moléculaire froid</text>
+              <text x="0" y="84" text-anchor="middle" fill="#94a3b8" font-size="7.5">Ils orbitent solidairement avec le disque en rotation</text>
+            </g>
+          </svg>
+        </div>
+
+        <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px; overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: left; color: #ffffff;">
+            <thead>
+              <tr style="border-bottom: 1.5px solid #64748b; font-weight: bold;">
+                <th style="padding: 6px;">Propriété</th>
+                <th style="padding: 6px;">Amas ouvert (galactique)</th>
+                <th style="padding: 6px;">Amas globulaire (comparatif)</th>
+                <th style="padding: 6px;">Impact observationnel</th>
+              </tr>
+            </thead>
+            <tbody style="line-height: 1.45;">
+              <tr style="border-bottom: 1px solid #334155;">
+                <td style="padding: 6px; color: #38bdf8; font-weight: bold;">Population stellaire</td>
+                <td style="padding: 6px;">Quelques dizaines à ~2 000 étoiles</td>
+                <td style="padding: 6px;">100 000 à plusieurs millions d'étoiles</td>
+                <td style="padding: 6px;">Amas ouverts souvent résolus individuellement en amateur.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #334155;">
+                <td style="padding: 6px; color: #4ade80; font-weight: bold;">Âge & Métallicité</td>
+                <td style="padding: 6px;">1 million à ~1 milliard d'années (Pop. I)</td>
+                <td style="padding: 6px;">11,5 à 13 milliards d'années (Pop. II)</td>
+                <td style="padding: 6px;">Riches en métaux hérités des générations stellaires antérieures.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #334155;">
+                <td style="padding: 6px; color: #fbbf24; font-weight: bold;">Morphologie</td>
+                <td style="padding: 6px;">Forme irrégulière, asymétrique et lâche</td>
+                <td style="padding: 6px;">Symétrie sphérique dense et compacte</td>
+                <td style="padding: 6px;">Pas de centre de gravité fortement concentré.</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px; color: #f472b6; font-weight: bold;">Exemples réputés</td>
+                <td style="padding: 6px;">Pléiades (M45), Hyades, Crèche (M44)</td>
+                <td style="padding: 6px;">M13 (Hercule), M22, Omega Centauri</td>
+                <td style="padding: 6px;">Visibles à l'œil nu ou aux jumelles dans le ciel d'hiver et d'été.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ONGLET 2 : TRUMPLER & DIAGRAMME H-R -->
+      <div id="onglet-ao-trumpler" style="display: none;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px;">
+          
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px;">
+            <div style="color: #38bdf8; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Diagramme H-R d'un amas ouvert jeune</div>
+            <div style="background: #0f172a; border-radius: 4px; padding: 6px; margin-bottom: 8px;">
+              <svg viewBox="0 0 280 145" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
+                <line x1="32" y1="125" x2="265" y2="125" stroke="#475569" stroke-width="1.3"/>
+                <line x1="32" y1="125" x2="32" y2="12" stroke="#475569" stroke-width="1.3"/>
+                <text x="265" y="136" text-anchor="end" fill="#94a3b8" font-size="7.5">Indice B-V (Bleu/Chaud → Rouge/Froid)</text>
+                <text x="36" y="20" fill="#94a3b8" font-size="7.5">Luminosité</text>
+
+                <path d="M 65 25 C 95 50 145 90 225 120" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+                <circle cx="65" cy="25" r="4" fill="#ffffff" stroke="#38bdf8" stroke-width="1.5"/>
+                <circle cx="85" cy="42" r="3.5" fill="#67e8f9"/>
+                <circle cx="115" cy="65" r="3" fill="#bae6fd"/>
+                <text x="75" y="20" fill="#ffffff" font-size="7.5" font-weight="bold">Étoiles bleues massives (O, B)</text>
+
+                <path d="M 65 25 Q 75 22 95 20" fill="none" stroke="#f97316" stroke-width="1.5" stroke-dasharray="3,2"/>
+                <circle cx="65" cy="25" r="6" fill="none" stroke="#f97316" stroke-width="1.2"/>
+                <text x="140" y="32" fill="#f97316" font-size="7.5" font-weight="bold">Point de bifurcation (Turn-off élevé)</text>
+
+                <circle cx="170" cy="100" r="2.5" fill="#facc15"/>
+                <text x="200" y="105" fill="#facc15" font-size="7.5">Naines jaunes (type Soleil)</text>
+              </svg>
+            </div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; line-height: 1.4;">
+              Contrairement aux amas globulaires où toutes les étoiles massives sont mortes depuis longtemps, les amas ouverts jeunes possèdent encore le haut de leur séquence principale. Plus le <strong>point de bifurcation</strong> descend vers les basses luminosités, plus l'amas ouvert est âgé.
+            </p>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px;">
+            <div style="color: #4ade80; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Classification de Robert Trumpler (1930)</div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; margin-bottom: 8px; line-height: 1.35;">
+              Notée sous la forme <strong>[Concentration] [Luminosité] [Richesse]</strong> (ex. <em>II 3 r</em> pour les Pléiades) :
+            </p>
+            
+            <div style="background: #0f172a; border-radius: 4px; padding: 6px; margin-bottom: 6px; font-size: 0.74rem; line-height: 1.35;">
+              <div style="color: #38bdf8; font-weight: bold;">1. Concentration centrale (I à IV) :</div>
+              <span style="color: #94a3b8;"><strong>I :</strong> forte concentration détachée • <strong>II :</strong> moyenne • <strong>III :</strong> moyennement faible • <strong>IV :</strong> très lâche, diffus.</span>
+            </div>
+
+            <div style="background: #0f172a; border-radius: 4px; padding: 6px; margin-bottom: 6px; font-size: 0.74rem; line-height: 1.35;">
+              <div style="color: #fbbf24; font-weight: bold;">2. Répartition des magnitudes (1 à 3) :</div>
+              <span style="color: #94a3b8;"><strong>1 :</strong> petit intervalle (éclats similaires) • <strong>2 :</strong> moyen • <strong>3 :</strong> grand intervalle (fort contraste d'éclats).</span>
+            </div>
+
+            <div style="background: #0f172a; border-radius: 4px; padding: 6px; font-size: 0.74rem; line-height: 1.35;">
+              <div style="color: #f472b6; font-weight: bold;">3. Population stellaire (p, m, r) :</div>
+              <span style="color: #94a3b8;"><strong>p</strong> (pauvre, &lt; 50 étoiles) • <strong>m</strong> (moyen, 50 à 100 étoiles) • <strong>r</strong> (riche, &gt; 100 étoiles).</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ONGLET 3 : DISSOLUTION ET COURANTS STELLAIRES -->
+      <div id="onglet-ao-dissolution" style="display: none;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px;">
+          
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px;">
+            <div style="color: #f97316; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Évaporation stellaire et forces de marée</div>
+            <div style="background: #0f172a; border-radius: 4px; padding: 6px; margin-bottom: 8px;">
+              <svg viewBox="0 0 280 85" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
+                <g transform="translate(140, 42)">
+                  <circle cx="0" cy="0" r="14" fill="#0284c7" opacity="0.3"/>
+                  <circle cx="-4" cy="-3" r="2.5" fill="#ffffff"/>
+                  <circle cx="3" cy="2" r="2" fill="#ffffff"/>
+                  <path d="M -15 0 C -45 -5 -80 -15 -110 -15" fill="none" stroke="#f97316" stroke-width="1.6" stroke-dasharray="3,3"/>
+                  <circle cx="-50" cy="-6" r="1.8" fill="#fdba74"/>
+                  <circle cx="-85" cy="-12" r="1.8" fill="#fdba74"/>
+                  <path d="M 15 0 C 45 5 80 15 110 15" fill="none" stroke="#f97316" stroke-width="1.6" stroke-dasharray="3,3"/>
+                  <circle cx="50" cy="6" r="1.8" fill="#fdba74"/>
+                  <circle cx="85" cy="12" r="1.8" fill="#fdba74"/>
+                  <text x="0" y="34" text-anchor="middle" fill="#94a3b8" font-size="7.5">Évaporation des étoiles légères le long de l'orbite</text>
+                </g>
+              </svg>
+            </div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; line-height: 1.4;">
+              La gravité d'un amas ouvert est très faible (vitesse de libération de seulement quelques km/s). Lors des frôlements répétés avec des nuages moléculaires géants et sous l'effet du cisaillement de marée galactique, les étoiles légères gagnent de l'énergie cinétique et s'échappent dans le milieu interstellaire.
+            </p>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px;">
+            <div style="color: #a78bfa; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Courants stellaires (groupes mouvants)</div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; margin-bottom: 6px; line-height: 1.35;">
+              Une fois l'amas dissous, ses étoiles continuent de voyager de concert pendant des centaines de millions d'années à la même vitesse et dans la même direction : c'est une <strong>association</strong> ou un <strong>courant stellaire</strong>.
+            </p>
+            <div style="background: #0f172a; border-radius: 4px; padding: 6px; margin-bottom: 6px;">
+              <div style="color: #c084fc; font-size: 0.75rem; font-weight: bold; margin-bottom: 2px;">Exemple : Le Courant de la Grande Ourse (Ursa Major)</div>
+              <p style="font-size: 0.72rem; color: #cbd5e1; margin: 0; line-height: 1.25;">
+                La majorité des étoiles de la célèbre casserole (sauf Dubhe et Alkaid) appartenaient au même amas ouvert né il y a ~300 millions d'années, aujourd'hui dispersé.
+              </p>
+            </div>
+            <p style="font-size: 0.75rem; color: #94a3b8; line-height: 1.35;">
+              <strong>Le cas du Soleil :</strong> notre étoile est elle-même née dans un amas ouvert il y a 4,6 milliards d'années, disloqué depuis des éons par les rotations galactiques.
+            </p>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px; grid-column: 1 / -1;">
+            <div style="color: #facc15; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Espérance de vie : Pourquoi les amas ouverts sont-ils éphémères ?</div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; line-height: 1.4;">
+              La plupart des amas ouverts ne survivent pas plus de <strong>200 à 400 millions d'années</strong> (une à deux rotations de la Voie lactée). Seuls les amas exceptionnellement riches et massifs situés loin des perturbations du centre galactique (comme M67 ou NGC 188) parviennent à dépasser plusieurs milliards d'années sans être disloqués.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SECTIONS SUIVANTES À COMPLÉTER -->
+    <!-- Emplacement pour les fiches individuelles (Pléiades, Hyades, Crèche, etc.) -->
+
+  </div>
+
+  <!-- VISIONNEUSE PLEIN ÉCRAN LIGHTBOX -->
+  <div class="lightbox-overlay" id="lightboxOverlay" onclick="fermerZoom()" title="Cliquer ou appuyer sur Échap pour fermer">
+    <img id="lightboxImg" class="lightbox-img" src="" alt="Agrandissement plein écran">
+  </div>
+
+  <script>
+    // GESTION DES ONGLETS DE L'INFOGRAPHIE
+    function changerOngletAO(nom) {
+      const onglets = ['distrib', 'trumpler', 'dissolution'];
+      onglets.forEach(o => {
+        const contenu = document.getElementById('onglet-ao-' + o);
+        const bouton = document.getElementById('btn-ao-' + o);
+        if (o === nom) {
+          contenu.style.display = 'block';
+          bouton.style.background = '#2563eb';
+          bouton.style.color = '#ffffff';
+        } else {
+          contenu.style.display = 'none';
+          bouton.style.background = '#1e293b';
+          bouton.style.color = '#94a3b8';
+        }
+      });
+    }
+
+    // GESTION DU ZOOM PLEIN ÉCRAN LIGHTBOX
+    function ouvrirZoomDirect(url) {
+      const overlay = document.getElementById('lightboxOverlay');
+      const img = document.getElementById('lightboxImg');
+      img.src = url;
+      overlay.classList.add('active');
+    }
+
+    function fermerZoom() {
+      document.getElementById('lightboxOverlay').classList.remove('active');
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        fermerZoom();
+      }
+    });
+  </script>
+</body>
+</html>
