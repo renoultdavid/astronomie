@@ -123,6 +123,69 @@
       border-radius: 8px;
       box-shadow: 0 0 50px rgba(0, 0, 0, 0.95), 0 0 20px rgba(56, 189, 248, 0.3);
     }
+    /* BANDEAU ACCÈS EXPLORATEUR CÉLESTE & BASE DE DONNÉES */
+    .top-explorer-banner {
+      width: 100%;
+      height: 44px;
+      margin-bottom: 2rem;
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.28) 0%, rgba(217, 119, 6, 0.12) 65%, transparent 100%);
+      border: 1.5px solid rgba(251, 191, 36, 0.7);
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.35s ease;
+      box-shadow: 0 4px 18px rgba(245, 158, 11, 0.25);
+    }
+    .top-explorer-banner:hover {
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.45) 0%, rgba(217, 119, 6, 0.22) 75%, transparent 100%);
+      border-color: #fde047;
+      box-shadow: 0 6px 28px rgba(250, 204, 21, 0.45);
+      transform: translateY(-1px);
+    }
+    .banner-lens-icon {
+      width: 18px;
+      height: 18px;
+      stroke: #fbbf24;
+      fill: none;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 0 6px #f59e0b);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+    .top-explorer-banner:hover .banner-lens-icon {
+      transform: scale(1.18) rotate(-10deg);
+      stroke: #fef08a;
+      filter: drop-shadow(0 0 10px #facc15);
+    }
+    .banner-text {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.72rem, 1vw, 0.85rem);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #fef3c7;
+      font-weight: 700;
+      text-shadow: 0 0 12px rgba(245, 158, 11, 0.6);
+    }
+    .banner-badge-hint {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      color: #fde68a;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      background: rgba(245, 158, 11, 0.2);
+      border: 1px solid rgba(251, 191, 36, 0.6);
+      padding: 2px 9px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
   </style>
 </head>
 <body>
