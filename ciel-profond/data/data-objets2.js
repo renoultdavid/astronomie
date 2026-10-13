@@ -1,5 +1,19 @@
 const OBJETS_CIEL_PROFOND_2 = [
 {
+    id: "ngc4698",
+    nomPrincipal: "NGC 4698",
+    autreNom: "",
+    catalogues: ["UGC 7970", "MCG +01-33-019", "VCC 2070", "PGC 43254"],
+    categoriePrincipale: "galaxie",
+    sousCategorie: "spirale",
+    specificites: ["seyfert"],
+    constellation: "Vierge",
+    image: "https://lh3.googleusercontent.com/d/1ZHbXAjMD-CjmzBuHqmSAel8KlwnXa6eM",
+    legendeImage: "Le bulbe orthogonal et les bras annulaires de NGC 4698 — Hubble / ESA",
+    coordonnees: { ad: "12h 48m 23s", dec: "+08° 29′ 15″", magnitude: "10.6", distance: "55 millions al", vitesseRadiale: "+1 009 km/s" },
+    texte: "NGC 4698 est une galaxie spirale précoce intermédiaire de classe SA(s)ab pec située dans la constellation de la Vierge, découverte par William Herschel en 1784. Évoluant à une distance d'environ cinquante-cinq millions d'années-lumière de la Terre et mesurant près de soixante-quinze mille années-lumière de diamètre, elle constitue un membre gravitationnellement lié de l'amas de la Vierge. Si son disque stellaire externe semble d'apparence régulière, NGC 4698 présente une cinématique interne singulière et rarissime : son bulbe stellaire central allongé et son disque nucléaire interne tournent selon un axe orthogonal (à angle droit) par rapport au grand disque galactique principal. Les étoiles et le gaz moléculaire froids du cœur décrivent ainsi une rotation polaire perpendiculaire, révélée par la spectroscopie 2D à champ intégral. Cette configuration atypique témoigne d'un événement de fusion mineure passée, au cours duquel une galaxie naine satellite a été absorbée le long d'une trajectoire polaire, injectant son moment cinétique perpendiculairement au plan galactique préexistant. Les bras spiraux externes, confinés à la périphérie du disque dans une pseudo-structure annulaire, sont jalonnés de petits amas d'étoiles bleues jeunes et de nœuds de poussière sombre absorbante. Le centre de la galaxie héberge un noyau actif de type Seyfert 2 propulsé par un trou noir supermassif en accrétion modérée, alimenté par le gaz canalisé par la résonance cinématique centrale. L'imagerie optique haute résolution de la caméra ACS du télescope spatial Hubble résout la transition nette entre l'orientation du bulbe étoilé ambré et la fine galette de poussière inclinée qui l'entoure. NGC 4698 constitue l'un des prototypes observationnels les plus nets pour étudier le découplage cinématique des cœurs galactiques et l'accrétion de matière selon des plans non coplanaires."
+  },
+    {
     id: "ngc4519",
     nomPrincipal: "NGC 4519",
     autreNom: "",
