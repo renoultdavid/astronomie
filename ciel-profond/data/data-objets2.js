@@ -1,5 +1,19 @@
 const OBJETS_CIEL_PROFOND_2 = [
 {
+    id: "pn_k_4_55",
+    nomPrincipal: "PN K 4-55",
+    autreNom: "Kohoutek 4-55",
+    catalogues: ["PN G081.2-14.9", "PK 081-14.1", "ARO 347"],
+    categoriePrincipale: "nebuleuse",
+    sousCategorie: "planetaire",
+    specificites: [],
+    constellation: "Cygne",
+    image: "https://lh3.googleusercontent.com/d/1OJ23EN8ecIyyH5GqIPotZxIdrUvo7YrW",
+    legendeImage: "L'architecture en coquilles concentriques de Kohoutek 4-55 — Hubble / WFPC2",
+    coordonnees: { ad: "21h 32m 44s", dec: "+32° 28′ 41″", magnitude: "13.4", distance: "4 600 al", vitesseRadiale: "-75 km/s" },
+    texte: "PN K 4-55 (Kohoutek 4-55) est une nébuleuse planétaire complexe située dans la constellation boréale du Cygne, découverte par l'astronome tchèque Luboš Kohoutek en 1967. Évoluant à une distance d'environ quatre mille six cents années-lumière du Système solaire au sein du disque de la Voie lactée, elle résulte des phases d'expulsion terminales de la matière gazeuse d'une étoile de masse intermédiaire parvenue au stade final de sa vie active. L'astre central, devenu un cœur stellaire dégénéré extrêmement chaud, irradie un intense flux de photons ultraviolets qui excite et ionise les vastes nappes de gaz dispersées dans l'espace interstellaire. L'imagerie optique à bande étroite réalisée par le télescope spatial Hubble à l'aide de la caméra WFPC2 révèle une structure en coquilles concentriques multiples particulièrement ordonnée et symétrique. La partie interne est dominée par un anneau dense et lumineux riche en oxygène ionisé (visible dans les longueurs d'onde associées aux teintes bleues), immédiatement entouré d'une seconde enveloppe intermédiaire brillante en émission d'hydrogène. L'ensemble est bordé par un halo externe étendu, marqué par une prépondérance de l'émission des ions d'azote ([N II]) aux teintes rougeâtres et orangées, matérialisant les premières pertes de masse subies par l'étoile géante rouge progénitrice. Cet enregistrement de données par Hubble revêt une importance historique : il constitue l'une des ultimes observations acquises par l'emblématique caméra WFPC2 en mai 2009, dix jours seulement avant son remplacement définitif par la WFC3 lors de la mission STS-125. L'expansion continue des enveloppes gazeuses à plusieurs dizaines de kilomètres par seconde dilue inexorablement la densité du milieu, qui cessera d'émettre dès que le rayonnement du cœur résiduel aura décru vers le stade de naine blanche froide."
+  },
+    {
     id: "pmr1",
     nomPrincipal: "PMR 1",
     autreNom: "Nébuleuse du Crâne Ouvert (Exposed Cranium Nebula)",
