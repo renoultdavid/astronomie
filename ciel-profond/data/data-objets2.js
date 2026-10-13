@@ -1598,10 +1598,19 @@ const OBJETS_CIEL_PROFOND_2 = [
     sousCategorie: "spirale",
     specificites: ["starburst"],
     constellation: "Céphée",
-    image: "https://lh3.googleusercontent.com/d/1nBVdGjBTyashqXmYWPRNpwQpvLWWgRc5",
-    legendeImage: "Le disque stellaire de face et les nombreux bras de NGC 6946 — Hubble",
+    image: "https://lh3.googleusercontent.com/d/1iARinXoUQU_7nuEXuL1j0yUFUchra9o9",
+    imagesGalerie: [
+      {
+        url: "https://lh3.googleusercontent.com/d/1nBVdGjBTyashqXmYWPRNpwQpvLWWgRc5",
+        legende: "Le disque stellaire de face et les nombreux bras de NGC 6946 — Hubble"
+      },
+      {
+        url: "https://lh3.googleusercontent.com/d/1iARinXoUQU_7nuEXuL1j0yUFUchra9o9",
+        legende: "Vue grand champ et régions H-alpha au télescope Mayall — NOIRLab / KPNO"
+      }
+    ],
     coordonnees: { ad: "20h 34m 52s", dec: "+60° 09′ 14″", magnitude: "8.8", distance: "25 millions al", vitesseRadiale: "+48 km/s" },
-    texte: "NGC 6946 (Caldwell 12, surnommée la Galaxie du Feu d'Artifice) est une galaxie spirale intermédiaire de classe SAB(rs)cd située à cheval sur les constellations de Céphée et du Cygne, découverte par William Herschel en 1798. Distante d'environ vingt-cinq millions d'années-lumière de la Terre et mesurant près de quarante mille années-lumière de diamètre, elle est observée presque rigoureusement de face avec une inclinaison d'environ trente-trois degrés. Bien que sa lumière soit atténuée par l'extinction due aux poussières de notre propre Voie lactée en raison de sa proximité avec le plan galactique, elle présente un disque stellaire dynamique parcouru par de multiples bras spiraux ramifiés et asymétriques. Ces bras sont jalonnés de centaines de complexes nébulaires ionisés en émission H-alpha et de super-amas d'étoiles massives. NGC 6946 est mondialement réputée pour détenir le record du nombre de supernovae observées au sein d'une seule galaxie au cours d'un siècle, avec dix explosions répertoriées entre 1917 et 2017 (dont SN 1917A, SN 1939C, SN 1948B, SN 1968D, SN 1969P, SN 1980K, SN 2002hh, SN 2004et, SN 2008S et SN 2017eaw). En outre, elle a été le siège de la disparition de l'étoile N6946-BH1 en 2009, candidate majeure à un effondrement direct en trou noir sans explosion lumineuse visible (supernova ratée). Les observations menées avec le télescope spatial Hubble, Chandra et Spitzer confirment la présence d'un sursaut de formation stellaire nucléaire alimenté par un vaste réservoir de gaz moléculaire froid, faisant de NGC 6946 un laboratoire de référence pour l'astrophysique des étoiles massives."
+    texte: "NGC 6946 (Caldwell 12, universellement désignée sous le nom de Galaxie du Feu d'Artifice) est une galaxie spirale intermédiaire de classe SAB(rs)cd située à cheval sur les constellations de Céphée et du Cygne, découverte par William Herschel en 1798. Évoluant à une distance d'environ vingt-cinq millions d'années-lumière de la Terre et mesurant près de quarante mille années-lumière de diamètre, elle est observée quasiment de face sous une faible inclinaison d'environ trente-trois degrés. Bien que son rayonnement optique subisse une forte extinction interstellaire due aux poussières du plan de notre propre Voie lactée, son architecture révèle un petit bulbe central entouré d'un disque dynamique où s'enroulent de multiples bras spiraux ramifiés et asymétriques. Ces bras sont densément jalonnés de centaines de complexes d'hydrogène ionisé en émission H-alpha et d'associations OB d'étoiles jeunes et massives. NGC 6946 détient le record astrophysique du nombre de supernovae historiques observées au sein d'une même galaxie au cours d'un siècle, avec dix explosions répertoriées entre 1917 et 2017 (notamment SN 1917A, SN 1939C, SN 1948B, SN 1968D, SN 1969P, SN 1980K, SN 2002hh, SN 2004et, SN 2008S et SN 2017eaw), associant détonations thermonucléaires et effondrements de cœur gravitationnels. En 2009, la disparition optique de la supergéante rouge N6946-BH1 a fourni le premier cas documenté de supernova ratée avec formation directe d'un trou noir stellaire sans contrepartie lumineuse majeure. L'imagerie combinée des observatoires spatiaux et terrestres montre un anneau interne de sursaut de formation stellaire alimenté par d'immenses réservoirs de gaz moléculaire froid, confirmant le statut de laboratoire d'excellence de NGC 6946 pour l'étude du cycle de vie des étoiles massives."
   },
     {
     id: "ngc5907",
