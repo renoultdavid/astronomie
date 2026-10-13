@@ -1,1 +1,650 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le Monde des Nébuleuses — Atlas Céleste</title>
+  <link rel="stylesheet" href="../../fiche.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #020617;
+      color: #e2e8f0;
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.8;
+      overflow-x: hidden;
+      padding-bottom: 5rem;
+    }
+
+    .fiche-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    /* EN-TÊTE */
+    .hero-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .hero-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #f43f5e;
+      background: rgba(244, 63, 94, 0.12);
+      border: 1px solid rgba(244, 63, 94, 0.35);
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+    .hero-header h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 3.8vw, 3rem);
+      letter-spacing: 0.12em;
+      color: #ffffff;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+    .hero-header .subtitle {
+      font-size: 1.05rem;
+      color: #94a3b8;
+      font-weight: 300;
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    /* TEXTES PRINCIPAUX */
+    .prose-block {
+      font-size: 1rem;
+      color: #cbd5e1;
+      text-align: justify;
+      font-weight: 300;
+      margin-bottom: 2rem;
+    }
+    .prose-block p {
+      margin-bottom: 1.4rem;
+    }
+
+    /* TITRES DE SECTIONS */
+    .section-main-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.7rem;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin: 3.5rem 0 1.5rem;
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-main-title::before {
+      content: "";
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: #f43f5e;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #f43f5e;
+    }
+
+    /* CARTES DE PRÉSENTATION */
+    .object-showcase {
+      background: #0b1120;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 1.8rem;
+      margin: 2.2rem 0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    .object-showcase-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      color: #f8fafc;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .object-tag {
+      font-size: 0.7rem;
+      font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: rgba(244, 63, 94, 0.15);
+      color: #fb7185;
+      border: 1px solid rgba(244, 63, 94, 0.4);
+      padding: 2px 10px;
+      border-radius: 14px;
+    }
+
+    /* CADRE D'IMAGE ZOOMABLE */
+    .zoomable-img-wrap {
+      position: relative;
+      width: 100%;
+      background: #000;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #1e293b;
+      margin: 1.2rem 0 1.5rem;
+      cursor: zoom-in;
+    }
+    .zoomable-img-wrap img {
+      width: 100%;
+      max-height: 480px;
+      object-fit: contain;
+      display: block;
+      transition: filter 0.25s ease;
+      background: #000;
+    }
+    .zoomable-img-wrap:hover img {
+      filter: brightness(1.08);
+    }
+    .zoom-hint-tag {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(2, 6, 23, 0.85);
+      border: 1px solid rgba(244, 63, 94, 0.6);
+      color: #fb7185;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      pointer-events: none;
+      backdrop-filter: blur(4px);
+    }
+    .zoom-pulse {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #f43f5e;
+      box-shadow: 0 0 8px #f43f5e;
+      animation: pulseAnim 1.8s infinite;
+    }
+    @keyframes pulseAnim {
+      0%, 100% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    /* VISIONNEUSE PLEIN ÉCRAN LIGHTBOX */
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+      padding: 1.5vh 1.5vw;
+    }
+    .lightbox-overlay.active {
+      display: flex;
+    }
+    .lightbox-img {
+      max-width: 97vw;
+      max-height: 94vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.95), 0 0 20px rgba(244, 63, 94, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="fiche-wrapper">
+
+    <!-- EN-TÊTE DE LA FICHE -->
+    <header class="hero-header">
+      <div class="hero-badge">Milieu Interstellaire • Gaz & Poussières</div>
+      <h1>Le Monde des Nébuleuses</h1>
+      <div class="subtitle">
+        Berceaux d'étoiles, voiles de silicates et tombeaux incandescents
+      </div>
+    </header>
+
+    <!-- INTRODUCTION GÉNÉRALE -->
+    <div class="prose-block">
+      <p>
+        Véritables matrices du cosmos, les nébuleuses sont de gigantesques nuages de gaz et de poussières interstellaires qui jalonnent les galaxies. Dans le silence glacé des nébuleuses obscures ou l'éclat vermillon des régions H II, la gravité condense la matière pour allumer de nouvelles étoiles.
+      </p>
+      <p>
+        Ailleurs, de vastes drapés de silicates diffusent simplement la lumière bleutée des astres environnants. À l'autre bout de la vie stellaire, les nébuleuses planétaires et les rémanents de supernova expulsent les éléments forgés au cœur des astres agonisants. Berceaux et tombeaux célestes à la fois, elles orchestrent l'incessant recyclage chimique qui ensemence l'Univers.
+      </p>
+    </div>
+
+    <!-- INFOGRAPHIE INTERACTIVE DES NÉBULEUSES -->
+    <div id="infographie-nebuleuses" style="font-family: system-ui, -apple-system, sans-serif; background: #0b1120; color: #e2e8f0; padding: 12px 14px; border-radius: 10px; width: 100%; border: 1px solid #1e293b; margin: 2rem 0 3rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
+      
+      <header style="text-align: center; margin-bottom: 12px;">
+        <h2 style="color: #f8fafc; margin: 0; font-size: 1.2rem; font-family: 'Cinzel', serif;">Les différentes familles de nébuleuses</h2>
+        <p style="color: #94a3b8; margin-top: 3px; font-size: 0.8rem;">Pouponnières stellaires, nuages de poussières et résidus de fin de vie</p>
+      </header>
+
+      <!-- Sélecteur d'onglets compact -->
+      <div style="display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin-bottom: 12px;">
+        <button onclick="changerOngletNeb('panorama')" id="btn-neb-panorama" style="padding: 6px 14px; border-radius: 6px; border: none; background: #2563eb; color: #fff; font-weight: 600; cursor: pointer; font-size: 0.8rem;">1. Panorama des 5 types</button>
+        <button onclick="changerOngletNeb('pouponnieres')" id="btn-neb-pouponnieres" style="padding: 6px 14px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.8rem;">2. Pouponnières & Poussières</button>
+        <button onclick="changerOngletNeb('morts')" id="btn-neb-morts" style="padding: 6px 14px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.8rem;">3. Morts stellaires</button>
+      </div>
+
+      <!-- ONGLET 1 : PANORAMA COMPARATIF -->
+      <div id="onglet-neb-panorama">
+        <div style="background: #070d19; border: 1px solid #1e293b; border-radius: 6px; padding: 8px; margin-bottom: 10px; overflow-x: auto;">
+          <svg viewBox="0 0 920 220" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; min-width: 700px; display: block;">
+            <defs>
+              <radialGradient id="gradHII" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="25%" stop-color="#fb7185"/>
+                <stop offset="70%" stop-color="#e11d48" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#881337" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="gradReflex" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="35%" stop-color="#60a5fa" stop-opacity="0.85"/>
+                <stop offset="75%" stop-color="#1d4ed8" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#0f172a" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="gradPlanetaire" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="20%" stop-color="#2dd4bf" stop-opacity="0.9"/>
+                <stop offset="65%" stop-color="#0f766e" stop-opacity="0.6"/>
+                <stop offset="90%" stop-color="#f43f5e" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#0f172a" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+
+            <text x="460" y="18" text-anchor="middle" fill="#94a3b8" font-size="11" letter-spacing="1">LES CINQ GRANDES NATURES PHYSIQUES DES NÉBULEUSES</text>
+
+            <!-- 1. ZONE HII -->
+            <g transform="translate(92, 105)">
+              <circle cx="0" cy="0" r="44" fill="url(#gradHII)"/>
+              <circle cx="-6" cy="-4" r="3.5" fill="#bae6fd"/>
+              <circle cx="8" cy="6" r="2.8" fill="#bae6fd"/>
+              <text x="0" y="58" text-anchor="middle" fill="#fb7185" font-size="11.5" font-weight="bold">1. Région H II</text>
+              <text x="0" y="71" text-anchor="middle" fill="#cbd5e1" font-size="9">Émission (gaz ionisé)</text>
+              <text x="0" y="83" text-anchor="middle" fill="#94a3b8" font-size="8.5">Ex. : M42 (Orion)</text>
+            </g>
+
+            <!-- 2. RÉFLEXION -->
+            <g transform="translate(276, 105)">
+              <circle cx="0" cy="0" r="44" fill="url(#gradReflex)"/>
+              <circle cx="0" cy="0" r="3.5" fill="#ffffff"/>
+              <text x="0" y="58" text-anchor="middle" fill="#38bdf8" font-size="11.5" font-weight="bold">2. Réflexion</text>
+              <text x="0" y="71" text-anchor="middle" fill="#cbd5e1" font-size="9">Diffusion sur poussière</text>
+              <text x="0" y="83" text-anchor="middle" fill="#94a3b8" font-size="8.5">Ex. : Pléiades (M45)</text>
+            </g>
+
+            <!-- 3. OBSCURE -->
+            <g transform="translate(460, 105)">
+              <circle cx="-35" cy="-25" r="1.5" fill="#ffffff" opacity="0.6"/>
+              <circle cx="32" cy="-20" r="1.5" fill="#ffffff" opacity="0.7"/>
+              <circle cx="-28" cy="22" r="1.5" fill="#ffffff" opacity="0.8"/>
+              <circle cx="36" cy="18" r="1.5" fill="#ffffff" opacity="0.6"/>
+              <ellipse cx="0" cy="0" rx="42" ry="34" fill="#020617" stroke="#334155" stroke-width="1.2"/>
+              <path d="M -18 -8 Q -6 -24 14 -12 Q 26 8 8 20 Q -14 26 -24 8 Z" fill="#000000"/>
+              <text x="0" y="58" text-anchor="middle" fill="#94a3b8" font-size="11.5" font-weight="bold">3. Obscure</text>
+              <text x="0" y="71" text-anchor="middle" fill="#cbd5e1" font-size="9">Absorption opaque</text>
+              <text x="0" y="83" text-anchor="middle" fill="#94a3b8" font-size="8.5">Ex. : Tête de Cheval</text>
+            </g>
+
+            <!-- 4. PLANÉTAIRE -->
+            <g transform="translate(644, 105)">
+              <circle cx="0" cy="0" r="38" fill="url(#gradPlanetaire)"/>
+              <circle cx="0" cy="0" r="18" fill="#070d19"/>
+              <circle cx="0" cy="0" r="2.2" fill="#ffffff"/>
+              <text x="0" y="58" text-anchor="middle" fill="#2dd4bf" font-size="11.5" font-weight="bold">4. Planétaire</text>
+              <text x="0" y="71" text-anchor="middle" fill="#cbd5e1" font-size="9">Fin d'étoile moyenne</text>
+              <text x="0" y="83" text-anchor="middle" fill="#94a3b8" font-size="8.5">Ex. : M57 (Anneau)</text>
+            </g>
+
+            <!-- 5. RÉMANENT SUPERNOVA -->
+            <g transform="translate(828, 105)">
+              <path d="M -30 -15 Q -10 -35 15 -25 Q 35 -15 28 10 Q 20 30 -8 32 Q -32 25 -32 -2 Z" fill="none" stroke="#f97316" stroke-width="1.5" stroke-dasharray="4,2"/>
+              <path d="M -22 -10 Q 0 -24 20 -8 Q 18 16 -4 20 Q -24 16 -18 -8" fill="none" stroke="#a855f7" stroke-width="1.3"/>
+              <circle cx="0" cy="0" r="2.5" fill="#38bdf8"/>
+              <text x="0" y="58" text-anchor="middle" fill="#f97316" font-size="11.5" font-weight="bold">5. Rémanent (SNR)</text>
+              <text x="0" y="71" text-anchor="middle" fill="#cbd5e1" font-size="9">Onde de choc cataclysmique</text>
+              <text x="0" y="83" text-anchor="middle" fill="#94a3b8" font-size="8.5">Ex. : M1 (Crabe)</text>
+            </g>
+          </svg>
+        </div>
+
+        <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px; overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: left; color: #ffffff;">
+            <thead>
+              <tr style="border-bottom: 1.5px solid #64748b; font-weight: bold;">
+                <th style="padding: 6px 8px;">Catégorie</th>
+                <th style="padding: 6px 8px;">Source d'énergie</th>
+                <th style="padding: 6px 8px;">Mécanisme optique</th>
+                <th style="padding: 6px 8px;">Couleur dominante</th>
+              </tr>
+            </thead>
+            <tbody style="line-height: 1.45;">
+              <tr style="border-bottom: 1px solid #334155;">
+                <td style="padding: 6px 8px; color: #fca5a5; font-weight: bold; white-space: nowrap;">Région H II</td>
+                <td style="padding: 6px 8px;">Étoiles jeunes massives (types O et B)</td>
+                <td style="padding: 6px 8px;">Ionisation UV et recombinaison de l'hydrogène</td>
+                <td style="padding: 6px 8px;">Rouge vif (raie H-alpha à 656,3 nm)</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #334155;">
+                <td style="padding: 6px 8px; color: #7dd3fc; font-weight: bold; white-space: nowrap;">Réflexion</td>
+                <td style="padding: 6px 8px;">Étoiles voisines sans UV suffisant</td>
+                <td style="padding: 6px 8px;">Diffusion de Rayleigh sur grains de poussières</td>
+                <td style="padding: 6px 8px;">Bleu azur (longueurs d'onde courtes diffusées)</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #334155;">
+                <td style="padding: 6px 8px; color: #e2e8f0; font-weight: bold; white-space: nowrap;">Obscure</td>
+                <td style="padding: 6px 8px;">Aucune (nuage moléculaire froid, 10 à 20 K)</td>
+                <td style="padding: 6px 8px;">Absorption et extinction de la lumière d'arrière-plan</td>
+                <td style="padding: 6px 8px;">Noir / Silhouette opaque</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #334155;">
+                <td style="padding: 6px 8px; color: #5eead4; font-weight: bold; white-space: nowrap;">Planétaire</td>
+                <td style="padding: 6px 8px;">Cœur dénudé d'étoile moyenne (naine blanche)</td>
+                <td style="padding: 6px 8px;">Excitation des couches de gaz éjectées en fin de vie</td>
+                <td style="padding: 6px 8px;">Vert-turquoise ([O III] à 500,7 nm) et rouge</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px 8px; color: #fdba74; font-weight: bold; white-space: nowrap;">Rémanent (SNR)</td>
+                <td style="padding: 6px 8px;">Énergie cinétique d'explosion de supernova</td>
+                <td style="padding: 6px 8px;">Chauffage par onde de choc et rayonnement synchrotron</td>
+                <td style="padding: 6px 8px;">Dentelles multicolores (rayons X, optique, radio)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ONGLET 2 : POUPONNIÈRES & POUSSIÈRES -->
+      <div id="onglet-neb-pouponnieres" style="display: none;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px;">
+          
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px;">
+            <div style="color: #fb7185; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Régions H II (Nébuleuses en émission)</div>
+            <div style="background: #0f172a; border-radius: 4px; padding: 6px; margin-bottom: 8px;">
+              <svg viewBox="0 0 280 80" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
+                <g transform="translate(140, 40)">
+                  <circle cx="0" cy="0" r="32" fill="#fb7185" opacity="0.3"/>
+                  <circle cx="0" cy="0" r="20" fill="#f43f5e" opacity="0.5"/>
+                  <circle cx="-5" cy="-2" r="3" fill="#bae6fd"/>
+                  <circle cx="4" cy="3" r="2.2" fill="#ffffff"/>
+                  <line x1="6" y1="-5" x2="18" y2="-16" stroke="#38bdf8" stroke-width="1.2" stroke-dasharray="2,2"/>
+                  <line x1="-8" y1="-6" x2="-20" y2="-18" stroke="#38bdf8" stroke-width="1.2" stroke-dasharray="2,2"/>
+                  <line x1="8" y1="6" x2="20" y2="18" stroke="#38bdf8" stroke-width="1.2" stroke-dasharray="2,2"/>
+                  <text x="0" y="36" text-anchor="middle" fill="#94a3b8" font-size="8">Sphère d'ionisation UV (Strömgren)</text>
+                </g>
+              </svg>
+            </div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; line-height: 1.4;">
+              Des étoiles massives naissantes (types O et B) irradient un puissant rayonnement ultraviolet (> 13,6 eV). Les atomes d'hydrogène neutre (H I) sont arrachés de leurs électrons, formant un plasma de protons et d'électrons libres (H II). Lors de la recombinaison, l'électron retombe en émettant le photon rouge caractéristique <strong>H-alpha</strong> (656,3 nm).
+            </p>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px;">
+            <div style="color: #38bdf8; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Nébuleuses par réflexion</div>
+            <div style="background: #0f172a; border-radius: 4px; padding: 6px; margin-bottom: 8px;">
+              <svg viewBox="0 0 280 80" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
+                <g transform="translate(140, 40)">
+                  <ellipse cx="10" cy="0" rx="40" ry="26" fill="#38bdf8" opacity="0.35"/>
+                  <circle cx="-16" cy="0" r="4" fill="#ffffff"/>
+                  <line x1="-10" y1="-4" x2="8" y2="-16" stroke="#bae6fd" stroke-width="1.3"/>
+                  <line x1="-8" y1="0" x2="14" y2="0" stroke="#bae6fd" stroke-width="1.3"/>
+                  <line x1="-10" y1="4" x2="8" y2="16" stroke="#bae6fd" stroke-width="1.3"/>
+                  <circle cx="16" cy="-14" r="1.5" fill="#cbd5e1"/>
+                  <circle cx="22" cy="8" r="1.5" fill="#cbd5e1"/>
+                  <text x="0" y="36" text-anchor="middle" fill="#94a3b8" font-size="8">Diffusion préférentielle de la lumière bleue</text>
+                </g>
+              </svg>
+            </div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; line-height: 1.4;">
+              L'étoile proche n'est pas assez chaude pour ioniser le gaz. La lumière frappe de minuscules grains de carbone et de silicates. Selon la loi de diffusion de Rayleigh, les courtes longueurs d'onde (bleues) sont beaucoup plus efficacement dispersées que les rouges, conférant au nuage sa teinte céleste.
+            </p>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px; grid-column: 1 / -1;">
+            <div style="color: #94a3b8; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Nébuleuses obscures (Nuages moléculaires denses)</div>
+            <div style="background: #0f172a; border-radius: 4px; padding: 6px; margin-bottom: 8px;">
+              <svg viewBox="0 0 600 70" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
+                <g transform="translate(300, 35)">
+                  <rect x="-280" y="-30" width="560" height="60" fill="#991b1b" opacity="0.5" rx="4"/>
+                  <circle cx="-220" cy="-10" r="1.5" fill="#ffffff"/>
+                  <circle cx="-160" cy="15" r="1.2" fill="#ffffff"/>
+                  <circle cx="180" cy="-12" r="1.5" fill="#ffffff"/>
+                  <circle cx="230" cy="10" r="1.3" fill="#ffffff"/>
+                  <path d="M -80 30 C -70 0 -50 -10 -40 -25 C -30 -35 -10 -25 -5 -15 C 0 -5 -10 15 10 20 C 30 25 50 15 70 30 Z" fill="#020617"/>
+                  <text x="0" y="5" text-anchor="middle" fill="#94a3b8" font-size="8.5">Absorption totale en lumière visible (transparence en infrarouge)</text>
+                </g>
+              </svg>
+            </div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; line-height: 1.4;">
+              Ce sont les régions les plus denses et les plus froides (10 à 20 K) du milieu interstellaire, où le gaz se trouve sous forme de dihydrogène moléculaire (H2). La poussière y bloque complètement le rayonnement visible d'arrière-plan. C'est au cœur de ces cocons que s'effondrent les futures étoiles, décelables sous l'œil des télescopes infrarouges comme le James Webb.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ONGLET 3 : MORTS STELLAIRES -->
+      <div id="onglet-neb-morts" style="display: none;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px;">
+          
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px;">
+            <div style="color: #2dd4bf; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Nébuleuses planétaires (Étoiles de 0,8 à 8 masses solaires)</div>
+            <div style="background: #0f172a; border-radius: 4px; padding: 6px; margin-bottom: 8px;">
+              <svg viewBox="0 0 280 80" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
+                <g transform="translate(140, 40)">
+                  <ellipse cx="0" cy="0" rx="42" ry="24" fill="none" stroke="#f43f5e" stroke-width="2" opacity="0.7"/>
+                  <ellipse cx="0" cy="0" rx="26" ry="15" fill="#2dd4bf" opacity="0.35"/>
+                  <ellipse cx="0" cy="0" rx="26" ry="15" fill="none" stroke="#2dd4bf" stroke-width="1.8"/>
+                  <circle cx="0" cy="0" r="2.2" fill="#ffffff"/>
+                  <text x="0" y="36" text-anchor="middle" fill="#94a3b8" font-size="8">Naine blanche centrale (> 50 000 K)</text>
+                </g>
+              </svg>
+            </div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; line-height: 1.4;">
+              Une étoile intermédiaire (comme le Soleil) parvenue au stade de géante rouge expulse doucement ses couches externes. Le cœur résiduel dénudé (future <strong>naine blanche</strong>) est si brûlant qu'il excite le gaz expulsé, produisant la raie interdite de l'oxygène doublement ionisé <strong>[O III]</strong> à 500,7 nm. Ce phénomène ne dure que 20 000 à 50 000 ans.
+            </p>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px;">
+            <div style="color: #f97316; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Rémanents de supernova (Étoiles massives > 8 masses solaires)</div>
+            <div style="background: #0f172a; border-radius: 4px; padding: 6px; margin-bottom: 8px;">
+              <svg viewBox="0 0 280 80" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
+                <g transform="translate(140, 40)">
+                  <path d="M -34 -12 C -20 -28 10 -30 28 -18 C 40 -4 34 20 18 26 C 0 32 -26 26 -32 8 Z" fill="none" stroke="#f97316" stroke-width="1.6" stroke-dasharray="5,2"/>
+                  <path d="M -22 -8 C -10 -18 8 -20 20 -8 C 24 6 14 18 4 18 C -12 18 -20 10 -22 -8" fill="none" stroke="#a855f7" stroke-width="1.2"/>
+                  <circle cx="0" cy="0" r="2" fill="#38bdf8"/>
+                  <line x1="-8" y1="-8" x2="8" y2="8" stroke="#38bdf8" stroke-width="1" stroke-dasharray="2,2"/>
+                  <text x="0" y="36" text-anchor="middle" fill="#94a3b8" font-size="8">Onde de choc à des milliers de km/s + Pulsar</text>
+                </g>
+              </svg>
+            </div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; line-height: 1.4;">
+              Résultat de l'explosion cataclysmique d'une étoile massive. La matière est propulsée à plus de 10 000 km/s. L'onde de choc réchauffe le gaz interstellaire à des millions de degrés, émettant des rayons X et de la lumière synchrotron. Au centre subsiste souvent une <strong>étoile à neutrons</strong> (pulsar) ou un trou noir.
+            </p>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px; grid-column: 1 / -1;">
+            <div style="color: #facc15; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Le grand cycle cosmique de la matière</div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; line-height: 1.4;">
+              Les nébuleuses constituent le moteur du recyclage stellaire : le gaz primitif se condense dans les <strong>nébuleuses obscures</strong> pour allumer de nouvelles étoiles dans les <strong>régions H II</strong>. En mourant, ces étoiles restituent leur matière enrichie en éléments lourds (carbone, oxygène, fer) via les <strong>nébuleuses planétaires</strong> et les <strong>rémanents de supernova</strong>, ensemensant ainsi les futures générations planétaires.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- SECTION DES FAMILLES DE NÉBULEUSES                              -->
+    <!-- ================================================================= -->
+    <h2 class="section-main-title">Panorama des Nébuleuses</h2>
+
+    <!-- 1. NÉBULEUSES H II -->
+    <div class="object-showcase">
+      <div class="object-showcase-title">
+        <span>Nébuleuses H II</span>
+        <span class="object-tag">Émission • Hydrogène Ionisé</span>
+      </div>
+      <div class="zoomable-img-wrap" onclick="ouvrirZoomDirect('https://lh3.googleusercontent.com/d/1btwgP1GJ4zZeraLarWmpNwLDKB1ybaPY')">
+        <img src="https://lh3.googleusercontent.com/d/1btwgP1GJ4zZeraLarWmpNwLDKB1ybaPY" alt="Nébuleuse H II — Région d'émission">
+        <div class="zoom-hint-tag"><span class="zoom-pulse"></span><span>Agrandir ⤢</span></div>
+      </div>
+      <div class="prose-block">
+        <p>
+          Une nébuleuse ou région H II est un immense nuage interstellaire composé d'hydrogène atomique presque totalement ionisé. Elle est illuminée et chauffée par le rayonnement ultraviolet intense de jeunes étoiles très massives et chaudes de type O ou B. En se recombinant avec les protons, les électrons émettent une lumière caractéristique dominée par la raie H-alpha, conférant au nuage sa célèbre teinte rosée ou rougeoyante.
+        </p>
+        <p>
+          Véritable pouponnière stellaire, cette structure bouillonne d'activité avant d'être peu à peu dispersée par le souffle puissant des vents stellaires. Éphémère à l'échelle cosmique, elle ne survit que quelques millions d'années — la grande nébuleuse d'Orion en étant l'exemple le plus spectaculaire.
+        </p>
+      </div>
+    </div>
+
+    <!-- 2. NÉBULEUSES OBSCURES -->
+    <div class="object-showcase">
+      <div class="object-showcase-title">
+        <span>Nébuleuses Obscures</span>
+        <span class="object-tag">Absorption • Cocon Moléculaire</span>
+      </div>
+      <div class="zoomable-img-wrap" onclick="ouvrirZoomDirect('https://lh3.googleusercontent.com/d/1EUEkJScD8VliXreNHmZu114p_eyq8bai')">
+        <img src="https://lh3.googleusercontent.com/d/1EUEkJScD8VliXreNHmZu114p_eyq8bai" alt="Nébuleuse Obscure — Nuage moléculaire opaque">
+        <div class="zoom-hint-tag"><span class="zoom-pulse"></span><span>Agrandir ⤢</span></div>
+      </div>
+      <div class="prose-block">
+        <p>
+          Une nébuleuse obscure est une concentration dense de gaz moléculaire froid et de microscopiques grains de poussières interstellaires. Dépourvue d'étoiles pour l'éclairer de l'intérieur, elle absorbe et masque la lumière visible des astres ou des nébuleuses situés en arrière-plan. Maintenue à des températures glaciales très proches du zéro absolu, elle protège sa matière des rayonnements extérieurs destructeurs.
+        </p>
+        <p>
+          Ce calme thermique permet à la gravité de compacter la poussière et le gaz, faisant de ces zones sombres le tout premier berceau des étoiles en gestation. Rendue célèbre par des silhouettes emblématiques comme la Tête de Cheval ou le Sac de Charbon, elle ne dévoile son cœur secret que sous l'œil des télescopes infrarouges.
+        </p>
+      </div>
+    </div>
+
+    <!-- 3. NÉBULEUSES PLANÉTAIRES -->
+    <div class="object-showcase">
+      <div class="object-showcase-title">
+        <span>Nébuleuses Planétaires</span>
+        <span class="object-tag">Fin de Vie • Gaz Excité</span>
+      </div>
+      <div class="zoomable-img-wrap" onclick="ouvrirZoomDirect('https://lh3.googleusercontent.com/d/1i_uXRaIJ_aLSBM_zZ6sBFEG_n8z6AGz7')">
+        <img src="https://lh3.googleusercontent.com/d/1i_uXRaIJ_aLSBM_zZ6sBFEG_n8z6AGz7" alt="Nébuleuse Planétaire — Coquille d'étoile intermédiaire">
+        <div class="zoom-hint-tag"><span class="zoom-pulse"></span><span>Agrandir ⤢</span></div>
+      </div>
+      <div class="prose-block">
+        <p>
+          Une nébuleuse planétaire est une coquille de gaz en expansion éjectée par une étoile de masse faible ou intermédiaire en fin de vie. Au centre, le cœur stellaire mis à nu — une future naine blanche — émet un intense rayonnement ultraviolet qui ionise et fait resplendir la matière expulsée. Ses motifs complexes et ses teintes vives, souvent bleu-vert et pourpres, trahissent la présence d'oxygène ionisé et d'hydrogène sculptés par des vents stellaires.
+        </p>
+        <p>
+          Son appellation historique provient simplement de sa vague ressemblance avec le disque verdâtre d'Uranus ou de Neptune dans les lunettes astronomiques du XVIIIe siècle. Éphémère à l'échelle cosmique, elle ne brille que quelques dizaines de milliers d'années avant de disperser ses éléments lourds dans le milieu interstellaire.
+        </p>
+      </div>
+    </div>
+
+    <!-- 4. NÉBULEUSES PAR RÉFLEXION -->
+    <div class="object-showcase">
+      <div class="object-showcase-title">
+        <span>Nébuleuses par Réflexion</span>
+        <span class="object-tag">Diffusion de Rayleigh • Poussières</span>
+      </div>
+      <div class="zoomable-img-wrap" onclick="ouvrirZoomDirect('https://lh3.googleusercontent.com/d/1fcdEnmN2MAjQCCEdXf5K3wuzbd0Ep6_Y')">
+        <img src="https://lh3.googleusercontent.com/d/1fcdEnmN2MAjQCCEdXf5K3wuzbd0Ep6_Y" alt="Nébuleuse par Réflexion — Voile bleuté diffus">
+        <div class="zoom-hint-tag"><span class="zoom-pulse"></span><span>Agrandir ⤢</span></div>
+      </div>
+      <div class="prose-block">
+        <p>
+          Une nébuleuse par réflexion est un nuage interstellaire de gaz et de poussières qui ne brille pas par lui-même, mais renvoie la lumière d'étoiles voisines. Les astres qui l'illuminent n'étant pas assez chauds pour ioniser le gaz environnant, la matière se contente de diffuser leur éclat sans émettre de rayonnement propre.
+        </p>
+        <p>
+          Elle arbore presque toujours une teinte bleutée caractéristique, les micrograins de poussière diffusant plus efficacement les courtes longueurs d'onde par diffusion Rayleigh. Ces nuages marquent souvent la présence de jeunes étoiles traversant fortuitement de vastes réservoirs de poussières cosmiques. Les délicats voiles lumineux enveloppant l'amas des Pléiades en constituent l'exemple le plus emblématique du ciel nocturne.
+        </p>
+      </div>
+    </div>
+
+    <!-- 5. RÉMANENTS DE SUPERNOVA -->
+    <div class="object-showcase">
+      <div class="object-showcase-title">
+        <span>Rémanents de Supernova</span>
+        <span class="object-tag">Onde de Choc • Recyclage Cosmique</span>
+      </div>
+      <div class="zoomable-img-wrap" onclick="ouvrirZoomDirect('https://lh3.googleusercontent.com/d/1KSMsgUgAuHxoW5HDmqUowULSZS_JKW2T')">
+        <img src="https://lh3.googleusercontent.com/d/1KSMsgUgAuHxoW5HDmqUowULSZS_JKW2T" alt="Rémanent de Supernova — Explosion cataclysmique">
+        <div class="zoom-hint-tag"><span class="zoom-pulse"></span><span>Agrandir ⤢</span></div>
+      </div>
+      <div class="prose-block">
+        <p>
+          Un rémanent de supernova est une structure diffuse en expansion rapide, vestige de l'explosion cataclysmique d'une étoile en fin de vie. Propulsée à des milliers de kilomètres par seconde, son onde de choc compresse et réchauffe le gaz interstellaire environnant, générant d'intenses rayonnements. En son centre subsiste souvent le cœur effondré du progéniteur, sous la forme d'une étoile à neutrons, d'un pulsar ou d'un trou noir.
+        </p>
+        <p>
+          Véritable moteur du recyclage cosmique, il ensemence l'espace en éléments lourds indispensables à l'apparition de nouvelles planètes et de la chimie complexe. Observable durant quelques dizaines de milliers d'années avant de se diluer, il donne naissance à des structures spectaculaires à l'image des Dentelles du Cygne ou de la nébuleuse du Crabe.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- VISIONNEUSE PLEIN ÉCRAN LIGHTBOX -->
+  <div class="lightbox-overlay" id="lightboxOverlay" onclick="fermerZoom()" title="Cliquer ou appuyer sur Échap pour fermer">
+    <img id="lightboxImg" class="lightbox-img" src="" alt="Agrandissement plein écran">
+  </div>
+
+  <script>
+    // GESTION DES ONGLETS DE L'INFOGRAPHIE
+    function changerOngletNeb(nom) {
+      const onglets = ['panorama', 'pouponnieres', 'morts'];
+      onglets.forEach(o => {
+        const contenu = document.getElementById('onglet-neb-' + o);
+        const bouton = document.getElementById('btn-neb-' + o);
+        if (o === nom) {
+          contenu.style.display = 'block';
+          bouton.style.background = '#2563eb';
+          bouton.style.color = '#ffffff';
+        } else {
+          contenu.style.display = 'none';
+          bouton.style.background = '#1e293b';
+          bouton.style.color = '#94a3b8';
+        }
+      });
+    }
+
+    // GESTION DU ZOOM PLEIN ÉCRAN LIGHTBOX
+    function ouvrirZoomDirect(url) {
+      const overlay = document.getElementById('lightboxOverlay');
+      const img = document.getElementById('lightboxImg');
+      img.src = url;
+      overlay.classList.add('active');
+    }
+
+    function fermerZoom() {
+      document.getElementById('lightboxOverlay').classList.remove('active');
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        fermerZoom();
+      }
+    });
+  </script>
+</body>
+</html>
