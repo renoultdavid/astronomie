@@ -1,5 +1,19 @@
 const OBJETS_CIEL_PROFOND_2 = [
 {
+    id: "hh49_50",
+    nomPrincipal: "HH 49-50",
+    autreNom: "Herbig-Haro 49/50",
+    catalogues: ["HH 49", "HH 50"],
+    categoriePrincipale: "nebuleuse",
+    sousCategorie: "emission",
+    specificites: [],
+    constellation: "Caméléon",
+    image: "https://lh3.googleusercontent.com/d/18lKhnOU8lXnk4eqiUbyMXWJjNCryq4J6",
+    legendeImage: "Les chocs d'étrave et jets circumstellaires de HH 49-50 — Spitzer",
+    coordonnees: { ad: "11h 06m 31s", dec: "-77° 39′ 40″", magnitude: "15.0", distance: "550 al", vitesseRadiale: "-120 km/s" },
+    texte: "HH 49-50 désigne une paire d'objets de Herbig-Haro situés dans la constellation australe circumpolaire du Caméléon, découverts lors des recensements systématiques des pouponnières d'étoiles associées au nuage moléculaire sombre Chamaeleon I. Évoluant à une distance d'environ cinq cent cinquante années-lumière de la Terre, cette nébuleuse par émission correspond à la manifestation visible de puissants jets de matière collimatés expulsés par une jeune protoétoile de faible masse encore enfouie dans son cocon natal de gaz et de poussières froides. Ces flux de matière supersoniques sont éjectés à des vitesses comprises entre cent et deux cents kilomètres par seconde le long de l'axe de rotation du système en formation. En percutant de plein fouet le milieu interstellaire environnant plus dense et plus lent, le jet engendre des ondes de choc radiatives terminales appelées chocs d'étrave (bow shocks), où le gaz est violemment comprimé, échauffé à des températures atteignant plusieurs dizaines de milliers de kelvins, puis ionisé. Lors de sa recombinaison et de son refroidissement rapide, ce plasma émet un rayonnement caractéristique centré sur les raies optiques de l'hydrogène (H-alpha) et des ions métalliques faiblement ionisés comme [S II] et [N II]. L'imagerie infrarouge obtenue par le télescope spatial Spitzer dévoile une morphologie spectaculaire et asymétrique en forme de tornade ou de fuseau allongé, illuminée par l'émission des molécules d'hydrogène moléculaire (H2) excitées par les chocs à travers le nuage dense. Les mesures cinématiques spectroscopiques confirment des mouvements propres rapides sur le plan du ciel, offrant aux astrophysiciens un modèle privilégié pour analyser la perte de moment cinétique et l'accrétion de matière lors des toutes premières phases de la genèse stellaire."
+  },
+    {
     id: "betelgeuse",
     nomPrincipal: "Bételgeuse",
     autreNom: "Alpha Orionis",
