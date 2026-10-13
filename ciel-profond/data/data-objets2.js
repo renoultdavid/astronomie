@@ -1,5 +1,19 @@
 const OBJETS_CIEL_PROFOND_2 = [
 {
+    id: "sgr_a_m87",
+    nomPrincipal: "Sagittarius A* / M87*",
+    autreNom: "Sgr A* / M87* (Comparaison d'échelle)",
+    catalogues: ["EHT Collaboration", "Messier 87*", "Galactic Center"],
+    categoriePrincipale: "galaxie",
+    sousCategorie: "interaction",
+    specificites: ["seyfert"],
+    constellation: "Sagittaire",
+    image: "https://lh3.googleusercontent.com/d/12LeM5AnesXN_zMPIopyR1AUdP-vKuoW0",
+    legendeImage: "Comparaison d'échelle des ombres des trous noirs Sgr A* et M87* — EHT Collaboration",
+    coordonnees: { ad: "17h 45m 40s", dec: "-29° 00′ 28″", magnitude: "—", distance: "26 700 al", vitesseRadiale: "-11 km/s" },
+    texte: "Cette planche comparative rassemble les deux seuls trous noirs supermassifs dont l'ombre centrale et l'anneau d'émission entourant l'horizon des événements ont été directement résolus par l'interféromètre millimétrique planétaire Event Horizon Telescope (EHT) : Sagittarius A* (Sgr A*), situé au cœur géométrique de notre Voie lactée, et M87*, tapi au centre de la galaxie elliptique géante Messier 87. Bien que leurs masses et leurs dimensions physiques diffèrent de plus de trois ordres de grandeur, ils présentent un diamètre angulaire quasi identique sur le ciel terrestre (environ cinquante microsecondes d'arc), compensé par leurs éloignements respectifs. Sgr A*, distant de seulement vingt-six mille sept cents années-lumière, renferme une masse d'environ quatre millions de masses solaires concentrée dans un rayon de Schwarzschild d'environ douze millions de kilomètres, soit un volume inférieur à l'orbite de Mercure. À l'opposé, M87*, situé à cinquante-cinq millions d'années-lumière de la Terre, est un monstre gravitationnel estimé à six milliards et demi de masses solaires : son rayon gravitationnel atteint près de vingt milliards de kilomètres, dépassant largement l'orbite de Pluton et l'héliopause franchie par la sonde spatiale Voyager 1. L'imagerie interférométrique à très longue base (VLBI) menée à la longueur d'onde de 1,3 millimètre met en évidence une signature conforme aux prédictions de la relativité générale d'Albert Einstein pour des trous noirs de Kerr en rotation : un anneau lumineux asymétrique engendré par l'amplification Doppler relativiste du plasma magnétisé circulant à une fraction significative de la vitesse de la lumière, enserrant une zone de dépression centrale causée par la capture gravitationnelle des photons. La variabilité temporelle ultrarapide de Sgr A* (de l'ordre de quelques minutes, contre plusieurs jours pour M87*) reflète directement l'échelle réduite de son orbite circulaire des photons. Cette comparaison constitue une preuve empirique fondamentale pour tester la métrique de l'espace-temps en régime de champ gravitationnel fort et contraindre la magnétohydrodynamique relativiste régissant l'alimentation et la formation des jets relativistes."
+  },
+    {
     id: "pn_k_4_55",
     nomPrincipal: "PN K 4-55",
     autreNom: "Kohoutek 4-55",
