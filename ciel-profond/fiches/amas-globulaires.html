@@ -1,1 +1,437 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le Monde des Amas Globulaires — Atlas Céleste</title>
+  <link rel="stylesheet" href="../../fiche.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #020617;
+      color: #e2e8f0;
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.8;
+      overflow-x: hidden;
+      padding-bottom: 5rem;
+    }
+
+    .fiche-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    /* EN-TÊTE */
+    .hero-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .hero-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #a78bfa;
+      background: rgba(167, 139, 250, 0.12);
+      border: 1px solid rgba(167, 139, 250, 0.35);
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+    .hero-header h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 3.8vw, 3rem);
+      letter-spacing: 0.12em;
+      color: #ffffff;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+    .hero-header .subtitle {
+      font-size: 1.05rem;
+      color: #94a3b8;
+      font-weight: 300;
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    /* TEXTES PRINCIPAUX */
+    .prose-block {
+      font-size: 1rem;
+      color: #cbd5e1;
+      text-align: justify;
+      font-weight: 300;
+      margin-bottom: 2rem;
+    }
+    .prose-block p {
+      margin-bottom: 1.4rem;
+    }
+
+    /* TITRES DE SECTIONS */
+    .section-main-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.7rem;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin: 3.5rem 0 1.5rem;
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-main-title::before {
+      content: "";
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: #a78bfa;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #a78bfa;
+    }
+
+    /* VISIONNEUSE PLEIN ÉCRAN LIGHTBOX */
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+      padding: 1.5vh 1.5vw;
+    }
+    .lightbox-overlay.active {
+      display: flex;
+    }
+    .lightbox-img {
+      max-width: 97vw;
+      max-height: 94vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.95), 0 0 20px rgba(167, 139, 250, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="fiche-wrapper">
+
+    <!-- EN-TÊTE DE LA FICHE -->
+    <header class="hero-header">
+      <div class="hero-badge">Population II • Halo Galactique</div>
+      <h1>Les Amas Globulaires</h1>
+      <div class="subtitle">
+        Forteresses gravitationnelles et reliques fossiles des premiers âges du cosmos
+      </div>
+    </header>
+
+    <!-- TEXTE D'INTRODUCTION -->
+    <div class="prose-block">
+      <p>
+        Véritables fossiles de l'aube cosmique, les amas globulaires sont de gigantesques essaims sphériques rassemblant des centaines de milliers d'étoiles soudées par une intense gravité. Évoluant au large dans le halo galactique, ils témoignent des toutes premières phases de formation de l'Univers, il y a plus de douze milliards d'années. Privés de réserves de gaz froid, ils ne fabriquent plus de matière neuve et ne sont peuplés que de vieilles étoiles de faible masse.
+      </p>
+      <p>
+        Pourtant, au cœur de leurs noyaux hyper-denses, des collisions stellaires extrêmes parviennent à défier le temps en rajeunissant de mystérieuses traînardes bleues. Étudier ces forteresses stellaires permet ainsi de sonder les origines du cosmos et de cartographier la silhouette invisible de notre propre galaxie.
+      </p>
+    </div>
+
+    <!-- INFOGRAPHIE INTERACTIVE DES AMAS GLOBULAIRES -->
+    <div id="infographie-amas" style="font-family: system-ui, -apple-system, sans-serif; background: #0b1120; color: #e2e8f0; padding: 12px 14px; border-radius: 10px; width: 100%; border: 1px solid #1e293b; margin: 2rem 0 3rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
+      
+      <header style="text-align: center; margin-bottom: 12px;">
+        <h2 style="color: #f8fafc; margin: 0; font-size: 1.2rem; font-family: 'Cinzel', serif;">Les amas globulaires : fossiles vivants du cosmos</h2>
+        <p style="color: #94a3b8; margin-top: 3px; font-size: 0.8rem;">Distribution galactique, datation stellaire et dynamiques internes extrêmes</p>
+      </header>
+
+      <!-- Sélecteur d'onglets compact -->
+      <div style="display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin-bottom: 12px;">
+        <button onclick="changerOngletAmas('distrib')" id="btn-amas-distrib" style="padding: 6px 14px; border-radius: 6px; border: none; background: #2563eb; color: #fff; font-weight: 600; cursor: pointer; font-size: 0.8rem;">1. Emplacement & Halo galactique</button>
+        <button onclick="changerOngletAmas('hr')" id="btn-amas-hr" style="padding: 6px 14px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.8rem;">2. Diagramme H-R & Datation</button>
+        <button onclick="changerOngletAmas('trainardes')" id="btn-amas-trainardes" style="padding: 6px 14px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.8rem;">3. Traînardes bleues & Cœurs denses</button>
+      </div>
+
+      <!-- ONGLET 1 : EMPLACEMENT ET STRUCTURE DU HALO -->
+      <div id="onglet-amas-distrib">
+        <div style="background: #070d19; border: 1px solid #1e293b; border-radius: 6px; padding: 8px; margin-bottom: 10px; overflow-x: auto;">
+          <svg viewBox="0 0 920 230" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; min-width: 700px; display: block;">
+            <defs>
+              <radialGradient id="gradBulbeAmas" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="30%" stop-color="#fde047" stop-opacity="0.95"/>
+                <stop offset="70%" stop-color="#ea580c" stop-opacity="0.6"/>
+                <stop offset="100%" stop-color="#7c2d12" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="gradAmasZoom" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="25%" stop-color="#fef08a"/>
+                <stop offset="65%" stop-color="#f97316" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#0b1120" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+
+            <text x="460" y="16" text-anchor="middle" fill="#94a3b8" font-size="11" letter-spacing="1">DISTRIBUTION DANS LE HALO SPHÉROÏDAL DE LA VOIE LACTÉE</text>
+
+            <!-- PARTIE GAUCHE : COUPE GALACTIQUE -->
+            <g transform="translate(230, 118)">
+              <circle cx="0" cy="0" r="92" fill="none" stroke="#334155" stroke-width="1.2" stroke-dasharray="4,4"/>
+              <ellipse cx="0" cy="0" rx="110" ry="6.5" fill="#38bdf8" opacity="0.45"/>
+              <ellipse cx="0" cy="0" rx="22" ry="17" fill="url(#gradBulbeAmas)"/>
+              <circle cx="-55" cy="0" r="2.8" fill="#facc15"/>
+              <text x="-55" y="-7" text-anchor="middle" fill="#fde047" font-size="8" font-weight="bold">Soleil</text>
+
+              <circle cx="-45" cy="-60" r="3" fill="#fde047"/>
+              <circle cx="25" cy="-70" r="3.5" fill="#fde047"/>
+              <circle cx="65" cy="-35" r="3" fill="#fde047"/>
+              <circle cx="-15" cy="-38" r="3.2" fill="#fde047"/>
+              <circle cx="-75" cy="-25" r="2.8" fill="#fde047"/>
+              <circle cx="-55" cy="48" r="3.2" fill="#fde047"/>
+              <circle cx="10" cy="55" r="3.8" fill="#fde047"/>
+              <circle cx="58" cy="62" r="3" fill="#fde047"/>
+              <circle cx="80" cy="22" r="2.8" fill="#fde047"/>
+              <circle cx="-25" cy="78" r="2.6" fill="#fde047"/>
+
+              <ellipse cx="5" cy="5" rx="80" ry="48" fill="none" stroke="#f59e0b" stroke-width="0.9" stroke-dasharray="3,3" transform="rotate(-35)"/>
+              <text x="0" y="106" text-anchor="middle" fill="#cbd5e1" font-size="9">Halo sphérique (~160 amas connus dans la Voie lactée)</text>
+            </g>
+
+            <!-- Flèche de transition -->
+            <path d="M 400 118 L 470 118" stroke="#475569" stroke-width="1.8" stroke-dasharray="4,3"/>
+            <polygon points="475,118 467,114 467,122" fill="#475569"/>
+
+            <!-- PARTIE DROITE : ZOOM AMAS -->
+            <g transform="translate(680, 118)">
+              <circle cx="0" cy="0" r="62" fill="url(#gradAmasZoom)"/>
+              <circle cx="0" cy="0" r="14" fill="#ffffff" opacity="0.95"/>
+              
+              <circle cx="-28" cy="-18" r="1.5" fill="#fef08a"/>
+              <circle cx="32" cy="-22" r="1.4" fill="#fed7aa"/>
+              <circle cx="-38" cy="14" r="1.6" fill="#fef08a"/>
+              <circle cx="28" cy="28" r="1.5" fill="#fde047"/>
+              <circle cx="45" cy="-8" r="1.3" fill="#fef08a"/>
+              <circle cx="-18" cy="42" r="1.4" fill="#fed7aa"/>
+              <circle cx="12" cy="-45" r="1.3" fill="#fef08a"/>
+              <circle cx="-48" cy="-5" r="1.2" fill="#fed7aa"/>
+
+              <text x="0" y="80" text-anchor="middle" fill="#facc15" font-size="10.5" font-weight="bold">Structure sphéroïdale fermée</text>
+              <text x="0" y="94" text-anchor="middle" fill="#94a3b8" font-size="8.5">100 000 à plusieurs millions d'étoiles (Ø ~100 à 200 al)</text>
+            </g>
+          </svg>
+        </div>
+
+        <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px; overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: left; color: #ffffff;">
+            <thead>
+              <tr style="border-bottom: 1.5px solid #64748b; font-weight: bold;">
+                <th style="padding: 6px;">Caractéristique</th>
+                <th style="padding: 6px;">Amas globulaire</th>
+                <th style="padding: 6px;">Amas ouvert (comparatif)</th>
+                <th style="padding: 6px;">Signification astrophysique</th>
+              </tr>
+            </thead>
+            <tbody style="line-height: 1.45;">
+              <tr style="border-bottom: 1px solid #334155;">
+                <td style="padding: 6px; color: #facc15; font-weight: bold;">Localisation</td>
+                <td style="padding: 6px;">Halo sphéroïdal & renflement central</td>
+                <td style="padding: 6px;">Disque galactique uniquement</td>
+                <td style="padding: 6px;">Ils n'ont pas participé à l'effondrement en disque mince.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #334155;">
+                <td style="padding: 6px; color: #38bdf8; font-weight: bold;">Âge moyen</td>
+                <td style="padding: 6px;">11,5 à 13 milliards d'années</td>
+                <td style="padding: 6px;">Quelques millions à 1 milliard d'années</td>
+                <td style="padding: 6px;">Parmi les plus anciens témoins de l'Univers primordial.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #334155;">
+                <td style="padding: 6px; color: #4ade80; font-weight: bold;">Métallicité</td>
+                <td style="padding: 6px;">Très faible (Population II pure)</td>
+                <td style="padding: 6px;">Élevée (Population I riche en métaux)</td>
+                <td style="padding: 6px;">Formés à partir d'un gaz presque vierge d'éléments lourds.</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px; color: #f472b6; font-weight: bold;">Liaison gravitationnelle</td>
+                <td style="padding: 6px;">Indissoluble (vitesses de libération élevées)</td>
+                <td style="padding: 6px;">Lâche (dissous en quelques rotations galactiques)</td>
+                <td style="padding: 6px;">Stabilité dynamique séculaire malgré les forces de marée.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ONGLET 2 : DIAGRAMME H-R ET DÉTERMINATION DE L'ÂGE -->
+      <div id="onglet-amas-hr" style="display: none;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px;">
+          
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px;">
+            <div style="color: #38bdf8; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Le diagramme H-R d'un amas globulaire</div>
+            <div style="background: #0f172a; border-radius: 4px; padding: 6px; margin-bottom: 8px;">
+              <svg viewBox="0 0 280 160" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
+                <line x1="32" y1="135" x2="265" y2="135" stroke="#475569" stroke-width="1.3"/>
+                <line x1="32" y1="135" x2="32" y2="15" stroke="#475569" stroke-width="1.3"/>
+                <text x="265" y="147" text-anchor="end" fill="#94a3b8" font-size="7.5">Indice B-V (Bleu/Chaud → Rouge/Froid)</text>
+                <text x="36" y="24" fill="#94a3b8" font-size="7.5">Luminosité</text>
+
+                <path d="M 140 85 C 155 80 185 60 210 25" fill="none" stroke="#ef4444" stroke-width="2.2"/>
+                <text x="215" y="32" fill="#fca5a5" font-size="7.5" font-weight="bold">Géantes rouges</text>
+
+                <path d="M 70 55 Q 110 52 145 56" fill="none" stroke="#38bdf8" stroke-width="2"/>
+                <text x="65" y="48" fill="#38bdf8" font-size="7.5" font-weight="bold">Branche horizontale</text>
+
+                <path d="M 140 85 C 160 100 180 115 215 130" fill="none" stroke="#eab308" stroke-width="2.2"/>
+                <text x="210" y="125" fill="#fde047" font-size="7.5">Étoiles de faible masse (naines)</text>
+
+                <circle cx="140" cy="85" r="4.5" fill="#f97316" stroke="#ffffff" stroke-width="1.2"/>
+                <text x="140" y="74" text-anchor="middle" fill="#f97316" font-size="8" font-weight="bold">Point de bifurcation (Turn-off)</text>
+
+                <path d="M 140 85 C 120 70 95 45 75 25" fill="none" stroke="#475569" stroke-width="1.4" stroke-dasharray="3,3"/>
+                <text x="85" y="28" fill="#64748b" font-size="7">Étoiles massives déjà mortes</text>
+              </svg>
+            </div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; line-height: 1.4;">
+              Dans un amas, toutes les étoiles sont nées simultanément. La position du <strong>point de bifurcation</strong> (le coude où les étoiles quittent la séquence principale) donne l'âge exact de l'amas : seules les étoiles de masse inférieure à environ 0,8 masse solaire y brûlent encore leur hydrogène.
+            </p>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px;">
+            <div style="color: #4ade80; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Classification de Shapley-Sawyer (I à XII)</div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; margin-bottom: 6px; line-height: 1.35;">
+              Établie en 1927 par Harlow Shapley et Helen Sawyer Hogg, cette grille mesure la concentration stellaire centrale de l'amas :
+            </p>
+            <ul style="font-size: 0.74rem; color: #94a3b8; padding-left: 16px; margin-bottom: 8px; line-height: 1.4;">
+              <li><strong>Classe I :</strong> concentration centrale extrême, cœur compact impénétrable (ex. M75).</li>
+              <li><strong>Classes IV à VI :</strong> concentration forte à intermédiaire avec halo périphérique bien résolu (ex. M13, M80).</li>
+              <li><strong>Classe XII :</strong> concentration quasi imperceptible, l'amas se fond doucement dans le champ stellaire (ex. Palomar 12).</li>
+            </ul>
+            <div style="background: #0f172a; border-radius: 4px; padding: 8px; border-left: 3px solid #facc15;">
+              <div style="color: #fde047; font-size: 0.76rem; font-weight: bold; margin-bottom: 2px;">L'exploit historique de Shapley (1918)</div>
+              <p style="font-size: 0.72rem; color: #cbd5e1; line-height: 1.35;">
+                En mesurant la distance et la répartition spatiale de 69 amas globulaires, Harlow Shapley comprit qu'ils étaient distribués en sphère autour du cœur du Sagittaire, prouvant que le Soleil n'était nullement au centre de la galaxie.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ONGLET 3 : TRAÎNARDES BLEUES ET DYNAMIQUE INTERNE -->
+      <div id="onglet-amas-trainardes" style="display: none;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px;">
+          
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px;">
+            <div style="color: #60a5fa; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Le paradoxe des traînardes bleues (« blue stragglers »)</div>
+            <div style="background: #0f172a; border-radius: 4px; padding: 6px; margin-bottom: 8px;">
+              <svg viewBox="0 0 280 85" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
+                <path d="M 120 70 C 145 78 180 95 210 110" fill="none" stroke="#475569" stroke-width="1.8"/>
+                <circle cx="120" cy="70" r="3.5" fill="#f97316"/>
+                <g transform="translate(75, 28)">
+                  <circle cx="0" cy="0" r="5" fill="#38bdf8" stroke="#ffffff" stroke-width="1.2"/>
+                  <circle cx="18" cy="14" r="4.2" fill="#38bdf8"/>
+                  <circle cx="-14" cy="10" r="4" fill="#60a5fa"/>
+                </g>
+                <text x="80" y="58" text-anchor="middle" fill="#38bdf8" font-size="8" font-weight="bold">Traînardes bleues (zone anormale)</text>
+                <text x="200" y="65" text-anchor="middle" fill="#94a3b8" font-size="7.5">Séquence principale normale</text>
+              </svg>
+            </div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; line-height: 1.4;">
+              Découvertes en 1953 par Allan Sandage dans M3, ces étoiles siègent sur la séquence principale <strong>au-dessus du point de bifurcation</strong>. Elles sont plus massives, plus chaudes et plus bleues que ce qui est théoriquement permis dans un système âgé de 12 milliards d'années.
+            </p>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px;">
+            <div style="color: #f472b6; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Les 2 voies de rajeunissement stellaire</div>
+            <div style="background: #0f172a; border-radius: 4px; padding: 6px; margin-bottom: 8px;">
+              <svg viewBox="0 0 280 85" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
+                <g transform="translate(68, 40)">
+                  <ellipse cx="-16" cy="0" rx="14" ry="10" fill="#f59e0b" opacity="0.8"/>
+                  <path d="M -2 0 Q 6 -4 14 0 Q 6 4 -2 0" fill="#facc15"/>
+                  <circle cx="16" cy="0" r="7" fill="#38bdf8"/>
+                  <text x="0" y="34" text-anchor="middle" fill="#94a3b8" font-size="7.5">1. Transfert de masse (binaire)</text>
+                </g>
+                <g transform="translate(210, 40)">
+                  <circle cx="-14" cy="0" r="8" fill="#f97316"/>
+                  <path d="M -4 0 L 4 0" stroke="#ffffff" stroke-width="1.5"/>
+                  <circle cx="14" cy="0" r="8" fill="#f97316"/>
+                  <text x="0" y="34" text-anchor="middle" fill="#94a3b8" font-size="7.5">2. Collision directe (cœur dense)</text>
+                </g>
+              </svg>
+            </div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; line-height: 1.4;">
+              <strong>1. Cannibalisme binaire :</strong> dans un couple serré, une étoile gonflée déverse son hydrogène frais sur sa compagne.<br>
+              <strong>2. Collision frontale :</strong> dans le cœur surpeuplé, deux étoiles fusionnent physiquement, formant une étoile neuve réinjectée en combustible nucléaire.
+            </p>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px; grid-column: 1 / -1;">
+            <div style="color: #a78bfa; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Dynamique extrême : ségrégation en masse et effondrement de cœur</div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; line-height: 1.45;">
+              Par le jeu des interactions gravitationnelles répétées (<em>frottement dynamique</em>), les étoiles les plus massives perdent de l'énergie et tombent vers le centre (<strong>ségrégation en masse</strong>), tandis que les étoiles légères sont éjectées en périphérie. Ce processus peut déclencher un <strong>effondrement de cœur</strong> (observé dans environ 20 % des amas de la Voie lactée), créant des densités stellaires de millions d'étoiles par parsec cube et constituant le terreau idéal pour forger des <strong>trous noirs de masse intermédiaire</strong> (de 100 à 10 000 masses solaires).
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SECTIONS SUIVANTES À COMPLÉTER -->
+    <!-- Tu pourras coller ici au fur et à mesure tes fiches individuelles (M13, M22, Omega Centauri...) -->
+
+  </div>
+
+  <!-- VISIONNEUSE PLEIN ÉCRAN LIGHTBOX (PRÊTE POUR LES FUTURES IMAGES) -->
+  <div class="lightbox-overlay" id="lightboxOverlay" onclick="fermerZoom()" title="Cliquer ou appuyer sur Échap pour fermer">
+    <img id="lightboxImg" class="lightbox-img" src="" alt="Agrandissement plein écran">
+  </div>
+
+  <script>
+    // GESTION DES ONGLETS DE L'INFOGRAPHIE
+    function changerOngletAmas(nom) {
+      const onglets = ['distrib', 'hr', 'trainardes'];
+      onglets.forEach(o => {
+        const contenu = document.getElementById('onglet-amas-' + o);
+        const bouton = document.getElementById('btn-amas-' + o);
+        if (o === nom) {
+          contenu.style.display = 'block';
+          bouton.style.background = '#2563eb';
+          bouton.style.color = '#ffffff';
+        } else {
+          contenu.style.display = 'none';
+          bouton.style.background = '#1e293b';
+          bouton.style.color = '#94a3b8';
+        }
+      });
+    }
+
+    // GESTION DU ZOOM PLEIN ÉCRAN LIGHTBOX
+    function ouvrirZoomDirect(url) {
+      const overlay = document.getElementById('lightboxOverlay');
+      const img = document.getElementById('lightboxImg');
+      img.src = url;
+      overlay.classList.add('active');
+    }
+
+    function fermerZoom() {
+      document.getElementById('lightboxOverlay').classList.remove('active');
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        fermerZoom();
+      }
+    });
+  </script>
+</body>
+</html>
