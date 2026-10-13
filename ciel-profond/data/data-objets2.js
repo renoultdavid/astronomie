@@ -1,5 +1,33 @@
 const OBJETS_CIEL_PROFOND_2 = [
 {
+    id: "ngc4941",
+    nomPrincipal: "NGC 4941",
+    autreNom: "",
+    catalogues: ["MCG -01-33-083", "IRAS 13018-0516", "PGC 45165"],
+    categoriePrincipale: "galaxie",
+    sousCategorie: "spirale",
+    specificites: ["seyfert", "barrée", "anneau"],
+    constellation: "Vierge",
+    image: "https://lh3.googleusercontent.com/d/1J7DXRSZchgpHvtkfFbCMjzp5klPFpFaD",
+    legendeImage: "L'anneau de résonance interne et le cœur Seyfert de NGC 4941 — Hubble",
+    coordonnees: { ad: "13h 04m 13s", dec: "-05° 33′ 06″", magnitude: "11.2", distance: "52 millions al", vitesseRadiale: "+1 108 km/s" },
+    texte: "NGC 4941 est une galaxie spirale barrée de classe (R)SAB(r)ab: située dans la constellation de la Vierge, découverte par William Herschel en 1785. Située à environ cinquante-deux millions d'années-lumière de la Terre et s'étendant sur un diamètre réel d'environ cinquante-cinq mille années-lumière, elle est observée sous une inclinaison modérée d'environ cinquante-deux degrés. Son architecture dynamique est caractérisée par un système de résonances emboîtées : un bulbe volumineux et brillant composé d'étoiles dorées de population II est traversé par une barre stellaire centrale principale bordée de fines poussières sombres. Cette barre est enserrée dans un anneau interne de résonance d'où émergent des bras spiraux serrés et réguliers qui se rejoignent pour dessiner un vaste pseudo-anneau externe. En son centre réside un noyau galactique actif de type Seyfert 2, propulsé par un trou noir supermassif en accrétion continue. Les observations spectroscopiques et d'imagerie haute résolution obtenues par la caméra WFC3 du télescope spatial Hubble mettent en évidence un cône d'ionisation bipolaire de gaz chaud et des fronts de compression de gaz moléculaire froid canalisé vers le cœur le long de la barre. Les mesures en rayons X acquises par les télescopes spatiaux XMM-Newton et Chandra révèlent une forte colonne d'extinction gazeuse masquant directement le moteur central le long de notre ligne de visée. Évoluant dans une zone périphérique de l'amas de la Vierge sans subir de forces de marée destructrices, NGC 4941 sert d'étalon pour étudier la dynamique des résonances de Lindblad et l'alimentation des noyaux actifs dans les spirales précoces."
+  },
+  {
+    id: "ngc5042",
+    nomPrincipal: "NGC 5042",
+    autreNom: "",
+    catalogues: ["ESO 576-013", "MCG -04-31-042", "PGC 46132"],
+    categoriePrincipale: "galaxie",
+    sousCategorie: "spirale",
+    specificites: ["barrée"],
+    constellation: "Hydre",
+    image: "https://lh3.googleusercontent.com/d/14PlzJHqmemqeCSeUpO1yGwHRIB6ipSA0",
+    legendeImage: "Le disque incliné et les bras asymétriques de NGC 5042 — Hubble",
+    coordonnees: { ad: "13h 15m 31s", dec: "-23° 59′ 02″", magnitude: "11.8", distance: "78 millions al", vitesseRadiale: "+1 732 km/s" },
+    texte: "NGC 5042 est une galaxie spirale barrée de classe SAB(s)c située dans la constellation australe de l'Hydre, découverte par John Herschel en 1835. Évoluant à une distance d'environ soixante-dix-huit millions d'années-lumière de la Terre et mesurant près de soixante-quinze mille années-lumière de diamètre, elle se présente sous une vue semi-inclinée d'environ cinquante-quatre degrés par rapport à notre ligne de visée. Son profil optique met en valeur une organisation stellaire articulée autour d'un bulbe central de dimensions modestes, traversé par une barre d'étoiles dorées anciennes de population II de faible contraste. Deux bras spiraux principaux amples et asymétriques émergent des extrémités de cette barre, parcourant le plan médian en se fragmentant en ramifications secondaires diffuses. Ces bras sont parsemés de condensations d'hydrogène ionisé en émission H-alpha et de jeunes amas d'étoiles bleues massives de types spectraux O et B, finement soulignés par des filaments de poussière interstellaire absorbante. L'imagerie optique haute résolution obtenue par la caméra WFC3 du télescope spatial Hubble résout les fronts de compression du gaz moléculaire froid et la texture du milieu interstellaire dans les régions internes du disque. Les analyses spectroscopiques et les cartographies radioastronomiques de la raie HI à 21 centimètres révèlent une courbe de rotation régulière et stable sans déformation cinématique asymétrique majeure, confirmant que NGC 5042 a conservé son réservoir d'hydrogène neutre à l'abri de collisions destructrices récentes au sein d'un environnement de champ calme."
+  },
+    {
     id: "ngc4410",
     nomPrincipal: "NGC 4410",
     autreNom: "RSCG 55",
