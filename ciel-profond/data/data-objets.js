@@ -3732,20 +3732,6 @@ texte: "NGC 3982 est une somptueuse galaxie spirale intermédiaire de classe SAB
     texte: "NGC 660 est une extraordinaire galaxie à anneau polaire située dans la constellation des Poissons, découverte par William Herschel en 1784. Elle constitue le membre le plus proche et le plus spectaculaire de cette classe morphologique rarissime de l'astrophysique extragalactique. Sa géométrie fascinante se compose d'un disque lenticulaire ou spiral préexistant traversé perpendiculairement par un titanesque anneau externe de gaz, de poussières et d'étoiles incliné d'environ 70 degrés par rapport au plan principal et s'étendant sur plus de 40 000 années-lumière. Cet anneau polaire résulte d'un événement de cannibalisme galactique survenu il y a environ un milliard d'années, au cours duquel NGC 660 a capturé par marée gravitationnelle l'intégralité du réservoir gazeux d'une galaxie compagne lors d'un passage rasant. Les forces de cisaillement et le couple gravitationnel ont déstabilisé ce matériau externe, allumant de superbes amas d'étoiles jeunes et bleues le long de l'anneau. En son centre réside un noyau actif abritant un trou noir supermassif et un intense sursaut de formation stellaire nucléaire qui a produit en 2012 une gigantesque explosion radio détectée par les interféromètres terrestres, causée par l'allumage d'un jet de matière relativiste."
   },
   {
-    id: "ngc922",
-    nomPrincipal: "NGC 922",
-    autreNom: "",
-    catalogues: ["ESO 478-28", "MCG -04-07-003", "PGC 9115"],
-    categoriePrincipale: "galaxie",
-    sousCategorie: "interaction",
-    specificites: ["starburst"],
-    constellation: "Fourneau",
-    image: "https://lh3.googleusercontent.com/d/12qzMj26JA-kxYmEMhI4WGSZKkoTU-p1b",
-    legendeImage: "La galaxie à anneau de collision en fer à cheval NGC 922 — Hubble",
-    coordonnees: { ad: "02h 25m 04s", dec: "-24° 47′ 22″", magnitude: "12.2", distance: "150 millions al", vitesseRadiale: "+3 095 km/s" },
-    texte: "NGC 922 est une fascinante galaxie à anneau de collision située dans la constellation australe du Fourneau, découverte par John Herschel en 1834. Elle présente une morphologie asymétrique spectaculaire en forme de fer à cheval ou de plume, issue de la traversée décentrée et à haute vitesse d'une petite galaxie naine compagne (identifiée à proximité sous la référence 2MASX J02243002-2444441) à travers son disque il y a environ 330 millions d'années. Cet impact cosmique a déclenché une formidable onde de densité gravitationnelle qui s'est propagée radialement vers l'extérieur comme une ride à la surface de l'eau. En percutant les nuages de gaz moléculaire froid, cette onde a allumé une spectaculaire flambée de naissances stellaires le long d'un vaste anneau partiel étincelant. Les observations conjointes du télescope spatial Hubble et de l'observatoire à rayons X Chandra ont révélé que cet anneau abrite une concentration prodigieuse de sources de rayons X ultralumineuses (ULXs), alimentées par des trous noirs stellaires massifs en accrétion critique nés de l'effondrement rapide des nouvelles étoiles géantes forgées lors du choc."
-  },
-  {
     id: "ngc1487",
     nomPrincipal: "NGC 1487",
     autreNom: "",
