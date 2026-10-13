@@ -1,5 +1,33 @@
 const OBJETS_CIEL_PROFOND_2 = [
 {
+    id: "betelgeuse",
+    nomPrincipal: "Bételgeuse",
+    autreNom: "Alpha Orionis",
+    catalogues: ["HR 2061", "HD 39801", "HIP 27989"],
+    categoriePrincipale: "étoile",
+    sousCategorie: "supergéante",
+    specificites: ["variable"],
+    constellation: "Orion",
+    image: "https://lh3.googleusercontent.com/d/1nFWVD2p3fb8PVfNI79uX1YRFQbcETwfX",
+    legendeImage: "La surface asymétrique et les cellules de convection de Bételgeuse — ALMA",
+    coordonnees: { ad: "05h 55m 10s", dec: "+07° 24′ 25″", magnitude: "0.5", distance: "650 al", vitesseRadiale: "+21.9 km/s" },
+    texte: "Bételgeuse (Alpha Orionis) est une supergéante rouge pulsante semi-régulière de type spectral M1-2 Ia-ab située dans la constellation d'Orion, marquant l'angle supérieur oriental de la figure de l'astérisme. Distante d'environ six cent cinquante années-lumière du Système solaire et dotée d'une masse estimée entre seize et dix-neuf masses solaires, elle possède un rayon colossal compris entre sept cents et neuf cents rayons solaires, qui engloberait l'orbite de Jupiter si elle occupait le centre de notre système planétaire. Elle est parvenue à un stade évolutif terminal avancé, consommant les éléments lourds au sein de son noyau avant son effondrement inéluctable en supernova de type II d'ici moins de cent mille ans. L'interféromètre millimétrique et submillimétrique ALMA (Atacama Large Millimeter/submillimeter Array) a fourni une image historique sans précédent en résolvant directement la photosphère et la chromosphère de l'étoile à des longueurs d'onde submillimétriques : le cliché révèle une géométrie non sphérique marquée par d'immenses cellules de convection géantes où le plasma bouillonne à des températures contrastées, créant des points chauds localisés. L'instrument SPHERE du Very Large Telescope (VLT) a par ailleurs permis d'élucider l'épisode du « grand obscurcissement » de la fin 2019, provoqué par l'éjection d'une gigantesque bulle de gaz expulsée par une pulsation convective, refroidie et condensée en un nuage de poussière opaque devant notre ligne de visée. Les mesures polarimétriques et spectroscopiques confirment une perte de masse stellaire continue de dix milliardièmes de masse solaire par an, faisant de Bételgeuse l'archétype des supergéantes massives en fin de vie."
+  },
+  {
+    id: "egg_nebula",
+    nomPrincipal: "Nébuleuse de l'Œuf",
+    autreNom: "Egg Nebula / CRL 2688",
+    catalogues: ["RAFGL 2688", "V1610 Cyg", "PGC 2058797"],
+    categoriePrincipale: "nébuleuse",
+    sousCategorie: "planétaire",
+    specificites: ["réflexion"],
+    constellation: "Cygne",
+    image: "https://lh3.googleusercontent.com/d/1ICZ1vtKwA_5cB3SJ2iSbpMioOUuEtrGe",
+    legendeImage: "Les arcs concentriques et les faisceaux bipolaires de la nébuleuse de l'Œuf — Hubble",
+    coordonnees: { ad: "21h 02m 18s", dec: "+36° 41′ 37″", magnitude: "14.0", distance: "3 000 al", vitesseRadiale: "-34.5 km/s" },
+    texte: "La Nébuleuse de l'Œuf (Egg Nebula / CRL 2688 / RAFGL 2688) est une nébuleuse protoplanétaire bipolaire remarquable située dans la constellation du Cygne, découverte en 1974 lors des relevés infrarouges du télescope embarqué sur fusée AFGL. Évoluant à une distance estimée à environ trois mille années-lumière de la Terre, elle illustre une phase de transition stellaire fugitive ne durant que quelques millénaires, pendant laquelle une étoile évoluée de la branche asymptotique des géantes (AGB) expulse violemment ses enveloppes gazeuses avant de devenir une nébuleuse planétaire ionisée. L'étoile centrale, une supergéante de classe spectrale F5, est entièrement masquée par un épais tore équatorial de gaz dense et de poussières carbonées riches en molécules organiques. L'imagerie optique haute résolution de la caméra ACS et de la WFC3 du télescope spatial Hubble dévoile une structure en arcs concentriques d'une remarquable régularité, témoignant d'épisodes discrets d'éjection de matière répétés tous les cent à cinq cents ans. Perpendiculairement au tore équatorial sombre, des jets collimatés de matière à grande vitesse ont foré des cavités par lesquelles la lumière stellaire s'échappe, créant quatre faisceaux de lumière polarisée réfléchie par la poussière circum-nucléaire. Les observations spectroscopiques submillimétriques menées avec l'interféromètre NOEMA et le réseau ALMA confirment la présence de vents moléculaires rapides propulsés à plus de cent kilomètres par seconde, faisant de la Nébuleuse de l'Œuf le prototype absolu pour comprendre la transition morphologique entre enveloppes sphériques AGB et nébuleuses planétaires asymétriques."
+  },
+    {
     id: "abell3381",
     nomPrincipal: "Abell 3381",
     autreNom: "ACO 3381",
