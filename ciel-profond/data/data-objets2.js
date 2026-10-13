@@ -1,5 +1,19 @@
 const OBJETS_CIEL_PROFOND_2 = [
 {
+    id: "ngc6951",
+    nomPrincipal: "NGC 6951",
+    autreNom: "NGC 6952",
+    catalogues: ["UGC 11604", "MCG +11-25-001", "PGC 65086"],
+    categoriePrincipale: "galaxie",
+    sousCategorie: "spirale",
+    specificites: ["barrée", "seyfert", "starburst"],
+    constellation: "Céphée",
+    image: "https://lh3.googleusercontent.com/d/1qlMo5FkMnOWb82jAQPq1gbsiO117O3S_",
+    legendeImage: "La barre centrale et l'anneau circum-nucléaire de NGC 6951 — Hubble",
+    coordonnees: { ad: "20h 37m 14s", dec: "+66° 06′ 20″", magnitude: "11.0", distance: "75 millions al", vitesseRadiale: "+1 424 km/s" },
+    texte: "NGC 6951 est une galaxie spirale barrée de classe SAB(rs)bc située dans la constellation boréale de Céphée, découverte par l'astronome américain Lewis Swift en 1877. Évoluant à une distance d'environ soixante-quinze millions d'années-lumière de la Terre et s'étendant sur un diamètre réel d'environ soixante-quinze mille années-lumière, elle est observée sous une vue semi-inclinée d'environ quarante-quatre degrés. Son architecture morphologique présente une barre stellaire centrale lumineuse composée d'étoiles dorées anciennes, bordée par deux étroits couloirs de poussière interstellaire sombre qui canalisent le gaz froid vers son centre. En son cœur réside un remarquable anneau circum-nucléaire de sursaut de formation stellaire (starburst ring) d'environ cinq cents parsecs de rayon, densément peuplé de dizaines de jeunes super-amas d'étoiles massives nés au cours des cent derniers millions d'années. Au centre de cet anneau se trouve un noyau galactique actif de type Seyfert 2 / LINER, propulsé par un trou noir supermassif en accrétion d'environ six millions de masses solaires. Deux bras spiraux principaux amples et symétriques émergent des extrémités de la barre, jalonnés de régions HII en émission H-alpha et de filaments de poussière absorbante. Dans le domaine des transitoires, NGC 6951 s'est illustrée en hébergeant plusieurs supernovae notables : SN 1999el de type IIn, SN 2000E de type Ia, SN 2015ap et SN 2020dur. L'imagerie haute résolution de la caméra WFC3 du télescope spatial Hubble offre une vue détaillée de la dynamique des gaz moléculaires et du rôle des barres dans l'alimentation simultanée des sursauts stellaires et des trous noirs centraux."
+  },
+    {
     id: "ngc6744",
     nomPrincipal: "NGC 6744",
     autreNom: "Caldwell 101",
