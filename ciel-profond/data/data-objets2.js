@@ -1,5 +1,19 @@
 const OBJETS_CIEL_PROFOND_2 = [
 {
+    id: "iras23077_6707",
+    nomPrincipal: "IRAS 23077+6707",
+    autreNom: "Le Sandwich de Dracula (Dracula's Chivito)",
+    catalogues: ["2MASS J23094406+6724037", "WISEA J230944.02+672403.4"],
+    categoriePrincipale: "etoile",
+    sousCategorie: "variable",
+    specificites: [],
+    constellation: "Céphée",
+    image: "https://lh3.googleusercontent.com/d/1nGsuKOxrla7-IhP4co6jeaE0WdBJsa5n",
+    legendeImage: "Le disque protoplanétaire géant vu par la tranche de IRAS 23077+6707 — Hubble",
+    coordonnees: { ad: "23h 09m 44s", dec: "+67° 24′ 04″", magnitude: "14.2", distance: "1 000 al", vitesseRadiale: "-14 km/s" },
+    texte: "IRAS 23077+6707 (surnommé le Sandwich de Dracula ou Dracula's Chivito) est un jeune système stellaire pré-séquence principale situé dans la constellation de Céphée, répertorié à l'origine par le télescope spatial infrarouge IRAS. Évoluant à une distance d'environ mille années-lumière de la Terre au sein d'une région de formation d'étoiles locale, cet objet s'est révélé être entouré par le plus vaste disque protoplanétaire jamais résolu dans notre galaxie. S'étendant sur un diamètre réel monumental de près de six cent quarante milliards de kilomètres (environ quatre mille unités astronomiques, soit plus de quarante fois la taille de notre Système solaire), ce disque circum-stellaire géant est observé quasiment par la tranche depuis notre ligne de visée. Son profil optique singulier se caractérise par une épaisse bande équatoriale de poussière sombre et opaque qui masque complètement l'étoile centrale en formation, bordée de part et d'autre par deux lobes lumineux symétriques formés par la lumière stellaire diffusée sur les grains de poussière superficiels. L'imagerie optique haute résolution de la caméra ACS du télescope spatial Hubble met en lumière une géométrie verticale particulièrement turbulente, révélant de longs filaments et des volutes de matière s'élevant très haut au-dessus et en dessous du plan équatorial. Les observations millimétriques complémentaires obtenues par le Submillimeter Array (SMA) confirment que ce disque renferme une masse considérable de gaz moléculaire froid et de poussières de plusieurs dixièmes de masse solaire. IRAS 23077+6707 constitue un laboratoire exceptionnel pour contraindre la dynamique de fragmentation des disques massifs et observer la formation de planètes géantes aux confins des systèmes stellaires naissants."
+  },
+    {
     id: "iras16399_0937",
     nomPrincipal: "IRAS 16399-0937",
     autreNom: "2MASX J16424018-0943192",
