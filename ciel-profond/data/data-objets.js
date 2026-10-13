@@ -11854,7 +11854,7 @@ texte: "NGC 3982 est une somptueuse galaxie spirale intermédiaire de classe SAB
       },
       {
         url: "https://lh3.googleusercontent.com/d/1P2K5_KKN04ylTJjazMf7b-aEBbm3sqs2",
-        legende: "Les anneaux de poussière infrarouges imbriqués — WISE / NASA"
+        legende: "Nébuleuse de la Boule de Cristal — NOIRLab (noirlab2613a)"
       }
     ],
     coordonnees: { ad: "04h 09m 17s", dec: "+30° 46′ 33″", magnitude: "10.9", distance: "1 300 al", vitesseRadiale: "+60 km/s" },
