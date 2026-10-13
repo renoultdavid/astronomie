@@ -4273,20 +4273,6 @@ texte: "NGC 3982 est une somptueuse galaxie spirale intermédiaire de classe SAB
     texte: "OES 148-2 (ESO 148-IG002) est une galaxie ultralumineuse en infrarouge (ULIRG) remarquable située dans la constellation australe du Toucan, à environ 600 millions d'années-lumière de nous. Elle est le fruit d'une collision majeure entre deux grandes galaxies spirales riches en gaz. Le système se distingue par deux spectaculaires queues de marée courbées qui s'étirent sur plus de 130 000 années-lumière, créant une silhouette dynamique d'une rare élégance. Au cœur de la galaxie, les deux noyaux galactiques en cours de fusion finale alimentent à la fois une puissante flambée de formation d'étoiles et un noyau actif de type Seyfert, générant une énergie thermique colossale absorbée par d'épaisses couches de poussière sombre et réémise en infrarouge."
   },
   {
-    id: "oes28619",
-    nomPrincipal: "OES 286-19",
-    autreNom: "AM 2055-425",
-    catalogues: ["ESO 286-IG019", "PGC 65780", "IRAS 20550-4250"],
-    categoriePrincipale: "galaxie",
-    sousCategorie: "interaction",
-    specificites: ["starburst"],
-    constellation: "Microscope",
-    image: "https://lh3.googleusercontent.com/d/1F8neCEV_cotRVD58fcu862dV_mnb4qKZ/view?usp=drive_link",
-    legendeImage: "La fusion paroxystique d'OES 286-19 — Hubble",
-    coordonnees: { ad: "20h 58m 27s", dec: "-42° 39′ 01″", magnitude: "14.0", distance: "580 millions al", vitesseRadiale: "+12 800 km/s" },
-    texte: "OES 286-19 (ESO 286-IG019) est une extraordinaire galaxie lumineuse en infrarouge (LIRG) située dans la constellation du Microscope, résidant à environ 580 millions d'années-lumière de la Terre. Résultat d'une collision paroxystique entre deux galaxies spirales, elle se caractérise par une longue et fine queue de marée rectiligne qui s'échappe de son corps central sur des dizaines de milliers d'années-lumière. L'imagerie haute résolution de la caméra ACS du télescope spatial Hubble révèle un cœur chaotique où les nuages moléculaires ont été écrasés par les ondes de choc, allumant des centaines de super-amas d'étoiles jeunes et bleues qui illuminent les volutes de poussière sombre en cours d'effondrement."
-  },
-  {
     id: "sdsscgb10189a",
     nomPrincipal: "SDSSCGB 10189",
     autreNom: "",
