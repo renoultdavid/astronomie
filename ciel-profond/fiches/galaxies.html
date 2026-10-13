@@ -1,1 +1,731 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le Monde des Galaxies — Atlas Céleste</title>
+  <link rel="stylesheet" href="../../fiche.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #020617;
+      color: #e2e8f0;
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.8;
+      overflow-x: hidden;
+      padding-bottom: 5rem;
+    }
+
+    .fiche-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    /* EN-TÊTE */
+    .hero-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .hero-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+    .hero-header h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 3.8vw, 3rem);
+      letter-spacing: 0.12em;
+      color: #ffffff;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+    .hero-header .subtitle {
+      font-size: 1.05rem;
+      color: #94a3b8;
+      font-weight: 300;
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    /* TEXTES PRINCIPAUX */
+    .prose-block {
+      font-size: 1rem;
+      color: #cbd5e1;
+      text-align: justify;
+      font-weight: 300;
+      margin-bottom: 2rem;
+    }
+    .prose-block p {
+      margin-bottom: 1.4rem;
+    }
+
+    /* TITRES DE SECTIONS */
+    .section-main-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.7rem;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin: 3.5rem 0 1.5rem;
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-main-title::before {
+      content: "";
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: #38bdf8;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #38bdf8;
+    }
+
+    /* CARTES DE PRÉSENTATION */
+    .object-showcase {
+      background: #0b1120;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 1.8rem;
+      margin: 2.2rem 0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    .object-showcase-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      color: #f8fafc;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .object-tag {
+      font-size: 0.7rem;
+      font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 2px 10px;
+      border-radius: 14px;
+    }
+
+    /* CADRE D'IMAGE ZOOMABLE */
+    .zoomable-img-wrap {
+      position: relative;
+      width: 100%;
+      background: #000;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #1e293b;
+      margin: 1.2rem 0 1.5rem;
+      cursor: zoom-in;
+    }
+    .zoomable-img-wrap img {
+      width: 100%;
+      max-height: 480px;
+      object-fit: contain;
+      display: block;
+      transition: filter 0.25s ease;
+      background: #000;
+    }
+    .zoomable-img-wrap:hover img {
+      filter: brightness(1.08);
+    }
+    .zoom-hint-tag {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(2, 6, 23, 0.85);
+      border: 1px solid rgba(56, 189, 248, 0.6);
+      color: #38bdf8;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      pointer-events: none;
+      backdrop-filter: blur(4px);
+    }
+    .zoom-pulse {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #38bdf8;
+      box-shadow: 0 0 8px #38bdf8;
+      animation: pulseAnim 1.8s infinite;
+    }
+    @keyframes pulseAnim {
+      0%, 100% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    /* VISIONNEUSE PLEIN ÉCRAN LIGHTBOX */
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+      padding: 1.5vh 1.5vw;
+    }
+    .lightbox-overlay.active {
+      display: flex;
+    }
+    .lightbox-img {
+      max-width: 97vw;
+      max-height: 94vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.95), 0 0 20px rgba(56, 189, 248, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="fiche-wrapper">
+
+    <!-- EN-TÊTE DE LA FICHE -->
+    <header class="hero-header">
+      <div class="hero-badge">Cosmologie • Îles d'Univers</div>
+      <h1>Le Monde des Galaxies</h1>
+      <div class="subtitle">
+        Morphologies de Hubble, architectures spiralées et interactions cosmiques
+      </div>
+    </header>
+
+    <!-- INTRODUCTION GÉNÉRALE -->
+    <div class="prose-block">
+      <p>
+        Véritables métropoles stellaires de l'Univers, les galaxies sont d'immenses assemblages d'étoiles, de gaz, de poussières et de matière noire liés par la gravitation. De la majesté ordonnée des spirales au dépouillement silencieux des sphéroïdes géants, elles incarnent l'histoire évolutive de la matière à grande échelle.
+      </p>
+      <p>
+        Qu'elles évoluent pacifiquement au sein de groupes clairsemés ou qu'elles se percutent violemment dans des amas surdensifiés, les galaxies sculptent l'ossature lumineuse de la toile cosmique et abritent en leur cœur des trous noirs supermassifs régulateurs de leur fécondité.
+      </p>
+    </div>
+
+    <!-- INFOGRAPHIE INTERACTIVE DES GALAXIES (DIAPASON DE HUBBLE) -->
+    <div id="infographie-galaxies" style="font-family: system-ui, -apple-system, sans-serif; background: #0b1120; color: #e2e8f0; padding: 12px 14px; border-radius: 10px; width: 100%; border: 1px solid #1e293b; margin: 2rem 0 3rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
+      
+      <header style="text-align: center; margin-bottom: 12px;">
+        <h2 style="color: #f8fafc; margin: 0; font-size: 1.2rem; font-family: 'Cinzel', serif;">Classification & fonctionnement des galaxies</h2>
+        <p style="color: #94a3b8; margin-top: 3px; font-size: 0.8rem;">Séquence de Hubble, architectures spiralées et mécanismes énergétiques</p>
+      </header>
+
+      <!-- Sélecteur d'onglets compact -->
+      <div style="display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin-bottom: 12px;">
+        <button onclick="changerOngletGalaxies('vue-generale')" id="btn-vue-generale" style="padding: 6px 14px; border-radius: 6px; border: none; background: #2563eb; color: #fff; font-weight: 600; cursor: pointer; font-size: 0.8rem;">1. Vue générale (Diapason)</button>
+        <button onclick="changerOngletGalaxies('morpho')" id="btn-morpho" style="padding: 6px 14px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.8rem;">2. Morphologie détaillée</button>
+        <button onclick="changerOngletGalaxies('physique')" id="btn-physique" style="padding: 6px 14px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.8rem;">3. Régimes & Activité physique</button>
+      </div>
+
+      <!-- ONGLET 1 : VUE GÉNÉRALE (DIAPASON DE HUBBLE) -->
+      <div id="onglet-vue-generale">
+        <div style="background: #070d19; border: 1px solid #1e293b; border-radius: 6px; padding: 8px; margin-bottom: 10px; overflow-x: auto;">
+          <svg viewBox="0 0 920 235" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; min-width: 700px; display: block;">
+            <defs>
+              <radialGradient id="gradE" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="40%" stop-color="#fbbf24" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="#d97706" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="gradBulbe" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="35%" stop-color="#fed7aa" stop-opacity="0.95"/>
+                <stop offset="100%" stop-color="#f97316" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+
+            <!-- Lignes directrices du diapason -->
+            <path d="M 50 108 L 315 108" stroke="#334155" stroke-width="2" stroke-dasharray="4,4"/>
+            <path d="M 315 108 Q 365 108 405 50 L 885 50" fill="none" stroke="#0284c7" stroke-width="2"/>
+            <path d="M 315 108 Q 365 108 405 162 L 885 162" fill="none" stroke="#16a34a" stroke-width="2"/>
+
+            <!-- Bloc informatif haut gauche -->
+            <text x="60" y="24" fill="#fbbf24" font-size="11" font-weight="bold">GALAXIES ELLIPTIQUES (E)</text>
+            <text x="60" y="40" fill="#94a3b8" font-size="9.5">Sphéroïdes lisses • Étoiles âgées sans gaz froid</text>
+            <text x="60" y="55" fill="#38bdf8" font-size="9.5" font-family="monospace">Indice d'aplatissement : n = 10 × (1 - b/a)</text>
+
+            <!-- ELLIPTIQUES -->
+            <g transform="translate(65, 108)">
+              <circle cx="0" cy="0" r="19" fill="url(#gradE)"/>
+              <text x="0" y="29" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">E0</text>
+              <text x="0" y="40" text-anchor="middle" fill="#64748b" font-size="8.5">n = 0</text>
+            </g>
+            <g transform="translate(135, 108)">
+              <ellipse cx="0" cy="0" rx="21" ry="16" fill="url(#gradE)"/>
+              <text x="0" y="29" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">E3</text>
+              <text x="0" y="40" text-anchor="middle" fill="#64748b" font-size="8.5">n = 3</text>
+            </g>
+            <g transform="translate(205, 108)">
+              <ellipse cx="0" cy="0" rx="23" ry="13" fill="url(#gradE)"/>
+              <text x="0" y="29" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">E5</text>
+              <text x="0" y="40" text-anchor="middle" fill="#64748b" font-size="8.5">n = 5</text>
+            </g>
+            <g transform="translate(275, 108)">
+              <ellipse cx="0" cy="0" rx="26" ry="8.5" fill="url(#gradE)"/>
+              <text x="0" y="29" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">E7</text>
+              <text x="0" y="40" text-anchor="middle" fill="#64748b" font-size="8.5">n = 7</text>
+            </g>
+
+            <!-- LENTICULAIRE S0 -->
+            <g transform="translate(355, 108)">
+              <ellipse cx="0" cy="0" rx="26" ry="8.5" fill="#94a3b8" opacity="0.3"/>
+              <circle cx="0" cy="0" r="10" fill="url(#gradBulbe)"/>
+              <text x="0" y="29" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="bold">S0</text>
+              <text x="0" y="40" text-anchor="middle" fill="#64748b" font-size="8.5">Lenticulaire</text>
+            </g>
+
+            <!-- SPIRALES ORDINAIRES (S) -->
+            <text x="430" y="22" fill="#38bdf8" font-size="10.5" font-weight="bold">SPIRALES ORDINAIRES (S)</text>
+            <g transform="translate(485, 50)">
+              <ellipse cx="0" cy="0" rx="24" ry="16" fill="none" stroke="#38bdf8" stroke-width="1.3" opacity="0.6"/>
+              <circle cx="0" cy="0" r="10" fill="url(#gradBulbe)"/>
+              <text x="0" y="26" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">Sa</text>
+              <text x="0" y="37" text-anchor="middle" fill="#64748b" font-size="8">Bras serrés</text>
+            </g>
+            <g transform="translate(610, 50)">
+              <ellipse cx="0" cy="0" rx="27" ry="18" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="10,4"/>
+              <circle cx="0" cy="0" r="7.5" fill="url(#gradBulbe)"/>
+              <text x="0" y="26" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">Sb</text>
+              <text x="0" y="37" text-anchor="middle" fill="#64748b" font-size="8">Intermédiaire</text>
+            </g>
+            <g transform="translate(735, 50)">
+              <path d="M -22 -13 Q 0 -20 22 -9 M 22 13 Q 0 20 -22 9" fill="none" stroke="#38bdf8" stroke-width="1.6"/>
+              <circle cx="0" cy="0" r="5" fill="url(#gradBulbe)"/>
+              <text x="0" y="26" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">Sc</text>
+              <text x="0" y="37" text-anchor="middle" fill="#64748b" font-size="8">Bras ouverts</text>
+            </g>
+            <g transform="translate(855, 50)">
+              <path d="M -24 -7 C -11 -20 16 -16 24 -3 M 24 7 C 11 20 -16 16 -24 3" fill="none" stroke="#38bdf8" stroke-width="1.3" stroke-dasharray="4,3"/>
+              <circle cx="0" cy="0" r="3" fill="url(#gradBulbe)"/>
+              <text x="0" y="26" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">Sd</text>
+              <text x="0" y="37" text-anchor="middle" fill="#64748b" font-size="8">Très épars</text>
+            </g>
+
+            <!-- SPIRALES BARRÉES (SB) -->
+            <text x="430" y="138" fill="#4ade80" font-size="10.5" font-weight="bold">SPIRALES BARRÉES (SB)</text>
+            <g transform="translate(485, 162)">
+              <line x1="-16" y1="0" x2="16" y2="0" stroke="#4ade80" stroke-width="2.8" stroke-linecap="round"/>
+              <ellipse cx="0" cy="0" rx="24" ry="15" fill="none" stroke="#4ade80" stroke-width="1.2" opacity="0.6"/>
+              <circle cx="0" cy="0" r="9" fill="url(#gradBulbe)"/>
+              <text x="0" y="26" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">SBa</text>
+            </g>
+            <g transform="translate(610, 162)">
+              <line x1="-17" y1="0" x2="17" y2="0" stroke="#4ade80" stroke-width="2.4" stroke-linecap="round"/>
+              <circle cx="0" cy="0" r="6.5" fill="url(#gradBulbe)"/>
+              <path d="M -17 0 C -25 -13 -6 -18 10 -18 M 17 0 C 25 13 6 18 -10 18" fill="none" stroke="#4ade80" stroke-width="1.5"/>
+              <text x="0" y="26" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">SBb</text>
+              <text x="0" y="37" text-anchor="middle" fill="#86efac" font-size="8">(Voie lactée)</text>
+            </g>
+            <g transform="translate(735, 162)">
+              <line x1="-17" y1="0" x2="17" y2="0" stroke="#4ade80" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="0" cy="0" r="4" fill="url(#gradBulbe)"/>
+              <path d="M -17 0 C -27 -9 0 -23 15 -18 M 17 0 C 27 9 0 23 -15 18" fill="none" stroke="#4ade80" stroke-width="1.5"/>
+              <text x="0" y="26" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">SBc</text>
+            </g>
+            <g transform="translate(855, 162)">
+              <line x1="-15" y1="0" x2="15" y2="0" stroke="#4ade80" stroke-width="1.4" stroke-linecap="round"/>
+              <circle cx="0" cy="0" r="2.5" fill="url(#gradBulbe)"/>
+              <path d="M -15 0 C -25 3 -17 19 -5 19 M 15 0 C 25 -3 17 -19 5 -19" fill="none" stroke="#4ade80" stroke-width="1.2" stroke-dasharray="3,3"/>
+              <text x="0" y="26" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">SBd</text>
+            </g>
+
+            <!-- IRRÉGULIÈRES -->
+            <g transform="translate(40, 206)">
+              <rect x="0" y="0" width="840" height="23" rx="4" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+              <text x="12" y="15.5" fill="#f87171" font-size="10" font-weight="bold">Irr (Irrégulières) :</text>
+              <text x="125" y="15.5" fill="#cbd5e1" font-size="9.5">Dépourvues de symétrie centrale ou axiale (ex. Nuages de Magellan)</text>
+            </g>
+          </svg>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 8px;">
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 8px 10px;">
+            <div style="color: #fbbf24; font-weight: bold; font-size: 0.82rem; margin-bottom: 2px;">Indice n des elliptiques (E0 à E7)</div>
+            <div style="font-family: monospace; background: #0f172a; padding: 3px 6px; border-radius: 4px; color: #38bdf8; font-size: 0.78rem; text-align: center; margin-bottom: 4px;">
+              n = 10 × (1 - b / a)
+            </div>
+            <p style="font-size: 0.75rem; color: #94a3b8; margin: 0; line-height: 1.3;">
+              <strong>a</strong> = demi-grand axe, <strong>b</strong> = demi-petit axe. <strong>E0</strong> est circulaire (b = a). L'aplatissement physique stable s'arrête à <strong>E7</strong> (b/a = 0,3).
+            </p>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 8px 10px;">
+            <div style="color: #38bdf8; font-weight: bold; font-size: 0.82rem; margin-bottom: 2px;">Séquence des lettres (a à d)</div>
+            <p style="font-size: 0.75rem; color: #94a3b8; margin: 0; line-height: 1.3;">
+              • <strong>Bulbe :</strong> volumineux en <em>a</em>, quasi absent en <em>d</em>.<br>
+              • <strong>Bras :</strong> enroulés et compacts en <em>a</em>, très épars en <em>d</em>.<br>
+              • <strong>Gaz froid :</strong> concentration croissante de <em>a</em> vers <em>d</em>.
+            </p>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 8px 10px;">
+            <div style="color: #4ade80; font-weight: bold; font-size: 0.82rem; margin-bottom: 2px;">Axe S vs SB (Barre médiane)</div>
+            <p style="font-size: 0.75rem; color: #94a3b8; margin: 0; line-height: 1.3;">
+              Environ 2/3 des spirales sont barrées (<strong>SB</strong>). Une onde stellaire linéaire traverse le noyau ; les bras émergent aux extrémités de cette barre (cas de la Voie lactée).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ONGLET 2 : MORPHOLOGIE DÉTAILLÉE -->
+      <div id="onglet-morpho" style="display: none;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 8px;">
+          
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
+            <div style="color: #60a5fa; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Grand dessein vs Floculente</div>
+            <div style="background: #0f172a; border-radius: 4px; padding: 4px; margin-bottom: 6px;">
+              <svg viewBox="0 0 280 80" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
+                <g transform="translate(70, 38)">
+                  <circle cx="0" cy="0" r="5.5" fill="#fed7aa"/>
+                  <path d="M 0 -5 C 22 -22 40 8 28 26 C 18 40 -8 32 -22 18" fill="none" stroke="#38bdf8" stroke-width="2"/>
+                  <path d="M 0 5 C -22 22 -40 -8 -28 -26 C -18 -40 8 -32 22 -18" fill="none" stroke="#38bdf8" stroke-width="2"/>
+                  <text x="0" y="36" text-anchor="middle" fill="#94a3b8" font-size="8">Grand dessein (M51)</text>
+                </g>
+                <g transform="translate(210, 38)">
+                  <circle cx="0" cy="0" r="3.5" fill="#fed7aa"/>
+                  <g stroke="#a78bfa" stroke-width="1.3" stroke-linecap="round">
+                    <path d="M -14 -18 Q -4 -24 7 -18"/>
+                    <path d="M 14 -10 Q 24 -5 20 7"/>
+                    <path d="M 9 16 Q -2 22 -12 16"/>
+                    <path d="M -20 9 Q -24 0 -16 -9"/>
+                    <path d="M -7 -7 Q 0 -11 7 -7"/>
+                    <path d="M 7 5 Q 0 9 -7 5"/>
+                  </g>
+                  <text x="0" y="36" text-anchor="middle" fill="#94a3b8" font-size="8">Floculente (NGC 2841)</text>
+                </g>
+              </svg>
+            </div>
+            <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.3;">
+              <strong>Grand dessein (~10 %) :</strong> 2 bras continus et symétriques régis par des ondes de densité.<br>
+              <strong>Floculente :</strong> aucun bras continu ; réseau moucheté de courts segments d'étoiles.
+            </p>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
+            <div style="color: #4ade80; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Typologie de Vaucouleurs : SAB et anneaux</div>
+            <div style="background: #0f172a; border-radius: 4px; padding: 4px; margin-bottom: 6px;">
+              <svg viewBox="0 0 280 80" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
+                <g transform="translate(70, 38)">
+                  <ellipse cx="0" cy="0" rx="13" ry="6" fill="none" stroke="#4ade80" stroke-width="1.6"/>
+                  <circle cx="0" cy="0" r="4" fill="#fed7aa"/>
+                  <path d="M -13 0 Q -22 -16 2 -22 M 13 0 Q 22 16 -2 22" fill="none" stroke="#4ade80" stroke-width="1.4"/>
+                  <text x="0" y="36" text-anchor="middle" fill="#94a3b8" font-size="8">Barre modérée (SAB)</text>
+                </g>
+                <g transform="translate(210, 38)">
+                  <circle cx="0" cy="0" r="15" fill="none" stroke="#facc15" stroke-width="1.4" stroke-dasharray="3,2"/>
+                  <circle cx="0" cy="0" r="4.5" fill="#fed7aa"/>
+                  <path d="M 15 0 C 28 14 14 28 -4 28 M -15 0 C -28 -14 -14 -28 4 -28" fill="none" stroke="#38bdf8" stroke-width="1.3"/>
+                  <text x="0" y="36" text-anchor="middle" fill="#94a3b8" font-size="8">Variété à anneau (r)</text>
+                </g>
+              </svg>
+            </div>
+            <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.3;">
+              Gérard de Vaucouleurs formalise les <strong>SAB</strong> (barre discrète), la variété <strong>(s)</strong> (bras émergeant directement) et <strong>(r)</strong> (bras greffés sur un anneau interne).
+            </p>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
+            <div style="color: #38bdf8; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Profil en coupe : Elliptique vs Lenticulaire</div>
+            <div style="background: #0f172a; border-radius: 4px; padding: 4px; margin-bottom: 6px;">
+              <svg viewBox="0 0 280 80" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
+                <g transform="translate(70, 38)">
+                  <ellipse cx="0" cy="0" rx="28" ry="16" fill="#fbbf24" opacity="0.3"/>
+                  <ellipse cx="0" cy="0" rx="14" ry="8" fill="#fbbf24" opacity="0.6"/>
+                  <circle cx="0" cy="0" r="4" fill="#ffffff"/>
+                  <text x="0" y="36" text-anchor="middle" fill="#94a3b8" font-size="8">E (Sphéroïde pur)</text>
+                </g>
+                <g transform="translate(210, 38)">
+                  <ellipse cx="0" cy="0" rx="40" ry="3" fill="#38bdf8" opacity="0.5"/>
+                  <ellipse cx="0" cy="0" rx="13" ry="11" fill="#fed7aa" opacity="0.8"/>
+                  <circle cx="0" cy="0" r="4" fill="#ffffff"/>
+                  <text x="0" y="36" text-anchor="middle" fill="#94a3b8" font-size="8">S0 (Disque mince + bulbe)</text>
+                </g>
+              </svg>
+            </div>
+            <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.3;">
+              Les elliptiques sont des sphéroïdes sans composante plane. Les <strong>lenticulaires (S0)</strong> ont un vrai disque en rotation, mais privé de gaz pour façonner des bras spiraux.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ONGLET 3 : RÉGIMES PHYSIQUES -->
+      <div id="onglet-physique" style="display: none;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 8px;">
+          
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
+            <div style="color: #fb923c; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Sursaut de formation (« starburst »)</div>
+            <div style="background: #0f172a; border-radius: 4px; padding: 4px; margin-bottom: 6px;">
+              <svg viewBox="0 0 280 80" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
+                <g transform="translate(140, 38)">
+                  <path d="M -7 -3 C -20 -24 0 -32 -3 -36 C 5 -32 16 -24 7 -3 Z" fill="#ef4444" opacity="0.75"/>
+                  <path d="M -7 3 C -20 24 0 32 -3 36 C 5 32 16 24 7 3 Z" fill="#ef4444" opacity="0.75"/>
+                  <ellipse cx="0" cy="0" rx="42" ry="5.5" fill="#cbd5e1" transform="rotate(-15)"/>
+                  <ellipse cx="0" cy="0" rx="9" ry="3.5" fill="#facc15" transform="rotate(-15)"/>
+                  <circle cx="0" cy="0" r="2.5" fill="#ffffff"/>
+                </g>
+                <text x="140" y="74" text-anchor="middle" fill="#94a3b8" font-size="8">Super-vent bipolaire de gaz ionisé (type M82)</text>
+              </svg>
+            </div>
+            <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.3;">
+              Compression brutale du gaz froid lors d'une interaction. Des supernovae en chaîne expulsent des panaches chauds perpendiculairement au disque.
+            </p>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px;">
+            <div style="color: #f472b6; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Modèle unifié de Seyfert (AGN)</div>
+            <div style="background: #0f172a; border-radius: 4px; padding: 4px; margin-bottom: 6px;">
+              <svg viewBox="0 0 280 80" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
+                <g transform="translate(140, 38)">
+                  <ellipse cx="-18" cy="0" rx="10" ry="14" fill="#b45309" opacity="0.8"/>
+                  <ellipse cx="18" cy="0" rx="10" ry="14" fill="#b45309" opacity="0.8"/>
+                  <circle cx="0" cy="0" r="3.5" fill="#000000" stroke="#f43f5e" stroke-width="1.3"/>
+                  <polygon points="0,-3 -10,-28 10,-28" fill="#38bdf8" opacity="0.35"/>
+                  <polygon points="0,3 -10,28 10,28" fill="#38bdf8" opacity="0.35"/>
+                  <line x1="26" y1="-23" x2="9" y2="-10" stroke="#f472b6" stroke-width="1.3"/>
+                  <text x="30" y="-23" fill="#f472b6" font-size="7.5" font-weight="bold">Seyfert 1 (vue directe)</text>
+                  <line x1="38" y1="0" x2="24" y2="0" stroke="#f472b6" stroke-width="1.3"/>
+                  <text x="42" y="3" fill="#f472b6" font-size="7.5" font-weight="bold">Seyfert 2 (vue masquée)</text>
+                </g>
+              </svg>
+            </div>
+            <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.3;">
+              Plongée dans l'axe du tore : raies larges observées (<strong>Seyfert 1</strong>). Vue latérale masquée par la poussière : raies étroites seules (<strong>Seyfert 2</strong>).
+            </p>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px; grid-column: 1 / -1;">
+            <div style="color: #34d399; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Bimodalité cosmologique : Nuage bleu, Vallée verte & Séquence rouge</div>
+            <div style="background: #0f172a; border-radius: 4px; padding: 4px; margin-bottom: 6px;">
+              <svg viewBox="0 0 600 85" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
+                <line x1="45" y1="72" x2="570" y2="72" stroke="#475569" stroke-width="1.3"/>
+                <line x1="45" y1="72" x2="45" y2="10" stroke="#475569" stroke-width="1.3"/>
+                <text x="570" y="82" text-anchor="end" fill="#94a3b8" font-size="8">Indice de couleur (Bleu → Rouge)</text>
+                <text x="50" y="16" fill="#94a3b8" font-size="8">Luminosité absolue (Masse)</text>
+
+                <ellipse cx="150" cy="50" rx="65" ry="14" fill="#0284c7" opacity="0.4"/>
+                <text x="150" y="53" text-anchor="middle" fill="#38bdf8" font-size="9" font-weight="bold">Nuage bleu (actives)</text>
+
+                <path d="M 225 47 C 275 43 305 34 335 30" fill="none" stroke="#facc15" stroke-width="1.8" stroke-dasharray="4,3"/>
+                <text x="280" y="28" text-anchor="middle" fill="#facc15" font-size="8" font-weight="bold">Tarissement (quenching)</text>
+
+                <rect x="250" y="16" width="65" height="54" fill="#22c55e" opacity="0.12"/>
+                <text x="282" y="66" text-anchor="middle" fill="#4ade80" font-size="8">Vallée verte</text>
+
+                <ellipse cx="425" cy="25" rx="75" ry="12" fill="#dc2626" opacity="0.4"/>
+                <text x="425" y="28" text-anchor="middle" fill="#fca5a5" font-size="9" font-weight="bold">Séquence rouge (« mortes »)</text>
+              </svg>
+            </div>
+            <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0; line-height: 1.3;">
+              Nées dans le <strong>nuage bleu</strong>, les galaxies voient leur gaz chassé par les jets centraux ou les supernovae. Elles traversent la <strong>vallée verte</strong> avant de s'éteindre sur la <strong>séquence rouge</strong>.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- SECTION DES FAMILLES DE GALAXIES                                -->
+    <!-- ================================================================= -->
+    <h2 class="section-main-title">Panorama des Galaxies</h2>
+
+    <!-- 1. ELLIPTIQUES -->
+    <div class="object-showcase">
+      <div class="object-showcase-title">
+        <span>Galaxies Elliptiques</span>
+        <span class="object-tag">Type E • Sphéroïdes Anciens</span>
+      </div>
+      <div class="zoomable-img-wrap" onclick="ouvrirZoomDirect('https://lh3.googleusercontent.com/d/1zPxUOHJZkvtOkprhoZNjSjLpjdlgVVWb')">
+        <img src="https://lh3.googleusercontent.com/d/1zPxUOHJZkvtOkprhoZNjSjLpjdlgVVWb" alt="Galaxie Elliptique">
+        <div class="zoom-hint-tag"><span class="zoom-pulse"></span><span>Agrandir ⤢</span></div>
+      </div>
+      <div class="prose-block">
+        <p>
+          Une galaxie elliptique est une vaste structure stellaire à la morphologie lisse et ovoïde, dépourvue de disque ou de bras spiraux. Elle est dominée par de vieilles étoiles de faible masse, ce qui lui confère une teinte homogène tirant vers le jaune et le rouge.
+        </p>
+        <p>
+          Virtuellement dépourvue de gaz froid et de poussières interstellaires, elle ne produit quasiment plus aucune nouvelle étoile. Elle résulte généralement de collisions et de fusions répétées entre galaxies, proliférant surtout au centre des amas galactiques denses. Cette famille englobe aussi bien de modestes naines que les monstres les plus gigantesques de l'Univers, à l'image de M87.
+        </p>
+      </div>
+    </div>
+
+    <!-- 2. LENTICULAIRES -->
+    <div class="object-showcase">
+      <div class="object-showcase-title">
+        <span>Galaxies Lenticulaires</span>
+        <span class="object-tag">Type S0 • Disque sans bras</span>
+      </div>
+      <div class="zoomable-img-wrap" onclick="ouvrirZoomDirect('https://lh3.googleusercontent.com/d/1F_d_KkXpvHRzRCFfwdMjzf4W46j6UrZU')">
+        <img src="https://lh3.googleusercontent.com/d/1F_d_KkXpvHRzRCFfwdMjzf4W46j6UrZU" alt="Galaxie Lenticulaire">
+        <div class="zoom-hint-tag"><span class="zoom-pulse"></span><span>Agrandir ⤢</span></div>
+      </div>
+      <div class="prose-block">
+        <p>
+          Une galaxie lenticulaire constitue une structure intermédiaire entre la galaxie spirale et la galaxie elliptique. Elle arbore un bulbe central volumineux entouré d'un disque stellaire net, mais reste dépourvue de bras spiraux.
+        </p>
+        <p>
+          Ayant épuisé ou perdu l'essentiel de son gaz interstellaire froid, elle ne donne presque plus naissance à de nouvelles étoiles. Sa population est ainsi dominée par des astres anciens et évolués, lui conférant une lueur douce et homogène. Elle représente souvent l'évolution terminale d'une spirale dépouillée de sa matière par son environnement galactique dense.
+        </p>
+      </div>
+    </div>
+
+    <!-- 3. SPIRALES -->
+    <div class="object-showcase">
+      <div class="object-showcase-title">
+        <span>Galaxies Spirales</span>
+        <span class="object-tag">Types S / SB • Ondes de Densité</span>
+      </div>
+      <div class="zoomable-img-wrap" onclick="ouvrirZoomDirect('https://lh3.googleusercontent.com/d/17YQrTq6CpS9elE0HSVgwM2SC3V8X3YXT')">
+        <img src="https://lh3.googleusercontent.com/d/17YQrTq6CpS9elE0HSVgwM2SC3V8X3YXT" alt="Galaxie Spirale">
+        <div class="zoom-hint-tag"><span class="zoom-pulse"></span><span>Agrandir ⤢</span></div>
+      </div>
+      <div class="prose-block">
+        <p>
+          Une galaxie spirale est un vaste disque aplati en rotation rapide, structuré en bras incurvés s'enroulant autour d'un bulbe central. Riche en gaz interstellaire et en poussières, elle maintient un taux élevé de formation stellaire le long de ses bras, illuminés par de jeunes étoiles bleues.
+        </p>
+        <p>
+          Son centre et son halo périphérique abritent au contraire des populations d'étoiles plus anciennes et évoluées. Elle peut être régulière ou barrée, présentant alors une traverse centrale rectiligne d'étoiles — à l'image de notre propre Voie lactée. Ses bras caractéristiques ne sont pas des structures rigides, mais des ondes de densité gravitationnelles qui compriment continuellement le gaz sur leur passage.
+        </p>
+      </div>
+    </div>
+
+    <!-- 4. IRRÉGULIÈRES -->
+    <div class="object-showcase">
+      <div class="object-showcase-title">
+        <span>Galaxies Irrégulières</span>
+        <span class="object-tag">Type Irr • Pouponnières Perturbées</span>
+      </div>
+      <div class="zoomable-img-wrap" onclick="ouvrirZoomDirect('https://lh3.googleusercontent.com/d/1g0-U3JKyXidgPhT0d7fL834t_oNWc-8j')">
+        <img src="https://lh3.googleusercontent.com/d/1g0-U3JKyXidgPhT0d7fL834t_oNWc-8j" alt="Galaxie Irrégulière">
+        <div class="zoom-hint-tag"><span class="zoom-pulse"></span><span>Agrandir ⤢</span></div>
+      </div>
+      <div class="prose-block">
+        <p>
+          Une galaxie irrégulière se caractérise par une morphologie chaotique et asymétrique, totalement dépourvue de disque spiral net ou de symétrie elliptique. Très riche en gaz interstellaire froid et en poussières, elle est souvent le théâtre d'épisodes intenses de formation d'étoiles jeunes et bleues.
+        </p>
+        <p>
+          Sa structure désordonnée résulte généralement de violentes perturbations gravitationnelles ou de collisions passées avec des galaxies voisines plus massives. Majoritairement de taille modeste, elle appartient souvent à la catégorie des galaxies naines satellisées autour d'ensembles plus vastes. Les Nuages de Magellan en constituent les exemples les plus célèbres, illustrant l'impact direct des forces de marée cosmiques sur l'organisation galactique.
+        </p>
+      </div>
+    </div>
+
+    <!-- 5. GROUPES ET AMAS -->
+    <div class="object-showcase">
+      <div class="object-showcase-title">
+        <span>Amas et Groupes de Galaxies</span>
+        <span class="object-tag">Toile Cosmique • Matière Noire</span>
+      </div>
+      <div class="zoomable-img-wrap" onclick="ouvrirZoomDirect('https://lh3.googleusercontent.com/d/1fGPasYZ0er1HYfI3coHRkXdXmrSDuQPV')">
+        <img src="https://lh3.googleusercontent.com/d/1fGPasYZ0er1HYfI3coHRkXdXmrSDuQPV" alt="Amas et Groupes de Galaxies">
+        <div class="zoom-hint-tag"><span class="zoom-pulse"></span><span>Agrandir ⤢</span></div>
+      </div>
+      <div class="prose-block">
+        <p>
+          Un groupe ou amas de galaxies est un vaste ensemble réunissant de quelques dizaines à plusieurs milliers de galaxies liées par la gravitation. Tandis que les groupes restent modestes — à l'image de notre Groupe local —, les amas géants constituent les plus grandes structures stables connues de l'Univers.
+        </p>
+        <p>
+          La matière visible des étoiles n'y forme qu'une infime fraction du tout, l'essentiel de la masse résidant dans un immense halo de matière noire et un gaz intergalactique surchauffé. Ce milieu dense et turbulent perturbe violemment les galaxies membres, arrachant souvent leur gaz par friction et provoquant d'incessantes fusions. Reliés entre eux par de longs filaments de matière au sein de superamas, ils dessinent l'ossature de la grande toile cosmique.
+        </p>
+      </div>
+    </div>
+
+    <!-- 6. INTERACTIONS ET COLLISIONS -->
+    <div class="object-showcase">
+      <div class="object-showcase-title">
+        <span>Interactions et Collisions</span>
+        <span class="object-tag">Ballet Gravitationnel • Queues de Marée</span>
+      </div>
+      <div class="zoomable-img-wrap" onclick="ouvrirZoomDirect('https://lh3.googleusercontent.com/d/1UzdXbKe8zd1IaxKF53mi7hlGRA7yFmzg')">
+        <img src="https://lh3.googleusercontent.com/d/1UzdXbKe8zd1IaxKF53mi7hlGRA7yFmzg" alt="Interaction et Collision de Galaxies">
+        <div class="zoom-hint-tag"><span class="zoom-pulse"></span><span>Agrandir ⤢</span></div>
+      </div>
+      <div class="prose-block">
+        <p>
+          Une interaction ou collision galactique est un gigantesque ballet gravitationnel où deux ou plusieurs structures cosmiques se déforment mutuellement à leur passage. En raison des distances immenses qui les séparent, les étoiles ne se percutent quasiment jamais, leurs trajectoires étant simplement remodelées par les forces de marée.
+        </p>
+        <p>
+          En revanche, les gigantesques nuages de gaz et de poussières se heurtent de plein fouet, comprimant la matière et allumant d'intenses flambées de formation stellaire. Ces perturbations arrachent des flots d'astres dans l'espace, sculptant de longues queues de marée et des ponts de matière spectaculaires. Le phénomène s'achève le plus souvent par une fusion complète en une unique galaxie elliptique — le sort qui attend d'ailleurs la Voie lactée et Andromède.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- VISIONNEUSE PLEIN ÉCRAN LIGHTBOX -->
+  <div class="lightbox-overlay" id="lightboxOverlay" onclick="fermerZoom()" title="Cliquer ou appuyer sur Échap pour fermer">
+    <img id="lightboxImg" class="lightbox-img" src="" alt="Agrandissement plein écran">
+  </div>
+
+  <script>
+    // GESTION DES ONGLETS DE L'INFOGRAPHIE
+    function changerOngletGalaxies(nom) {
+      const onglets = ['vue-generale', 'morpho', 'physique'];
+      onglets.forEach(o => {
+        const contenu = document.getElementById('onglet-' + o);
+        const bouton = document.getElementById('btn-' + o);
+        if (o === nom) {
+          contenu.style.display = 'block';
+          bouton.style.background = '#2563eb';
+          bouton.style.color = '#ffffff';
+        } else {
+          contenu.style.display = 'none';
+          bouton.style.background = '#1e293b';
+          bouton.style.color = '#94a3b8';
+        }
+      });
+    }
+
+    // GESTION DU ZOOM PLEIN ÉCRAN LIGHTBOX
+    function ouvrirZoomDirect(url) {
+      const overlay = document.getElementById('lightboxOverlay');
+      const img = document.getElementById('lightboxImg');
+      img.src = url;
+      overlay.classList.add('active');
+    }
+
+    function fermerZoom() {
+      document.getElementById('lightboxOverlay').classList.remove('active');
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        fermerZoom();
+      }
+    });
+  </script>
+</body>
+</html>
