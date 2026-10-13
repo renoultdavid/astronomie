@@ -1,5 +1,27 @@
 const OBJETS_CIEL_PROFOND_2 = [
 {
+    id: "ngc1512",
+    nomPrincipal: "NGC 1512",
+    autreNom: "",
+    catalogues: ["ESO 250-4", "MCG -07-09-007", "PGC 14391"],
+    categoriePrincipale: "galaxie",
+    sousCategorie: "spirale",
+    specificites: ["grand_dessein", "starburst", "interaction"],
+    constellation: "Horloge",
+    galerie: [
+      {
+        url: "https://lh3.googleusercontent.com/d/1yACeCwxUJJfh7FlQviTWa2H_PEmEqXFf",
+        legende: "L'anneau nucléaire de sursaut stellaire de NGC 1512 — Hubble"
+      },
+      {
+        url: "https://lh3.googleusercontent.com/d/1ryd1LWiHZzqe5WhesqZ7usWOj3cJRgA2",
+        legende: "Le couple en interaction gravitationnelle NGC 1512 et NGC 1510 — Hubble"
+      }
+    ],
+    coordonnees: { ad: "04h 03m 54s", dec: "-43° 20′ 56″", magnitude: "10.2", distance: "38 millions al", vitesseRadiale: "+898 km/s" },
+    texte: "NGC 1512 est une galaxie spirale barrée à anneaux multiples de classe (R'1)SB(r)ab située dans la constellation australe de l'Horloge, découverte par James Dunlop en 1826. Située à environ trente-huit millions d'années-lumière de la Terre et s'étendant sur un diamètre réel d'environ soixante-dix mille années-lumière, elle est observée sous une inclinaison modérée d'environ trente-cinq degrés. Son profil morphologique présente un bulbe central compact traversé par une barre stellaire d'étoiles dorées anciennes, enserrée dans un anneau interne de résonance d'où émergent deux bras spiraux principaux symétriques à grand dessein. En son cœur réside un remarquable anneau circum-nucléaire de sursaut de formation stellaire (starburst ring) d'environ 2 400 années-lumière de diamètre, magnifiquement résolu par le télescope spatial Hubble en un réseau dense de super-amas d'étoiles jeunes et bleues massives nées au cours des quarante derniers millions d'années. À l'extrémité sud-ouest de son disque externe, NGC 1512 est engagée dans une interaction gravitationnelle directe avec sa compagne satellite, la galaxie naine lenticulaire bleue NGC 1510, distante de seulement cinq minutes d'arc en projection céleste. Les forces de marée mutuelles ont étiré d'immenses bras de gaz neutre et un pont de matière diffus qui enveloppe le duo sur plusieurs dizaines de kiloparsecs, amorçant le démantèlement progressif de la compagne au profit du disque externe de la spirale. Les cartographies en radioastronomie menées avec le réseau ATCA sur la raie HI à 21 centimètres et les observations dans l'ultraviolet lointain confirment que cette interaction canalise le gaz froid vers les structures résonantes, alimentant une natalité stellaire étendue tout en offrant un cas d'étude pour l'accrétion de matière et l'évolution séculaire des galaxies barrées couplées."
+  },
+    {
     id: "arp4",
     nomPrincipal: "Arp 4",
     autreNom: "MCG -02-05-050",
