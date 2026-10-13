@@ -1,5 +1,19 @@
 const OBJETS_CIEL_PROFOND_2 = [
 {
+    id: "ngc1022",
+    nomPrincipal: "NGC 1022",
+    autreNom: "",
+    catalogues: ["MCG -01-07-031", "IRAS 02360-0653", "PGC 10010"],
+    categoriePrincipale: "galaxie",
+    sousCategorie: "spirale",
+    specificites: ["starburst"],
+    constellation: "Baleine",
+    image: "https://lh3.googleusercontent.com/d/1HWa-EJXcbu7VNSiJDoMBTbLTSfJKO41Z",
+    legendeImage: "Le réseau dense de poussières et le disque interne de NGC 1022 — Hubble",
+    coordonnees: { ad: "02h 38m 33s", dec: "-06° 40′ 39″", magnitude: "11.3", distance: "65 millions al", vitesseRadiale: "+1 453 km/s" },
+    texte: "NGC 1022 est une galaxie spirale intermédiaire de classe (R')SB(s)a située dans la constellation équatoriale de la Baleine, découverte par William Herschel en 1785. Évoluant à une distance d'environ soixante-cinq millions d'années-lumière de la Terre et s'étendant sur un diamètre réel d'environ quarante-cinq mille années-lumière, elle est observée sous une faible inclinaison d'environ vingt-quatre degrés, offrant une perspective frontale sur son architecture interne. Son profil morphologique se singularise par une barre stellaire centrale trapue et peu proéminente, bordée par un réseau chaotique et dense de méandres de poussière sombre et absorbante qui s'enroulent étroitement autour de la région centrale. En son cœur réside un anneau interne de sursaut de formation stellaire (starburst), alimenté par des flux réguliers de gaz moléculaire froid canalisés vers les zones denses sous l'effet des couples gravitationnels exercés par la barre. L'imagerie optique haute résolution de la caméra ACS et de la WFC3 du télescope spatial Hubble résout de multiples grappes de jeunes super-amas d'étoiles bleues massives qui percent à travers les bandes de poussière rougie. Dans le cadre de recherches fondamentales sur les trous noirs centraux, NGC 1022 a fait l'objet d'analyses approfondies destinées à calibrer la corrélation entre la masse du trou noir supermassif intermédiaire (estimée à quelques millions de masses solaires) et la dispersion des vitesses stellaires du bulbe. Les mesures spectroscopiques et les cartographies radioastronomiques de la raie HI confirment une cinématique globale régulière et ordonnée, sans perturbation de marée externe majeure. NGC 1022 constitue un modèle d'observation pour étudier la dynamique des poussières interstellaires et l'accrétion de matière au sein des spirales précoces de masse intermédiaire."
+  },
+    {
     id: "oes28619",
     nomPrincipal: "OES 286-19",
     autreNom: "AM 2055-425",
