@@ -1,5 +1,19 @@
 const OBJETS_CIEL_PROFOND_2 = [
 {
+    id: "ngc1786",
+    nomPrincipal: "NGC 1786",
+    autreNom: "ESO 56-SC039",
+    catalogues: ["KMK 88-34", "LW 129", "PGC 2816919"],
+    categoriePrincipale: "amas",
+    sousCategorie: "globulaire",
+    specificites: ["extragalactique"],
+    constellation: "Dorade",
+    image: "https://lh3.googleusercontent.com/d/1hmX3BAFd9FZv6Q3j6xAFE1MsXHzMV6cz",
+    legendeImage: "Le champ d'étoiles résolu de l'amas globulaire extragalactique NGC 1786 — Hubble",
+    coordonnees: { ad: "04h 59m 08s", dec: "-67° 44′ 43″", magnitude: "10.1", distance: "160 000 al", vitesseRadiale: "+264 km/s" },
+    texte: "NGC 1786 est un amas globulaire extragalactique très ancien situé dans la constellation australe de la Dorade, découvert par John Herschel en 1835. Positionné à environ cent soixante mille années-lumière de la Terre, il fait partie intégrante du Grand Nuage de Magellan (LMC), constituant l'un des objets les plus massifs et âgés de cette galaxie naine compagne de la Voie lactée. Avec un âge estimé à plus de douze milliards d'années et une masse totale approchant cinq cent mille masses solaires, il est contemporain des plus vieux amas globulaires de notre propre halo galactique. L'imagerie optique haute résolution obtenue par la caméra ACS du télescope spatial Hubble résout individuellement des dizaines de milliers d'étoiles membres jusqu'au cœur de son profil central hautement concentré. Les études spectroscopiques à haute résolution menées avec le Very Large Telescope (VLT) de l'ESO révèlent une faible métallicité de l'ordre de [Fe/H] = -1,7 dex et confirment la présence de multiples populations stellaires. L'analyse des abondances chimiques démontre l'existence d'anticorrélations classiques entre le sodium et l'oxygène (Na-O), ainsi qu'entre le magnésium et l'aluminium (Mg-Al) ou le potassium (Mg-K), caractéristiques des cycles de fusion avancés CNO et de l'auto-enrichissement par les étoiles massives de la branche asymptotique des géantes (AGB). Non perturbé par des forces de marée destructrices au sein du disque magellanique, NGC 1786 fournit un étalon pour étudier les premiers épisodes de formation stellaire dans les galaxies naines en interaction."
+  },
+    {
     id: "ngc1512",
     nomPrincipal: "NGC 1512",
     autreNom: "",
