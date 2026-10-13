@@ -626,6 +626,7 @@
 
   <!-- CHARGEMENT DU FICHIER DATA SÉPARÉ -->
   <script src="./data/data-objets.js"></script>
+  <script src="./data/data-objets2.js"></script>
 
  <script>
     const SUB_CATEGORIES = {
@@ -659,7 +660,11 @@
       ]
     };
 
-    let dataset = (typeof OBJETS_CIEL_PROFOND !== 'undefined') ? OBJETS_CIEL_PROFOND : [];
+   const liste1 = (typeof OBJETS_CIEL_PROFOND !== 'undefined') ? OBJETS_CIEL_PROFOND : [];
+    const liste2 = (typeof OBJETS_CIEL_PROFOND_2 !== 'undefined') ? OBJETS_CIEL_PROFOND_2 : [];
+
+    // On place liste2 en premier pour que vos fiches les plus récentes apparaissent en haut à gauche
+    let dataset = [...liste2, ...liste1];
 
     const searchInput = document.getElementById('searchInput');
     const filterCategory = document.getElementById('filterCategory');
