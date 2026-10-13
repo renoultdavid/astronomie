@@ -1,5 +1,19 @@
 const OBJETS_CIEL_PROFOND_2 = [
 {
+    id: "ngc4519",
+    nomPrincipal: "NGC 4519",
+    autreNom: "",
+    catalogues: ["UGC 7707", "MCG +02-32-124", "VCC 1500", "PGC 41687"],
+    categoriePrincipale: "galaxie",
+    sousCategorie: "spirale",
+    specificites: [],
+    constellation: "Vierge",
+    image: "https://lh3.googleusercontent.com/d/1GyOpaoAcauxmyjOk9n0GdAPqv2n6T-b6",
+    legendeImage: "Le disque incliné et les bras asymétriques de NGC 4519 — Hubble",
+    coordonnees: { ad: "12h 33m 30s", dec: "+08° 39′ 18″", magnitude: "11.8", distance: "55 millions al", vitesseRadiale: "+1 220 km/s" },
+    texte: "NGC 4519 est une galaxie spirale barrée de classe SB(rs)d située dans la constellation de la Vierge, découverte par William Herschel en 1784. Évoluant à une distance d'environ cinquante-cinq millions d'années-lumière de la Terre et s'étendant sur un diamètre réel d'environ cinquante-cinq mille années-lumière, elle constitue un membre de la périphérie sud de l'amas de la Vierge. Observée sous une inclinaison modérée d'environ quarante-cinq degrés par rapport à notre ligne de visée, elle présente un profil morphologique typique des spirales tardives de faible brillance de surface. Son architecture interne est dominée par un bulbe central sphéroïdal très modeste, traversé par une barre stellaire diffuse composée d'étoiles dorées anciennes de population II. Des extrémités de cette barre émergent des bras spiraux morcelés, ouverts et asymétriques qui s'enroulent de manière lâche à travers le disque, conférant à la galaxie une allure floconneuse. L'imagerie optique haute résolution de la caméra WFC3 du télescope spatial Hubble résout de multiples condensations d'hydrogène ionisé en émission H-alpha et de jeunes amas d'étoiles bleues massives de types spectraux O et B, parsemés le long du tracé des bras. Ces zones de formation stellaire contrastent avec de fins filaments de poussière interstellaire sombre qui sillonnent le plan médian du disque. Les cartographies radioastronomiques de la raie HI à 21 centimètres révèlent un réservoir substantiel de gaz neutre froid dont la distribution cinématique demeure régulière, montrant peu de signes d'érosion par pression dynamique malgré son appartenance à l'environnement d'amas. Sans perturbation de marée gravitationnelle majeure avec des compagnes proches, NGC 4519 fournit un modèle représentatif pour calibrer les taux de formation stellaire et la dispersion des vitesses dans les disques barrés tardifs de masse intermédiaire."
+  },
+    {
     id: "ngc3166_69",
     nomPrincipal: "NGC 3166 et NGC 3169",
     autreNom: "Paire de NGC 3166",
