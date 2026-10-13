@@ -106,7 +106,8 @@ const OBJETS_CIEL_PROFOND_2 = [
     sousCategorie: "spirale",
     specificites: ["grand_dessein", "starburst", "interaction"],
     constellation: "Horloge",
-    galerie: [
+    image: "https://lh3.googleusercontent.com/d/1yACeCwxUJJfh7FlQviTWa2H_PEmEqXFf",
+    imagesGalerie: [
       {
         url: "https://lh3.googleusercontent.com/d/1yACeCwxUJJfh7FlQviTWa2H_PEmEqXFf",
         legende: "L'anneau nucléaire de sursaut stellaire de NGC 1512 — Hubble"
@@ -175,7 +176,7 @@ const OBJETS_CIEL_PROFOND_2 = [
     coordonnees: { ad: "11h 33m 29s", dec: "+36° 37′ 41″", magnitude: "14.5", distance: "13 millions al", vitesseRadiale: "+244 km/s" },
     texte: "Mrk 178 (Markarian 178 / UGC 6541) est une galaxie naine compacte bleue de classe BCD (Blue Compact Dwarf) située dans la constellation de la Grande Ourse, répertoriée par l'astronome arménien Benjamin Markarian lors de ses relevés de galaxies à fort excès de rayonnement ultraviolet. Située à seulement treize millions d'années-lumière de la Terre et s'étendant sur un diamètre réel modeste d'environ huit mille années-lumière, elle appartient au volume local de galaxies. Dépourvue de bulbe central ou de régularité spirale, elle est le siège d'un vigoureux sursaut de formation stellaire localisé qui concentre une abondance de super-amas d'étoiles jeunes et bleues massives de types O et B. L'imagerie haute résolution obtenue par la caméra ACS du télescope spatial Hubble résout individuellement des milliers d'étoiles membres, permettant d'identifier une population sous-jacente de vieilles géantes rouges et de tracer l'histoire de la natalité stellaire au sein du système. Ces observations confirment que Mrk 178 n'est pas une galaxie primitive nouvellement formée, mais un système ancien connaissant des épisodes discontinus de flambée d'étoiles. Les analyses spectroscopiques indiquent une très faible métallicité du gaz interstellaire, avec une abondance en éléments lourds largement inférieure à celle du Soleil. Les mesures cinématiques en raie HI à 21 centimètres révèlent une dynamique dominée par les turbulences thermiques du gaz neutre, faisant de Mrk 178 un laboratoire pour étudier l'enrichissement chimique et la rétroaction des vents stellaires dans les naines pauvres en métaux."
   },
-  {
+ {
     id: "ngc922",
     nomPrincipal: "NGC 922",
     autreNom: "Arp 10",
@@ -184,7 +185,8 @@ const OBJETS_CIEL_PROFOND_2 = [
     sousCategorie: "spirale",
     specificites: ["anneau", "starburst", "interaction"],
     constellation: "Fourneau",
-    galerie: [
+    image: "https://lh3.googleusercontent.com/d/1FBHvt8OXhVJVlLFgzZbhJL7i0lwsOV6q",
+    imagesGalerie: [
       {
         url: "https://lh3.googleusercontent.com/d/1FBHvt8OXhVJVlLFgzZbhJL7i0lwsOV6q",
         legende: "L'anneau de collision en fer à cheval et la plume de marée de NGC 922 — Hubble"
@@ -195,7 +197,7 @@ const OBJETS_CIEL_PROFOND_2 = [
       }
     ],
     coordonnees: { ad: "02h 25m 04s", dec: "-24° 47′ 22″", magnitude: "11.8", distance: "145 millions al", vitesseRadiale: "+3 095 km/s" },
-    texte: "NGC 922 (Arp 10) est une spectaculaire galaxie à anneau de collision de classe SB(s)cd pec située dans la constellation australe du Fourneau, découverte par William Herschel en 1785. Évoluant à une distance d'environ cent quarante-cinq millions d'années-lumière de la Terre et s'étendant sur un diamètre réel d'environ soixante-quinze mille années-lumière, elle est le résultat d'un impact cosmique frontal survenu il y a environ trois cent trente millions d'années avec la galaxie naine satellite 2MASX J02243014-2444441. Cette collision quasi axiale a engendré une onde de choc de densité circulaire qui s'est propagée vers l'extérieur à travers le disque riche en gaz, comprimant les nuages moléculaires froids et déclenchant une violente vague de formation stellaire. L'imagerie optique haute résolution de la caméra WFC3 du télescope spatial Hubble dévoile un anneau incomplet en forme de fer à cheval, densément constellé de super-amas d'étoiles jeunes et bleues massives et de nébuleuses d'hydrogène ionisé en émission H-alpha. De l'autre côté du système s'étire une vaste plume de marée stellaire diffuse résultant de l'éjection gravitationnelle de matière lors du passage du projectile. Les observations en rayons X acquises par l'observatoire spatial Chandra ont mis en évidence un nombre exceptionnel de sources ultralumineuses (ULX), associées à des trous noirs de masse stellaire formés par l'effondrement précoce d'étoiles supermassives nées du sursaut. NGC 922 constitue un modèle de référence pour étudier l'hydrodynamique des collisions centrales et la formation des structures annulaires asymétriques."
+    texte: "NGC 922 (Arp 10) est une galaxie à anneau de collision de classe SB(s)cd pec située dans la constellation australe du Fourneau, découverte par William Herschel en 1785. Évoluant à une distance d'environ cent quarante-cinq millions d'années-lumière de la Terre et s'étendant sur un diamètre réel d'environ soixante-quinze mille années-lumière, elle est le résultat d'un impact cosmique frontal survenu il y a environ trois cent trente millions d'années avec la galaxie naine satellite 2MASX J02243014-2444441. Cette collision quasi axiale a engendré une onde de choc de densité circulaire qui s'est propagée vers l'extérieur à travers le disque riche en gaz, comprimant les nuages moléculaires froids et déclenchant une vague de formation stellaire soutenue. L'imagerie optique haute résolution de la caméra WFC3 du télescope spatial Hubble dévoile un anneau incomplet en forme de fer à cheval, densément constellé de super-amas d'étoiles jeunes et bleues massives et de nébuleuses d'hydrogène ionisé en émission H-alpha. De l'autre côté du système s'étire une vaste plume de marée stellaire diffuse résultant de l'éjection gravitationnelle de matière lors du passage du projectile. Les observations en rayons X acquises par l'observatoire spatial Chandra ont mis en évidence un nombre exceptionnel de sources ultralumineuses (ULX), associées à des trous noirs de masse stellaire formés par l'effondrement précoce d'étoiles supermassives nées du sursaut. NGC 922 constitue un modèle de référence pour étudier l'hydrodynamique des collisions centrales et la formation des structures annulaires asymétriques."
   },
   {
     id: "ngc1058",
