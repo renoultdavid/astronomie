@@ -1,5 +1,19 @@
 const OBJETS_CIEL_PROFOND_2 = [
 {
+    id: "pmr1",
+    nomPrincipal: "PMR 1",
+    autreNom: "Nébuleuse du Crâne Ouvert (Exposed Cranium Nebula)",
+    catalogues: ["PN G272.8+01.0", "WISEA J092841.01-493646.6"],
+    categoriePrincipale: "nebuleuse",
+    sousCategorie: "planetaire",
+    specificites: [],
+    constellation: "Voiles",
+    image: "https://lh3.googleusercontent.com/d/1Xt0qCw21_zjnnTSI_EiWmHdnbKuGY5Of",
+    legendeImage: "La double coquille et le couloir sombre de PMR 1 — JWST / NIRCam",
+    coordonnees: { ad: "09h 28m 41s", dec: "-49° 36′ 47″", magnitude: "14.5", distance: "5 000 al", vitesseRadiale: "+35 km/s" },
+    texte: "PMR 1 (répertoriée sous la désignation de nébuleuse planétaire PN G272.8+01.0 et surnommée la Nébuleuse du Crâne Ouvert ou Exposed Cranium Nebula) est une nébuleuse en coquilles multiples située dans la constellation australe des Voiles, découverte au début des années 2000 lors d'un relevé systématique d'émissions H-alpha. Évoluant à une distance d'environ cinq mille années-lumière de la Terre et s'étendant sur un diamètre réel d'environ 3,2 années-lumière, cet objet a été sculpté par les éjections de matière successives d'une étoile massive mourante. L'étoile centrale présente des caractéristiques spectrales chaudes comparables à celles d'une étoile de type Wolf-Rayet de la séquence carbonée, subissant un taux d'érosion par vent stellaire particulièrement élevé avant d'atteindre son stade évolutif ultime. L'imagerie infrarouge à très haute sensibilité obtenue par la caméra NIRCam (Near-Infrared Camera) du télescope spatial James Webb (JWST) résout la superposition de deux phases dynamiques d'éjection distinctes : une vaste enveloppe externe quasi translucide et blanchâtre dominée par l'hydrogène moléculaire étiré, et une région interne bilobée aux teintes orangées enrichie en éléments chimiques plus lourds synthétisés au cours des cycles nucléaires. Cette structure interne est nettement scindée en deux hémisphères par un couloir sombre médian d'absorption, matérialisant un tore équatorial de poussières froides ou un axe de collimation d'écoulement bipolaire supersonique. La nature du progéniteur demeure au cœur des modélisations astrophysiques pour déterminer si l'astre évoluera vers une naine blanche par perte graduelle de masse ou s'il possède une masse suffisante pour culminer en explosion de supernova par effondrement de cœur. PMR 1 offre ainsi un cadre d'étude privilégié pour sonder la morphogenèse des coquilles asymétriques et la dynamique des vents stellaires enrichis lors des phases de transition avancées."
+  },
+    {
     id: "ngc4698",
     nomPrincipal: "NGC 4698",
     autreNom: "",
