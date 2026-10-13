@@ -310,16 +310,25 @@ const OBJETS_CIEL_PROFOND = [
   {
     id: "ngc4490",
     nomPrincipal: "NGC 4490",
-    autreNom: "Galaxie du Cocon (Arp 269 part)",
-    catalogues: ["Arp 269", "UGC 7651", "PGC 41333"],
+    autreNom: "Galaxie du Cocon (Arp 269)",
+    catalogues: ["Arp 269", "UGC 7651", "PGC 41333", "VV 30"],
     categoriePrincipale: "galaxie",
     sousCategorie: "interaction",
     specificites: ["starburst"],
     constellation: "Chiens de Chasse",
-    image: "https://lh3.googleusercontent.com/d/13G5DcPdbQ-M-K0nXau2TJ1IRp0Rjon0w",
-    legendeImage: "Le feu d'artifice de formation stellaire de la Galaxie du Cocon NGC 4490 — Hubble",
+    image: "https://lh3.googleusercontent.com/d/1t1GnaRet1ItV6INzBhiFz15nSbGh6BmB",
+    imagesGalerie: [
+      {
+        url: "https://lh3.googleusercontent.com/d/13G5DcPdbQ-M-K0nXau2TJ1IRp0Rjon0w",
+        legende: "Flambée de formation stellaire au cœur de NGC 4490 — Hubble"
+      },
+      {
+        url: "https://lh3.googleusercontent.com/d/1t1GnaRet1ItV6INzBhiFz15nSbGh6BmB",
+        legende: "Le couple en interaction NGC 4490 et NGC 4485 — NOIRLab / KPNO"
+      }
+    ],
     coordonnees: { ad: "12h 30m 36s", dec: "+41° 38′ 37″", magnitude: "9.8", distance: "25 millions al", vitesseRadiale: "+565 km/s" },
-    texte: "NGC 4490, universellement et poétiquement surnommée la Galaxie du Cocon, est une spectaculaire galaxie spirale barrée en interaction étroite avec sa petite compagne irrégulière NGC 4485, formant le célèbre couple en collision Arp 269 découvert par William Herschel en 1788 dans les Chiens de Chasse. Il y a quelques dizaines de millions d'années, les deux galaxies se sont heurtées de plein fouet lors d'un passage rasant à haute vitesse. Cette rencontre cataclysmique a étiré un pont de matière stellaire et d'hydrogène neutre de plus de 24 000 années-lumière entre les deux astres, tout en déformant profondément le disque de NGC 4490 en une silhouette recourbée en cocon. L'onde de choc hydrodynamique résultante a comprimé les réserves de gaz interstellaire, allumant un prodigieux feu d'artifice de formation d'étoiles généralisé (starburst) qui embrase l'ensemble de la galaxie. Les clichés à haute résolution du télescope spatial Hubble révèlent des milliers de super-amas d'étoiles jeunes et bleues supermassives, des nébuleuses d'hydrogène ionisé écarlates et un double noyau galactique en coalescence enfoui sous d'épaisses voûtes de poussière sombre, faisant de la Galaxie du Cocon l'un des laboratoires les plus dynamiques de l'Univers de proximité."
+    texte: "NGC 4490 (communément surnommée la Galaxie du Cocon) est une galaxie spirale barrée de classe SB(s)d pec située dans la constellation des Chiens de Chasse, découverte par William Herschel en 1788. Évoluant à une distance d'environ vingt-cinq millions d'années-lumière de la Terre et mesurant près de cinquante mille années-lumière de diamètre, elle forme avec sa petite compagne irrégulière NGC 4485 le système binaire en interaction gravitationnelle étroite Arp 269 (VV 30). Il y a quelques dizaines de millions d'années, les deux galaxies ont subi un passage périastral rasant à haute vitesse qui a étiré un pont de matière stellaire et de gaz neutre de plus de vingt-quatre mille années-lumière entre leurs disques. Cette collision a profondément perturbé la dynamique de NGC 4490, courbant son disque en une silhouette asymétrique et déclenchant un sursaut de formation stellaire généralisé (starburst) alimenté par la compression hydrodynamique des nuages moléculaires froids. L'imagerie optique à grand champ obtenue au télescope Mayall de l'observatoire de Kitt Peak met en évidence les émissions H-alpha de l'hydrogène ionisé disséminées le long du pont de transfert gazeux, tandis que la caméra WFC3 du télescope spatial Hubble résout des milliers de jeunes super-amas d'étoiles bleues massives de types spectraux O et B. Les analyses spectroscopiques dans l'infrarouge et en radioastronomie ont révélé que NGC 4490 abrite en réalité un double noyau galactique en cours de fusion avancée, séparé d'environ mille cinq cents années-lumière et masqué par d'épaisses bandes de poussière interstellaire sombre. Le système est également enveloppé par une immense enveloppe d'hydrogène neutre (HI) cartographiée sur la raie à 21 centimètres, mesurant plus de deux cent mille années-lumière d'envergure. En raison de sa proximité et de son taux exceptionnel de formation stellaire, NGC 4490 a été le siège de plusieurs supernovae et transitoires lumineux au cours des dernières décennies, notamment SN 1982F, SN 2008ax et SN 2011ht. Ce couple constitue un modèle de premier ordre pour étudier la redistribution du gaz et la morphologie des sursauts stellaires induits par effet de marée."
   },
   {
     id: "ngc4496",
