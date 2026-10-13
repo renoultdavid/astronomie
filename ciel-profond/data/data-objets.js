@@ -11846,10 +11846,19 @@ texte: "NGC 3982 est une somptueuse galaxie spirale intermédiaire de classe SAB
     sousCategorie: "planetaire",
     specificites: [],
     constellation: "Taureau",
-    image: "https://lh3.googleusercontent.com/d/1cAYj2y476uCtFPAgEvynYVlZJCuF2IBu",
-    legendeImage: "Nébuleuse de la Boule de Cristal (NGC 1514) — WISE / NASA",
+    image: "https://lh3.googleusercontent.com/d/1OPL5UFC0Y7-pWb5LrP-Z1XcTbe6MTgXL",
+    imagesGalerie: [
+      {
+        url: "https://lh3.googleusercontent.com/d/1OPL5UFC0Y7-pWb5LrP-Z1XcTbe6MTgXL",
+        legende: "Nébuleuse de la Boule de Cristal (NGC 1514) — Imagerie optique profonde"
+      },
+      {
+        url: "https://lh3.googleusercontent.com/d/1P2K5_KKN04ylTJjazMf7b-aEBbm3sqs2",
+        legende: "Les anneaux de poussière infrarouges imbriqués — WISE / NASA"
+      }
+    ],
     coordonnees: { ad: "04h 09m 17s", dec: "+30° 46′ 33″", magnitude: "10.9", distance: "1 300 al", vitesseRadiale: "+60 km/s" },
-    texte: "NGC 1514, célèbre sous le nom de nébuleuse de la Boule de Cristal, est un jalon fondamental dans l'histoire de l'astronomie. Observée par William Herschel en 1790, sa vision d'une étoile brillante entourée d'une atmosphère lumineuse fluide le convainquit définitivement que toutes les nébuleuses n'étaient pas des amas d'étoiles non résolus, mais comprenaient de véritables fluides gazeux cosmiques. Située dans la constellation du Taureau, elle est centrée sur l'étoile binaire BD+30° 623 (magnitude 9,4), réunissant une géante de type A0III et une naine blanche chaude responsable de l'ionisation. Les observations infrarouges du télescope spatial WISE ont révélé une structure saisissante et inédite de deux anneaux de poussière imbriqués ceinturant la bulle principale. Cette double coquille annulaire trahit l'interaction gravitationnelle et les épisodes de transfert de masse de l'enveloppe commune au sein du couple binaire lors des pulsations thermiques de l'étoile progénitrice."
+    texte: "NGC 1514 (communément appelée la Nébuleuse de la Boule de Cristal) est une nébuleuse planétaire complexe située dans la constellation du Taureau, découverte par William Herschel le 13 novembre 1790. Cette observation a constitué un tournant historique majeur en astronomie observationnelle : la vision nette d'une étoile centrale brillante entourée d'un voile fluide parfaitement continu convainquit Herschel que toutes les nébuleuses n'étaient pas des amas stellaires lointains non résolus, mais qu'il existait une véritable matière fluide gazeuse cosmique dispersée dans l'espace. Située à une distance d'environ mille trois cents années-lumière du Système solaire et mesurant près de deux années-lumière d'envergure, elle abrite en son centre un système stellaire binaire atypique répertorié sous la désignation BD+30° 623. Ce couple associe une étoile géante brillante de type spectral A0III (magnitude apparente 9,4) et une naine blanche sous-jacente très chaude invisible en lumière visible mais détectée en rayonnement ultraviolet extrême, responsable de la photo-ionisation de la bulle de gaz environnante. L'enveloppe gazeuse optique présente une structure asymétrique et tourmentée, marquée par des bulles intérieures entrecroisées, des nœuds denses et des cavités sculptées par les vents stellaires rapides. L'imagerie spatiale dans l'infrarouge moyen et lointain acquise par le télescope spatial WISE a révélé une architecture jusque-là inconnue composée de deux immenses anneaux de poussière imbriqués ceinturant la bulle principale à angle oblique. Cette morphologie bipolaire annulaire témoigne d'une phase d'enveloppe commune et d'éjections épisodiques de masse survenues lors de la perte des couches externes de l'étoile génitrice couplée aux perturbations orbitales de sa compagne. Les données spectroscopiques confirment une expansion continue de la matière à plus de vingt-cinq kilomètres par seconde. NGC 1514 constitue un laboratoire fondamental pour contraindre l'évolution des binaires serrées et comprendre la genèse des asymétries annulaires au sein des nébuleuses planétaires."
   },
   {
     id: "ngc1535",
