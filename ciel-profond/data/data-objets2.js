@@ -1110,20 +1110,6 @@ const OBJETS_CIEL_PROFOND_2 = [
     texte: "NGC 6503 est une galaxie spirale naine de classe SA(s)cd située dans la constellation boréale du Dragon, découverte par l'astronome allemand Arthur Auwers en 1854. Située à seulement dix-sept millions d'années-lumière de la Terre et s'étendant sur un diamètre réel d'environ trente mille années-lumière, elle est inclinée d'environ soixante-quatorze degrés par rapport à notre ligne de visée. Elle occupe une position cosmologique singulière en bordure immédiate du Vide Local, un vaste espace intergalactique quasi désert de plusieurs dizaines de mégaparsecs de diamètre, ce qui lui vaut parfois la désignation de galaxie au bord du gouffre. Dépourvue de bulbe central massif, elle présente une structure spirale floconneuse dominée par une multitude de courts segments de bras découpés qui s'enroulent autour d'un noyau compact. L'imagerie optique haute résolution de la caméra WFC3 du télescope spatial Hubble résout de nombreux super-amas d'étoiles jeunes et bleues ainsi que des nébuleuses d'hydrogène ionisé en émission H-alpha, bordées par d'étroites bandes de poussière interstellaire sombre. En son centre réside un noyau de type LINER / Seyfert de très faible luminosité abritant un trou noir supermassif d'environ quelques millions de masses solaires. Les mesures cinématiques en radioastronomie sur la raie HI à 21 cm montrent une courbe de rotation régulière et plate s'étendant bien au-delà du disque optique, confirmant la présence d'un halo étendu de matière noire. Son isolement en périphérie du Vide Local en fait un modèle pour analyser la dynamique des disques purs préservés de perturbations de marée."
   },
   {
-    id: "ngc6744",
-    nomPrincipal: "NGC 6744",
-    autreNom: "Caldwell 101",
-    catalogues: ["ESO 104-42", "IRAS 19050-6356", "PGC 62836"],
-    categoriePrincipale: "galaxie",
-    sousCategorie: "spirale",
-    specificites: ["grand dessein", "interaction"],
-    constellation: "Paon",
-    image: "https://lh3.googleusercontent.com/d/1_DcPzKu5KgBeuK4Z9oZ38D-lDQX8WZjM",
-    legendeImage: "L'architecture spirale et la compagne satellite de NGC 6744 — Hubble / ESO",
-    coordonnees: { ad: "19h 09m 46s", dec: "-63° 51′ 27″", magnitude: "8.3", distance: "30 millions al", vitesseRadiale: "+841 km/s" },
-    texte: "NGC 6744 (Caldwell 101) est une imposante galaxie spirale intermédiaire de classe SAB(r)bc située dans la constellation australe du Paon, découverte par James Dunlop en 1826. Évoluant à une distance d'environ trente millions d'années-lumière de la Terre et s'étendant sur un diamètre réel monumental de près de cent soixante-quinze mille années-lumière, elle est considérée comme l'un des analogues morphologiques les plus fidèles de notre Voie lactée dans l'Univers local. Observée sous une inclinaison modérée d'environ cinquante degrés, elle présente un bulbe central sphéroïdal et doré composé d'étoiles âgées de population II, traversé par une barre stellaire discrète et ceinturé par un anneau interne de poussière. De cette région émergent deux bras spiraux principaux amples qui se fragmentent ensuite en ramifications externes étendues, densément jalonnées par des centaines de régions HII en émission H-alpha et de jeunes amas stellaires bleus massifs. À l'extrémité de l'un de ses bras spiraux externes réside une petite galaxie satellite déformée, la naine irrégulière NGC 6744A, dessinant une configuration dynamique analogue au couple formé par la Voie lactée et le Grand Nuage de Magellan. En 2005, la galaxie a hébergé la supernova de type Ic SN 2005at. Les observations photométriques et spectroscopiques haute résolution obtenues par l'instrument WFI de l'ESO et le télescope spatial Hubble mettent en évidence un gradient de métallicité et une distribution de la poussière comparables à ceux observés dans le disque galactique local, faisant de NGC 6744 une référence pour calibrer la morphologie et la dynamique des grandes spirales barrées."
-  },
-  {
     id: "ngc6753",
     nomPrincipal: "NGC 6753",
     autreNom: "",
