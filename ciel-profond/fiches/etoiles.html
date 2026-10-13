@@ -1,1 +1,590 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le Monde des Étoiles — Atlas Céleste</title>
+  <link rel="stylesheet" href="../../fiche.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #020617;
+      color: #e2e8f0;
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.8;
+      overflow-x: hidden;
+      padding-bottom: 5rem;
+    }
+
+    .fiche-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    /* EN-TÊTE */
+    .hero-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .hero-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #facc15;
+      background: rgba(250, 204, 21, 0.12);
+      border: 1px solid rgba(250, 204, 21, 0.35);
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+    .hero-header h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 3.8vw, 3rem);
+      letter-spacing: 0.12em;
+      color: #ffffff;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+    .hero-header .subtitle {
+      font-size: 1.05rem;
+      color: #94a3b8;
+      font-weight: 300;
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    /* TEXTES PRINCIPAUX */
+    .prose-block {
+      font-size: 1rem;
+      color: #cbd5e1;
+      text-align: justify;
+      font-weight: 300;
+      margin-bottom: 2rem;
+    }
+    .prose-block p {
+      margin-bottom: 1.4rem;
+    }
+
+    /* TITRES DE SECTIONS */
+    .section-main-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.7rem;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin: 3.5rem 0 1.5rem;
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-main-title::before {
+      content: "";
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: #facc15;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #facc15;
+    }
+
+    /* VISIONNEUSE PLEIN ÉCRAN LIGHTBOX */
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+      padding: 1.5vh 1.5vw;
+    }
+    .lightbox-overlay.active {
+      display: flex;
+    }
+    .lightbox-img {
+      max-width: 97vw;
+      max-height: 94vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.95), 0 0 20px rgba(250, 204, 21, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="fiche-wrapper">
+
+    <!-- EN-TÊTE DE LA FICHE -->
+    <header class="hero-header">
+      <div class="hero-badge">Astrophysique Stellaire • Nucléosynthèse</div>
+      <h1>Le Monde des Étoiles</h1>
+      <div class="subtitle">
+        Forges thermonucléaires du cosmos, équilibre hydrostatique et destins ultimes
+      </div>
+    </header>
+
+    <!-- TEXTE D'INTRODUCTION -->
+    <div class="prose-block">
+      <p>
+        Véritables réacteurs thermonucléaires du cosmos, les étoiles sont les forges élémentaires qui éclairent et façonnent l'Univers. Tout au long de leur existence sur la séquence principale, elles maintiennent un équilibre subtil entre l'écrasement de la gravité et le souffle ardent de la fusion nucléaire en leur cœur.
+      </p>
+      <p>
+        Mais leur destinée tout entière est scellée dès leur naissance par un paramètre unique : leur masse initiale. Tandis que les astres modestes comme le Soleil s'éteignent paisiblement sous la forme de naines blanches, les géantes consument leur combustible à un rythme frénétique avant de s'effondrer avec fracas. En explosant en supernovae pour laisser place à des étoiles à neutrons ou des trous noirs, elles ensemencent l'espace des atomes lourds indispensables à la vie future.
+      </p>
+    </div>
+
+    <!-- INFOGRAPHIE INTERACTIVE DES ÉTOILES -->
+    <div id="infographie-etoiles" style="font-family: system-ui, -apple-system, sans-serif; background: #0b1120; color: #e2e8f0; padding: 12px 14px; border-radius: 10px; width: 100%; border: 1px solid #1e293b; margin: 2rem 0 3rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
+      
+      <header style="text-align: center; margin-bottom: 12px;">
+        <h2 style="color: #f8fafc; margin: 0; font-size: 1.2rem; font-family: 'Cinzel', serif;">Le cycle de vie et la mort des étoiles</h2>
+        <p style="color: #94a3b8; margin-top: 3px; font-size: 0.8rem;">Genèse nébulaire, séquence principale et destins régis par la masse initiale</p>
+      </header>
+
+      <!-- Sélecteur d'onglets compact -->
+      <div style="display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin-bottom: 12px;">
+        <button onclick="changerOngletEtoiles('naissance')" id="btn-et-naissance" style="padding: 6px 14px; border-radius: 6px; border: none; background: #2563eb; color: #fff; font-weight: 600; cursor: pointer; font-size: 0.8rem;">1. Naissance & Séquence principale</button>
+        <button onclick="changerOngletEtoiles('destin')" id="btn-et-destin" style="padding: 6px 14px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.8rem;">2. Destins selon la masse</button>
+        <button onclick="changerOngletEtoiles('fusion')" id="btn-et-fusion" style="padding: 6px 14px; border-radius: 6px; border: none; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; font-size: 0.8rem;">3. Cœur en oignon & Fusion nucléaire</button>
+      </div>
+
+      <!-- ONGLET 1 : NAISSANCE & CLASSIFICATION SPECTRALE -->
+      <div id="onglet-et-naissance">
+        <div style="background: #070d19; border: 1px solid #1e293b; border-radius: 6px; padding: 8px; margin-bottom: 10px; overflow-x: auto;">
+          <svg viewBox="0 0 920 220" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; min-width: 700px; display: block;">
+            <defs>
+              <radialGradient id="gradProto" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="30%" stop-color="#fdba74"/>
+                <stop offset="70%" stop-color="#ea580c" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#070d19" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="gradEtoileEquilibre" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="40%" stop-color="#fef08a"/>
+                <stop offset="75%" stop-color="#eab308" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="#ca8a04" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+
+            <text x="460" y="16" text-anchor="middle" fill="#94a3b8" font-size="11" letter-spacing="1">DE L'EFFONDREMENT GRAVITATIONNEL À L'ÉQUILIBRE HYDROSTATIQUE</text>
+
+            <!-- 1. Effondrement nébulaire -->
+            <g transform="translate(130, 115)">
+              <ellipse cx="0" cy="0" rx="60" ry="45" fill="#1e293b" opacity="0.6"/>
+              <path d="M -40 -20 Q 0 -40 40 -15 Q 20 30 -30 25 Z" fill="#0f172a"/>
+              <line x1="-50" y1="-30" x2="-20" y2="-12" stroke="#38bdf8" stroke-width="1.8"/>
+              <line x1="50" y1="-30" x2="20" y2="-12" stroke="#38bdf8" stroke-width="1.8"/>
+              <line x1="-45" y1="35" x2="-18" y2="15" stroke="#38bdf8" stroke-width="1.8"/>
+              <line x1="45" y1="35" x2="18" y2="15" stroke="#38bdf8" stroke-width="1.8"/>
+              <circle cx="0" cy="0" r="10" fill="#ea580c" opacity="0.7"/>
+              <text x="0" y="65" text-anchor="middle" fill="#38bdf8" font-size="10" font-weight="bold">1. Nuage moléculaire</text>
+              <text x="0" y="78" text-anchor="middle" fill="#cbd5e1" font-size="8.5">Instabilité de Jeans</text>
+              <text x="0" y="90" text-anchor="middle" fill="#94a3b8" font-size="7.5">Contraction sous son propre poids</text>
+            </g>
+
+            <!-- Flèche intermédiaire 1 -->
+            <path d="M 235 115 L 295 115" stroke="#475569" stroke-width="1.8" stroke-dasharray="4,3"/>
+
+            <!-- 2. Protoétoile & Disque -->
+            <g transform="translate(390, 115)">
+              <ellipse cx="0" cy="0" rx="65" ry="12" fill="#78350f" opacity="0.6" transform="rotate(-15)"/>
+              <circle cx="0" cy="0" r="28" fill="url(#gradProto)"/>
+              <line x1="-12" y1="-45" x2="-3" y2="-12" stroke="#f97316" stroke-width="2" stroke-linecap="round"/>
+              <line x1="12" y1="45" x2="3" y2="12" stroke="#f97316" stroke-width="2" stroke-linecap="round"/>
+              <text x="0" y="65" text-anchor="middle" fill="#fb923c" font-size="10" font-weight="bold">2. Stade protoétoile</text>
+              <text x="0" y="78" text-anchor="middle" fill="#cbd5e1" font-size="8.5">Disque d'accrétion + jets</text>
+              <text x="0" y="90" text-anchor="middle" fill="#94a3b8" font-size="7.5">Cœur s'échauffe par compression</text>
+            </g>
+
+            <!-- Flèche intermédiaire 2 -->
+            <path d="M 505 115 L 565 115" stroke="#475569" stroke-width="1.8" stroke-dasharray="4,3"/>
+
+            <!-- 3. Étoile stable (Équilibre hydrostatique) -->
+            <g transform="translate(730, 115)">
+              <circle cx="0" cy="0" r="42" fill="url(#gradEtoileEquilibre)"/>
+              <circle cx="0" cy="0" r="14" fill="#ffffff"/>
+              <text x="0" y="3" text-anchor="middle" fill="#b45309" font-size="7.5" font-weight="bold">4 H → He</text>
+              
+              <g stroke="#0284c7" stroke-width="1.6">
+                <line x1="0" y1="-38" x2="0" y2="-20"/>
+                <line x1="0" y1="38" x2="0" y2="20"/>
+                <line x1="-38" y1="0" x2="-20" y2="0"/>
+                <line x1="38" y1="0" x2="20" y2="0"/>
+              </g>
+              <g stroke="#ef4444" stroke-width="1.6">
+                <line x1="0" y1="-16" x2="0" y2="-30"/>
+                <line x1="0" y1="16" x2="0" y2="30"/>
+                <line x1="-16" y1="0" x2="-30" y2="0"/>
+                <line x1="16" y1="0" x2="30" y2="0"/>
+              </g>
+
+              <text x="0" y="65" text-anchor="middle" fill="#facc15" font-size="10" font-weight="bold">3. Séquence principale</text>
+              <text x="0" y="78" text-anchor="middle" fill="#cbd5e1" font-size="8.5">Équilibre hydrostatique</text>
+              <text x="0" y="90" text-anchor="middle" fill="#94a3b8" font-size="7.5">Gravité compensée par la pression de radiation</text>
+            </g>
+          </svg>
+        </div>
+
+        <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 10px; overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: left; color: #ffffff;">
+            <thead>
+              <tr style="border-bottom: 1.5px solid #64748b; font-weight: bold;">
+                <th style="padding: 6px;">Type</th>
+                <th style="padding: 6px;">Température</th>
+                <th style="padding: 6px;">Couleur apparente</th>
+                <th style="padding: 6px;">Masse typique</th>
+                <th style="padding: 6px;">Durée de vie (Séquence Principale)</th>
+                <th style="padding: 6px;">Exemple emblématique</th>
+              </tr>
+            </thead>
+            <tbody style="line-height: 1.45;">
+              <tr style="border-bottom: 1px solid #334155;">
+                <td style="padding: 6px; color: #60a5fa; font-weight: bold;">O</td>
+                <td style="padding: 6px;">&gt; 30 000 K</td>
+                <td style="padding: 6px;">Bleu profond</td>
+                <td style="padding: 6px;">16 à 100 masses solaires</td>
+                <td style="padding: 6px;">Quelques millions d'années</td>
+                <td style="padding: 6px;">Zeta Puppis, Alnitak</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #334155;">
+                <td style="padding: 6px; color: #93c5fd; font-weight: bold;">B</td>
+                <td style="padding: 6px;">10 000 à 30 000 K</td>
+                <td style="padding: 6px;">Bleu-blanc</td>
+                <td style="padding: 6px;">2,5 à 16 masses solaires</td>
+                <td style="padding: 6px;">10 à 100 millions d'années</td>
+                <td style="padding: 6px;">Rigel, Spica</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #334155;">
+                <td style="padding: 6px; color: #f8fafc; font-weight: bold;">A</td>
+                <td style="padding: 6px;">7 500 à 10 000 K</td>
+                <td style="padding: 6px;">Blanc pur</td>
+                <td style="padding: 6px;">1,5 à 2,5 masses solaires</td>
+                <td style="padding: 6px;">~1 milliard d'années</td>
+                <td style="padding: 6px;">Sirius A, Véga</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #334155;">
+                <td style="padding: 6px; color: #fef08a; font-weight: bold;">F</td>
+                <td style="padding: 6px;">6 000 à 7 500 K</td>
+                <td style="padding: 6px;">Blanc-jaune</td>
+                <td style="padding: 6px;">1,05 à 1,5 masse solaire</td>
+                <td style="padding: 6px;">3 à 7 milliards d'années</td>
+                <td style="padding: 6px;">Procyon A, Canopus</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #334155;">
+                <td style="padding: 6px; color: #facc15; font-weight: bold;">G</td>
+                <td style="padding: 6px;">5 200 à 6 000 K</td>
+                <td style="padding: 6px;">Jaune franc</td>
+                <td style="padding: 6px;">0,8 à 1,05 masse solaire</td>
+                <td style="padding: 6px;">~10 milliards d'années</td>
+                <td style="padding: 6px;">Le Soleil (G2V), Alpha Centauri A</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #334155;">
+                <td style="padding: 6px; color: #fb923c; font-weight: bold;">K</td>
+                <td style="padding: 6px;">3 700 à 5 200 K</td>
+                <td style="padding: 6px;">Orange</td>
+                <td style="padding: 6px;">0,5 à 0,8 masse solaire</td>
+                <td style="padding: 6px;">15 à 30 milliards d'années</td>
+                <td style="padding: 6px;">Arcturus, Aldébaran</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px; color: #f87171; font-weight: bold;">M</td>
+                <td style="padding: 6px;">2 400 à 3 700 K</td>
+                <td style="padding: 6px;">Rouge sombre</td>
+                <td style="padding: 6px;">0,08 à 0,5 masse solaire</td>
+                <td style="padding: 6px;">100 à 1 000+ milliards d'années</td>
+                <td style="padding: 6px;">Proxima Centauri, Bételgeuse</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ONGLET 2 : DESTINS SELON LA MASSE INITIALE -->
+      <div id="onglet-et-destin" style="display: none;">
+        <div style="background: #070d19; border: 1px solid #1e293b; border-radius: 6px; padding: 8px; margin-bottom: 10px; overflow-x: auto;">
+          <svg viewBox="0 0 920 250" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; min-width: 700px; display: block;">
+            <defs>
+              <linearGradient id="gradPath1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#475569"/>
+                <stop offset="100%" stop-color="#facc15"/>
+              </linearGradient>
+              <linearGradient id="gradPath2" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#475569"/>
+                <stop offset="100%" stop-color="#38bdf8"/>
+              </linearGradient>
+              <linearGradient id="gradPath3" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#475569"/>
+                <stop offset="100%" stop-color="#c084fc"/>
+              </linearGradient>
+            </defs>
+
+            <text x="460" y="16" text-anchor="middle" fill="#94a3b8" font-size="11" letter-spacing="1">LES TROIS BRANCHES FONDAMENTALES DE FIN DE VIE</text>
+
+            <!-- Tronc commun : Naissance -->
+            <g transform="translate(60, 125)">
+              <circle cx="0" cy="0" r="16" fill="#64748b"/>
+              <text x="0" y="26" text-anchor="middle" fill="#94a3b8" font-size="8.5" font-weight="bold">Nuage & Protoétoile</text>
+            </g>
+
+            <!-- Branche 0 : Étoiles manquées (< 0,08 Masse solaire) -->
+            <path d="M 76 125 Q 120 125 150 205 L 860 205" fill="none" stroke="#64748b" stroke-width="1.8" stroke-dasharray="3,3"/>
+            <g transform="translate(480, 205)">
+              <circle cx="0" cy="0" r="9" fill="#78350f"/>
+              <text x="0" y="-12" text-anchor="middle" fill="#a8a29e" font-size="8.5" font-weight="bold">Masse inférieure à 0,08 masse solaire : Naines brunes</text>
+              <text x="0" y="18" text-anchor="middle" fill="#64748b" font-size="7.5">Pas d'allumage de l'hydrogène • Refroidissement lent et définitif</text>
+            </g>
+
+            <!-- Branche 1 : Faible et moyenne masse (0,08 à 8 Masses solaires) -->
+            <path d="M 76 125 Q 150 125 210 60 L 860 60" fill="none" stroke="url(#gradPath1)" stroke-width="2.2"/>
+            
+            <g transform="translate(320, 60)">
+              <circle cx="0" cy="0" r="18" fill="#dc2626" opacity="0.85"/>
+              <circle cx="0" cy="0" r="5" fill="#fef08a"/>
+              <text x="0" y="27" text-anchor="middle" fill="#fca5a5" font-size="8.5" font-weight="bold">Géante rouge</text>
+              <text x="0" y="38" text-anchor="middle" fill="#94a3b8" font-size="7.5">Fusion de l'hélium</text>
+            </g>
+
+            <g transform="translate(560, 60)">
+              <ellipse cx="0" cy="0" rx="22" ry="12" fill="none" stroke="#2dd4bf" stroke-width="1.8"/>
+              <circle cx="0" cy="0" r="2.5" fill="#ffffff"/>
+              <text x="0" y="27" text-anchor="middle" fill="#2dd4bf" font-size="8.5" font-weight="bold">Nébuleuse planétaire</text>
+              <text x="0" y="38" text-anchor="middle" fill="#94a3b8" font-size="7.5">Éjection des couches</text>
+            </g>
+
+            <g transform="translate(800, 60)">
+              <circle cx="0" cy="0" r="7" fill="#ffffff" stroke="#38bdf8" stroke-width="1.2"/>
+              <text x="0" y="22" text-anchor="middle" fill="#ffffff" font-size="9" font-weight="bold">Naine blanche</text>
+              <text x="0" y="33" text-anchor="middle" fill="#fde047" font-size="7.5">Masse résiduelle &lt; 1,44 M☉</text>
+              <text x="0" y="44" text-anchor="middle" fill="#94a3b8" font-size="7">Limite de Chandrasekhar</text>
+            </g>
+
+            <!-- Branche 2 : Étoiles massives (8 à 25-30 Masses solaires) -->
+            <path d="M 76 125 Q 160 125 240 125 L 860 125" fill="none" stroke="url(#gradPath2)" stroke-width="2.2"/>
+            
+            <g transform="translate(320, 125)">
+              <circle cx="0" cy="0" r="22" fill="#b91c1c" opacity="0.9"/>
+              <circle cx="0" cy="0" r="7" fill="#38bdf8"/>
+              <text x="0" y="31" text-anchor="middle" fill="#fca5a5" font-size="8.5" font-weight="bold">Supergéante rouge</text>
+            </g>
+
+            <g transform="translate(560, 125)">
+              <path d="M -16 -8 L 0 -18 L 16 -8 L 8 8 L -8 8 Z" fill="#f97316"/>
+              <text x="0" y="24" text-anchor="middle" fill="#f97316" font-size="8.5" font-weight="bold">Supernova (Type II)</text>
+              <text x="0" y="35" text-anchor="middle" fill="#94a3b8" font-size="7.5">Effondrement de cœur</text>
+            </g>
+
+            <g transform="translate(800, 125)">
+              <circle cx="0" cy="0" r="5" fill="#38bdf8" stroke="#ffffff" stroke-width="1.2"/>
+              <line x1="-8" y1="-8" x2="8" y2="8" stroke="#38bdf8" stroke-width="1" stroke-dasharray="2,2"/>
+              <text x="0" y="20" text-anchor="middle" fill="#38bdf8" font-size="9" font-weight="bold">Étoile à neutrons / Pulsar</text>
+              <text x="0" y="31" text-anchor="middle" fill="#cbd5e1" font-size="7.5">Densité nucléaire pure (Ø ~20 km)</text>
+            </g>
+
+            <!-- Branche 3 : Étoiles très massives (> 25-30 Masses solaires) -->
+            <path d="M 560 125 Q 630 125 680 165 L 860 165" fill="none" stroke="url(#gradPath3)" stroke-width="2"/>
+            <g transform="translate(800, 165)">
+              <circle cx="0" cy="0" r="6" fill="#000000" stroke="#c084fc" stroke-width="2"/>
+              <text x="0" y="19" text-anchor="middle" fill="#c084fc" font-size="9" font-weight="bold">Trou noir stellaire</text>
+              <text x="0" y="30" text-anchor="middle" fill="#f472b6" font-size="7.5">Cœur &gt; 2,2 à 3 M☉ (Limite TOV)</text>
+            </g>
+          </svg>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px;">
+          
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px;">
+            <div style="color: #facc15; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Naines blanches & Limite de Chandrasekhar</div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; margin: 0; line-height: 1.4;">
+              Les étoiles de moins de 8 masses solaires (comme le Soleil) achèvent leur vie en naine blanche de la taille de la Terre. La matière y est soutenue par la <strong>pression de dégénérescence des électrons</strong>. Si la masse du résidu dépasse <strong>1,44 masse solaire</strong> (limite de Chandrasekhar), les électrons ne peuvent plus lutter contre la gravité : l'astre s'effondre.
+            </p>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px;">
+            <div style="color: #38bdf8; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Étoiles à neutrons & Limite TOV</div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; margin: 0; line-height: 1.4;">
+              Lors d'une supernova, les électrons et les protons fusionnent en neutrons (<em>neutronisation</em>). L'astre se fige sous la <strong>pression de dégénérescence des neutrons</strong>. Une sphère de 20 km concentre 1,4 à 2,2 masses solaires. Au-delà du seuil de Tolman-Oppenheimer-Volkoff (TOV, ~2,2 masses solaires), même les neutrons cèdent.
+            </p>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px;">
+            <div style="color: #c084fc; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px;">Trous noirs stellaires</div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; margin: 0; line-height: 1.4;">
+              Issus des étoiles initialement supérieures à 25 ou 30 masses solaires. Rien dans la physique connue ne pouvant freiner l'effondrement gravitationnel au-delà de la limite TOV, la matière s'effondre jusqu'à une singularité ponctuelle ceinte d'un <strong>horizon des événements</strong> dont même la lumière ne peut s'échapper.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ONGLET 3 : NUCLÉOSYNTHÈSE & STRUCTURE EN OIGNON -->
+      <div id="onglet-et-fusion" style="display: none;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px;">
+          
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px;">
+            <div style="color: #f87171; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Structure en pelure d'oignon d'une supergéante</div>
+            <div style="background: #0f172a; border-radius: 4px; padding: 6px; margin-bottom: 8px;">
+              <svg viewBox="0 0 280 160" preserveAspectRatio="xMidYMin meet" style="width: 100%; height: auto; display: block;">
+                <g transform="translate(140, 80)">
+                  <circle cx="0" cy="0" r="74" fill="#1e3a8a" opacity="0.4"/>
+                  <text x="0" y="-62" text-anchor="middle" fill="#93c5fd" font-size="7">Hydrogène (H)</text>
+
+                  <circle cx="0" cy="0" r="58" fill="#0284c7" opacity="0.5"/>
+                  <text x="0" y="-47" text-anchor="middle" fill="#bae6fd" font-size="7">Hélium (He)</text>
+
+                  <circle cx="0" cy="0" r="44" fill="#16a34a" opacity="0.6"/>
+                  <text x="0" y="-34" text-anchor="middle" fill="#bbf7d0" font-size="7">Carbone (C) / Néon (Ne)</text>
+
+                  <circle cx="0" cy="0" r="32" fill="#ca8a04" opacity="0.7"/>
+                  <text x="0" y="-22" text-anchor="middle" fill="#fef08a" font-size="7">Oxygène (O)</text>
+
+                  <circle cx="0" cy="0" r="20" fill="#ea580c" opacity="0.85"/>
+                  <text x="0" y="-12" text-anchor="middle" fill="#fed7aa" font-size="6.5">Silicium (Si)</text>
+
+                  <circle cx="0" cy="0" r="9" fill="#ef4444"/>
+                  <text x="0" y="3" text-anchor="middle" fill="#ffffff" font-size="6.5" font-weight="bold">Fer</text>
+                </g>
+              </svg>
+            </div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; line-height: 1.4;">
+              Les étoiles très massives brûlent successivement des combustibles de plus en plus lourds à des températures vertigineuses. Chaque étage s'allume lorsque la couche sous-jacente s'effondre et s'échauffe.
+            </p>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px;">
+            <div style="color: #fb923c; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Le Fer : terminus énergétique du réacteur</div>
+            <p style="font-size: 0.76rem; color: #cbd5e1; margin-bottom: 6px; line-height: 1.4;">
+              De l'hydrogène jusqu'au silicium, les réactions de fusion sont <strong>exothermiques</strong> (elles libèrent de l'énergie et créent la pression thermique qui soutient l'étoile).
+            </p>
+            <div style="background: #0f172a; border-radius: 4px; padding: 8px; margin-bottom: 6px; border-left: 3px solid #ef4444;">
+              <div style="color: #f87171; font-size: 0.75rem; font-weight: bold; margin-bottom: 2px;">Pourquoi le fer tue l'étoile :</div>
+              <p style="font-size: 0.72rem; color: #cbd5e1; margin: 0; line-height: 1.3;">
+                Le noyau de <strong>Fer-56</strong> possède l'énergie de liaison nucléaire par nucléon maximale de la nature. Faire fusionner le fer ne dégage aucune énergie : au contraire, la réaction est <strong>endothermique</strong> (elle consomme de l'énergie).
+              </p>
+            </div>
+            <p style="font-size: 0.74rem; color: #94a3b8; line-height: 1.4;">
+              Privé subitement de source de chaleur, le cœur s'effondre sous son propre poids en une fraction de seconde (à ~70 000 km/s). Les couches supérieures rebondissent violemment sur le cœur incompressible : l'étoile explose en <strong>supernova à effondrement de cœur</strong>.
+            </p>
+          </div>
+
+          <div style="background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 12px; grid-column: 1 / -1; overflow-x: auto;">
+            <div style="color: #38bdf8; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;">Rythme de combustion des combustibles nucléaires (Étoile de 25 masses solaires)</div>
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.76rem; text-align: left; color: #ffffff;">
+              <thead>
+                <tr style="border-bottom: 1px solid #475569;">
+                  <th style="padding: 6px;">Combustible</th>
+                  <th style="padding: 6px;">Cendres produites</th>
+                  <th style="padding: 6px;">Température requise</th>
+                  <th style="padding: 6px;">Durée de cette phase</th>
+                </tr>
+              </thead>
+              <tbody style="line-height: 1.4;">
+                <tr style="border-bottom: 1px solid #334155;">
+                  <td style="padding: 6px; color: #93c5fd; font-weight: bold;">Hydrogène (H)</td>
+                  <td style="padding: 6px;">Hélium (He)</td>
+                  <td style="padding: 6px;">~40 millions de degrés</td>
+                  <td style="padding: 6px; font-weight: bold;">7 millions d'années</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #334155;">
+                  <td style="padding: 6px; color: #facc15; font-weight: bold;">Hélium (He)</td>
+                  <td style="padding: 6px;">Carbone (C), Oxygène (O)</td>
+                  <td style="padding: 6px;">~200 millions de degrés</td>
+                  <td style="padding: 6px;">500 000 ans</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #334155;">
+                  <td style="padding: 6px; color: #4ade80; font-weight: bold;">Carbone (C)</td>
+                  <td style="padding: 6px;">Néon (Ne), Magnésium (Mg)</td>
+                  <td style="padding: 6px;">~800 millions de degrés</td>
+                  <td style="padding: 6px;">600 ans</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #334155;">
+                  <td style="padding: 6px; color: #fb923c; font-weight: bold;">Néon (Ne)</td>
+                  <td style="padding: 6px;">Oxygène (O), Magnésium (Mg)</td>
+                  <td style="padding: 6px;">~1,5 milliard de degrés</td>
+                  <td style="padding: 6px;">1 an</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #334155;">
+                  <td style="padding: 6px; color: #f87171; font-weight: bold;">Oxygène (O)</td>
+                  <td style="padding: 6px;">Silicium (Si), Soufre (S)</td>
+                  <td style="padding: 6px;">~2 milliards de degrés</td>
+                  <td style="padding: 6px;">6 mois</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; color: #ef4444; font-weight: bold;">Silicium (Si)</td>
+                  <td style="padding: 6px;">Fer (Fe), Nickel (Ni)</td>
+                  <td style="padding: 6px;">~3,5 milliards de degrés</td>
+                  <td style="padding: 6px; color: #ef4444; font-weight: bold;">1 seul jour !</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SECTIONS SUIVANTES À COMPLÉTER -->
+    <!-- Emplacement pour les futures fiches individuelles (Bételgeuse, Sirius, Rigel, etc.) -->
+
+  </div>
+
+  <!-- VISIONNEUSE PLEIN ÉCRAN LIGHTBOX -->
+  <div class="lightbox-overlay" id="lightboxOverlay" onclick="fermerZoom()" title="Cliquer ou appuyer sur Échap pour fermer">
+    <img id="lightboxImg" class="lightbox-img" src="" alt="Agrandissement plein écran">
+  </div>
+
+  <script>
+    // GESTION DES ONGLETS DE L'INFOGRAPHIE
+    function changerOngletEtoiles(nom) {
+      const onglets = ['naissance', 'destin', 'fusion'];
+      onglets.forEach(o => {
+        const contenu = document.getElementById('onglet-et-' + o);
+        const bouton = document.getElementById('btn-et-' + o);
+        if (o === nom) {
+          contenu.style.display = 'block';
+          bouton.style.background = '#2563eb';
+          bouton.style.color = '#ffffff';
+        } else {
+          contenu.style.display = 'none';
+          bouton.style.background = '#1e293b';
+          bouton.style.color = '#94a3b8';
+        }
+      });
+    }
+
+    // GESTION DU ZOOM PLEIN ÉCRAN LIGHTBOX
+    function ouvrirZoomDirect(url) {
+      const overlay = document.getElementById('lightboxOverlay');
+      const img = document.getElementById('lightboxImg');
+      img.src = url;
+      overlay.classList.add('active');
+    }
+
+    function fermerZoom() {
+      document.getElementById('lightboxOverlay').classList.remove('active');
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        fermerZoom();
+      }
+    });
+  </script>
+</body>
+</html>
