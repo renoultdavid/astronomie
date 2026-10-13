@@ -1152,20 +1152,6 @@ const OBJETS_CIEL_PROFOND_2 = [
     texte: "NGC 6814 est une galaxie spirale de classe SAB(rs)bc située dans la constellation de l'Aigle, découverte par William Herschel en 1788. Évoluant à une distance d'environ soixante-quinze millions d'années-lumière de la Terre et s'étendant sur un diamètre réel d'environ soixante-quinze mille années-lumière, elle est observée sous un angle presque parfaitement de face avec une inclinaison d'environ vingt-trois degrés. Son disque présente deux bras spiraux principaux amples et symétriques à grand dessein qui émergent d'un bulbe central compact, parcourant l'ensemble du plan galactique avant de se fragmenter en structures secondaires diffuses. Ces bras sont jalonnés de nombreuses régions HII en émission H-alpha et de super-amas d'étoiles bleues massives, entrecoupés de bandes étroites de poussière sombre absorbante. En son centre réside un noyau galactique actif de type Seyfert 1.5 très étudié, propulsé par un trou noir supermassif d'environ dix-huit millions de masses solaires dévorant le gaz résiduel. Ce cœur actif produit un flux variable et puissant de rayons X et de rayonnement ultraviolet, surveillé par les observatoires spatiaux XMM-Newton, Swift et NuSTAR. Des campagnes de cartographie par écho lumineux (reverberation mapping) ont permis de mesurer directement la taille de la région des lignes larges (BLR) et de contraindre la masse du trou noir central. En 1999, la galaxie a hébergé la supernova SN 1999ed de type II. Évoluant dans un champ calme sans compagne massive proche, NGC 6814 sert d'étalon pour étudier l'entretien des ondes de densité à grand dessein et les mécanismes d'alimentation des trous noirs supermassifs."
   },
   {
-    id: "ngc6872",
-    nomPrincipal: "NGC 6872",
-    autreNom: "",
-    catalogues: ["ESO 073-32", "AM 2011-705", "PGC 64413"],
-    categoriePrincipale: "galaxie",
-    sousCategorie: "spirale",
-    specificites: ["interaction", "barrée"],
-    constellation: "Paon",
-    image: "https://lh3.googleusercontent.com/d/1KyvjEjpDGtkFKd8wiSQmI9QiGYXvKzby",
-    legendeImage: "Les bras de marée colossaux de NGC 6872 et la lenticulaire IC 4970 — VLT / ESO",
-    coordonnees: { ad: "20h 16m 56s", dec: "-70° 46′ 05″", magnitude: "11.7", distance: "212 millions al", vitesseRadiale: "+4 695 km/s" },
-    texte: "NGC 6872 (surnommée la galaxie du Condor) est une galaxie spirale barrée géante de classe SB(s)b pec située dans la constellation australe du Paon, découverte par John Herschel en 1835. Évoluant à environ deux cent douze millions d'années-lumière de la Terre au cœur du groupe de Pavo, elle s'étend sur une envergure totale de plus de cinq cent vingt mille années-lumière de bout en bout, ce qui en fait l'une des galaxies spirales les plus étendues répertoriées dans l'Univers. Cette envergure résulte d'une interaction de marée violente avec sa voisine immédiate, la galaxie lenticulaire compacte IC 4970, qui a traversé son disque il y a environ cent trente millions d'années. Cette collision a étiré ses deux bras spiraux principaux en de gigantesques queues de marée asymétriques. L'imagerie optique du Very Large Telescope (VLT) de l'ESO combinée aux données ultraviolettes du satellite GALEX révèle une vague de formation stellaire le long de ces bras étirés, ponctuée d'amas d'étoiles jeunes et massives. À l'extrémité du bras nord-est, la compression du gaz a initié la formation d'une galaxie naine de marée (tidal dwarf galaxy). Le centre de NGC 6872 est traversé par une barre stellaire allongée et abrite un noyau à faible niveau d'activité. Les simulations numériques et les observations en radioastronomie de la raie HI confirment que la rencontre orbitale a redistribué le réservoir gazeux sans disloquer la barre, offrant un modèle pour analyser l'évolution des disques géants soumis à des collisions rasantes."
-  },
-  {
     id: "ngc6902",
     nomPrincipal: "NGC 6902",
     autreNom: "",
