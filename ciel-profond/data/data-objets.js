@@ -2447,20 +2447,6 @@ texte: "NGC 3982 est une somptueuse galaxie spirale intermédiaire de classe SAB
     texte: "NGC 1483 est une ravissante galaxie spirale barrée située dans la constellation australe de la Dorade, membre du groupe de galaxies de la Dorade découvert par John Herschel en 1835. Observée par la caméra ACS du télescope spatial Hubble, elle dévoile une barre centrale lumineuse diffuse d'où émergent des bras spiraux vaporeux et irréguliers. Le disque stellaire est ponctué de jeunes amas d'étoiles bleues massives et de petites nébuleuses d'hydrogène ionisé, offrant un profil morphologique typique des spirales tardives de masse modérée qui convertissent calmement leur réservoir de gaz sans subir d'interactions de marée violentes."
   },
   {
-    id: "ngc1512",
-    nomPrincipal: "NGC 1512",
-    autreNom: "",
-    catalogues: ["ESO 250-4", "MCG -07-09-007", "PGC 14391"],
-    categoriePrincipale: "galaxie",
-    sousCategorie: "spirale",
-    specificites: ["grand_dessein", "starburst"],
-    constellation: "Horloge",
-    image: "https://lh3.googleusercontent.com/d/1yACeCwxUJJfh7FlQviTWa2H_PEmEqXFf",
-    legendeImage: "L'anneau nucléaire de sursaut stellaire de NGC 1512 — Hubble",
-    coordonnees: { ad: "04h 03m 54s", dec: "-43° 20′ 56″", magnitude: "10.2", distance: "38 millions al", vitesseRadiale: "+898 km/s" },
-    texte: "NGC 1512 est une extraordinaire galaxie spirale barrée à double anneau située dans la constellation de l'Horloge, découverte par James Dunlop en 1826. Elle est mondialement célèbre pour son spectaculaire anneau de sursaut stellaire nucléaire de 2 400 années-lumière de diamètre, magnifiquement résolu par le télescope spatial Hubble en un collier scintillant de super-amas d'étoiles jeunes et bleues entourant le bulbe. Plus loin, une puissante barre stellaire traverse le disque avant de rejoindre un second anneau externe étendu d'où s'élancent de longs bras spiraux en interaction gravitationnelle avec sa compagne satellite lenticulaire NGC 1510, offrant un cas d'école sur la résonance orbitale et la formation stellaire déclenchée."
-  },
-  {
     id: "ngc1559",
     nomPrincipal: "NGC 1559",
     autreNom: "",
