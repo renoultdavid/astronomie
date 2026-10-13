@@ -64,9 +64,16 @@ const OBJETS_CIEL_PROFOND_2 = [
     sousCategorie: "spirale",
     specificites: ["anneau", "starburst", "interaction"],
     constellation: "Fourneau",
-    image: "https://lh3.googleusercontent.com/d/1FBHvt8OXhVJVlLFgzZbhJL7i0lwsOV6q",
-    imageSecondaire: "https://lh3.googleusercontent.com/d/12qzMj26JA-kxYmEMhI4WGSZKkoTU-p1b",
-    legendeImage: "L'anneau de collision asymétrique et la plume de marée de NGC 922 — Hubble / Chandra",
+    galerie: [
+      {
+        url: "https://lh3.googleusercontent.com/d/1FBHvt8OXhVJVlLFgzZbhJL7i0lwsOV6q",
+        legende: "L'anneau de collision en fer à cheval et la plume de marée de NGC 922 — Hubble"
+      },
+      {
+        url: "https://lh3.googleusercontent.com/d/12qzMj26JA-kxYmEMhI4WGSZKkoTU-p1b",
+        legende: "Les sources de rayons X ultralumineuses (ULX) au sein du sursaut de NGC 922 — Chandra"
+      }
+    ],
     coordonnees: { ad: "02h 25m 04s", dec: "-24° 47′ 22″", magnitude: "11.8", distance: "145 millions al", vitesseRadiale: "+3 095 km/s" },
     texte: "NGC 922 (Arp 10) est une spectaculaire galaxie à anneau de collision de classe SB(s)cd pec située dans la constellation australe du Fourneau, découverte par William Herschel en 1785. Évoluant à une distance d'environ cent quarante-cinq millions d'années-lumière de la Terre et s'étendant sur un diamètre réel d'environ soixante-quinze mille années-lumière, elle est le résultat d'un impact cosmique frontal survenu il y a environ trois cent trente millions d'années avec la galaxie naine satellite 2MASX J02243014-2444441. Cette collision quasi axiale a engendré une onde de choc de densité circulaire qui s'est propagée vers l'extérieur à travers le disque riche en gaz, comprimant les nuages moléculaires froids et déclenchant une violente vague de formation stellaire. L'imagerie optique haute résolution de la caméra WFC3 du télescope spatial Hubble dévoile un anneau incomplet en forme de fer à cheval, densément constellé de super-amas d'étoiles jeunes et bleues massives et de nébuleuses d'hydrogène ionisé en émission H-alpha. De l'autre côté du système s'étire une vaste plume de marée stellaire diffuse résultant de l'éjection gravitationnelle de matière lors du passage du projectile. Les observations en rayons X acquises par l'observatoire spatial Chandra ont mis en évidence un nombre exceptionnel de sources ultralumineuses (ULX), associées à des trous noirs de masse stellaire formés par l'effondrement précoce d'étoiles supermassives nées du sursaut. NGC 922 constitue un modèle de référence pour étudier l'hydrodynamique des collisions centrales et la formation des structures annulaires asymétriques."
   },
