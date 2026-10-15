@@ -12416,20 +12416,6 @@ texte: "NGC 3982 est une somptueuse galaxie spirale intermédiaire de classe SAB
     texte: "IC 4663 est une nébuleuse planétaire singulière située dans la constellation du Scorpion, ayant acquis un statut historique majeur en astrophysique stellaire en 2012. Les observations spectroscopiques menées au Very Large Telescope (VLT) de l'ESO ont révélé que son étoile centrale est la toute première représentante formellement identifiée d'une naine blanche de type spectral [WN], c'est-à-dire une étoile de Wolf-Rayet de faible masse dont l'atmosphère est presque exclusivement composée d'hélium et d'azote, totalement dépourvue d'hydrogène et sans abondance dominante de carbone. Cette découverte a confirmé l'existence d'une voie évolutive post-AGB alternative, vraisemblablement initiée par la fusion de deux naines blanches de types hélium et carbone-oxygène. L'enveloppe gazeuse, elliptique et ceinturée par de fines coquilles d'onde de choc, brille principalement dans les raies [O III], traduisant une dynamique d'expansion rapide propulsée par le vent stellaire extrême de son résidu stellaire inédit."
   },
   {
-    id: "ic5148",
-    nomPrincipal: "IC 5148",
-    autreNom: "Nébuleuse du Pneu de secours",
-    catalogues: ["IC 5150", "Spare Tyre Nebula", "PK 002-52.1"],
-    categoriePrincipale: "nebuleuse",
-    sousCategorie: "planetaire",
-    specificites: [],
-    constellation: "Grue",
-    image: "https://lh3.googleusercontent.com/d/1g-kwszwWiXZ5z9kpiIkPDRe6a6zD0Cgj",
-    legendeImage: "Nébuleuse du Pneu de secours (IC 5148) — ESO / VLT",
-    coordonnees: { ad: "21h 59m 35s", dec: "-39° 23′ 09″", magnitude: "11.0", distance: "3 000 al", vitesseRadiale: "-14 km/s" },
-    texte: "IC 5148 (parfois répertoriée sous l'identifiant en doublon IC 5150) est une magnifique nébuleuse planétaire annulaire située dans la constellation australe de la Grue, mondialement connue sous le surnom de nébuleuse du Pneu de secours (Spare Tyre Nebula). Elle offre l'image saisissante d'une double coquille gazeuse symétrique entourée d'un fin anneau extérieur éclatant rappelant la bande de roulement d'un pneumatique. Mesurant plus de 2 années-lumière de diamètre, la nébuleuse se distingue par une vitesse d'expansion phénoménale d'environ 50 km/s, ce qui en fait l'une des nébuleuses planétaires s'étendant le plus rapidement de notre Galaxie. En son centre réside une naine blanche très lumineuse et chaude qui ionise les couches successives expulsées lors du démantèlement de l'étoile géante rouge. L'enveloppe gazeuse brille de superbes nuances turquoises et pourpres associées aux raies de l'oxygène doublement ionisé et de l'hydrogène atomique, illustrant la structure classique en bulle soufflée par vent stellaire rapide."
-  },
-  {
     id: "ic2220",
     nomPrincipal: "IC 2220",
     autreNom: "Nébuleuse du Toby Jug",
