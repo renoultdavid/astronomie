@@ -19,132 +19,159 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+      --payne: #353B45;
+      --payne-dark: #1f232b;
+      --payne-base: #28323e;
+      --abyss: #050608;
+      --abyss-surface: #0e1117;
+
+      --gold-pure: #d4af37;
+      --gold-glow: rgba(212, 175, 55, 0.45);
+      --gold-pale: #f2e3af;
+      --gold-accent: #d4af37;
+      --cyan-accent: #d4af37;
+
+      --text-bright: #f5f6f9;
+      --text-muted: #8c95a6;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
       user-select: none;
       -webkit-user-select: none;
+      -webkit-user-drag: none;
+      -webkit-tap-highlight-color: transparent;
     }
 
     html, body {
-      width: 100%;
-      height: 100%;
-      background-color: #020617;
-      color: #e2e8f0;
-      font-family: 'Montserrat', sans-serif;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      background-color: var(--abyss);
+      color: var(--text-bright);
+      font-family: 'Cormorant Garamond', Georgia, serif;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* BARRE DE NAVIGATION MAÎTRESSE UNIQUE */
-    #master-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 52px;
-      z-index: 1000;
-      background: rgba(2, 6, 23, 0.92);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    [hidden],
+    [hidden="true"],
+    .btn-header-nav[hidden] {
+      display: none !important;
+    }
+
+    /* EN-TÊTE GLOBAL FIXE (IDENTIQUE À PANORAMA DES ARTS & VOYAGES) */
+    #main-header {
+      height: 48px;
+      min-height: 48px;
+      padding: 4px 1.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 1.2rem;
+      z-index: 1000;
+      background: #050608;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.18);
+      flex-shrink: 0 !important;
     }
 
-    .bar-group-left {
+    .museum-insignia {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 14px;
+      min-width: 0;
     }
 
-    .btn-home {
+    .btn-header-nav {
+      background: rgba(18, 22, 30, 0.9);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: var(--gold-pale);
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 3px;
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #94a3b8;
+      gap: 6px;
       text-decoration: none;
+      transition: all 0.25s ease;
+      flex-shrink: 0;
+    }
+
+    .btn-header-nav:hover {
+      background: rgba(212, 175, 55, 0.2);
+      color: #fff;
+      border-color: var(--gold-pure);
+    }
+
+    .insignia-title {
+      font-family: 'Cinzel', serif;
       font-size: 0.95rem;
-      transition: all 0.2s ease;
-      cursor: pointer;
-    }
-    .btn-home:hover {
-      color: #ffd166;
-      border-color: #ffd166;
-      background: rgba(255, 209, 102, 0.15);
-      transform: scale(1.05);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--gold-pure);
+      white-space: nowrap;
     }
 
-    .btn-nav-back {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #cbd5e1;
+    .insignia-sub {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 0.82rem;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      font-style: italic;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .btn-header-fullscreen {
+      background: rgba(18, 22, 30, 0.8);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      color: var(--gold-pale);
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
       padding: 5px 12px;
-      border-radius: 20px;
-      font-family: 'Cinzel', serif;
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      border-radius: 3px;
       cursor: pointer;
-      display: none; /* Visible seulement quand on quitte l'accueil */
+      display: flex;
       align-items: center;
-      gap: 6px;
-      transition: all 0.2s ease;
-    }
-    .btn-nav-back:hover {
-      color: #38bdf8;
-      border-color: #38bdf8;
-      background: rgba(56, 189, 248, 0.1);
+      gap: 8px;
+      transition: all 0.25s ease;
+      flex-shrink: 0;
     }
 
-    #nav-title {
-      font-family: 'Cinzel', serif;
-      font-size: 0.85rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #ffffff;
-      pointer-events: none;
+    .btn-header-fullscreen:hover {
+      background: rgba(212, 175, 55, 0.15);
+      border-color: var(--gold-pure);
+      color: #fff;
     }
 
-    .btn-fs {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #cbd5e1;
-      padding: 5px 12px;
-      border-radius: 20px;
-      font-family: 'Cinzel', serif;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s ease;
-    }
-    .btn-fs:hover {
-      color: #38bdf8;
-      border-color: #38bdf8;
-      background: rgba(56, 189, 248, 0.1);
+    @media (max-width: 768px) {
+      #main-header { padding: 4px 0.75rem; }
+      .insignia-sub { display: none; }
+      .insignia-title { font-size: 0.78rem; letter-spacing: 1.5px; }
+      .btn-header-fullscreen span { display: none; }
     }
 
     /* CONTENEUR DES VUES */
     #views-container {
-      position: absolute;
-      top: 52px;
-      left: 0;
+      position: relative;
+      flex: 1;
       width: 100%;
-      height: calc(100% - 52px);
+      height: calc(100vh - 48px);
+      height: calc(100dvh - 48px);
       overflow: hidden;
     }
 
@@ -155,11 +182,145 @@
       height: 100%;
       display: none;
       overflow-y: auto;
-      background: #020617;
+      background: var(--abyss);
     }
 
     .app-view.active {
       display: block;
+    }
+
+    /* =========================================================
+       VUE 0 : LE HUB D'ACCUEIL À 2 VOLETS (STYLE PANORAMA DES ARTS)
+       ========================================================= */
+    #view-hub {
+      display: none;
+      flex-direction: row;
+      background: var(--abyss);
+      overflow: hidden;
+    }
+    #view-hub.active {
+      display: flex;
+    }
+
+    .portal-panel {
+      flex: 1 1 50%;
+      width: 50%;
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding: 3rem 2.5rem;
+      border-right: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .portal-panel:last-child {
+      border-right: none;
+    }
+
+    .portal-panel-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.45;
+      transition: opacity 0.3s ease;
+      z-index: 1;
+    }
+
+    .bg-discovery {
+      background-image: radial-gradient(circle at center, rgba(14, 17, 24, 0.25) 0%, rgba(5, 6, 8, 0.92) 90%), url('https://lh3.googleusercontent.com/d/13QyqDMudQp6Z7KeRNnQoUfh9Eglsu-Md');
+      background-position: center center;
+    }
+
+    .bg-database {
+      background-image: radial-gradient(circle at center, rgba(14, 17, 24, 0.25) 0%, rgba(5, 6, 8, 0.92) 90%), url('https://lh3.googleusercontent.com/d/1HuY6ihApDLJEQREdOi7JTpkYI4p-zycW');
+      background-position: center center;
+    }
+
+    .portal-panel:hover .portal-panel-bg {
+      opacity: 0.75;
+    }
+
+    .portal-panel-content {
+      position: relative;
+      z-index: 2;
+      max-width: 480px;
+      background: rgba(10, 13, 18, 0.92);
+      padding: 1.8rem;
+      border-radius: 4px;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9);
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .portal-panel:hover .portal-panel-content {
+      border-color: var(--gold-pure);
+      transform: translateY(-2px);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 20px rgba(212, 175, 55, 0.25);
+    }
+
+    .portal-badge {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold-pure);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .portal-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+
+    .portal-desc {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.02rem;
+      line-height: 1.55;
+      color: #c4cad8;
+      margin-bottom: 1.35rem;
+    }
+
+    .portal-cta-btn {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.18), rgba(212, 175, 55, 0.06));
+      border: 1px solid var(--gold-pure);
+      color: var(--gold-pale);
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 9px 18px;
+      border-radius: 3px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.25s ease;
+    }
+
+    .portal-panel:hover .portal-cta-btn {
+      background: var(--gold-pure);
+      color: #050608;
+      font-weight: 700;
+      box-shadow: 0 0 18px rgba(212, 175, 55, 0.45);
+    }
+
+    @media (max-width: 860px) {
+      #view-hub { flex-direction: column; }
+      .portal-panel {
+        width: 100%;
+        flex: 1 1 50%;
+        padding: 1.5rem;
+        border-right: none;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.22);
+      }
+      .portal-title { font-size: 1.25rem; }
     }
 
     /* VUE 1 : FRESQUE PORTAIL 16/9 */
@@ -177,8 +338,8 @@
     .portal-container {
       position: relative;
       aspect-ratio: 16 / 9;
-      width: min(100vw, calc((100vh - 52px) * (16 / 9)));
-      height: min(calc(100vh - 52px), calc(100vw * (9 / 16)));
+      width: min(100vw, calc((100vh - 48px) * (16 / 9)));
+      height: min(calc(100vh - 48px), calc(100vw * (9 / 16)));
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -408,15 +569,15 @@
 
     .drawer {
       position: fixed;
-      top: 52px;
+      top: 48px;
       right: 0;
       width: 440px;
       max-width: 90vw;
-      height: calc(100% - 52px);
-      background: rgba(11, 17, 33, 0.96);
+      height: calc(100% - 48px);
+      background: rgba(14, 17, 23, 0.96);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
-      border-left: 1px solid rgba(255, 255, 255, 0.14);
+      border-left: 1px solid rgba(212, 175, 55, 0.3);
       box-shadow: -15px 0 45px rgba(0, 0, 0, 0.85);
       z-index: 1050;
       transform: translateX(100%);
@@ -432,9 +593,9 @@
 
     .close-btn {
       align-self: flex-end;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #94a3b8;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      color: var(--gold-pale);
       width: 36px;
       height: 36px;
       border-radius: 50%;
@@ -447,11 +608,13 @@
     }
     .close-btn:hover {
       color: #ffffff;
-      background: rgba(255, 255, 255, 0.25);
+      border-color: var(--gold-pure);
+      background: rgba(212, 175, 55, 0.2);
       transform: rotate(90deg);
     }
 
     .drawer-badge {
+      font-family: 'Cinzel', serif;
       display: inline-block;
       align-self: flex-start;
       margin-top: 0.8rem;
@@ -459,10 +622,10 @@
       letter-spacing: 0.22em;
       text-transform: uppercase;
       padding: 4px 12px;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.08);
-      color: #93c5fd;
-      border: 1px solid rgba(147, 197, 253, 0.25);
+      border-radius: 4px;
+      background: rgba(212, 175, 55, 0.12);
+      color: var(--gold-pure);
+      border: 1px solid rgba(212, 175, 55, 0.35);
     }
 
     .drawer-title {
@@ -477,10 +640,10 @@
       width: 100%;
       height: 190px;
       margin: 1.2rem 0;
-      border-radius: 14px;
+      border-radius: 8px;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      background: #0f172a;
+      border: 1px solid rgba(212, 175, 55, 0.28);
+      background: #0e1117;
     }
 
     .drawer-img {
@@ -491,10 +654,11 @@
     }
 
     .drawer-desc {
-      font-size: 0.9rem;
-      line-height: 1.7;
-      color: #cbd5e1;
-      font-weight: 300;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: #c4cad8;
+      font-weight: 400;
       margin-bottom: 2rem;
       flex-grow: 1;
     }
@@ -506,23 +670,23 @@
       gap: 12px;
       width: 100%;
       padding: 0.9rem 1.5rem;
-      background: linear-gradient(135deg, #ffffff, #cbd5e1);
-      color: #050814;
+      background: linear-gradient(135deg, var(--gold-pure), var(--gold-pale));
+      color: #050608;
       text-decoration: none;
       font-family: 'Cinzel', serif;
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      border-radius: 40px;
+      border-radius: 4px;
       border: none;
       cursor: pointer;
-      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.25);
+      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
       transition: all 0.3s ease;
     }
     .launch-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(255, 255, 255, 0.45);
+      box-shadow: 0 8px 30px rgba(212, 175, 55, 0.45);
       background: #ffffff;
       color: #000000;
     }
@@ -874,25 +1038,76 @@
 </head>
 <body>
 
-  <!-- BARRE MAÎTRESSE UNIQUE -->
-  <header id="master-bar">
-    <div class="bar-group-left">
-      <a href="https://renoultdavid.github.io/accueil/" class="btn-home" title="Accueil général du site">🏠</a>
-      <button id="btn-back" class="btn-nav-back" onclick="navigateBack()">← Retour</button>
+  <!-- EN-TÊTE GLOBAL FIXE (IDENTIQUE À PANORAMA DES ARTS & VOYAGES) -->
+  <header id="main-header">
+    <div class="museum-insignia">
+      <!-- Accueil général du site (Portail) -->
+      <a href="../accueil/index.html" class="btn-header-nav" title="Accueil général du site">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Portail</span>
+      </a>
+
+      <!-- Accueil interne (menu des 2 volets) -->
+      <button id="btn-back-hub" class="btn-header-nav" onclick="returnToAstroHub()" title="Retour au menu des deux volets" hidden>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="18" rx="1"/><rect x="14" y="3" width="7" height="18" rx="1"/></svg>
+        <span>Hub</span>
+      </button>
+
+      <!-- Bouton retour dans la hiérarchie interne (ex: Système solaire -> Fresque) -->
+      <button id="btn-back" class="btn-header-nav" onclick="navigateBack()" hidden>
+        <span>← Retour</span>
+      </button>
+
+      <div class="insignia-title">Atlas Céleste</div>
+      <div class="insignia-sub" id="insignia-subtitle">Portail &amp; Observatoire Astronomique</div>
     </div>
 
-    <div id="nav-title">Atlas Céleste</div>
-
-    <div>
-      <button class="btn-fs" onclick="toggleFullScreen()" title="Plein écran">⛶ Plein écran</button>
-    </div>
+    <button id="btn-fullscreen-toggle" class="btn-header-fullscreen" onclick="toggleFullScreen()" title="Basculer en plein écran">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+      </svg>
+      <span>Plein Écran</span>
+    </button>
   </header>
 
   <!-- LES ÉCRANS DU SITE -->
   <main id="views-container">
 
-    <!-- VUE 1 : PORTAIL GÉNÉRAL (ATLAS CÉLESTE) -->
-    <section id="view-portal" class="app-view active">
+    <!-- =====================================================================
+         VUE 0 : LE HUB D'ACCUEIL À 2 VOLETS (PORTAIL ASTRONOMIE)
+         ===================================================================== -->
+    <section id="view-hub" class="app-view active">
+      <!-- Volet Gauche : Découverte de l'Univers -->
+      <div class="portal-panel panel-discovery" onclick="openDiscoveryVolet()">
+        <div class="portal-panel-bg bg-discovery"></div>
+        <div class="portal-panel-content">
+          <span class="portal-badge">MODULE 01</span>
+          <h2 class="portal-title">Découverte de l'Univers</h2>
+          <p class="portal-desc">Exploration interactive des grands domaines cosmiques : notre Système solaire, le planétarium 3D, les nébuleuses, les amas stellaires, les galaxies et les étoiles.</p>
+          <button class="portal-cta-btn" type="button">
+            <span>Explorer l'Univers</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Volet Droit : Base de Données -->
+      <div class="portal-panel panel-database" onclick="openDatabaseVolet()">
+        <div class="portal-panel-bg bg-database"></div>
+        <div class="portal-panel-content">
+          <span class="portal-badge">MODULE 02</span>
+          <h2 class="portal-title">Base de Données</h2>
+          <p class="portal-desc">Explorateur céleste et catalogue multicritères du ciel profond : filtrez par constellations, types morphologiques et catalogues Messier, NGC et IC.</p>
+          <button class="portal-cta-btn" type="button">
+            <span>Accéder à la base de données</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- VUE 1 : FRESQUE INTERACTIVE (DÉCOUVERTE DE L'UNIVERS - SANS BANDEAU HAUT) -->
+    <section id="view-portal" class="app-view">
       <div class="portal-container" id="portalContainer">
         <img 
           id="spaceBg" 
@@ -903,15 +1118,6 @@
         />
         
         <div class="cosmic-overlay"></div>
-        <!-- BANDEAU SOMMITAL DISCRET : MOTEUR DE RECHERCHE DU CIEL PROFOND -->
-        <div class="top-explorer-banner" onclick="openPanel('explorer')">
-          <svg class="banner-lens-icon" viewBox="0 0 24 24">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <span class="banner-text">Explorateur Céleste &amp; Base de Données</span>
-          <span class="banner-badge-hint">Filtres croisés</span>
-        </div>
 
         <!-- 1. Système Solaire -->
         <div class="hotspot theme-solar" style="top: 78%; left: 24%;" onclick="openPanel('solar')">
@@ -1454,8 +1660,8 @@
         frame.src = `./ciel-profond/fiches/${data.viewId}.html`;
         goToView('fiche-astre');
         
-        const title = document.getElementById('nav-title');
-        if (title) title.innerText = data.title.toUpperCase();
+        const subtitle = document.getElementById('insignia-subtitle');
+        if (subtitle) subtitle.innerText = data.title;
       }
     }
 
@@ -1553,9 +1759,9 @@
         explorateur: "EXPLORATEUR CÉLESTE"
       };
 
-      const title = document.getElementById('nav-title');
-      if (title) {
-        title.innerText = noms[nomAstre] || nomAstre.toUpperCase();
+      const subtitle = document.getElementById('insignia-subtitle');
+      if (subtitle) {
+        subtitle.innerText = noms[nomAstre] || nomAstre.toUpperCase();
       }
     }
 
@@ -1569,8 +1775,32 @@
 
     updateCarousel();
 
-    /* GESTION DE LA NAVIGATION INTERNE */
-    let navigationStack = ['portal'];
+    /* GESTION DE LA NAVIGATION INTERNE & DES 2 VOLETS */
+    let navigationStack = ['hub'];
+
+    function openDiscoveryVolet() {
+      navigationStack = ['hub'];
+      goToView('portal');
+    }
+
+    function openDatabaseVolet() {
+      navigationStack = ['hub'];
+      ouvrirFicheAstre('explorateur');
+    }
+
+    function returnToAstroHub() {
+      closePanel();
+      const planFrame = document.getElementById('planetarium-frame');
+      if (planFrame) planFrame.src = '';
+      const ficheFrame = document.getElementById('fiche-frame');
+      if (ficheFrame) ficheFrame.src = '';
+
+      navigationStack = ['hub'];
+      document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
+      const hubEl = document.getElementById('view-hub');
+      if (hubEl) hubEl.classList.add('active');
+      updateMasterBar('hub');
+    }
 
     function goToView(viewId) {
       document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
@@ -1613,39 +1843,68 @@
     }
 
     function updateMasterBar(viewId) {
+      const btnHub = document.getElementById('btn-back-hub');
       const backBtn = document.getElementById('btn-back');
-      const title = document.getElementById('nav-title');
+      const subtitle = document.getElementById('insignia-subtitle');
 
-      if (viewId === 'portal') {
-        backBtn.style.display = 'none';
-        title.innerText = 'Atlas Céleste';
+      if (viewId === 'hub') {
+        if (btnHub) btnHub.hidden = true;
+        if (backBtn) backBtn.hidden = true;
+        if (subtitle) subtitle.innerText = 'Portail & Observatoire Astronomique';
+      } else if (viewId === 'portal') {
+        if (btnHub) btnHub.hidden = false;
+        if (backBtn) backBtn.hidden = true;
+        if (subtitle) subtitle.innerText = "Découverte de l'Univers";
       } else if (viewId === 'systeme-solaire') {
-        backBtn.style.display = 'inline-flex';
-        backBtn.innerText = '← Atlas Céleste';
-        title.innerText = 'Système Solaire';
+        if (btnHub) btnHub.hidden = false;
+        if (backBtn) {
+          backBtn.hidden = false;
+          backBtn.innerHTML = '<span>← Fresque Céleste</span>';
+        }
+        if (subtitle) subtitle.innerText = 'Système Solaire';
       } else if (viewId === 'planetarium') {
-        backBtn.style.display = 'inline-flex';
-        backBtn.innerText = '← Système Solaire';
-        title.innerText = 'Planétarium 3D';
+        if (btnHub) btnHub.hidden = false;
+        if (backBtn) {
+          backBtn.hidden = false;
+          backBtn.innerHTML = '<span>← Système Solaire</span>';
+        }
+        if (subtitle) subtitle.innerText = 'Planétarium 3D';
       } else if (viewId === 'fiche-astre') {
-        backBtn.style.display = 'inline-flex';
-        backBtn.innerText = '← Système Solaire';
+        if (btnHub) btnHub.hidden = false;
+        // Si on vient de la fresque ou du système solaire (et non directement du Hub vers la Base de Données), on affiche aussi le bouton retour d'un cran
+        const prev = navigationStack[navigationStack.length - 2];
+        if (backBtn) {
+          if (prev && prev !== 'hub') {
+            backBtn.hidden = false;
+            backBtn.innerHTML = prev === 'systeme-solaire' ? '<span>← Système Solaire</span>' : '<span>← Fresque Céleste</span>';
+          } else {
+            backBtn.hidden = true;
+          }
+        }
       } else {
-        backBtn.style.display = 'inline-flex';
-        backBtn.innerText = '← Atlas Céleste';
-        title.innerText = viewId.toUpperCase();
+        if (btnHub) btnHub.hidden = false;
+        if (backBtn) {
+          backBtn.hidden = false;
+          backBtn.innerHTML = '<span>← Retour</span>';
+        }
+        if (subtitle) subtitle.innerText = viewId.toUpperCase();
       }
     }
 
     /* PLEIN ÉCRAN PERMANENT */
     function toggleFullScreen() {
+      const btnFs = document.getElementById('btn-fullscreen-toggle');
       if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(err => {
+        document.documentElement.requestFullscreen().then(() => {
+          if (btnFs) btnFs.querySelector('span').textContent = 'Quitter Plein Écran';
+        }).catch(err => {
           console.warn("Plein écran non supporté :", err);
         });
       } else {
         if (document.exitFullscreen) {
-          document.exitFullscreen();
+          document.exitFullscreen().then(() => {
+            if (btnFs) btnFs.querySelector('span').textContent = 'Plein Écran';
+          }).catch(() => {});
         }
       }
     }
@@ -1661,5 +1920,4 @@
     });
   </script>
 </body>
-</html>
 </html>
